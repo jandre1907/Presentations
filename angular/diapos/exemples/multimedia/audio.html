@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Audio support</title>
+	<style>
+		body		{ text-align: center; }
+		audio		{ margin: 1em 0; }
+		table 	{ border: 1px solid black; margin: auto; width: 70%; }
+		caption	{ font-size: 1.1em; font-weight: bold; }
+		th, td	{ border: 1px solid grey; }
+		thead th	{ background-color: black; color: white; }
+		td 		{ text-align: center; }
+		tfoot td	{ text-align: left; }
+		sup		{ font-style: italic; }
+	</style>
+</head>
+<body>
+	<h1>Audio support</h1>
+
+	<audio autoplay controls loop preload>
+		<source src="../assets/snds/Josh-Woodward-Swansong.ogg" />
+		<source src="../assets/snds/Josh-Woodward-Swansong.mp3" />
+	</audio>
+
+	<p>That song is "Swansong" from Ubuntu showcase by Josh-Woodward</p>
+
+  <table>
+    <caption>Audio codec support in browsers</caption>
+    <thead>
+      <tr>
+        <th>Codecs/container</th>
+        <th title="Internet Explorer">IE</th>
+        <th title="Mozilla Firefox">Firefox</th>
+        <th title="Apple Safari">Safari</th>
+        <th title="Google Chrome">Chrome</th>
+        <th>Opera</th>
+        <th>iPhone</th>
+        <th>Android</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Ogg Vorbis</th>
+        <td></td>
+        <td>3.6+</td>
+        <td></td>
+        <td>6.0+</td>
+        <td>10.5+</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>MP3</th>
+        <td>9.0+</td>
+        <td></td>
+        <td>5.0+</td>
+        <td>6.0+</td>
+        <td>10.5+</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>WAV</th>
+        <td></td>
+        <td>3.5+</td>
+        <td>4.0+</td>
+        <td></td>
+        <td>10.5+</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <p><a href="http://validator.w3.org/check?uri=referer"><img src="http://w3c.html5.free.fr/img/button/valid-html5.png" alt="Valid HTML 5" /></a></p>
+</body>
+</html>
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>WebSockets chat demo</title>
+	<style>
+		section {  }
+		#chat { width: 99%; border: 1px solid black; background: #FAFAF2; padding: 0.25em; }
+		#command { width: 99%; border-top: 1px solid grey; position: fixed; bottom: 0; padding: 0.5em 0; background-color: orange; text-align: center; }
+		input { border: 1px solid #FAFA40; }
+		input#login { width: 10%; }
+		input#message { width: 85%; }
+		aside { float: right; }
+		aside p { margin-top: 0; }
+	</style>
+	<script>
+		function to2Digit(val) {
+			return (('' + val).length == 1) ? '0' + val : val;
+		}
+		function getTime() {
+			var t = new Date();
+			return to2Digit(t.getHours()) + ':' + to2Digit(t.getMinutes()) + '.' + to2Digit(t.getSeconds());
+		}
+
+		window.addEventListener('load', function() {
+
+			var l = document.getElementById('login'),
+				r = document.getElementById('chat'),
+				c = document.getElementById('message');
+
+			var url = 'ws://' + window.location.host + ':8000/chat';
+			var ws = new WebSocket(url);
+
+			ws.onopen = function (evt) {
+				r.innerHTML += getTime() + '> Connected to ' + url + '<br>';
+			};
+
+			ws.onmessage = function (evt) {
+				r.innerHTML = getTime() + '> ' + evt.data + '<br>' + r.innerHTML;
+			};
+
+			ws.onclose = function (evt) {
+				r.innerHTML += '<hr>' + getTime() +'> Disconnected<br>';
+			};
+
+			c.addEventListener('keypress', function(e) {
+				if (e.keyCode == 13) {
+					ws.send(l.value + ' says: ' + c.value);
+					c.value = '';
+				}
+			}, false);
+
+		}, false);
+	</script>
+</head>
+<body>
+	<aside>
+		<p style="color: green;">Working on Chromium 8+, Firefox 4?, iOS 4.2</p>
+	</aside>
+	<h1>WebSockets demo</h1>
+	<section id="chat"></section>
+	<section id="command"><input type="text" id="login" value="username" />:<input type="text" id="message" value="your message" /></section>
+</body>
+</html>

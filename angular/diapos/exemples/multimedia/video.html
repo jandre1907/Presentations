@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Video support</title>
+	<style>
+		body		{ text-align: center; }
+		video		{ margin: 1em 0; width: 592px; height: 256px; }
+		table 	{ border: 1px solid black; margin: auto; }
+		caption	{ font-size: 1.1em; font-weight: bold; }
+		th, td	{ border: 1px solid grey; }
+		thead th	{ background-color: black; color: white; }
+		td 		{ text-align: center; }
+		tfoot td	{ text-align: left; }
+		sup		{ font-style: italic; }
+	</style>
+	<script>
+		window.addEventListener('load', function() {
+			var 	video = document.querySelector('video'),
+					time = document.getElementById('time');
+			video.addEventListener('play', function() {
+				setInterval(function() {
+					time.innerHTML = parseInt(video.currentTime, 10) + ' seconds ellapsed';
+				}, 1000);
+			}, false);
+		}, false);
+	</script>
+</head>
+<body>
+	<h1>Video support</h1>
+
+	<video autoplay controls loop preload>
+		<source src="../assets/vids/vid.ogv" />
+		<source src="../assets/vids/vid.mp4" />
+		This content appears if the video tag or the codec is not supported.
+	</video>
+	<p id="time"></p>
+
+	<p>Video is from <a href="http://media.chikuyonok.ru/ambilight/">ambilight demo</a> by <a href="http://www.james-watson.net/">James Watson</a></p>
+
+  <table>
+    <caption>Video codec support in browsers</caption>
+    <thead>
+      <tr>
+        <th>Codecs/container</th>
+        <th title="Internet Explorer">IE</th>
+        <th title="Mozilla Firefox">Firefox</th>
+        <th title="Apple Safari">Safari</th>
+        <th title="Google Chrome">Chrome</th>
+        <th>Opera</th>
+        <th>iPhone</th>
+        <th>Android</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Theora+Vorbis+Ogg</th>
+        <td></td>
+        <td>3.5+</td>
+        <td><sup>2</sup></td>
+        <td>5.0+</td>
+        <td>10.5+</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>H.264+AAC+MP4</th>
+        <td>9.0+</td>
+        <td></td>
+        <td>3.0+</td>
+        <td>5.0+</td>
+        <td></td>
+        <td>3.0+</td>
+        <td>2.0+</td>
+      </tr>
+      <tr>
+        <th>WebM</th>
+        <td>9.0+<sup>1</sup></td>
+        <td>4.0+</td>
+        <td><sup>2</sup></td>
+        <td>6.0+</td>
+        <td>10.6+</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="8"><sup>1</sup> Internet Explorer 9 will only support
+        WebM <a href=
+        "http://windowsteamblog.com/windows/b/bloggingwindows/archive/2010/05/19/another-follow-up-on-html5-video-in-ie9.aspx">when
+        the user has installed a VP8 codec</a>.</td>
+      </tr>
+      <tr>
+        <td colspan="8"><sup>2</sup> Safari will play
+        anything that QuickTime can play, but QuickTime only comes with H.264/AAC/MP4
+        support pre-installed.</td>
+      </tr>
+    </tfoot>
+  </table>
+  <p><a href="http://validator.w3.org/check?uri=referer"><img src="http://w3c.html5.free.fr/img/button/valid-html5.png" alt="Valid HTML 5" /></a></p>
+</body>
+</html>
+
