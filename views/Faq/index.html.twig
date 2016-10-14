@@ -1,0 +1,140 @@
+{% extends "SelBundle::layout.html.twig" %}
+{% form_theme search_form 'SelBundle:Faq:fields_search.html.twig' %}
+
+ {% block meta_desc %}
+	<meta name="description" content="{{ 'faq.faq_index.meta_desc'|trans({}, 'faq') }}">
+{% endblock %}
+
+{% block title %}{{ 'home.home_homepage.faq_link_title_onglet'|trans({}, 'home') }}{% endblock %}
+
+{% block content_header '' %}
+
+{% block flashMessage %}{% endblock flashMessage %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{ 'faq.faq_index.title'|trans({}, 'faq') }}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block breadcrumb %}
+    <div id="box_breadcrumb_id" class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="http://www.navigo.fr" title="{{ 'faq.faq_index.home_link_breadcrumb'|trans({}, 'faq') }}">{{ 'faq.faq_index.home_link_breadcrumb'|trans({}, 'faq') }}</a></li>
+                <li><a href="{{ path('sel_homepage') }}" title="{{ 'faq.faq_index.home_services_navigo_link_breadcrumb'|trans({}, 'faq') }}">{{ 'faq.faq_index.home_services_navigo_link_breadcrumb'|trans({}, 'faq') }}</a></li>
+                {% if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('sel_espace_client') }}" title="{{ 'faq.faq_index.faq_mon_espace_breadcrumb'|trans({}, 'faq') }}">{{ 'faq.faq_index.faq_mon_espace_breadcrumb'|trans({}, 'faq') }}</a></li>
+                {% endif %}
+                <li class="active">{{ 'faq.faq_index.faq_lbl_breadcrumb'|trans({}, 'faq') }}</li>
+            </ol>
+        </div>
+    </div>
+{% endblock breadcrumb %}
+
+{% block previousArrow %}{% endblock previousArrow %}
+
+
+{% block content %}
+    <div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="home faq">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8 col-md-8">
+                            <p>{{ 'faq.faq_index.article.content'|trans({}, 'faq') }}</p>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-4 margin-bottom">
+                            <div class="faq-search-form-group form-group">
+                                <h3 class="normal"><strong>{{ 'faq.faq_search_results.engine.title'|trans({}, 'faq') }}</strong></h3>
+                            </div>
+
+                            <div class="faq-search-form-group form-group">
+                                <form action="{{ path('sel_faq_search') }}" method="post" {{ form_enctype(search_form) }}>
+                                    {% if form_errors(search_form) %}
+                                     <p class="warning-light red">
+                                        <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alerte">
+                                        <strong>{{ form_errors(search_form) }}</strong>
+                                    </p>
+                                    {% endif %}
+                                    {{ form_row(search_form.keywords) }}
+                                    {{ form_rest(search_form) }}
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                {% if articles|length > 0 %}
+                    <div class="row margin-10"><!-- -->
+                        <div class="col-xs-12 col-sm-8 col-md-8" data-ng-controller="noneCtrl">
+                            <h2 class="normal">FAQ</h2>
+                            <div class="panel-group" id="forfaits"  aria-multiselectable="false" >
+
+
+                            {% for element in articles %}
+                                {% set index_parent = loop.index %}
+                                <div class="panel panel-default no-margin">
+                                    <div class="panel-heading slide"   >
+                                        <a  href="#them{{ index_parent }}" data-toggle="collapse" data-parent="#forfaits"  aria-expanded="true" aria-controls="them{{ index_parent }}" data-ng-click="controlHash($event)"
+                                        >
+                                            <h3 id="them{{ index_parent }}_titre">{{ element.category }}</h3>
+                                            <span class="plus">+</span><span class="moins">-</span>
+                                        </a>
+                                    </div>
+
+                                    <div id="them{{ index_parent }}" class="panel-collapse collapse"   aria-labelledby="headingOne">
+                                        <div class="panel-body slide">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                                    <ul class="color_bullet">
+                                                        {% for key, value in element.articles %}
+                                                        <li>
+                                                          <a href="{{ path('sel_faq_show', { 'questionId': value.articleId }) }}" class="link" title="{{ value.article }}">
+                                                            {{ value.article }}
+                                                          </a>
+                                                        </li>
+                                                        {% endfor %}
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 media-margin">
+
+                            <div class="faq-search-form-group form-group">
+                                <form action="{{ path('sel_faq_search') }}" method="post" {{ form_enctype(search_form) }}>
+                                    {% if form_errors(search_form) %}
+                                     <p class="warning-light red">
+                                        <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alerte">
+                                        <strong>{{ form_errors(search_form) }}</strong>
+                                    </p>
+                                    {% endif %}
+                                    {{ form_row(search_form.keywords) }}
+                                    {{ form_rest(search_form) }}
+                                </form>
+                            </div>
+							{#
+                            <div class="media box_spacer_xs12">
+                                {{ 'faq.faq_index.espace_services_video'|trans({}, 'faq')  | raw }}
+                            </div>
+							#}
+                        </div>
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content%}

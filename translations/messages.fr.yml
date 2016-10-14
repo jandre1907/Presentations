@@ -1,0 +1,15 @@
+Connexion: __Connexion
+'* Champs obligatoires': '__* Champs obligatoires'
+'Créer mon compte': '__Créer mon compte'
+'Mot de passe oublié?': '__Mot de passe oublié?'
+'Me connecter': '__Me connecter'
+footer.please_answer: __footer.please_answer
+footer.already_sig: __footer.already_sig
+footer.yes: __footer.yes
+footer.no: __footer.no
+profile.continue: __profile.continue
+base.main_title: __base.main_title
+footer.copyright: __footer.copyright
+Bad credentials.: Nom d'utilisateur ou mot de passe incorrect
+User account is locked.: Votre compte est bloqué. Un email vous a été envoyé pour modifier votre mot de passe.
+User account is disabled.: Votre compte n'est pas activé.

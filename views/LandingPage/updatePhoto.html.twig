@@ -1,0 +1,62 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block angularModule %}updatePhoto{%  endblock angularModule %}
+
+{% block title %}Services Navigo{% endblock %}
+
+
+{% block javascript_foot %}
+    {{ parent() }}
+    {% javascripts
+        '@SelBundle/Resources/public/js/cmc/model.js'
+        '@SelBundle/Resources/public/js/cmc/updatePhoto/updatePhoto.js'
+        '@SelBundle/Resources/public/js/cmc/updatePhoto/common/titleCtrl.js'
+        '@SelBundle/Resources/public/js/cmc/updatePhoto/page_photo/photoCtrl.js'
+        '@SelBundle/Resources/public/js/cmc/updatePhoto/common/model/appModel.js'
+        '@SelBundle/Resources/public/js/cmc/updatePhoto/common/model/apiModel.js'
+        '@SelBundle/Resources/public/js/cmc/updatePhoto/common/model/userSigModel.js'
+        '@SelBundle/Resources/public/js/cmc/updatePhoto/common/model/userSelModel.js'
+        '@SelBundle/Resources/public/js/cmc/updatePhoto/common/ressources/sigRs.js'
+        '@SelBundle/Resources/public/js/cmc/updatePhoto/common/ressources/ressources.js'
+        output='js/cmc_update_photo.js' %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+    <script src="//www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+    <script type="text/javascript">
+        {#CMC.userSig.lastname = "{{ infos.porteur.nom} }}";#}
+        {#CMC.userSig.firstname = "{{ infos.porteur.nom} }}";#}
+        CMC.reference = "{{infos.porteur}}";
+    </script>
+{% endblock javascript_foot %}
+
+{% block contentTitle %}
+{% verbatim %}
+<div class="row" data-ng-controller="TitleCtrl">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="heading">
+            <h1>{{title}}</h1>
+        </div>
+    </div>
+</div>
+{% endverbatim %}
+{% endblock contentTitle %}
+
+{% block mainContent %}
+    {% block body %}
+        {% block content %}
+          <div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div id="sel_form" class="form-horizontal">
+                            <!-- Step forms -->
+                            <div class="step-content">
+                                <div data-ng-controller="UpdatePhotoCtrl"  class="container-fluid" data-ui-view>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock content %}
+    {% endblock body%}
+{% endblock mainContent %}

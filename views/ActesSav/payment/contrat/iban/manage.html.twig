@@ -1,0 +1,120 @@
+ {% extends "SelBundle::layout.html.twig" %}
+
+ {% block title %}{{ 'pay.pay_forfait_iban.service_navigo_title'|trans({}, 'pay') }}{% endblock %}
+
+ {% block content_header '' %}
+ {% block flashMessage %}{% endblock flashMessage %}
+
+ {% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title="{{ 'pay.pay_forfait_iban.accueil'|trans({}, 'pay') }}">{{ 'pay.pay_forfait_iban.accueil'|trans({}, 'pay') }}</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title="{{ 'pay.pay_forfait_iban.service_navigo_link_label'|trans({}, 'pay') }}">{{ 'pay.pay_forfait_iban.service_navigo_link_label'|trans({}, 'pay') }}</a></li>
+            <li><a href="{{ path('sel_espace_client') }}" title="{{ 'pay.pay_forfait_iban.espace_client_link_label'|trans({}, 'pay') }}">{{ 'pay.pay_forfait_iban.espace_client_link_label'|trans({}, 'pay') }}</a></li>
+            <li><a href="{{ path('sel_payment_list') }}" title="{{ 'pay.pay_forfait_iban.moyen_paiement_link_label'|trans({}, 'pay') }}">{{ 'pay.pay_forfait_iban.moyen_paiement_link_label'|trans({}, 'pay') }}</a></li>
+            <li class="active">{{ 'pay.pay_forfait_iban.changer_moyen_paiement_link_label'|trans({}, 'pay') }}</li>
+          </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+ {% block contentTitle %}
+     <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{ 'pay.pay_forfait_iban.changer_moyen_paiement_title'|trans({}, 'pay') }}</h1>
+            </div>
+        </div>
+    </div>
+ {% endblock contentTitle %}
+
+{% block previousArrow %}
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="prev">
+			<a href="javascript:window.history.back()">
+				<img src="{{ asset('bundles/sel/images/prev16.png') }}" class="picto" alt="Retour à la page précédente">
+				précédent
+			</a>
+		</div>
+	</div>
+</div>
+{% endblock previousArrow %}
+
+{% block content %}
+
+        <form action="{{ path('sel_iban_associate', { 'md5iban': md5iban, 'contract': forfait.reference, 'codeProduit': forfait.codeProduit,  'returnUrl' : 'sel_contrat_iban_manage' }) }}" name="changeIban" method="POST">
+        <input type="hidden" name="returnUrl" value="sel_espace_client" />
+
+            <div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="sav paiement change">
+                            <div class="row flex">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p class="nom-forfait">
+                                                <strong>{{ forfait.nameProduit }} du</strong><br>
+                                                {{ forfait.dateDebut|date("d/m/Y")}} au {{ forfait.dateFin|date("d/m/Y")}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row show-grid">
+                                        <div class="col-xs-12 col-sm-12 col-md-6">
+                                        {% if forfait.situationFinanciere.domiciliationBancaire.codeBic is defined %}
+                                            <div class="select-paiement-actif">
+                                                <h2 class="title">
+                                                    {{ 'pay.pay_forfait_iban.moyen_paiement_associes_sub_title_2'|trans({}, 'pay') }}
+                                                </h2>
+                                                <p class="paiement-actif">
+                                                    <span>{{ 'pay.pay_forfait_iban.type_paiement_label'|trans({}, 'pay') }}<strong>{{ 'pay.pay_forfait_iban.prelevement_sepa'|trans({}, 'pay') }}</strong></span>
+                                                    <span>{{ 'pay.pay_forfait_iban.BIC_label'|trans({}, 'pay') }}<strong>{{ forfait.situationFinanciere.domiciliationBancaire.codeBic }}</strong></span>
+                                                    <span>{{ 'pay.pay_forfait_iban.IBAN_label'|trans({}, 'pay') }}<strong>{{ forfait.situationFinanciere.domiciliationBancaire.iban | hideIbanChars}}</strong></span>
+                                                    <span>{{ 'pay.pay_forfait_iban.nom_titulaire_label'|trans({}, 'pay') }}<strong>{{ forfait.situationFinanciere.domiciliationBancaire.titulaireDuCompte }}</strong></span>
+                                                </p>
+                                           </div>
+                                           {% endif %}
+                                            <a href="{{ path('sel_add_iban', {'returnUrl':'sel_contrat_iban_manage', 'contract': forfait.reference, 'codeProduit': forfait.codeProduit}) }}" class="ajouter-iban brn btn-primary" title="{{ 'pay.pay_forfait_iban.ajout_bic_iban_label_title'|trans({}, 'pay') }}">
+                                                <span>{{ 'pay.pay_forfait_iban.ajout_bic_iban_label'|trans({}, 'pay') }}</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-6">
+                                            {% if ibans|length > 0 %}
+                                            <h2 class="title">
+                                                {{ 'pay.pay_forfait_iban.selection_moyen_paiement_sub_title_2'|trans({}, 'pay') }}
+                                            </h2>
+                                            {% endif %}
+                                            {% for item in ibans %}
+                                            {% if item.codeStatut == 1 %}
+
+                                            <div class="select-paiement">
+                                                <div class="radio">
+                                                    <input id="RadioPm{{ loop.index }}" name="md5iban2" value="{{ item.md5iban }}" type="radio"
+                                                    {% if item.md5iban == md5iban %} checked="checked" {% endif %}  />
+                                                    <label class="radio" for="RadioPm{{ loop.index }}">
+                                                        <span>{{ 'pay.pay_forfait_iban.type_paiement_label'|trans({}, 'pay') }}<strong>{{ 'pay.pay_forfait_iban.prelevement_sepa'|trans({}, 'pay') }}</strong></span><br>
+                                                        <span>{{ 'pay.pay_forfait_iban.BIC_label'|trans({}, 'pay') }}<strong>{{ item.codeBic }}</strong></span><br>
+                                                        <span>{{ 'pay.pay_forfait_iban.IBAN_label'|trans({}, 'pay') }}<strong>{{ item.iban | hideIbanChars}}</strong></span><br>
+                                                        <span>{{ 'pay.pay_forfait_iban.nom_titulaire_label'|trans({}, 'pay') }}<strong>{{ item.titulaireDuCompte }}</strong></span><br>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-md-12 text-center">
+                                            <button type="submit" class="btn btn-primary aide-photo-btn btn-color" title="{{ 'pay.pay_forfait_iban.confirmer_btn_title'|trans({}, 'pay') }}"><span>{{ 'pay.pay_forfait_iban.confirmer_btn'|trans({}, 'pay') }}</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+{% endblock content%}

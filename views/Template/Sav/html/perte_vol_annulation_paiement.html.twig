@@ -1,0 +1,20 @@
+<div class="infos">
+    <div class="info">
+        <div class="text-center">
+            <p>{{ 'pv.pv_paiement.payline_annulation' |trans({}, 'pv') }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 text-center">
+         <a type="button" href="{{ path('sel_espace_client') }}" class="btn btn-default aide-photo-btn" title="{{ 'pv.pv_paiement.payline_msg' |trans({}, 'pv') }}" ><span>{{ 'pv.pv_paiement.payline_msg' |trans({}, 'pv') }}</span></a>
+    </div>
+</div>
+
+{# block tag %}
+            {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': {
+                    "declarationFail": true
+                }})
+            %}
+{ endblock tag #}

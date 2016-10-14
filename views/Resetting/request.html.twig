@@ -1,0 +1,103 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block meta_desc %}
+	<meta name="description" content="{{'mdp.mdp_reset_request.meta_desc'|trans({}, 'mdp', 'fr')|raw}}">
+{% endblock %}
+
+{% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title='{{'mdp.mdp_request.accueil_link_breadcrumb_title'|trans({}, 'mdp', 'fr')|raw}}'>{{'mdp.mdp_request.accueil_link_breadcrumb'|trans({}, 'mdp')|raw}}</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title='{{'mdp.mdp_request.gere_maCarte_link_breadcrumb_title'|trans({}, 'mdp', 'fr')|raw}}'>{{'mdp.mdp_request.gere_maCarte_link_breadcrumb'|trans({}, 'mdp')|raw}}</a></li>
+            <li class="active">{{'mdp.mdp_request.mdp_oublie_link_breadcrumb'|trans({}, 'mdp')|raw}}</li>
+          </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+    {% javascripts
+        '@SelBundle/Resources/public/js/Connexion/Module/*.js'
+        '@SelBundle/Resources/public/js/Connexion/Controller/*.js'
+        output='js/connexion.js' %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+    <script src="//www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+{% endblock javascript_foot %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{'mdp.mdp_reset_request.lbl_titre'|trans({}, 'mdp', 'fr')|raw}}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block angularModule %}connexion{% endblock %}
+{% block mainContent %}
+{% block body %}
+
+    {% block content %}
+        <div data-ng-controller="FormValidatorCtrl" data-ng-init="secretCaptcha = '{{ public_key_captcha }}'">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-horizontal">
+                        <div class="step_form creation-compte">
+                            <div class="form-content">
+                                <form name="form1" action="{{ path('sel_front_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+                                    <span class="general_Intext">{{'mdp.mdp_reset_request.lbl_consigne_mdp'|trans({}, 'mdp', 'fr')|raw}}</span>
+
+                                    {% if invalid_username is defined %}
+
+                                        <p class="warning-light red">
+                                            <img alt="Alerte" class="picto" src="{{ asset('bundles/sel/images/alert.png') }}">
+                                            <strong>
+                                                {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}
+                                            </strong>
+                                        </p>
+
+                                    {% endif %}
+
+                                    <div class="form-group" data-border-valid-mobile>
+                                        <label for="email" class="col-xs-12 col-sm-4 col-md-4 control-label">{{'mdp.mdp_reset_request.lbl_email'|trans({}, 'mdp', 'fr')|raw}}<span class="star"></span></label>
+                                        <div class="col-xs-11 col-sm-6 col-md-4">
+                                            <input id="email" ng_model="{{ form.email.vars.full_name }}" name="{{form.email.vars.full_name }}" placeholder="nom.prenom@domaine.com" type="email" data-gie-mail class="form-control" value="" required="required" aria-required="true">
+                                            <img class="picto valid" data-ng-show="form1['{{ form.email.vars.full_name }}'].$dirty && form1['{{ form.email.vars.full_name }}'].$valid" src="{{prefix_front}}bundles/sel/images/check.png" alt="Ok">
+                                            <img class="picto error" data-ng-show="form1['{{ form.email.vars.full_name }}'].$dirty && form1['{{ form.email.vars.full_name }}'].$invalid" src="{{prefix_front}}bundles/sel/images/error.png" alt="Erreur">
+                                            <span aria-live="assertive"  class="mess-error" data-ng-show="form1['{{ form.email.vars.full_name }}'].$dirty && form1['{{ form.email.vars.full_name }}'].$error.email">{{"sna.sna_erreur.IHM-TRANS-ERR_004"|trans({}, "sna", "fr")|raw}}</span>
+                                            <span aria-live="assertive"  class="mess-error" data-ng-show="form1['{{ form.email.vars.full_name }}'].$dirty && form1['{{ form.email.vars.full_name }}'].$error.required">{{"sna.sna_erreur.IHM-TRANS-ERR_002"|trans({}, "sna", "fr")|raw}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                       <label class="col-xs-12 col-sm-4 col-md-4 control-label">{{'mdp.mdp_reset_request.lbl_recop_carac'|trans({}, 'mdp', 'fr')|raw}}<span class="star"></span></label>
+                                       <div class="col-xs-12 col-sm-4 col-md-4" data-ng-click="captchaEventManager()" >
+                                           <!-- Captcha -->
+                                           {#{form_widget(form.captcha, { 'attr': {'data-ng-model': "capcha"} })}#}
+                                           <div id="g-recaptcha" class="g-recaptcha" data-sitekey="{{ public_key_captcha }}">
+                                       </div>
+
+                                   </div>
+                                {#{{form_rest(form)}}#}
+                                <div class="row">
+                                    <div class="col-xs-12 text-center">
+                                        <button type="submit" data-ng-disabled="form1.$invalid" class="btn btn-primary aide-photo-btn" value="Valider la demande de mot de passe oublié"><span>{{'mdp.mdp_reset_request.btn_valider'|trans({}, 'mdp', 'fr')|raw}}</span></button>
+                                    </div>
+                                </div>
+                            </form>
+							<span class="obligatoire">
+								<span class="star" aria-label="{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}"></span>
+								{{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}
+							</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    {% endblock content %}
+{% endblock body%}
+
+{% endblock mainContent %}

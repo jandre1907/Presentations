@@ -1,0 +1,51 @@
+mdp.mdp_reset_request.meta_desc: 'Mot de passe oublié'
+mdp.mdp_reset_info.lbl_titre: 'Mot de passe oublié'
+mdp.mdp_reset_info.lbl_prise_cpt: 'Votre demande de renouvellement de mot de passe a bien été prise en compte.<br/>Nous vous avons envoyé un mail pour réinitialiser votre mot de passe.'
+mdp.mdp_reset_info.lbl_info: 'Si vous ne retrouvez pas cet email</strong>, pensez à consulter les courriers indésirables de votre boite mail.'
+mdp.mdp_reset_info.lbl_mail_again: 'Pensez &agrave; consulter les courriers ind&eacute;sirables. Si vous n&rsquo;avez pas re&ccedil;u d&rsquo;e-mail, <a class="link underline" title="Recevoir un autre mail d''activation de compte" href="#" ng-click="gotoStep(null, null)">cliquez ici</a>'
+mdp.mdp_reset_info.btn_retour_accueil: 'Retour accueil'
+mdp.mdp_reset_info.titre_modal: 'Renvoi du mail de renouvellement de mot de passe'
+mdp.mdp_reset_info.content_modal: 'Un nouveau mail de renouvellement de mot de passe vient de vous être renvoyé.'
+mdp.mdp_reset_info.btn_close_modal: Fermer
+mdp.mdp_reset_confirmation.lbl_titre: 'Modifier mon mot de passe'
+mdp.mdp_reset_confirmation.lbl_mdp_ok: 'Votre nouveau mot de passe a bien été enregistré.'
+mdp.mdp_reset_confirmation.btn_retour_espa: 'Retour à mon espace personnel'
+mdp.mdp_already_request.lbl_titre: 'Mot de passe oublié'
+mdp.mdp_already_request.btn_retour_accueil: 'Retour accueil'
+mdp.mdp_already_request.text: 'Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.'
+mdp.mdp_reset_request.lbl_champ_obli: 'Les informations à saisir marquées par une * sont obligatoires'
+mdp.mdp_reset_request.lbl_titre: 'Mot de passe oublié'
+mdp.mdp_reset_request.lbl_titre_onglet: 'Navigo: Mot de passe oublié'
+mdp.mdp_reset_request.act_precedent: précédent
+mdp.mdp_reset_request.lbl_consigne_mdp: 'Veuillez renseigner votre e-mail pour réinitialiser votre mot de passe'
+mdp.mdp_reset_request.lbl_email: E-mail
+mdp.mdp_reset_request.lbl_recop_carac: 'Recopier les caractères'
+mdp.mdp_reset_request.btn_valider: Valider
+mdp.mdp_new.accueil: Accueil
+mdp.mdp_new.service_navigo: 'Je gère ma carte Navigo'
+mdp.mdp_new.espace_client: 'Mon espace personnel'
+mdp.mdp_new.vos_coordonnees: 'Vos Coordonnées'
+mdp.mdp_new.reinit_mdp: 'Modifier mon mot de passe'
+mdp.mdp_new.modifier_mdp: 'Modifier mon mot de passe'
+mdp.mdp_new.lbl_titre: 'Modifier mon mot de passe'
+mdp.mdp_new.act_precedent: Précédent
+mdp.mdp_new.aid_mdp: "<span><strong>Votre mot de passe doit respecter le format suivant :</strong></span>\r\n<ul class=\"color_bullet\">\r\n<li>minimum une majuscule</li>\r\n<li>minimum une minuscule</li>\r\n<li>minimum un chiffre</li>\r\n<li>minimum 8 caract&egrave;res</li>\r\n<li>maximum 20 caract&egrave;res</li>\r\n</ul>"
+mdp.mdp_new.lbl_anc_mdp: 'Mon mot de passe actuel'
+mdp.mdp_new.lbl_nouv_mdp: 'Mon nouveau mot de passe'
+mdp.mdp_new.lbl_conf_mdp: 'Confirmer mon nouveau mot de passe'
+mdp.mdp_new.btn_valider: Valider
+mdp.mdp_request.accueil_link_breadcrumb: Accueil
+mdp.mdp_request.accueil_link_breadcrumb_title: Accueil
+mdp.mdp_request.gere_maCarte_link_breadcrumb: 'Je gère ma carte Navigo'
+mdp.mdp_request.gere_maCarte_link_breadcrumb_title: 'Je gère ma carte Navigo'
+mdp.mdp_request.mdp_oublie_link_breadcrumb: 'Mot de passe oublié'
+mdp.mdp_request.mdp_oublie_link_breadcrumb_title: 'Mot de passe oublié'
+mdp.mdp_request.mail_reinitialisation_link_breadcrumb: 'Envoi mail de réinitialisation'
+mdp.mdp_request.mail_reinitialisation_lin_breadcrumb_title: 'Envoi mail de réinitialisation'
+mdp.mdp_reset_confirmation.accueil: Accueil
+mdp.mdp_reset_confirmation.service_navigo: 'Je gère ma carte Navigo'
+mdp.mdp_reset_confirmation.espace_client: 'Mon espace personnel'
+mdp.mdp_reset_confirmation.vos_coordonnees: 'Vos informations personnelles'
+mdp.mdp_reset_confirmation.reinit_mdp: 'Modifier mon mot de passe'
+mdp.mdp_reset_confirmation.confirm_reinit_mdp: Confirmation
+mdp.mdp_new.info_perso: 'Mes informations personnelles'

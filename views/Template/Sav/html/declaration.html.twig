@@ -1,0 +1,34 @@
+{% verbatim %}<div class="infos">
+    <div class="info">
+        <div class="text-center">
+            <p data-message-dv meskey="{{pageCtrl.meskey}}"></p>
+            <p data-message-dv meskey="{{pageCtrl.meskey2}}"></p>
+        </div>
+    </div>
+</div>
+<!--
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12" ></div>
+    <div class="col-xs-12 col-sm-12 col-md-12" data-message-dv meskey="{{pageCtrl.meskey2}}"></div>
+</div>
+-->
+<div class="row">
+    <div class="col-xs-12 text-center">
+         <button type="button" class="btn btn-primary aide-photo-btn button_declarer" title="{{pageCtrl.buttonMessageTitle}}" data-ng-click="pageCtrl.stepSubmit()"><span>{{pageCtrl.buttonMessage}}</span></button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-8" data-message-dv meskey="{{pageCtrl.meskey3}}">
+    </div>
+</div>
+
+{% endverbatim %}
+
+{% block tag %}
+            {# set declaration to true to access subsection declaration in get_template in rtracking.yml #}
+            {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': {
+                    "declaration": true
+                }})
+            %}
+{% endblock tag %}

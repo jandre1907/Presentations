@@ -1,0 +1,110 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block title "Symfony - Users" %}
+
+{% block content_header '' %}
+
+{% block content %}
+    {% verbatim %}
+        {{ 5 + 3 }}
+
+        <div data-ng-controller="formBuilderCtrl" data-ng-click="addForm()">Cliquez ici</div>
+        <input type="text" name="step" value='' data-ng-model="currentStep" />
+        <div data-ng-controller="formBuilderCtrl" data-ng-click="downloadForm(currentStep)">download Form mockup</div>
+        {{form}}
+    {% endverbatim %}
+
+    <div class="ui-widget">
+        <label for="tags">Recherche Utilisateur: </label>
+        <input id="tags">
+    </div>
+    <div class="header clear-fix"></div>
+
+    <h1 class="title">{{ 'user.list.headline'|trans({}, 'SelBundle') }}</h1>
+
+    <p>
+        {{ 'user.offset'|trans({}, 'SelBundle') }}: {{ data.offset ?: '-' }}, {{ 'user.limit'|trans({}, 'SelBundle') }}: {{ data.limit }}
+    </p>
+
+    <ul id="user-list">
+        {% for user in data.users %}
+        <li>
+            <a href="{{ path('get_user', {'id': user.id}) }}">{{ user.username }}</a>
+            [<a href="{{ path('edit_users', {'id': user.id}) }}">{{ 'user.edit.link'|trans({}, 'SelBundle') }}</a>]
+            [<a href="{{ path('remove_users', {'id': user.id}) }}">{{ 'user.remove.link'|trans({}, 'SelBundle') }}</a>]
+        </li>
+
+        <li>{{ 'user.list.empty'|trans({}, 'SelBundle') }}</li>
+        {% endfor %}
+    </ul>
+    <p>
+        <a href="{{ path('new_user') }}">{{ 'user.new.link'|trans({}, 'SelBundle') }}</a>
+    </p>
+
+{% endblock %}
+{% block javascript_foot %}
+    {{ parent() }}
+    <script type="text/javascript">
+    var cache = {};
+        $( document ).ready(function() {
+            //var cache = {};
+            console.log('ici');
+            $( "#tags" ).autocomplete({
+                //source: availableTags
+                minLength: 2,
+                source : function(request, response){
+                    var term = request.term;
+                    if ( term in cache ) {
+                        response( cache[ term ] );
+                        return;
+                    }
+                    $.ajax({
+                        url : '{{ path('get_users') }}',
+                        //url : 'users.json',
+                        dataType : 'json',
+                        data : {
+                            keywords : $('#tags').val(),
+                            limit : 15
+                        },
+                        success : function(data){
+                            cache[ term ] = data;
+                            /*response($.map(data.users, function(object){
+                                console.log(object);
+                                return object.first_name + ' ' + object.last_name;
+                            }));*/
+                            response(data.users);
+                        }
+                    });
+                },
+                focus: function( event, ui ) {
+                    $( "#tags" ).val( ui.item.first_name + ', ' + ui.item.last_name);
+                    return false;
+                },
+                select: function( event, ui ) {
+                    console.log('slele');
+                    $( "#user-list" ).html("<li></li>");
+                    $( "<li id=li" + ui.item.id + "></li>" ).appendTo( "#user-list" );
+                    console.log(ui);
+                    $( '<a href="/restapi/web/app_dev.php/users/' + ui.item.id + '.json">' + ui.item.last_name + '</a> ').appendTo( "#li" + ui.item.id );
+                    $( '<span>&nbsp;[</span>').appendTo( "#li" + ui.item.id );
+                    $( '<a href="/restapi/web/app_dev.php/users/' + ui.item.id + '/edit">{{ 'user.edit.link'|trans({}, 'SelBundle') }}</a>').appendTo( "#li" + ui.item.id );
+                    $( '<span>]&nbsp;[</span>').appendTo( "#li" + ui.item.id );
+                    $( '<a href="/restapi/web/app_dev.php/users/' + ui.item.id + '/remove">{{ 'user.remove.link'|trans({}, 'SelBundle') }}</a>').appendTo( "#li" + ui.item.id );
+                    $( '<span>]&nbsp;</span>').appendTo( "#li" + ui.item.id );
+                    return false;
+                }
+            })
+            .autocomplete( "instance" )._renderItem = function( ul, item ) {
+                if ( typeof item.id != 'undefined' ) {
+                    return $( "<li>" )
+                    .append( "<a>" + item.first_name + " " + item.last_name + "</a>" )
+                    .appendTo( ul );
+                };
+            }
+                // http://www.renault-arc.local/restapi/web/app_dev.php/users/5186/edit
+                // http://www.renault-arc.local/restapi/web/app_dev.php/users/1094/remove
+        });
+    </script>
+{% endblock javascript_foot %}
+
+

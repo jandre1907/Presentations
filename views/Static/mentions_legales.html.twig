@@ -1,0 +1,34 @@
+ {% extends "SelBundle::layout.html.twig" %}
+
+{% block meta_desc %}
+	<meta name="description" content="{{'static.static_mentions_legales.meta_desc'|trans({}, 'static', 'fr')|raw}}">
+{% endblock %}
+
+ {% block content_header '' %}
+ {% block flashMessage %}{% endblock flashMessage %}
+
+ {% block breadcrumb %}
+    <div id="box_breadcrumb_id" class="row">
+       <div class="col-xs-12">
+          <ol class="breadcrumb">
+          <li><a href="http://www.navigo.fr" title="{{ 'sna.sna_transverse.accueil_link_breadcrumb_title'|trans({}, 'sna') }}">{{ 'sna.sna_transverse.accueil_link_breadcrumb'|trans({}, 'sna') }}</a></li>
+          <li><a href="{{ path('sel_homepage') }}" title="{{ 'sna.sna_transverse.gere_maCarte_link_breadcrumb_title' | trans({}, 'sna') }}">{{ 'sna.sna_transverse.gere_maCarte_link_breadcrumb'|trans({}, 'sna') }}</a></li>
+    	  <li>{{ 'static.static_mentions_legales.title'|trans({}, 'static')|raw }}</li>
+          </ol>
+       </div>
+    </div>
+ {% endblock breadcrumb %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{'static.static_mentions_legales.title'|trans({}, 'static', 'fr')|raw }}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block content %}
+	{{'static.static_mentions_legales.texte'|trans({'%cgu%':  asset('bundles/sel/pdf/CGU_SEL.pdf'), '%cgv%':  asset('bundles/sel/pdf/CGV_SEL.pdf')}, 'static', 'fr')|raw}}
+{% endblock %}

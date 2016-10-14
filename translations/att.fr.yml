@@ -1,0 +1,20 @@
+att.att_list.lbl_titre: 'Télécharger une attestation de contrat'
+att.att_list.lbl_choix_forf: "Pour quel forfait souhaitez-vous obtenir une attestation\_de contrat ?"
+att.att_list.liste_elt: '<span class="general_Intext">Forfait {{ forfait.forfait }} <span ng-show="pageCtrl.displayDateForfait">{{ forfait.annee }}</span> de <strong>{{ forfait.porteur }}</strong></span>'
+att.att_list.liste_elt_link_begin: '<a href="{{forfait.refUrl}}" target="_blank" title="Télécharger l’attestation PDF du Forfait {{ forfait.codeProduit | forfaitName }} {{ forfait.dateDebut | forfaitYear }} de {{ forfait.identitePorteur }} (nouvelle fenêtre)" >'
+att.att_list.liste_elt_link_content: 'Télécharger ({{ forfait.size/1024 | number:0 }} Ko)'
+att.att_list.liste_elt_link_end: '</a>'
+att.att_list.liste_elt_link: '<a href="{{forfait.refUrl}}" class="" title="télécharger l’attestation PDF du Forfait {{ forfait.codeProduit | forfaitName }} {{ forfait.dateDebut | forfaitYear }} de {{ forfait.identitePorteur }}" download>Télécharger ({{ forfait.size/1024 | number:0 }} Ko)</a>'
+att.att_list.INFO_ATTESTATION: '<h3>Votre attestation est disponible sur un nouvel onglet de votre navigateur.</h3>'
+att.att_list.SAV-ATT-EC01-RG_006: '<h3>Aucune attestation n’est disponible<h3>'
+att.att_list.SERVER_ERROR: '<h3>Nous ne sommes pas en mesure de donner suite à votre demande</h3>'
+att.att_list.Bt_return_msg: 'Retour à mon espace personnel'
+att.att_list.Bt_return_title: 'Retour à mon espace personnel'
+att.att_list.accueil_link_breadcrumb: Accueil
+att.att_list.accueil_link_breadcrumb_title: Accueil
+att.att_list.gere_maCarte_link_breadcrumb: 'Je gère ma carte Navigo'
+att.att_list.gere_maCarte_link_breadcrumb_title: 'Je gère ma carte Navigo'
+att.att_list.mon_espace_link_breadcrumb: 'Mon espace personnel'
+att.att_list.mon_espace_link_breadcrumb_title: 'Mon espace personnel'
+att.att_list.title_main: 'Obtenir mon attestation de forfait'
+att.att_list.perte_vol: 'Déclarer la perte ou le vol de ma carte Navigo'

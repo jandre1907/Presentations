@@ -1,0 +1,106 @@
+                            <div class="form-content" data-ng-form="verificationForm">
+                                <div class="form-group" data-border-valid-mobile>
+                                    <label for="adresse" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'coor.coor_edit.lbl_num_rue'|trans({}, 'coor', 'fr')|raw}}<span class="star"></span></label>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <input id="adresse" data-ng-model="street1" name="street1" class="form-control" required aria-required="true">
+                                        <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="verificationForm.street1.$invalid">
+                                        <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Erreur" data-ng-show="verificationForm.street1.$dirty && verificationForm.street1.$valid">
+
+                                        <span class="mess-error" data-ng-show="verificationForm.street1.$error.required" aria-live="assertive" >{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="complement_adresse2" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'coor.coor_edit.lbl_comp_add_l1'|trans({}, 'coor', 'fr')|raw}}</label>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <textarea id="complement_adresse2" class="form-control" placeholder="{{'coor.coor_edit.info_comp_add_l1'|trans({}, 'coor', 'fr')|raw}}" data-ng-model="ligne1" maxlength="38" name="ligne1"></textarea>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="complement_adresse" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'coor.coor_edit.lbl_comp_add_l2'|trans({}, 'coor', 'fr')|raw}}</label>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <textarea id="complement_adresse" class="form-control" placeholder="{{'coor.coor_edit.info_comp_add_l2'|trans({}, 'coor', 'fr')|raw}}" data-ng-model="street2" maxlength="38" name="street2"></textarea>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="complement_adresse3" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'coor.coor_edit.lbl_comp_add_l4'|trans({}, 'coor', 'fr')|raw}}</label>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <textarea id="complement_adresse3" class="form-control" placeholder="{{'coor.coor_edit.info_comp_add_l4'|trans({}, 'coor', 'fr')|raw}}" data-ng-model="ligne4" maxlength="38" name="ligne4"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group" data-border-valid-mobile>
+                                    <label for="code_postal" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'coor.coor_edit.lbl_cp'|trans({}, 'coor', 'fr')|raw}}<span class="star"></span></label>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                         <input id="code_postal" type="text" class="form-control" data-ng-model="postalCode" name="postalCode" data-ng-change="getCities()" required maxlength="5" aria-required="true" data-ng-pattern="/^[0-9]{5}$/">
+
+                                        <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="verificationForm.postalCode.$invalid">
+                                        <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Erreur" data-ng-show="verificationForm.postalCode.$dirty && verificationForm.postalCode.$valid">
+
+                                        <span class="mess-error" data-ng-show="verificationForm.postalCode.$error.required" aria-live="assertive" >{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                                    </div>
+
+                                </div>
+                                <div class="form-group" data-border-valid-mobile>
+                                    <label for="ville" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'coor.coor_edit.lbl_ville'|trans({}, 'coor', 'fr')|raw}}</label>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <select id="ville" class="form-control chosen-select" name="city" data-ng-options="city.label for city in cities" data-ng-model="city"></select>
+
+                                        <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="verificationForm.city.$invalid">
+                                        <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Erreur" data-ng-show="!verificationForm.postalCode.$pristine && cities.length">
+
+                                        <span class="mess-error" data-ng-show="verificationForm.city.$invalid" aria-live="assertive" >{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="pays" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'coor.coor_edit.lbl_pays'|trans({}, 'coor', 'fr')|raw}}<span class="star"></span></label>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <input id="pays" data-ng-model="country" name="country" class="form-control" disabled aria-required="true">
+                                    </div>
+
+                                </div>
+                                <div class="form-group" data-border-valid-mobile>
+                                    <label for="mobile" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'coor.coor_edit.lbl_tel_port'|trans({}, 'coor', 'fr')|raw}}</label>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <input type= 'tel' id="mobile" data-ng-model="mobil" name="mobil" class="form-control" aria-required="true" data-ng-pattern="/^(06|07)[ ]?[0-9]{2}[ ]?[0-9]{2}[ ]?[0-9]{2}[ ]?[0-9]{2}[ ]?$/" maxlength="15">
+
+                                            <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="verificationForm.mobil.$invalid">
+                                            <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Erreur" data-ng-show="!verificationForm.mobil.$pristine && verificationForm.mobil.$valid">
+
+                                        <span class="mess-error" data-ng-show="verificationForm.mobil.$error.pattern" aria-live="assertive" >{% verbatim %}{{errorMessages['IHM-TRANS-ERR_002']}}{% endverbatim %}</span>
+                                        <span class="mess-error" data-ng-show="verificationForm.mobil.$error.required" aria-live="assertive" >{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3">
+                                        <div class="box_action_show_error">
+                                            <a href="#" class="action_show_error">
+                                                <img  src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/picto_information.png" alt="{{"sna.sna_coordonnees_porteur.img_info_alt"|trans({}, "sna", "fr")|raw}}" />
+                                            </a>
+                                            <div id="phone-info" class="tooltip right tel" > <!-- class tel provisoire -->
+                                                <div class="tooltip-arrow"></div>
+                                                <div class="tooltip-inner">
+                                                    {{"cpt.cpt_confirm_rattachement.indication_telephone_portable"|trans({}, "cpt", "fr")|raw}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" data-border-valid-mobile>
+                                    <label for="phoneFix" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'coor.coor_edit.lbl_tel_fix'|trans({}, 'coor', 'fr')|raw}}</label>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <input id="phoneFix" data-ng-model="phone" name="phoneFix" type="tel" class="form-control" data-ng-pattern="/^(01|02|03|04|05|08|09)[ ]?[0-9]{2}[ ]?[0-9]{2}[ ]?[0-9]{2}[ ]?[0-9]{2}[ ]?$/" maxlength="15">
+                                        <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="verificationForm.phoneFix.$invalid">
+                                        <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Erreur" data-ng-show="!verificationForm.phoneFix.$pristine && verificationForm.phoneFix.$valid">
+
+                                        <span class="mess-error" data-ng-show="verificationForm.phoneFix.$invalid" aria-live="assertive" >{% verbatim %}{{errorMessages['IHM-TRANS-ERR_002']}}{% endverbatim %}</span>
+                                    </div>
+
+                                </div>
+                                <div class="checkbox col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
+                                    <input type="checkbox" id="inlineRadio9" checked="checked" data-ng-model="cgv">
+                                    <label for="inlineRadio9">{{'coor.coor_edit.cac_offre_comm'|trans({}, 'coor', 'fr')|raw}}
+                                    </label>
+                                </div>
+                            </div>
+                                              <!-- form-content -->

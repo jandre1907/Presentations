@@ -1,0 +1,213 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+
+{% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title="{{ 'pay.pay_add_iban.accueil'|trans({}, 'pay') }}">{{ 'pay.pay_add_iban.accueil'|trans({}, 'pay') }}</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title="{{ 'pay.pay_add_iban.service_navigo'|trans({}, 'pay') }}">{{ 'pay.pay_add_iban.service_navigo'|trans({}, 'pay') }}</a></li>
+            <li><a href="{{ path('sel_espace_client') }}" title="{{ 'pay.pay_add_iban.service_client_link_label'|trans({}, 'pay') }}">{{ 'pay.pay_add_iban.service_client_link_label'|trans({}, 'pay') }}</a></li>
+            <li><a href="{{ path('sel_payment_list') }}" title="{{ 'pay.pay_add_iban.moyen_de_paiement'|trans({}, 'pay') }}">{{ 'pay.pay_add_iban.moyen_de_paiement'|trans({}, 'pay') }}</a></li>
+            <li class="active">{{ 'pay.pay_add_iban.ajout_bic_ban'|trans({}, 'pay') }}</li> <!-- pas de lien sur le dernier item du fil d'ariane !!!!! -->
+          </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+    {% javascripts
+        '@SelBundle/Resources/public/js/Payment/Module/*.js'
+        '@SelBundle/Resources/public/js/Payment/Controller/*.js'
+        '@SelBundle/Resources/public/js/Payment/Service/Factory/*.js'
+        output='js/payment.js' %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+{% endblock javascript_foot %}
+
+
+ {% block title %}{{ 'pay.pay_list.my_moyen_de_paiement_title_onglet'|trans({}, 'pay') }}{% endblock %}
+
+ {% block content_header '' %}
+ {% block flashMessage %}{% endblock flashMessage %}
+ {% block contentTitle %}
+     <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12">
+             <div class="heading">
+                 <h1>{{ 'pay.pay_add_iban.ajout_bic_iban_title'|trans({}, 'pay') }}</h1>
+             </div>
+         </div>
+     </div>
+{% endblock contentTitle %}
+
+{% block previousArrow %}
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="prev">
+            <a href="javascript:window.history.back()">
+                <img src="{{ asset('bundles/sel/images/prev16.png') }}" class="picto" alt="{{ 'transverse.transverse_prev.previous_page_title' |trans({}, 'transverse') }}">
+                {{ 'transverse.transverse_prev.previous_page' |trans({}, 'transverse') }}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock previousArrow %}
+{% block angularModule %}payment{% endblock %}
+
+{% block content %}
+
+<div data-ng-controller="PaymentController"
+ng-init="
+iban1='{{ form.iban1.vars.value }}';
+iban2='{{ form.iban2.vars.value }}';
+iban3='{{ form.iban3.vars.value }}';
+iban4='{{ form.iban4.vars.value }}';
+iban5='{{ form.iban5.vars.value }}';
+iban6='{{ form.iban6.vars.value }}';
+iban7='{{ form.iban7.vars.value }}';
+bic='{{ form.bic.vars.value }}';
+ibanIsComplies();
+bicIsComplies();
+">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div id="sel_form" class="form-horizontal">
+                {% if error %}
+		         <p class="warning-light red" >
+		            <img src="data:null" data-ng-src="{{ asset('bundles/sel/images/alert.png') }}" class="picto" alt="Alerte">
+		            <strong>{{error}}</strong>
+		        </p>
+		        {% endif %}
+
+                <div class="step-content">
+                    <div class="step_form">
+                        <form action=" {{ path('sel_save_iban', {'returnUrl':returnUrl, 'contract': contract, 'codeProduit': codeProduit}) }} " method="POST" {{ form_enctype(form) }} class="">
+                                <!--  {{ form_errors(form) }} -->
+                            <div class="form-content">
+                                <p class="info-picto">
+                                    <img src="{{ asset('bundles/sel/images/info.png') }}" class="picto" alt="Information">
+                                    <span>{{ 'pay.pay_add_iban.informations_banque'|trans({}, 'pay') }}</span>
+                                </p>
+                                <br>
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-sm-4 col-md-3 control-label label-rib">{{ 'pay.pay_add_iban.titulaire_compte_label'|trans({}, 'pay') }}<span class="star"></span></label>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        {{ sigClient.civilite }} {{ sigClient.prenom }} {{ sigClient.nom }}
+                                        <a class="link help" href="#" aria-label={{'pay.pay_add_iban.aria_infos_modif_coor'|trans({}, 'pay') }} data-target="#infos_coordonnees" data-toggle="modal">
+                                            <img src="{{ asset('bundles/sel/images/question.png') }}" class="picto" alt="Aide" width="20" height="20">
+                                        </a>
+                                    </div>
+                                 </div>
+
+                                    <div class="form-group" data-border-valid-mobile>
+                                        <label for="rib_bic" class="col-xs-12 col-sm-4 col-md-3 control-label label-rib">BIC<span class="star"></span>
+                                            <span class="sub-label">{{ 'pay.pay_add_iban.identifiant_code_bank'|trans({}, 'pay') }}</span>
+                                        </label>
+                                        <div class="col-xs-12 col-sm-8 col-md-6">
+                                            {{ form_widget(form.bic, { 'attr': {
+                                                    'data-ng-model': "bic",
+                                                    'maxlength': '11',
+                                                    'data-field-name': 'bicName',
+                                                    'data-ng-change': 'bicIsComplies()',
+                                                    'class': 'form-control'
+                                                } })
+                                            }} <!-- {{ form_errors(form.bic) }} -->
+                                            <span aria-live="assertive"  class="mess-error" data-ng-show="!bicIsComplies() && bicPicType != null">{{"sna.sna_erreur.IHM-TRANS-ERR_002"|trans({}, "sna", "fr")|raw}}</span>
+                                            {#<img class="picto valid" data-ng-show="bicPicType != null" src="{{prefix_front}}/bundles/sel/images/{% verbatim %}{{ bicPicType }}{% endverbatim %}.png" alt="{% verbatim %}{{ bicPicType }}{% endverbatim %}">#}
+                                            <img class="picto valid" data-ng-show="bicIsComplies()" src="{{ asset('bundles/sel/images/check.png') }}" alt="Ok">
+                                            <img alt="Erreur" class="picto error" data-ng-show="!bicIsComplies() && bicPicType != null" src="data:null" data-ng-src="{{ asset('bundles/sel/images/error.png') }}">
+
+                                        </div>
+                                    </div>
+
+                                <div class="form-group" data-border-valid-mobile>
+                                    <label for="rib_iban1" class="col-xs-12 col-sm-4 col-md-3 control-label label-rib">IBAN<span class="star"></span>
+                                        <span class="sub-label">{{ 'pay.pay_add_iban.numero_compte_bancaire'|trans({}, 'pay') }}</span>
+                                    </label>
+                                    <div class="col-xs-4 hide">
+                                        {{ form_widget(form.iban)  }}
+                                    </div>
+                                    <div class="col-xs-12 col-sm-8 col-md-8">
+                                        <div class="iban-group">
+											<fieldset>
+		                                            {{ form_widget(form.iban1, { 'attr': {'data-ng-model': "iban1", 'data-field-name':'iban1Name', "data-ng-change": "ibanIsComplies()", "data-ng-keyup": "changeFocus( $event, 'iban1')"} }) }}<!-- {{ form_errors(form.iban1) }} -->
+		                                            {{ form_widget(form.iban2, { 'attr': {'data-ng-model': "iban2", 'data-field-name':'iban2Name', "data-ng-change": "ibanIsComplies()", "data-ng-keyup": "changeFocus( $event, 'iban2')"} }) }}<!-- {{ form_errors(form.iban2) }} -->
+		                                            {{ form_widget(form.iban3, { 'attr': {'data-ng-model': "iban3", 'data-field-name':'iban3Name', "data-ng-change": "ibanIsComplies()", "data-ng-keyup": "changeFocus( $event, 'iban3')"} }) }}<!-- {{ form_errors(form.iban3) }} -->
+		                                            {{ form_widget(form.iban4, { 'attr': {'data-ng-model': "iban4", 'data-field-name':'iban4Name', "data-ng-change": "ibanIsComplies()", "data-ng-keyup": "changeFocus( $event, 'iban4')"} }) }}<!-- {{ form_errors(form.iban4) }} -->
+		                                            {{ form_widget(form.iban5, { 'attr': {'data-ng-model': "iban5", 'data-field-name':'iban5Name', "data-ng-change": "ibanIsComplies()", "data-ng-keyup": "changeFocus( $event, 'iban5')"} }) }}<!-- {{ form_errors(form.iban5) }} -->
+		                                            {{ form_widget(form.iban6, { 'attr': {'data-ng-model': "iban6", 'data-field-name':'iban6Name', "data-ng-change": "ibanIsComplies()", "data-ng-keyup": "changeFocus( $event, 'iban6')"} }) }}<!-- {{ form_errors(form.iban6) }} -->
+		                                            {{ form_widget(form.iban7, { 'attr': {'data-ng-model': "iban7", 'data-field-name':'iban7Name', "data-ng-change": "ibanIsComplies()", "data-ng-keyup": "changeFocus( $event, 'iban7')"} }) }}<!-- {{ form_errors(form.iban7) }} -->
+											<fieldset>
+										</div>
+
+
+                                            <span aria-live="assertive"  class="mess-error" data-ng-show="!ibanIsComplies() && picType != null">{{"sna.sna_erreur.IHM-TRANS-ERR_002"|trans({}, "sna", "fr")|raw}}</span>
+                                            {#<img class="picto valid" data-ng-show="picType != null" src="{{prefix_front}}/bundles/sel/images/{% verbatim %}{{ picType }}{% endverbatim %}.png" alt="{% verbatim %}{{ picType }}{% endverbatim %}">#}
+                                            <img alt="Ok" class="picto valid" data-ng-show="ibanIsComplies()" src="data:null" data-ng-src="{{ asset('bundles/sel/images/check.png') }}">
+                                            <img alt="Erreur" class="picto error picto-error-mobile" data-ng-show="!ibanIsComplies() && picType != null" src="data:null" data-ng-src="{{ asset('bundles/sel/images/error.png') }}">
+                                    </div>
+                                </div>
+
+                                    <div class="hide">{{ form_rest(form) }}</div>
+
+                                    <div class="form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+                                            <div class="checkbox">
+                                                <input type="checkbox" id="inlineRadio111" data-ng-model="checkbox_declaration">
+                                                <label for="inlineRadio111">{{ 'pay.pay_add_iban.declaration_honneur'|trans({}, 'pay') }}<span class="star"></span></label>
+                                                {# <img class="picto valid" data-ng-show="checkbox_declaration" src="{{prefix_front}}/bundles/sel/images/check.png" alt=""> #} <!-- pas de picto pour valider les checkbox, radio et boutons -->
+                                                {#<img alt="Erreur" class="picto error" data-ng-show="!checkbox_declaration" src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/error.png">#}
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <button type="submit" data-ng-disabled="form.$invalid || buttonIsEnabled()" class="btn btn-primary aide-photo-btn" title="{{ 'pay.pay_add_iban.ajouter_btn_title'|trans({}, 'pay') }}"><span>{{ 'pay.pay_add_iban.ajouter_btn'|trans({}, 'pay') }}</span></button>
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="obligatoire">
+              						            <span class="star" aria-label="{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}"></span>
+              						            {{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}
+              						        </span>
+                                </div>
+
+                            </div>
+                        </form>
+                    <!-- -->
+                    </div>
+                </div>
+            </div><!-- form-horizontal -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+
+<div aria-labelledby="fenetreDialogue"  tabindex="-1" id="infos_coordonnees" class="modal fade">
+    <div  class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button value="Fermer la fenêtre de dialogue et continuer" aria-label="{{ 'pay.pay_add_iban.aria_close_window_and_continue'|trans({}, 'pay') }}" data-dismiss="modal" class="close" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 id="fenetreDialogue" class="modal-title">{{ 'pay.pay_add_iban.modification_coordonnees'|trans({}, 'pay') }}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{ 'pay.pay_add_iban.information_non_modifiables'|trans({}, 'pay') }}</p>
+                <ul class="color_bullet">
+                    <li>{{ 'pay.pay_add_iban.civilite_label'|trans({}, 'pay') }}</li>
+                    <li>{{ 'pay.pay_add_iban.nom_label'|trans({}, 'pay') }}</li>
+                    <li>{{ 'pay.pay_add_iban.prenom_label'|trans({}, 'pay') }}</li>
+                    <li>{{ 'pay.pay_add_iban.date_naissance_label'|trans({}, 'pay') }}</li>
+                </ul>
+                <p>{{ 'pay.pay_add_iban.invitation'|trans({}, 'pay') }} <a href="#" title="[Nom du Fichier PDF + XX Ko]" class="link underline">{{ 'pay.pay_add_iban.points_ventes'|trans({}, 'pay') }} (PDF - XX Ko)</a>.</p>
+            </div>
+            <div class="modal-footer">
+                <button value="{{ 'pay.pay_add_iban.close_window_btn'|trans({}, 'pay') }}" data-dismiss="modal" class="btn btn-default" type="button">{{ 'pay.pay_add_iban.close_btn'|trans({}, 'pay') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content%}

@@ -1,0 +1,21 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block title "Symfony - Users" %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <h1 class="title">{{ 'user.new.headline'|trans({}, 'SelBundle') }}</h1>
+
+    {%  if (form is defined) %}
+    <form action="{{ url('post_users') }}" method="POST" {{ form_enctype(form) }}>
+
+        {{ form_widget(form) }}
+
+        <input type="submit" value="{% trans from 'SelBundle' %}user.new.submit{% endtrans %}">
+    </form>
+    {% endif %}
+
+{% endblock %}
+
+

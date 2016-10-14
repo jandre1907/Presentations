@@ -1,0 +1,18 @@
+{% verbatim %}<div class="step_form" id="echec-specifique"><!-- Echec -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+            <div class="warning">
+                <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/warning.png" class="picto" alt="Attention">
+                <br>
+                <br>
+                <p>{% endverbatim %}{{"rat.rat_echec.err_identification2"|trans({}, "rat", "fr")|raw}}{% verbatim %}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button data-ng-click="pageCtrl.onTerminer()" type="button" class="btn btn-default aide-photo-btn" title="{% endverbatim %}{{"rat.rat_echec.btn_retour_accueil_info"|trans({}, "rat", "fr")|raw}}{% verbatim %}">
+                <span>{% endverbatim %}{{"rat.rat_echec.btn_retour_accueil"|trans({}, "rat", "fr")|raw}}{% verbatim %}</span></button>
+        </div>
+    </div>
+</div>{% endverbatim %}

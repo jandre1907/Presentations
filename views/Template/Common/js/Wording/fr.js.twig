@@ -1,0 +1,420 @@
+/**
+ * Wording permet de récupérer un texte ou block:
+ * soit par clé xliff
+ * soit par clé spec
+ */
+angular.module("Common").factory("Wording",["$log",
+    function($log) {
+        var wording = {
+            "pv": {
+
+                "pv_declaration": {
+                    //Button 1
+                    "Bt_ok_title":     '{{"pv.pv_declaration.Bt_ok_title"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "Bt_return_title": '{{"pv.pv_declaration.Bt_return_title"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "Bt_ok_msg":       '{{"pv.pv_declaration.Bt_ok_msg"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "Bt_return_msg":   '{{"pv.pv_declaration.Bt_return_msg"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    //( +)(.*?)[.](.*?)[.](.*)
+                    //$1"$4": "{{'$2.$3.$4'|trans({}, "$2", "fr")|raw}}",
+                    //Messages
+                    "SAV-PV-DEC-EC01-MSS_001": '{{"pv.pv_declaration.SAV-PV-DEC-EC01-MSS_001"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-PV-DEC-EC01-MSS_002": '{{"pv.pv_declaration.SAV-PV-DEC-EC01-MSS_002"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-PV-DEC-EC01-MSS_003": '{{"pv.pv_declaration.SAV-PV-DEC-EC01-MSS_003"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "label_legendValidite_casNA_IR" : '{{"pv.pv_declaration.label.legendValidite_casNA_IR"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "label_legendValidite_casNA_IR_tiers_pa" : '{{"pv.pv_declaration.label.legendValidite_casNA_IR_tiers_pa"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "vide":""
+                },
+                "pv_paiement": {
+                    "bt_ok_msg": '{{"pv.pv_paiement.Bt_ok_msg"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "bt_ok_title": '{{"pv.pv_paiement.Bt_ok_title"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-PV-PRE-MSS_001": '{{"pv.pv_paiement.SAV-PV-PRE-MSS_001"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-PV-PRE-MSS_002": '{{"pv.pv_paiement.SAV-PV-PRE-MSS_002"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-PV-PRE-MSS_003": '{{"pv.pv_paiement.SAV-PV-PRE-MSS_003"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-P/V-PPA-MSS_001_DOCA": '{{"pv.pv_paiement.SAV-P/V-PPA-MSS_001_DOCA"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-P/V-PPA-MSS_002_DOCA": '{{"pv.pv_paiement.SAV-P/V-PPA-MSS_002_DOCA"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-P/V-PPA-MSS_003_DOCA": '{{"pv.pv_paiement.SAV-P/V-PPA-MSS_003_DOCA"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-PV-POC-EC01-MSS_001":  '{{"pv.pv_paiement.SAV-PV-POC-EC01-MSS_001"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "absence_montant_err": '{{"pv.pv_paiement.absence_montant_err"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "vide":""
+                },
+                "pv_confirmation": {
+                    "Bt_ok_title":     '{{"pv.pv_confirmation.Bt_ok_title"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "Bt_return_title": '{{"pv.pv_confirmation.Bt_return_title"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "Bt_ok_msg":       '{{"pv.pv_confirmation.Bt_ok_msg"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "Bt_return_msg":   '{{"pv.pv_confirmation.Bt_return_msg"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-P/V-CONF-MSS_001": '{{"pv.pv_confirmation.SAV-P/V-CONF-MSS_001"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-P/V-CONF-MSS_002": '{{"pv.pv_confirmation.SAV-P/V-CONF-MSS_002"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-P/V-CONF-MSS_003": '{{"pv.pv_confirmation.SAV-P/V-CONF-MSS_003"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-P/V-CONF-MSS_004": '{{"pv.pv_confirmation.SAV-P/V-CONF-MSS_004"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-P/V-CONF-MSS_005": '{{"pv.pv_confirmation.SAV-P/V-CONF-MSS_005"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-P/V-CONF-MSS_006": '{{"pv.pv_confirmation.SAV-P/V-CONF-MSS_006"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-P/V-CONF-MSS_007": '{{"pv.pv_confirmation.SAV-P/V-CONF-MSS_007"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-P/V-CONF-MSS_008": '{{"pv.pv_confirmation.SAV-P/V-CONF-MSS_008"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "SAV-P/V-CONF-MSS_009": '{{"pv.pv_confirmation.SAV-P/V-CONF-MSS_009"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "vide":""
+                },
+                "pv_echec": {
+                    "SAV-P/V-NMS": '{{"pv.pv_echec.SAV-P/V-NMS"|trans({'%pdf_point_vente_url%':  asset('bundles/sel/pdf/liste_agences.pdf')}, "pv", "fr")| raw | escape('js')}}',
+                    "V-16A":       '{{"pv.pv_echec.V-16A"|trans({}, "pv", "fr")| raw | escape('js')}}',
+                    "V-LIM-EC01":  '{{"pv.pv_echec.V-LIM-EC01"|trans({'%pdf_point_vente_url%':  asset('bundles/sel/pdf/liste_agences.pdf')}, "pv", "fr")| raw | escape('js')}}',
+                    "V-LIM-EC02":  '{{"pv.pv_echec.V-LIM-EC02"|trans({'%cgu%':  asset('bundles/sel/pdf/CGU_SEL.pdf')}, "pv", "fr")| raw | escape('js')}}',
+                    "NO_CONTRACT": '{{"pv.pv_echec.NO_CONTRACT"|trans({'%pdf_point_vente_url%':  asset('bundles/sel/pdf/liste_agences.pdf')}, "pv", "fr")| raw | escape('js')}}',
+                    "vide":""
+                },
+
+                // Etape 1 : Ecran de déclaration de perte/vol pour imagine R sans tiers payant
+                // Déclarer la perte ou le vol de ma carte Navigo  SAV     lbl_titre
+                // "act_precedent": "précédent",
+                // "lbl_etape_1": "DECLARATION",
+                // "lbl_etape_2": "COORDONNES",
+                // "lbl_etape_3": "PAIEMENT",
+                // "lbl_etape_4": "CONFIRMATION",
+                // "btn_decla_perte_ir": "Si vous déclarez la perte ou le vol de votre carte Navigo en ligne, vous recevrez votre nouvelle carte Navigo sous un délai de 7 jours ouvrés.  A noter : en cas de racket ou de vol avec violence de votre carte Navigo, vous pouvez la renouveler gratuitement en agence commerciale RATP, SNCF ou Optile, ou dans un comptoir RATP (PDF 20Ko), en vous munissant de la copie du récépissé de dépôt de plainte établi auprès des services de police.",
+
+
+                // // Etape 1 : Ecran de déclaration de perte/vol pour imagine R avec tiers payant choix 1
+                // // Déclarer la perte ou le vol de ma carte Navigo  SAV     lbl_titre
+                // "act_precedent": "précédent",
+                // "lbl_etape_1": "DECLARATION",
+                // "lbl_etape_2": "COORDONNES",
+                // "lbl_etape_3": "CONFIRMATION",
+                // "btn_decla_perte_ir_t1": "A l’issue de votre demande, celle-ci devra être validée par le Tiers payant qui finance votre forfait afin qu’il puisse prendre en charge les frais associés au renouvellement de votre carte Navigo.  A noter : en cas de racket ou de vol avec violence de votre carte Navigo, vous pouvez la renouveler gratuitement en agence commerciale RATP, SNCF ou Optile, ou dans un comptoir RATP (PDF 20Ko) en vous munissant de la copie du récépissé de dépôt de plainte établi auprès des services de police.",
+
+                "vide":""
+
+            },
+            "demande_attestation": {
+                'liste': {
+                    'liste_elt':           '{{"att.att_list.liste_elt"          |trans({}, "att", "fr")| raw | escape('js')}}',
+                    'liste_elt_link':      '{{"att.att_list.liste_elt_link"     |trans({}, "att", "fr")| raw | escape('js')}}',
+                    'INFO_ATTESTATION':    '{{"att.att_list.INFO_ATTESTATION"   |trans({}, "att", "fr")| raw | escape('js')}}',
+                    'SAV-ATT-EC01-RG_006': '{{"att.att_list.SAV-ATT-EC01-RG_006"|trans({}, "att", "fr")| raw | escape('js')}}',
+                    'SERVER_ERROR':        '{{"att.att_list.SERVER_ERROR"|trans({}, "att", "fr")| raw | escape('js')}}',
+                    'vide': ""
+                }
+            },
+            "sna" :{
+                "sna_erreur": {
+
+
+                    "SNA-CO-EC01-MSS_001": '{{"sna.sna_erreur.SNA-CO-EC01-MSS_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-MSS_002": '{{"sna.sna_erreur.SNA-CO-EC01-MSS_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-ERR_003": '{{"sna.sna_erreur.SNA-CO-EC01-ERR_003"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-MSS_004": '{{"sna.sna_erreur.SNA-CO-EC01-MSS_004"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-MSS_005": '{{"sna.sna_erreur.SNA-CO-EC01-MSS_005"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-ERR_006": '{{"sna.sna_erreur.SNA-CO-EC01-ERR_006"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-ERR_007": '{{"sna.sna_erreur.SNA-CO-EC01-ERR_007"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-ERR_008": '{{"sna.sna_erreur.SNA-CO-EC01-ERR_008"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+
+                    "SNA-PAI-EC01-MSS_002": '{{"sna.sna_erreur.SNA-PAI-EC01-MSS_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-MSS_001": '{{"sna.sna_erreur.SNA-PAI-EC01-MSS_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-ERR_003": '{{"sna.sna_erreur.SNA-PAI-EC01-ERR_003"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-ERR_004": '{{"sna.sna_erreur.SNA-PAI-EC01-ERR_004"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-ERR_005": '{{"sna.sna_erreur.SNA-PAI-EC01-ERR_005"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-ERR_006": '{{"sna.sna_erreur.SNA-PAI-EC01-ERR_006"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-ERR_007": '{{"sna.sna_erreur.SNA-PAI-EC01-ERR_007"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-ERR_008": '{{"sna.sna_erreur.SNA-PAI-EC01-ERR_008"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+
+                    "SNA-SIG-EC01-MSS_001": '{{"sna.sna_erreur.SNA-SIG-EC01-MSS_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_002": '{{"sna.sna_erreur.SNA-SIG-EC01-MSS_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_003": '{{"sna.sna_erreur.SNA-SIG-EC01-MSS_003"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_004": '{{"sna.sna_erreur.SNA-SIG-EC01-MSS_004"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_005": '{{"sna.sna_erreur.SNA-SIG-EC01-MSS_005"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_006": '{{"sna.sna_erreur.SNA-SIG-EC01-MSS_006"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_007": '{{"sna.sna_erreur.SNA-SIG-EC01-MSS_007"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_008": '{{"sna.sna_erreur.SNA-SIG-EC01-MSS_008"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-ERR_003": '{{"sna.sna_erreur.SNA-SIG-EC01-ERR_003"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-ERR_004": '{{"sna.sna_erreur.SNA-SIG-EC01-ERR_004"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+
+
+                    "SNA-RAT-EC02-ERR_001": '{{"sna.sna_erreur.SNA-RAT-EC02-ERR_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "SNA-RAT-EC02-ERR_002": '{{"sna.sna_erreur.SNA-RAT-EC02-ERR_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+
+                    "SNA-FOR-EC01-MSS_001": '{{"sna.sna_erreur.SNA-FOR-EC01-MSS_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+
+
+                    "IHM-TRANS-ERR_001": '{{"sna.sna_erreur.IHM-TRANS-ERR_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_002": '{{"sna.sna_erreur.IHM-TRANS-ERR_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_002_PLURIEL": '{{"sna.sna_erreur.IHM-TRANS-ERR_002_PLURIEL"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_003": '{{"sna.sna_erreur.IHM-TRANS-ERR_003"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_004": '{{"sna.sna_erreur.IHM-TRANS-ERR_004"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_005": '{{"sna.sna_erreur.IHM-TRANS-ERR_005"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_006": '{{"sna.sna_erreur.IHM-TRANS-ERR_006"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_007-DOCA": '{{"sna.sna_erreur.IHM-TRANS-ERR_007-DOCA"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+
+                    "CU-INS-EC01-ERR_001": '{{"sna.sna_erreur.CU-INS-EC01-ERR_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC01-ERR_002": '{{"sna.sna_erreur.CU-INS-EC01-ERR_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC01-ERR_003": '{{"sna.sna_erreur.CU-INS-EC01-ERR_003"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC01-ERR_004": '{{"sna.sna_erreur.CU-INS-EC01-ERR_004"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+
+                    "CMC-CO-EC01-MSS_001": '{{"sna.sna_erreur.CMC-CO-EC01-MSS_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CMC-CO-EC01-ERR_001": '{{"sna.sna_erreur.CMC-CO-EC01-ERR_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CMC-CO-EC01-ERR_002": '{{"sna.sna_erreur.CMC-CO-EC01-ERR_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+
+                    "CU-INS-EC02-ERR_001": '{{"sna.sna_erreur.CU-INS-EC02-ERR_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC02-ERR_002": '{{"sna.sna_erreur.CU-INS-EC02-ERR_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC02-MSG_002": '{{"sna.sna_erreur.CU-INS-EC02-MSG_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC02-ERR_003": '{{"sna.sna_erreur.CU-INS-EC02-ERR_003"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC02-ERR_004": '{{"sna.sna_erreur.CU-INS-EC02-ERR_004"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+
+                    "CU-INS-EC03-MSS_001": '{{"sna.sna_erreur.CU-INS-EC03-MSS_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC03-MSS_002": '{{"sna.sna_erreur.CU-INS-EC03-MSS_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+
+                    "CU-RAT-EC01-MSS_001": '{{"sna.sna_erreur.CU-RAT-EC01-MSS_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-RAT-EC01-MSS_002": '{{"sna.sna_erreur.CU-RAT-EC01-MSS_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+
+                    "CU-CON-EC01-ERR_001": '{{"sna.sna_erreur.CU-CON-EC01-ERR_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_002": '{{"sna.sna_erreur.CU-CON-EC01-ERR_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_003": '{{"sna.sna_erreur.CU-CON-EC01-ERR_003"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_004": '{{"sna.sna_erreur.CU-CON-EC01-ERR_004"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_005": '{{"sna.sna_erreur.CU-CON-EC01-ERR_005"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_006": '{{"sna.sna_erreur.CU-CON-EC01-ERR_006"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+
+                    "CU-REI-EC03-MSS_001": '{{"sna.sna_erreur.CU-REI-EC03-MSS_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "CU-REI-EC03-MSS_002": '{{"sna.sna_erreur.CU-REI-EC03-MSS_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+
+                    "CU-REI-EC03-MSS_001": '{{"sna.sna_erreur.CU-REI-EC03-MSS_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "NORM-MSS_001": '{{"sna.sna_erreur.NORM-MSS_001"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "NORM-MSS_002": '{{"sna.sna_erreur.NORM-MSS_002"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "NORM-MSS_003": '{{"sna.sna_erreur.NORM-MSS_003"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "NORM-ERR_004": '{{"sna.sna_erreur.NORM-ERR_004"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "generic_form_field_input_error": '{{"sna.sna_erreur.generic_form_field_input_error"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "vide" :""
+                },
+                "sna_profil":{
+                    "titre_etape":       '{{"sna.sna_profil.titre_etape"|trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "champs_requis_msg": '{{"sna.sna_profil.champs_requis_msg"|trans({}, "sna", "fr")| raw | escape('js')}}'
+                },
+                "sna_coordonnees_porteur":{
+                    "titre_etape": '{{"sna.sna_coordonnees_porteur.titre_etape"|trans({}, "sna", "fr")| raw | escape('js')}}'
+                },
+                "sna_photo":{
+                    "titre_etape": '{{"sna.sna_photo.titre_etape"|trans({}, "sna", "fr")| raw | escape('js')}}'
+                },
+                "sna_paiement":{
+                    "titre_etape": '{{"sna.sna_paiement.titre_etape"|trans({}, "sna", "fr")| raw | escape('js')}}'
+                },
+                "sna_recapitulatif":{
+                    "titre_etape": '{{"sna.sna_recapitulatif.titre_etape"|trans({}, "sna", "fr")| raw | escape('js')}}'
+                },
+                "sna_signature_payeur":{
+                    "titre_etape": '{{"sna.sna_signature_payeur.titre_etape"|trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "otp_err_msg": '{{"sna.sna_signature_payeur.otp_err_msg"|trans({}, "sna", "fr")| raw | escape('js')}}'
+                },
+                "sna_signature_porteur":{
+                    "titre_etape": '{{"sna.sna_signature_porteur.titre_etape"|trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "otp_err_msg": '{{"sna.sna_signature_porteur.otp_err_msg"|trans({}, "sna", "fr")| raw | escape('js')}}'
+                },
+                "sna_confirmation_porteur":{
+                    "titre_etape": '{{"sna.sna_confirmation_porteur.titre_etape"|trans({}, "sna", "fr")| raw | escape('js')}}'
+                },
+                "sna_forfait" : {
+                    "titre_zone": '{{"sna.sna_forfait.titre_zone" |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "info_prelevement_generale": '{{"sna.sna_forfait.info_prelevement_generale" |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "info_prelevement_specifique": '{{"sna.sna_forfait.info_prelevement_specifique" |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "btn_ok_label": '{{"sna.sna_forfait.btn_ok_label"   |trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "titre_etape": '{{"sna.sna_forfait.titre_etape"|trans({}, "sna", "fr")| raw | escape('js')}}',
+                    "vide": ""
+                }
+            },
+            "rat": {
+                "rat_identification":{
+                    "titre_etape": '{{"rat.rat_identification.titre_etape"|trans({}, "rat", "fr")| raw | escape('js')}}'
+                },
+                "rat_details":{
+                    "titre_etape": '{{"rat.rat_details.titre_etape"|trans({}, "rat", "fr")| raw | escape('js')}}'
+                },
+                "rat_choix_identite":{
+                    "titre_etape": '{{"rat.rat_choix_identite.titre_etape"|trans({}, "rat", "fr")| raw | escape('js')}}'
+                },
+                "rat_aide":{
+                    "titre_etape": '{{"rat.rat_aide.titre_etape"|trans({}, "rat", "fr")| raw | escape('js')}}'
+                }
+
+            },
+            "cpt": {
+                "cpt_erreur": {
+                    "IHM-TRANS-ERR_001": '{{"cpt.cpt_erreur.IHM-TRANS-ERR_001"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_002": '{{"cpt.cpt_erreur.IHM-TRANS-ERR_002"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_002_PLURIEL": '{{"cpt.cpt_erreur.IHM-TRANS-ERR_002_PLURIEL"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_003": '{{"cpt.cpt_erreur.IHM-TRANS-ERR_003"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_004": '{{"cpt.cpt_erreur.IHM-TRANS-ERR_004"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_005": '{{"cpt.cpt_erreur.IHM-TRANS-ERR_005"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_006": '{{"cpt.cpt_erreur.IHM-TRANS-ERR_006"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_007": '{{"cpt.cpt_erreur.IHM-TRANS-ERR_007"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_008": '{{"cpt.cpt_erreur.IHM-TRANS-ERR_008"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+
+                    "CU-INS-EC01-ERR_001": '{{"cpt.cpt_erreur.CU-INS-EC01-ERR_001"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC02-ERR_001": '{{"cpt.cpt_erreur.CU-INS-EC02-ERR_001"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC02-ERR_002": '{{"cpt.cpt_erreur.CU-INS-EC02-ERR_002"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC02-MSG_002": '{{"cpt.cpt_erreur.CU-INS-EC02-MSG_002"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC02-ERR_003": '{{"cpt.cpt_erreur.CU-INS-EC02-ERR_003"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC02-ERR_004": '{{"cpt.cpt_erreur.CU-INS-EC02-ERR_004"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+
+                    "CU-INS-EC03-MSS_001": '{{"cpt.cpt_erreur.CU-INS-EC03-MSS_001"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC03-MSS_002": '{{"cpt.cpt_erreur.CU-INS-EC03-MSS_002"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+
+                    "CU-RAT-EC01-MSS_001": '{{"cpt.cpt_erreur.CU-RAT-EC01-MSS_001"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-RAT-EC01-MSS_002": '{{"cpt.cpt_erreur.CU-RAT-EC01-MSS_002"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+
+                    "CU-CON-EC01-ERR_001": '{{"cpt.cpt_erreur.CU-CON-EC01-ERR_001"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_002": '{{"cpt.cpt_erreur.CU-CON-EC01-ERR_002"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_003": '{{"cpt.cpt_erreur.CU-CON-EC01-ERR_003"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_004": '{{"cpt.cpt_erreur.CU-CON-EC01-ERR_004"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_005": '{{"cpt.cpt_erreur.CU-CON-EC01-ERR_005"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_006": '{{"cpt.cpt_erreur.CU-CON-EC01-ERR_006"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+
+                    "CU-REI-EC03-MSS_001": '{{"cpt.cpt_erreur.CU-REI-EC03-MSS_001"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-REI-EC03-MSS_002": '{{"cpt.cpt_erreur.CU-REI-EC03-MSS_002"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+
+                    "CU-DET-EC01-ERR_001": '{{"cpt.cpt_erreur.CU-DET-EC01-ERR_001"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "CU-DET-EC01-ERR_002": '{{"cpt.cpt_erreur.CU-DET-EC01-ERR_002"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+
+
+                    "CU-CON-EC04-ERR_001": '{{"cpt.cpt_erreur.CU-CON-EC04-ERR_001"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                    "undefined": '<img class="picto" alt="Alerte" src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/alert.png" /><p class="red">Nous ne sommes pas en mesure de donner suite &agrave; votre demande.&nbsp;Merci de vous rendre dans une agence commerciale des transporteurs, dans certains comptoirs RATP ou en guichets services Navigo SNCF (<a class="red underline" data-ng-href="{% verbatim %}{{prefix_front}}{% endverbatim %}bundles/sel/pdf/liste_agences.pdf">100Ko PDF</a>).</p>',
+                    "vide":""
+                },
+                "cpt_confirm_rattachement": {
+                    "titre_etape": 'Vos coordonnées'
+
+                },
+                "cpt_inscription": {
+                    "titre_etape": '{{"cpt.cpt_inscription.titre_etape"   |trans({}, "cpt", "fr")| raw | escape('js')}}',
+                },
+                "cpt_rattachement_details": {
+                    "titre_etape": 'Création de votre espace data-personnel'
+                },
+                "cpt_envoi_activation": {
+                    "titre_etape": 'Création de votre espace data-personnel'
+                },
+                "cpt_confirm_rattachement": {
+                    "titre_etape": 'Vos coordonnées'
+                },
+                "cpt_echec_rattachement": {
+                    "titre_etape": 'Problème d\'activation de votre espace data-personnel'
+                }
+            },
+            "cdc": {
+                "cdc_erreur": {
+                    "SNA-CO-EC01-MSS_001": '{{"cdc.cdc_erreur.SNA-CO-EC01-MSS_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-MSS_002": '{{"cdc.cdc_erreur.SNA-CO-EC01-MSS_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-ERR_003": '{{"cdc.cdc_erreur.SNA-CO-EC01-ERR_003" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-MSS_004": '{{"cdc.cdc_erreur.SNA-CO-EC01-MSS_004" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-MSS_005": '{{"cdc.cdc_erreur.SNA-CO-EC01-MSS_005" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-ERR_006": '{{"cdc.cdc_erreur.SNA-CO-EC01-ERR_006" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-ERR_007": '{{"cdc.cdc_erreur.SNA-CO-EC01-ERR_007" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-CO-EC01-ERR_008": '{{"cdc.cdc_erreur.SNA-CO-EC01-ERR_008" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+
+
+                    "SNA-PAI-EC01-MSS_001": '{{"cdc.cdc_erreur.SNA-PAI-EC01-MSS_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-MSS_002": '{{"cdc.cdc_erreur.SNA-PAI-EC01-MSS_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-ERR_003": '{{"cdc.cdc_erreur.SNA-PAI-EC01-ERR_003" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-ERR_004": '{{"cdc.cdc_erreur.SNA-PAI-EC01-ERR_004" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-ERR_005": '{{"cdc.cdc_erreur.SNA-PAI-EC01-ERR_005" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-ERR_006": '{{"cdc.cdc_erreur.SNA-PAI-EC01-ERR_006" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-ERR_007": '{{"cdc.cdc_erreur.SNA-PAI-EC01-ERR_007" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-PAI-EC01-ERR_008": '{{"cdc.cdc_erreur.SNA-PAI-EC01-ERR_008" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+
+                    "SNA-SIG-EC01-MSS_001": '{{"cdc.cdc_erreur.SNA-SIG-EC01-MSS_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_002": '{{"cdc.cdc_erreur.SNA-SIG-EC01-MSS_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_003": '{{"cdc.cdc_erreur.SNA-SIG-EC01-MSS_003" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_004": '{{"cdc.cdc_erreur.SNA-SIG-EC01-MSS_004" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_005": '{{"cdc.cdc_erreur.SNA-SIG-EC01-MSS_005" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_006": '{{"cdc.cdc_erreur.SNA-SIG-EC01-MSS_006" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_007": '{{"cdc.cdc_erreur.SNA-SIG-EC01-MSS_007" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-MSS_008": '{{"cdc.cdc_erreur.SNA-SIG-EC01-MSS_008" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-ERR_003": '{{"cdc.cdc_erreur.SNA-SIG-EC01-ERR_003" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-SIG-EC01-ERR_004": '{{"cdc.cdc_erreur.SNA-SIG-EC01-ERR_004" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+
+
+                    "SNA-RAT-EC02-ERR_001": '{{"cdc.cdc_erreur.SNA-RAT-EC02-ERR_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "SNA-RAT-EC02-ERR_002": '{{"cdc.cdc_erreur.SNA-RAT-EC02-ERR_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+
+                    "SNA-FOR-EC01-MSS_001": '{{"cdc.cdc_erreur.SNA-FOR-EC01-MSS_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+
+
+                    "IHM-TRANS-ERR_001": '{{"cdc.cdc_erreur.IHM-TRANS-ERR_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_002": '{{"cdc.cdc_erreur.IHM-TRANS-ERR_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_002_PLURIEL": '{{"cdc.cdc_erreur.IHM-TRANS-ERR_002_PLURIEL" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_003": '{{"cdc.cdc_erreur.IHM-TRANS-ERR_003" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_004": '{{"cdc.cdc_erreur.IHM-TRANS-ERR_004" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_005": '{{"cdc.cdc_erreur.IHM-TRANS-ERR_005" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "IHM-TRANS-ERR_006": '{{"cdc.cdc_erreur.IHM-TRANS-ERR_006" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+
+                    "CU-INS-EC01-ERR_001": '{{"cdc.cdc_erreur.CU-INS-EC01-ERR_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC01-ERR_002": '{{"cdc.cdc_erreur.CU-INS-EC01-ERR_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC01-ERR_003": '{{"cdc.cdc_erreur.CU-INS-EC01-ERR_003" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC01-ERR_004": '{{"cdc.cdc_erreur.CU-INS-EC01-ERR_004" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+
+
+                    "CU-INS-EC02-ERR_001": '{{"cdc.cdc_erreur.CU-INS-EC02-ERR_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC02-ERR_002": '{{"cdc.cdc_erreur.CU-INS-EC02-ERR_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC02-MSG_002": '{{"cdc.cdc_erreur.CU-INS-EC02-MSG_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC02-ERR_003": '{{"cdc.cdc_erreur.CU-INS-EC02-ERR_003" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC02-ERR_004": '{{"cdc.cdc_erreur.CU-INS-EC02-ERR_004" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+
+                    "CU-INS-EC03-MSS_001": '{{"cdc.cdc_erreur.CU-INS-EC03-MSS_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-INS-EC03-MSS_002": '{{"cdc.cdc_erreur.CU-INS-EC03-MSS_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+
+                    "CU-RAT-EC01-MSS_001": '{{"cdc.cdc_erreur.CU-RAT-EC01-MSS_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-RAT-EC01-MSS_002": '{{"cdc.cdc_erreur.CU-RAT-EC01-MSS_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+
+                    "CU-CON-EC01-ERR_001": '{{"cdc.cdc_erreur.CU-CON-EC01-ERR_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_002": '{{"cdc.cdc_erreur.CU-CON-EC01-ERR_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_003": '{{"cdc.cdc_erreur.CU-CON-EC01-ERR_003" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_004": '{{"cdc.cdc_erreur.CU-CON-EC01-ERR_004" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_005": '{{"cdc.cdc_erreur.CU-CON-EC01-ERR_005" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-CON-EC01-ERR_006": '{{"cdc.cdc_erreur.CU-CON-EC01-ERR_006" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+
+                    "CU-REI-EC03-MSS_001": '{{"cdc.cdc_erreur.CU-REI-EC03-MSS_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CU-REI-EC03-MSS_002": '{{"cdc.cdc_erreur.CU-REI-EC03-MSS_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+
+                    "CMC-CO-EC01-MSS_001": '{{"cdc.cdc_erreur.CMC-CO-EC01-MSS_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CMC-CO-EC01-ERR_001": '{{"cdc.cdc_erreur.CMC-CO-EC01-ERR_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "CMC-CO-EC01-ERR_002": '{{"cdc.cdc_erreur.CMC-CO-EC01-ERR_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "legals": '{{"cdc.cdc_erreur.legals" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+
+                    "NORM-MSS_001": '{{"cdc.cdc_erreur.NORM-MSS_001" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "NORM-MSS_002": '{{"cdc.cdc_erreur.NORM-MSS_002" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "NORM-MSS_003": '{{"cdc.cdc_erreur.NORM-MSS_003" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "NORM-ERR_004": '{{"cdc.cdc_erreur.NORM-ERR_004" |trans({}, "cdc", "fr")| raw | escape('js')}}',
+                    "vide": ""
+                }
+            }
+
+        }
+
+
+        return {
+            get: function(fullKey) {
+                $log.log(fullKey);
+                var keys = fullKey.split('.');
+                if(!wording[keys[0]] || !wording[keys[0]][keys[1]] || !wording[keys[0]][keys[1]][keys[2]]){
+
+                    return fullKey;
+                }
+
+                return wording[keys[0]][keys[1]][keys[2]];
+            },
+            getWording: function(categorie, subcategorie, label) {
+                $log.log(categorie, subcategorie, label);
+                if(!wording[categorie] || !wording[categorie][subcategorie] || !wording[categorie][subcategorie][label]) {
+
+                    return categorie  + "." +  subcategorie + "." + label;
+                }
+
+                return wording[categorie][subcategorie][label];
+            },
+            getCategorie: function(categorie) {
+                $log.log(categorie);
+                if (!wording[categorie]){
+
+                    return categorie;
+                }
+
+                return wording[categorie];
+            }
+        }
+    }
+]);

@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="fr">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="fr">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="fr">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html lang="fr">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/sel/css/contractPDF.css') }}"/>
+	<title></title>
+</head>
+<body>
+	<div id="content">
+		<div id="details">
+			<span id="ex-client" class="italic">Exemplaire client</span>
+			<div id="details-1">
+				<span class="bold">Contrat :</span>{{ params.contrat.type }}<br>
+				<span class="bold">N° de client :</span><br>
+			</div>
+			<div id="details-2">	
+				<br>
+				<span class="bold">Le :</span>
+			</div>
+			<span id="details-end" class="bold">Titulaire du Contrat imagine R</span>
+		</div>
+		<div id="titulaire">
+			<div id="titulaire-1">
+				Civilité :	{{ params.porteur.civilite }}<span id="titu-nom" class="nom">Nom :	{{ params.porteur.nom }}</span><br>	
+				Adresse :	{{ params.porteur.addresse.rue }}<br> 
+							<span class="adresse">{{ params.porteur.addresse.rue2 }}</span><br> 
+							<span class="adresse"></span><br>
+				Tél.Portable:{{ params.porteur.portable }}<br>
+				Courriel: {{ params.porteur.email }}
+			</div>
+			<div id="titulaire-2">
+				<span id="prenom">Prénom :	{{ params.porteur.prenom }}</span>né(e) le:{{ params.porteur.birthDate }}<br>
+				Code Postal :{{ params.porteur.addresse.zip }}<br>
+				Ville : {{ params.porteur.addresse.city }}<br>
+				pays:{{ params.porteur.addresse.pays }}<br>
+			</div>
+			<div id="titulaire-end" class="bold">Type de Forfait</div>
+		</div>
+		<div id="forfait">
+			<div id="forfait-1">
+				Zones de validité du forfait : 	{{ params.forfait.zone }}<br>
+				Validité du forfait: {{ params.forfait.date_validite }}<br>		
+				Mode de paiement choisi : Prélèvement SEPA<br>
+			</div>
+			<div id="forfait-end" class="bold">
+				Payeur du Contrat imagine R
+			</div>
+		</div>
+		<div id="payeur-1">
+			<div id="content-payeur-1">
+				<div id="payeur-1A">
+					Civilité :{{ params.porteur.civilite }}<span id="payeur-nom" class="nom">Nom :{{ params.porteur.nom }}</span><br>
+					Adresse :{{ params.porteur.addresse.rue }}<br>
+					<span class="adresse">{{ params.porteur.addresse.rue2 }}</span><br>
+					<span class="adresse"></span><br>
+					<span class="adresse"></span>
+
+				</div>
+				<div id="payeur-1B">
+					Prénom :{{ params.porteur.prenom }}<br>
+					Code Postal :{{ params.porteur.addresse.zip}}<br>	
+					Ville : {{ params.porteur.addresse.city}}
+				</div>
+			</div>
+			<div id="content-payeur-2">
+				<p>Les signataires déclarent :</p>
+				- l’exactitude des renseignements donnés ci-dessus.<br>
+				- souscrire entièrement au contenu des conditions générales jointes, après en avoir pris connaissance.<br>
+				<div id="sign-titulaire">
+				Signature du titulaire du contrat
+				</div>
+				<div id="sign-debiteur">
+					<p>Signature du titulaire du compte à débiter</p>
+					<span class="italic">(dans le cas du règlement par prélèvement automatique, si le payeur est différent du titulaire du contrat)</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

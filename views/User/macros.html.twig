@@ -1,0 +1,311 @@
+{% macro show_infosContract(contrat, loop, user) %}
+<div class="panel-body fixe">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6">
+            <p class="recap-line clearfix">
+                <label>{{ 'home.home_espace_client.label.forfait' | trans({}, 'home') }}</label>
+                <strong>{{ contrat.nameProduit}}</strong>
+            </p>
+
+            {% if not contrat.noContratsTransport or contrat.codeProduit in [1, 2, 4] %}
+            <p class="recap-line clearfix">
+                <label>{{ 'home.home_espace_client.label.validite' | trans({}, 'home') }} {% if contrat.situationFinanciere.modePaiement == "Prélevement" and contrat.codeProduit == 4 %}<sup>(1)</sup>{% endif %}</label>
+                {% if contrat.codeProduit in [1, 2, 4, 80, 90, 93] %}
+                     <strong>{{ contrat.dateDebut|date('d/m/Y')}} - {{ contrat.dateFin|date('d/m/Y')}}</strong>
+                {% elseif contrat.codeProduit == 3 %}
+                    {% set dd = "" %}{% set df = "" %}
+                    {% for contratsTransport in contrat.contratsTransport %}
+                        {% if contratsTransport.contratEnCours is defined %}
+                            {% set dd = contratsTransport.dateDebut|date('d/m/Y') %}
+                            {% set df = contratsTransport.dateFin|date('d/m/Y') %}
+                        {% elseif contratsTransport.contratAVenir is defined %}
+                            {% set dd = contratsTransport.dateDebut|date('d/m/Y') %}
+                            {% set df = contratsTransport.dateFin|date('d/m/Y') %}
+                        {% endif %}
+                    {% endfor %}
+                    <strong>{{ dd }} - {{ df }}</strong>
+                {% endif %}
+
+            </p>
+            {% elseif contrat.noContratsTransport and contrat.codeProduit not in [3, 93] %}
+                <p class="recap-line clearfix">
+                <label>{{ 'home.home_espace_client.label.validite' | trans({}, 'home') }}</label>
+                {% if contrat.codeProduit in [1, 2, 4, 80, 90] %}
+                     <strong>{{ contrat.dateDebut|date('d/m/Y')}} - {{ contrat.dateFin|date('d/m/Y')}}</strong>
+                {% endif %}
+            </p>
+            {% endif %}
+            {% if contrat.codeProduit in [1, 2, 4] %}
+            <p class="recap-line clearfix">
+                <label>{{ 'home.home_espace_client.label.paiement' | trans({}, 'home') }}</label>
+                <strong>{{ contrat.situationFinanciere.modePaiement}}</strong>
+            </p>
+            {% endif %}
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-5">
+            {% if contrat.codeProduit in [1, 2, 4, 80] %}
+            <p class="recap-line clearfix">
+                <label>{{ 'home.home_espace_client.label.etat' | trans({}, 'home') }}</label>
+                <strong>{{ contrat.etat}}</strong>
+            </p>
+            {% endif %}
+            <p class="recap-line clearfix">
+                {% if contrat.contratsTransport is defined and contrat.codeProduit in [3, 4, 80, 90, 93] %}
+                    {% if  contrat.codeProduit not in [3, 93] or not contrat.noContratsTransport %}
+                        <label>{{ 'home.home_espace_client.label.zone' | trans({}, 'home') }}<sup> (2)</sup></label>
+                        {% set za = "" %}{% set zd = "" %}
+                        {% for contratsTransport in contrat.contratsTransport %}
+                            {% set zd = contratsTransport.zoneDepart %}
+                            {% set za = contratsTransport.zoneArrivee %}
+                        {% endfor %}
+
+                        {% if (zd != 1 and za != 2) and za == (zd + 1) %}{# à part 1-2 qui est toute zone, les zonages n - n+1 sont spécifique #}
+                            <strong>{{ zd }} - {{ za }}</strong>
+                        {% else %}
+                            <strong>{{ 'home.home_espace_client.label.toute_zone' | trans({}, 'home') }}</strong>
+                        {% endif %}
+                    {% endif %}
+                {% elseif contrat.codeProduit in [1, 2] %}
+                    <label>{{ 'home.home_espace_client.label.zone' | trans({}, 'home') }}<sup> (2)</sup></label>
+                    <strong>{{ 'home.home_espace_client.label.toute_zone' | trans({}, 'home') }}</strong>{# Imagine R Tarif Unique #}
+                {% endif %}
+
+
+            </p>
+            {% if contrat.codeProduit in [1, 2, 4] %}
+            <p class="recap-line clearfix">
+                <label>{{ 'home.home_espace_client.label.payeur' | trans({}, 'home') }}</label>
+                <strong>{{ contrat.situationFinanciere.identitePayeur}}</strong>
+            </p>
+            {% endif %}
+        </div>
+
+            <div class="height-full {% if loop.index == 1 and contrat.numeroPorteur == user.referenceSig %}open{% endif %}">
+                <a href="javascript:" title="{{ 'home.home_espace_client.btn_plus_info_title' | trans({}, 'home') }}">
+                    <span class="plus">+</span><span class="moins">-</span>
+                </a>
+            </div>
+
+    </div>
+
+</div>
+{% endmacro %}
+
+{% macro show_particulariteContract(contrat, loop) %}
+    {% if contrat.codeProduit in [1, 2, 4] %}
+        {% if contrat.dette is defined %}
+            <div class="bg-danger context" >
+                <p class="heading star">
+                    <img src="{{ asset('bundles/sel/images/alert16.png') }}" class="picto" alt="Alerte">
+                    {{ 'home.home_espace_client.warning.debt' | trans({'%debt%': contrat.dette}, 'home') }}
+                </p>
+                <p class="mess">
+                    {% if contrat.codeProduit == 4 %}
+                        {% set phone = "22 22" %}
+                            {% set nameProduit = 'home.home_espace_client.na_typeProduit' | trans({}, 'home') | raw  %}
+                            {% set adressProduit = 'home.home_espace_client.na_addressProduit' | trans({}, 'home') | raw  %}
+                    {% else %}
+                        {% set phone = "55 55" %}
+                            {% set nameProduit = 'home.home_espace_client.ir_typeProduit' | trans({}, 'home') | raw %}
+                            {% set adressProduit = 'home.home_espace_client.ir_addressProduit' | trans({}, 'home') | raw  %}
+                    {% endif %}
+                    {{ 'home.home_espace_client.message.regulariser' | trans({'%phone%': phone, '%nameProduit%': nameProduit, '%adressProduit%': adressProduit, '%point_vente%' : asset('bundles/sel/pdf/liste_agences.pdf') }, 'home') | raw }}
+                </p>
+            </div>
+        {% endif %}
+        {% if contrat.rechargerImaginR is defined %}
+            <div class="bg-danger context" >
+                <p class="heading star">
+                    <img src="{{ asset('bundles/sel/images/alert16.png') }}" class="picto" alt="Alerte">
+                    {{ 'home.home_espace_client.warning.rechargerImaginR' | trans({}, 'home') }}
+                </p>
+            </div>
+        {% endif %}
+        {% if contrat.reconduire is defined %}
+            <div class="bg-danger context" >
+                <p class="heading star">
+                    <img src="{{ asset('bundles/sel/images/alert16.png') }}" class="picto" alt="Alerte">
+                    {{ 'home.home_espace_client.warning.fin_valdidite' | trans({}, 'home') }}
+                </p>
+                {#<p class="mess">Merci de <a href="#" class="link underline" title="Reconduire votre forfait">Pensez à le reconduire</a> afin de pouvoir continuer à voyager.</p>#}
+                <p class="mess">{{ 'home.home_espace_client.link.reconduire' | trans({'%link%' : "#"}, 'home') | raw }}</p>
+            </div>
+        {% endif %}
+        {% if contrat.finDeVie is defined %}
+            <div class="bg-danger context" >
+                <p class="heading star">
+                    <img src="{{ asset('bundles/sel/images/alert16.png') }}" class="picto" alt="Alerte">
+                    {{ 'home.home_espace_client.warning.fin_valdidite_date_pass' | trans({'%numeroPass%' : contrat.pass.numeroSerie, '%date%' : contrat.pass.dateExpiration|date('d/m/Y')},  'home') }}
+                </p>
+                <p class="mess">{{ 'home.home_espace_client.message.confirm_address' | trans({}, 'home') | raw }}</p>
+            </div>
+        {% endif %}
+    {% elseif contrat.codeProduit  in [3, 90, 93] %}
+        {% if contrat.finDeVie is defined %}
+            <div class="bg-danger context" >
+                <p class="heading star">
+                    <img src="{{ asset('bundles/sel/images/alert16.png') }}" class="picto" alt="Alerte">
+                    {{ 'home.home_espace_client.warning.fin_valdidite_date' | trans({'%date%' : contrat.pass.dateExpiration|date('d/m/Y')}, 'home') }}
+                </p>
+                <p class="mess">{{ 'home.home_espace_client.message.point_de_vente' | trans({'%point_vente%' : asset('bundles/sel/pdf/liste_agences.pdf')}, 'home') | raw }}</p>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endmacro %}
+
+{% macro show_optionsContract(contrat, loop) %}
+    {% if contrat.noContratsTransport and contrat.codeProduit in [3, 93] %}
+    <div class="bg-warning context">
+        <p class="heading star">
+            <img src="{{ asset('bundles/sel/images/info16.png')}}" class="picto" alt="Information">
+            {{ 'home.home_espace_client.message.no_contract_transport'|trans({}, 'home') }}
+        </p>
+    </div>
+{% endif %}
+<div class="row show-grid">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <ul class="color_bullet list_2_cols">
+        {% if contrat.codeProduit not in [80, 90] %}
+        <li>
+            <a href="{{ path('sel_actesav', {'action': 'attestation', 'productCode': contrat.codeProduit, 'contractReference': contrat.reference}) }}" class="link" title="{{ 'home.home_espace_client.label.attestation_title' | trans({}, 'home') }}">
+                {{ 'home.home_espace_client.label.attestation' | trans({}, 'home') }}<img src="{{ asset('bundles/sel/images/pdf.png') }}" class="picto pdf-medium" alt="Fichier PDF">
+            </a>
+        </li>
+        {% endif %}
+        {% if contrat.etat != "Résilié" %}
+            {% if contrat.codeProduit in [1,2,4] %}
+                <li>
+                    <a href="{{ path('sel_actesav', {'action': 'pertevol', 'productCode': contrat.codeProduit, 'contractReference': contrat.reference}) }}" class="link" title="{{ 'home.home_espace_client.label.perte_vol_title' | trans({}, 'home') }}">
+                        {{ 'home.home_espace_client.label.perte_vol' | trans({}, 'home') }}
+                    </a>
+                </li>
+                {% if contrat.situationFinanciere.modePaiement == "Prélevement" %}
+                <li>
+                    <a href="{{ path('sel_contrat_iban_manage', {contract: contrat.reference,  codeProduit: contrat.codeProduit}) }}" class="link" title="{{ 'home.home_espace_client.label.rib_title' | trans({}, 'home') }}">
+                        {{ 'home.home_espace_client.label.rib' | trans({}, 'home') }}
+                    </a>
+                </li>
+
+                {% endif %}
+            {% endif %}
+            {% if contrat.codeProduit in [4] %}
+                <li>
+                    <a href="{{ 'home.home_espace_client.stop_forfait_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_espace_client.stop_forfait_title' | trans({}, 'home') }}">
+                        {{ 'home.home_espace_client.stop_forfait' | trans({}, 'home') }}
+                    </a>
+                </li>
+                {% if contrat.situationFinanciere.modePaiement == "Comptant" %}
+                    <li>
+                        <a href="{{ path('sel_faq')}}" class="link" title="{{ 'home.home_espace_client.label.prelevement_title' | trans({}, 'home') }}">
+                            {{ 'home.home_espace_client.label.prelevement' | trans({}, 'home') }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endif %}
+            {% if contrat.codeProduit in [1, 2] %}
+                <li>
+                    <a href="{{ path('sel_contrat_bonplan', {contract: contrat.reference,  codeProduit: contrat.codeProduit}) }}" class="link" title="{{ 'home.home_espace_client.label.bon_plan_title' | trans({}, 'home') }}">
+                        {{ 'home.home_espace_client.label.bon_plan' | trans({}, 'home') }}
+                    </a>
+                </li>
+                {% if contrat.noContratsTransport or contrat.rechargerImaginR is defined %}
+                {#
+                    <li>
+                        <a href="{{ path('sel_faq')}}" class="link" title="{{ 'home.home_espace_client.label.renouveler_abo_title' | trans({}, 'home') }}">
+                            {{ 'home.home_espace_client.label.renouveler_abo' | trans({}, 'home') }}
+                        </a>
+                    </li>
+                #}
+                {% endif %}
+            {% endif %}
+            {% if contrat.codeProduit in [3, 80] %}
+                    <li>
+                        <a href="{{ 'home.home_espace_client.label.recharger_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_espace_client.label.recharger_title' | trans({}, 'home') | raw }}">
+                            {{ 'home.home_espace_client.label.recharger' | trans({}, 'home') | raw }}<img alt="Service disponible avec un lecteur de carte" class="picto usb-medium" src="{{ asset('bundles/sel/images/usb.png')}}">
+                        </a>
+                    </li>
+            {% endif %}
+
+            {% if contrat.codeProduit in [3] %}
+                    <li>
+                        <a href="{{ 'home.home_homepage.nms.consulter_historique_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.nms.consulter_historique_link_title' | trans({}, 'home') | raw }}">
+                            {{ 'home.home_homepage.nms.consulter_historique_link' | trans({}, 'home') | raw }}<img alt="Service disponible avec un lecteur de carte" class="picto usb-medium" src="{{ asset('bundles/sel/images/usb.png')}}">
+                        </a>
+                    </li>
+            {% endif %}
+
+            {% if contrat.codeProduit in [90, 93] %}
+                    <li>
+                        <a href="{{ 'home.home_espace_client.label.recharger_solidarite_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_espace_client.label.recharger_solidarite_title' | trans({}, 'home') | raw }}">
+                            {{ 'home.home_espace_client.label.recharger_solidarite' | trans({}, 'home') | raw }}<img alt="Service disponible avec un lecteur de carte" class="picto usb-medium" src="{{ asset('bundles/sel/images/usb.png')}}">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ 'home.home_homepage.free_shipping.recharger_forfait_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.free_shipping.recharger_forfait_link_title' | trans({}, 'home') | raw }}">
+                            {{ 'home.home_homepage.free_shipping.recharger_forfait_link' | trans({}, 'home') | raw }}<img alt="Service disponible avec un lecteur de carte" class="picto usb-medium" src="{{ asset('bundles/sel/images/usb.png')}}">
+                        </a>
+                    </li>
+            {% endif %}
+            {% if contrat.codeProduit in [90, 93] %}
+                <li>
+                    <a href="{{ 'home.home_espace_client.change_zone_link_url_tst'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_espace_client.change_zone_link_title' | trans({}, 'home') }}">
+                        {{ 'home.home_espace_client.change_zone_link' | trans({}, 'home') }}
+                    </a>
+                </li>
+            {% endif %}
+            {% if contrat.codeProduit in [3] %}
+                <li>
+                    <a href="{{ 'home.home_espace_client.label.comment_perte_vol_url_nms'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_espace_client.label.comment_perte_vol_title' | trans({}, 'home') }}">
+                        {{ 'home.home_espace_client.label.comment_perte_vol' | trans({}, 'home') }}
+                    </a>
+                </li>
+            {% endif %}
+            {% if contrat.codeProduit in [80] %}
+                <li>
+                    <a href="{{ 'home.home_espace_client.label.comment_perte_vol_url_amethyste'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_espace_client.label.comment_perte_vol_title' | trans({}, 'home') }}">
+                        {{ 'home.home_espace_client.label.comment_perte_vol' | trans({}, 'home') }}
+                    </a>
+                </li>
+            {% endif %}
+            {% if contrat.codeProduit in [90, 93] %}
+                <li>
+                    <a href="{{ 'home.home_espace_client.label.comment_perte_vol_url_tst'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_espace_client.label.comment_perte_vol_title' | trans({}, 'home') }}">
+                        {{ 'home.home_espace_client.label.comment_perte_vol' | trans({}, 'home') }}
+                    </a>
+                </li>
+            {% endif %}
+            {% if contrat.codeProduit in [4] and contrat.situationFinanciere.modePaiement == "Prélevement" %}
+                <li>
+                    <a href="{{ 'home.home_espace_client.change_zone_link_url_na'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_espace_client.change_zone_link_title' | trans({}, 'home') }}">
+                        {{ 'home.home_espace_client.change_zone_link' | trans({}, 'home') }}
+                    </a>
+                </li>
+            {% endif %}
+            {% if contrat.codeProduit in [90, 93] %}
+                    <li>
+                        <a href="{{ 'home.home_espace_client.agence_solidarite_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_espace_client.agence_solidarite_link_title' | trans({}, 'home') }}">
+                            {{ 'home.home_espace_client.agence_solidarite_link' | trans({}, 'home') }}<img src="{{ asset('bundles/sel/images/link.png')}}" class="picto" alt="lien externe">
+                        </a>
+                    </li>
+            {% endif %}
+    {#{% if contrat.codeProduit in [90, 93] %}
+            <li>
+                <a href="{{ path('sel_faq')}}" class="link" title="Plus d'information">
+                    {{ 'home.home_espace_client.label.plus_info' | trans({}, 'home') }}
+                </a>
+            </li>
+    {% endif %}#}
+
+
+    {% if contrat.codeProduit == 3 %}
+        </ul>
+        <ul class="color_bullet">
+            <li>
+                {{ 'home.home_espace_client.link.history_achat' | trans({'%link%' : "https://rechargercommandernavigo.fr/962b56fa-b455-11e1b5b5-000c29fc784d/"}, 'home') | raw }}
+            </li>
+    {% endif %}
+        {% endif %}
+        </ul>{# END <ul class="color_bullet list_2_cols"> #}
+    </div>
+</div>
+{% endmacro %}

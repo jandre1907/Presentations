@@ -1,0 +1,17 @@
+<div class="step_form" id="echec"><!-- Echec -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+            <div class="warning">
+                <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/warning.png" class="picto" alt="Attention">
+                <br><br>
+                <p>{% verbatim %}{{errorMessages[Holder.erreur]}}{% endverbatim %}</p>
+                {#<p>{{"rat.rat_echec.fail1"|trans({}, "rat", "fr")|raw}}</p>#}
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+            <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+            <button type="button" class="btn btn-primary aide-photo-btn" title="{{"rat.rat_echec.btn_retour_accueil_info"|trans({}, "rat", "fr")|raw}}"><span>{{"rat.rat_echec.btn_retour_accueil"|trans({}, "rat", "fr")|raw}}</span></button>
+        </div>
+    </div>
+</div>

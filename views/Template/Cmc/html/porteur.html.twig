@@ -1,0 +1,337 @@
+{% verbatim %}<div class="step_form" id="step_coordonnees" data-ng-form name="step_form"><!-- 2 -->
+
+    <p class="text-error" data-ng-show="error">{{error}}</p>
+
+    <h2 id="saisie-coordonnees" class="margin-ultra-bottom" tabindex="-1">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_titre"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</h2>
+
+    <h3 class="margin-ultra-bottom">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_action_utilisateur"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</h3>
+
+    <div class="form-content">
+        <div class="form-group">
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <span class="radio_label"><strong>{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_civilite"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</strong><span class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></span>
+            </div>
+            <div class="col-xs-11 col-sm-6 col-md-5">
+                <div class="radio">
+                    <input type="radio" name="inlineRadioOption1" id="inlineRadio1" value="02" data-ng-model="userSig.prefix"
+                           data-ng-disabled="userSig.prefix && userInfo.isSig" required>
+                    <label class="radio-inline" for="inlineRadio1">
+                        {% endverbatim %}{{"cdc.cdc_coordonnees.lbl_madame"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label>
+                    <input type="radio" name="inlineRadioOption1" id="inlineRadio2" value="01" data-ng-model="userSig.prefix"
+                           data-ng-disabled="userSig.prefix && userInfo.isSig" required>
+                    <label class="radio-inline" for="inlineRadio2">
+                        {% endverbatim %}{{"cdc.cdc_coordonnees.lbl_monsieur"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label>
+                </div>
+                <span aria-live="assertive"  class="mess-error"
+                      data-ng-show="formSubmitted && (step_form.inlineRadioOption1.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                {% endverbatim %} {# <img alt="Erreur" class="picto error" data-ng-show="formSubmitted && (step_form.inlineRadioOption1.$invalid)"
+                                          data-ng-src="{{ prefix_front }}bundles/sel/images/error.png"> #}{% verbatim %}
+            </div>
+
+        </div>
+        <div class="form-group" data-border-valid-mobile>
+            <label for="nom" class="col-xs-12 col-sm-4 col-md-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_nom"|trans({}, "cdc", "fr")|raw}}{% verbatim %}<span class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="nom" type="text" class="form-control" data-ng-disabled="userSig.lastname && userInfo.IsSIG"
+                       data-ng-model="userSig.lastname" data-ng-required="isFirstLastNameMandatory" name="nom" maxlength="20"
+                       aria-required="true">
+                <span aria-live="assertive"  class="mess-error"
+                      data-ng-show="formSubmitted && (step_form.nom.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" data-ng-hide="true"
+                     data-ng-show="!(step_form.nom.$invalid)">
+                <img alt="Erreur" class="picto error" data-ng-show="formSubmitted && (step_form.nom.$invalid)"
+                     data-ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+
+        </div>
+        <div class="form-group" data-border-valid-mobile>
+            <label for="prenom" class="col-xs-12 col-sm-4 col-md-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_prenom"|trans({}, "cdc", "fr")|raw}}{% verbatim %}<span
+                    class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="prenom" type="text" class="form-control" data-ng-disabled="userSig.firstname && userInfo.IsSIG"
+                       data-ng-model="userSig.firstname" data-ng-required="isFirstLastNameMandatory" name="prenom" maxlength="20"
+                       aria-required="true">
+                <span aria-live="assertive"  class="mess-error"
+                      data-ng-show="formSubmitted && (step_form.prenom.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" data-ng-hide="true"
+                     data-ng-show="!(step_form.prenom.$invalid)">
+                <img alt="Erreur" class="picto error" data-ng-show="formSubmitted && (step_form.prenom.$invalid)"
+                     data-ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+
+        </div>
+        <div class="form-group birthdate" data-border-valid-mobile>
+            <label for="birthdate" class="col-xs-12 col-sm-4 col-md-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_date_naissance"|trans({}, "cdc", "fr")|raw}}{% verbatim %}<span
+                    class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                  <div class="col_3">
+                      <div>
+                          <input id="birthdate" class="form-control" type="text" placeholder="JJ" data-ng-model="userSig.birthDate.day" name="birthday" data-ng-change="setBirthDate()" data-ng-disabled="userSig.birthDate.day && userInfo.isSig" maxlength="2" minlength="2" required aria-required="true" aria-label="{% endverbatim %}{{"cdc.cdc_coordonnees.aria_alt_champs_jour_naissance"|trans({}, "cdc", "fr")|raw}}{% verbatim %}">
+                      </div><div>
+                          <input class="form-control" type="text" placeholder="MM" data-ng-model="userSig.birthDate.month" data-ng-change="setBirthDate()" name="birthmonth" maxlength="2" minlength="2" data-ng-disabled="userSig.birthDate.month && userInfo.isSig" required aria-required="true" aria-label="{% endverbatim %}{{"cdc.cdc_coordonnees.aria_alt_champs_mois_naissance"|trans({}, "cdc", "fr")|raw}}{% verbatim %}">
+                      </div><div>
+                          <input class="form-control" type="text" placeholder="AAAA" data-ng-model="userSig.birthDate.year" data-ng-change="setBirthDate()" name="birthyear" maxlength="4" data-ng-disabled="userSig.birthDate.year && userInfo.isSig" required aria-required="true" aria-label="{% endverbatim %}{{"cdc.cdc_coordonnees.aria_alt_champs_annee_naissance"|trans({}, "cdc", "fr")|raw}}{% verbatim %}">
+                      </div>
+                  </div>
+                  <div class="clearfix">
+                    <span aria-live="assertive"  class="mess-error"
+                          data-ng-show="formSubmitted && (step_form.birthday.$invalid || step_form.birthmonth.$invalid || step_form.birthyear.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                    <span class="mess-error" data-ng-hide="isDateValide">{% endverbatim %}{{"cdc.cdc_coordonnees.erreur_date_naissance"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span>
+                    <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok"
+                         data-ng-show="isDateValide && step_form.birthyear.$dirty">
+                    <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto valid" alt="Ok"
+                         data-ng-show="!isDateValide && step_form.birthyear.$dirty">
+                </div>
+             </div>
+
+
+        </div>
+        <div class="form-group" data-border-valid-mobile>
+            <label for="numero-rue" class="col-xs-12 col-sm-4 col-md-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_addresse"|trans({}, "cdc", "fr")|raw}}{% verbatim %}<span class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="numero-rue" type="text" class="form-control" data-ng-model="userSig.street3" name="ligne3"
+                       required maxlength="38" aria-required="true">
+                <span aria-live="assertive"  class="mess-error"
+                      data-ng-show="formSubmitted && (step_form.ligne3.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" data-ng-hide="true"
+                     data-ng-show="!(step_form.ligne3.$invalid)">
+                <img alt="Erreur" data-ng-show="formSubmitted && (step_form.ligne3.$invalid)" class="picto error"
+                     data-ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+
+        </div>
+        <div class="form-group" data-border-valid-mobile>
+            <label for="adresse-2" class="col-xs-12 col-sm-4 col-md-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_complement_addresse"|trans({}, "cdc", "fr")|raw}}<{% verbatim %}/label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <textarea id="adresse-2" class="form-control"
+                          placeholder="{% endverbatim %}{{"cdc.cdc_coordonnees.info_complement_addresse"|trans({}, "cdc", "fr")|raw}}{% verbatim %}" name="ligne2"
+                          data-ng-model="userSig.street2" maxlength="38"></textarea>
+                <span aria-live="assertive"  class="mess-error"
+                      data-ng-show="formSubmitted && (step_form.ligne2.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img alt="Erreur" data-ng-show="formSubmitted && (step_form.ligne2.$invalid)" class="picto error"
+                     data-ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+
+        </div>
+
+        <div class="form-group" data-border-valid-mobile>
+            <label for="code-postal" class="col-xs-12 col-sm-4 col-md-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_code_postal"|trans({}, "cdc", "fr")|raw}}{% verbatim %}<span
+                    class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="code-postal" type="text" class="form-control" data-ng-model="userSig.postalCode" name="postalCode"
+                       data-ng-change="getCities(userSig.postalCode)" required maxlength="5" minlength="5" aria-required="true">
+                <span aria-live="assertive"  class="mess-error"
+                      data-ng-show="formSubmitted && (step_form.postalCode.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok"
+                     data-ng-hide="true" data-ng-show="!(step_form.postalCode.$invalid)">
+                <img alt="Erreur" data-ng-show="formSubmitted && (step_form.postalCode.$invalid)" class="picto error"
+                     data-ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="ville" class="col-xs-12 col-sm-4 col-md-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_ville"|trans({}, "cdc", "fr")|raw}}{% verbatim %}<span
+                    class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <select id="ville" class="form-control " name="city" data-ng-options="city.label for city in cities"
+                        data-ng-model="userSig.city" aria-required="true">
+
+                </select>
+                <span aria-live="assertive"  class="mess-error"
+                      data-ng-show="formSubmitted && (step_form.city.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img alt="Erreur" data-ng-show="formSubmitted && (step_form.city.$invalid)" class="picto error"
+                     data-ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="pays" class="col-xs-12 col-sm-4 col-md-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_pays"|trans({}, "cdc", "fr")|raw}}{% verbatim %}<span class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="pays" type="text" class="form-control" disabled  value="France" data-ng-model="userSig.country"
+                       aria-required="true">
+            </div>
+
+        </div>
+        <div class="form-group" data-border-valid-mobile>
+            <label class="col-xs-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_telephone_portable"|trans({}, "cdc", "fr")|raw}}{% verbatim %}<span class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input type="text" class="form-control" data-ng-model="rawMobile" name="mobile" maxlength="15" required>
+                <span aria-live="assertive"  class="mess-error" data-ng-hide="true"
+                      data-ng-show="formSubmitted && (step_form.mobile.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" data-ng-hide="true"
+                     data-ng-show="!(step_form.mobile.$invalid)">
+                <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" data-ng-hide="true"
+                     data-ng-show="formSubmitted && (step_form.mobile.$invalid)">
+            </div>
+
+        </div>
+        <div class="form-group" data-border-valid-mobile>
+            <label for="tel" class="col-xs-12 col-sm-4 col-md-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_telephone_fixe"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="tel" type="text" class="form-control" data-ng-model="rawFixe" name="telephoneFixe" maxlength="15"
+                       aria-described="phone-info">
+                <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" data-ng-hide="true"
+                     data-ng-show="!(step_form.telephoneFixe.$invalid)">
+                <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" data-ng-hide="true"
+                     data-ng-show="formSubmitted && (step_form.telephoneFixe.$invalid)">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <div class="box_action_show_error">
+                    <a href="#" class="action_show_error">
+                        <img src="data:null" data-ng-src="{{ '../bundles/sel/images/picto_information.png' }}" alt="{% endverbatim %}{{"cdc.cdc_coordonnees.img_info_alt"|trans({}, "cdc", "fr")|raw}}{% verbatim %}"/>
+                    </a>
+
+                    <div id="phone-info" class="tooltip right tel" > <!-- class tel provisoire -->
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">{% endverbatim %}{{"cdc.cdc_coordonnees.indication_telephone_portable"|trans({}, "cdc", "fr")|raw}}
+                        {% verbatim %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Création compte SEL-->
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-4 col-md-4 control-label create-sel">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_action_utilisateur_mdp"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label>
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <p class="create-sel">
+                    {% endverbatim %}{{"cdc.cdc_coordonnees.info_email"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</p>
+            </div>
+
+        </div>
+
+        <div class="form-group" data-border-valid-mobile>
+            <label for="email" class="col-xs-12 col-sm-4 col-md-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_email"|trans({}, "cdc", "fr")|raw}}{% verbatim %}<span
+                    class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="email" type="email" data-gie-mail name="email" class="form-control" data-ng-model="userSel.email"
+                       data-ng-required="emailRequired" maxlength="100" data-ng-disabled="disableEmail" aria-required="true">
+                <span aria-live="assertive"  class="mess-error"
+                      data-ng-show="formSubmitted && (step_form.email.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok"
+                     data-ng-hide="true" data-ng-show="(!step_form.email.$invalid)">
+                <img alt="Erreur" data-ng-show="formSubmitted && (step_form.email.$invalid)" class="picto error"
+                     data-ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+
+
+        </div>
+
+        <div class="form-group" data-ng-hide="disableEmail" data-border-valid-mobile>
+            <label for="confirmer-email" class="col-xs-12 col-sm-4 col-md-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_email_confirmation"|trans({}, "cdc", "fr")|raw}}{% verbatim %}<span
+                    class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+
+                <input id="confirmer-email" type="email" data-gie-mail name="emailtwo" class="form-control" data-ng-model="userSel.emailTwin" maxlength="100" onpaste="return false;" data-ng-required="emailRequired"
+                       aria-required="true">
+                <!--sel-password-->
+                <span aria-live="assertive"  class="mess-error" data-ng-show="(step_form.emailtwo.$error.emailEqual)">{{errorMessages['IHM-TRANS-ERR_006']}}</span>
+                <span aria-live="assertive"  class="mess-error" data-ng-show="formSubmitted && (step_form.emailtwo.$error.required)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok"
+                     data-ng-hide="true" data-ng-show="(!step_form.emailtwo.$invalid)">
+                <img alt="Erreur" data-ng-show="formSubmitted && (step_form.emailtwo.$invalid)" class="picto error"
+                     data-ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+
+
+        </div>
+
+
+        <div class="form-group" data-ng-hide="hidePassword" data-border-valid-mobile>
+            <label for="password" class="col-xs-12 col-sm-4 col-md-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_mdp"|trans({}, "cdc", "fr")|raw}}{% verbatim %}<span
+                    class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="password" type="password" autocomplete="off" name="password" class="form-control" data-ng-model="userSel.password"
+                       minlength="8" maxlength="20" data-sel-password data-ng-required="passwordRequired" aria-required="true"
+                       aria-described="password-info" aria-required="true" data-sel-password>
+                <span aria-live="assertive"  class="mess-error"
+                      data-ng-show="formSubmitted && (step_form.password.$error.passwordFormat)">{{errorMessages['IHM-TRANS-ERR_003']}}</span>
+                <span aria-live="assertive"
+                      data-ng-show="step_form.password.$error.minlength || step_form.password.$error.maxlength">{{errorMessages['IHM-TRANS-ERR_007-DOCA']}}</span>
+                <span aria-live="assertive"  class="mess-error" data-ng-show="formSubmitted && (step_form.password.$error.required)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok"
+                     data-ng-hide="true" data-ng-show="step_form.password.$valid">
+
+                <img alt="Erreur" data-ng-show="formSubmitted && (step_form.password.$invalid)" class="picto error"
+                     data-ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <div class="box_action_show_error">
+                    <a href="#" class="action_show_error">
+                        <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/picto_information.png"
+                             alt="Information"/>
+                    </a>
+
+                    <div id="password-info" class="tooltip right password" >
+                        <!-- class password provisoire -->
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">{% endverbatim %}{{"cdc.cdc_coordonnees.info_mdp"|trans({}, "cdc", "fr")|raw}}{% verbatim %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" data-ng-hide="hidePassword" data-border-valid-mobile>
+            <label for="confirmer-password" class="col-xs-12 col-sm-4 col-md-4 control-label">{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_mdp_confirmation"|trans({}, "cdc", "fr")|raw}}{% verbatim %}<span class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="confirmer-password" type="password" autocomplete="off" class="form-control" data-ng-model="userSel.passwordTwin"
+                       name="password2" minlength="8" maxlength="20" data-sel-password data-ng-required="passwordRequired"
+                       aria-required="true">
+                <span aria-live="assertive"  class="mess-error" data-ng-show="formSubmitted && (step_form.password2.$error.required)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <span aria-live="assertive"  class="mess-error" data-ng-show="userSel.password != userSel.passwordTwin">{% endverbatim %}{{"cdc.cdc_coordonnees.err_concordance_mdp"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span>
+                <span aria-live="assertive"  class="mess-error" data-ng-show="formSubmitted && (step_form.password.$error.passwordFormat)">{{errorMessages['IHM-TRANS-ERR_003']}}</span>
+                <span aria-live="assertive"  data-ng-show="step_form.password.$error.minlength || step_form.password.$error.maxlength">{{errorMessages['IHM-TRANS-ERR_007-DOCA']}}</span>
+                <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" data-ng-hide="true" data-ng-show="step_form.password2.$valid">
+                <img alt="Erreur" data-ng-show="formSubmitted && (step_form.password.$invalid)" class="picto error" src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+                <img alt="Erreur" data-ng-show="formSubmitted && (step_form.passwordTwin.$invalid)" class="picto error" src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+
+        </div>
+
+        <div class="checkbox margin-top-bottom">
+            <input type="checkbox" id="inlineRadio9-1" data-ng-model="userSig.acceptContract" name="donneesCommunicables"
+                   data-ng-true-value="1" data-ng-false-value="0" required>
+            <label for="inlineRadio9-1">{% endverbatim %}{{"cdc.cdc_coordonnees.ckbok_cgv_debut"|trans({}, "cdc", "fr")|raw}}{% verbatim %}<a href="#" class="link underline" target="_blank"
+                   title="{% endverbatim %}{{"cdc.cdc_coordonnees.ckbok_cgv_link_title"|trans({}, "cdc", "fr")|raw}}{% verbatim %}">
+                   {% endverbatim %}{{"cdc.cdc_coordonnees.ckbox_cgv_link"|trans({}, "cdc", "fr")|raw}}{% verbatim %}
+                  </a>
+            </label>
+            <span aria-live="assertive"  class="mess-error"
+                  data-ng-show="formSubmitted && (step_form.donneesCommunicables.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+            <img alt="Erreur" data-ng-show="formSubmitted && (step_form.donneesCommunicables.$invalid)" class="picto error"
+                 data-ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+        </div>
+
+        <div class="checkbox margin-top-bottom">
+            <input type="checkbox" data-ng-model="userSig.acceptCom" name="optin" id="inlineRadio9-2" data-ng-true-value="1"
+                   data-ng-false-value="0">
+            <label for="inlineRadio9-2">{% endverbatim %}{{"cdc.cdc_coordonnees.ckbox_offre_commerciale"|trans({}, "cdc", "fr")|raw}}{% verbatim %}
+            </label>
+        </div>
+    </div>
+    <!-- form-content -->
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button type="button" class="btn btn-primary aide-photo-btn" data-ng-disabled="disableSubmit || step_form.donneesCommunicables.$invalid" data-ng-click="submitForm()" title=" {% endverbatim %}{{"cdc.cdc_coordonnees.bt_ok_title"|trans({}, "cdc", "fr")|raw}} {% verbatim %}"><span>{% endverbatim %}{{"cdc.cdc_coordonnees.bt_ok"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></button>
+        </div>
+    </div>
+    <span class="obligatoire">
+        <span class="star" aria-label="{% endverbatim %}{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}{% verbatim %}">*</span>
+            {% endverbatim %}{{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}{% verbatim %}
+    </span>
+     {% endverbatim %}{% include 'SelBundle:Rest:addressPopin.html.twig' %}{% verbatim %}
+</div>
+{% endverbatim %}

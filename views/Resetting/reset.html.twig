@@ -1,0 +1,179 @@
+{% extends "SelBundle::layout.html.twig" %}
+{% block title %}{{ 'mdp.mdp_reset_request.lbl_titre_onglet'|trans({}, 'mdp') }}{% endblock %}
+{% block javascript_foot %}
+    {{ parent() }}
+    {% javascripts
+        '@SelBundle/Resources/public/js/userManager/passwordManager/Module/*.js'
+        '@SelBundle/Resources/public/js/userManager/passwordManager/Controller/*.js'
+        output='js/passwordManager.js' %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+{% endblock javascript_foot %}
+
+{% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title="{{'mdp.mdp_new.accueil'|trans({}, 'mdp', 'fr')|raw}}">{{'mdp.mdp_new.accueil'|trans({}, 'mdp', 'fr')|raw}}</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title="{{'mdp.mdp_new.service_navigo'|trans({}, 'mdp', 'fr')|raw}}">{{'mdp.mdp_new.service_navigo'|trans({}, 'mdp', 'fr')|raw}}</a></li>
+            <li><a href="{{ path('sel_espace_client') }}" title="{{'mdp.mdp_new.espace_client'|trans({}, 'mdp', 'fr')|raw}}">{{'mdp.mdp_new.espace_client'|trans({}, 'mdp', 'fr')|raw}}</a></li>
+            {% if user.referenceSig is not null %}
+                <li><a href="{{ path('sel_coordonnees') }}" title="{{'mdp.mdp_new.info_perso'|trans({}, 'mdp', 'fr')|raw}}">{{'mdp.mdp_new.info_perso'|trans({}, 'mdp', 'fr')|raw}}</a></li>
+            {% endif %}
+            <li class="active">{{'mdp.mdp_new.reinit_mdp'|trans({}, 'mdp', 'fr')|raw}}</li>
+          </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                {% if form.current_password is defined %}
+                    <h1 data-ng-init="currentFieldIsPresent = true">{{'mdp.mdp_new.modifier_mdp'|trans({}, 'mdp', 'fr')|raw}}</h1>
+                {% else %}
+                    <h1>{{'mdp.mdp_new.lbl_titre'|trans({}, 'mdp', 'fr')|raw}}</h1>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block angularModule %}passwordManager{% endblock %}
+
+{% form_theme form _self  %}
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            {% for error in errors %}
+                <strong>{{ error.message }}</strong>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+{% block mainContent %}
+{% block body %}
+    {% block content %}
+        <div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-horizontal">
+                        {% if tentatives %}
+                            <p class="warning-light red">
+                                <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alerte">
+                                {% if form.current_password is defined %}
+                                    {{ form_errors(form.current_password) }}
+                                {% endif %}
+                                {{tentatives}}
+                            </p>
+                        {% endif %}
+                        {% if error is defined and error %}
+                            <p class="warning-light red">
+                                <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alerte">
+                                {{ error|trans({}, 'messages')|raw }}
+                            </p>
+                        {% endif %}
+                        <div class="step_form creation-compte" data-ng-controller="ResetPasswordController" data-ng-init="fieldNameFirst = '{{form.new.first.vars.full_name}}'; fieldNameSecond = '{{form.new.second.vars.full_name}}'">
+                            {{ form_errors(form) }}
+                            <div class="form-content">
+                                <form action="{{ path('sel_front_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+                                    <div data-ng-form name="step_form">
+                                    <div class="info">
+                                        {{'mdp.mdp_new.aid_mdp'|trans({}, 'mdp', 'fr')|raw}}
+                                    </div>
+                                    {% if form.current_password is defined %}
+                                    <div class="form-group">
+                                        <label class="col-xs-12 col-sm-4 col-md-3 control-label">{{'mdp.mdp_new.lbl_anc_mdp'|trans({}, 'mdp', 'fr')|raw}}<span class="star"></span></label>
+                                        <div class="col-xs-11 col-sm-6 col-md-6">
+                                            {{ form_widget(form.current_password, {'attr': {
+                                                    'minlength' : 8,
+                                                    'data-ng-focus'  : "focus=1",
+                                                    'class': 'form-control',
+                                                    'data-ng-password': null
+                                                },
+                                                'required': false
+                                                }
+                                            )}}
+
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    <div class="form-group">
+                                        <label class="col-xs-12 col-sm-4 col-md-3 control-label">{{'mdp.mdp_new.lbl_nouv_mdp'|trans({}, 'mdp', 'fr')|raw}}<span class="star"></span></label>
+                                        <div class="col-xs-11 col-sm-6 col-md-6">
+                                            {{ form_widget(form.new.first, { 'attr' : {
+                                                        'minlength' : 8,
+                                                        'data-ng-focus'  : "focus=1",
+                                                        'data-sel-password': 'data-sel-password',
+                                                        'data-ng-model':'password',
+
+                                                        'class': 'form-control'
+                                                    },
+                                                    'required': false
+                                                }
+                                             )}}
+
+
+
+                                            <img class="picto valid" src="{{prefix_front}}bundles/sel/images/error.png" alt="Erreur" data-ng-show="!step_form[fieldNameFirst].$pristine && step_form[fieldNameFirst].$invalid">
+
+                                            <img class="picto valid" src="{{prefix_front}}bundles/sel/images/check.png" alt="Ok" data-ng-show="!step_form[fieldNameFirst].$pristine && step_form[fieldNameFirst].$valid">
+
+                                            <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="!step_form[fieldNameFirst].$pristine && step_form[fieldNameFirst].$invalid">Le format du mot de passe est invalide</span>
+                                            <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="step_form[fieldNameFirst].$error.minlength || step_form[fieldNameFirst].$error.maxlength">La taille du mot de passe est invalide</span>
+
+                                        </div>
+                                    </div>
+                                   <div class="form-group">
+                                        <label class="col-xs-12 col-sm-4 col-md-3 control-label">{{'mdp.mdp_new.lbl_conf_mdp'|trans({}, 'mdp', 'fr')|raw}}<span class="star"></span></label>
+                                        <div class="col-xs-11 col-sm-6 col-md-6">
+                                            {{ form_widget(form.new.second, { 'attr' : {
+                                                        'minlength' : 8,
+                                                        'data-sel-password': 'data-sel-password',
+                                                        'data-ng-model':'passwordTwin',
+                                                        'name': 'passwordTwin',
+                                                        'class': 'form-control',
+                                                        'onpaste': "return false"
+                                            },
+                                                    'required': false
+                                                }
+                                            )}}
+                                            <img class="picto valid" src="{{prefix_front}}bundles/sel/images/error.png" alt="Erreur" data-ng-show="!step_form[fieldNameSecond].$pristine && step_form[fieldNameSecond].$invalid">
+
+                                            <img class="picto valid" src="{{prefix_front}}bundles/sel/images/check.png" alt="Ok" data-ng-show="!step_form[fieldNameSecond].$pristine && step_form[fieldNameSecond].$valid">
+
+                                            <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="password != passwordTwin && !step_form[fieldNameSecond].$pristine">Les deux mots de passe ne concordent pas. Veuillez les saisir à nouveau.</span>
+
+                                            <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="!step_form[fieldNameSecond].$pristine && step_form[fieldNameSecond].$invalid">Le format du mot de passe est invalide</span>
+
+                                            <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="step_form[fieldNameSecond].$error.minlength || step_form[fieldNameSecond].$error.maxlength">La taille du mot de passe est invalide</span>
+
+
+                                        </div>
+                                    </div>
+                                </div><!-- form-content -->
+                                {{ form_rest(form) }}
+
+                                <div class="row">
+                                    <div class="col-xs-12 text-center">
+                                        <button type="submit" class="btn btn-primary aide-photo-btn" value="Réinitialiser votre mot de passe" data-ng-disabled="submitIsDisabled()"><span>{{'mdp.mdp_new.btn_valider'|trans({}, 'mdp', 'fr')|raw}}</span></button>
+                                    </div>
+                                </div>
+                                <span class="obligatoire">
+                                    <span class="star" aria-label="{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}"></span>
+                                    {{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}
+                                </span>
+                                </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock content %}
+{% endblock body%}
+
+{% endblock mainContent %}

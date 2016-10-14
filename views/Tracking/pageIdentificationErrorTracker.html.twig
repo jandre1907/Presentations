@@ -1,0 +1,51 @@
+ <script type="text/javascript">
+ try  {
+      window.xtsd =    "{{ params.xtsd | raw}}";
+      window.xtsite =  "{{ params.xtsite | raw}}";
+      window.xtn2 =    "{{ params.xtn2 | raw}}";
+      window.pages = {{ params.pages | raw}};
+      window.xt_multc ="{{ params.xt_multc | raw}}";
+      window.xt_ac =   "{{ params.xt_ac | raw}}";
+      window.xt_an =   "{{ params.xt_an | raw}}";
+      window.xt_page = "{{params.xtpage | raw}}";
+      window.xt_form = {{ params.xt_form | raw}};
+      window.sessionId = "{{ params.sessionId | raw}}";
+      window.referer = "{{ params.referer | striptags}}";
+      window.xtautoredir = false;
+   } catch (e) {
+      // TODO something
+   }
+
+</script>
+{% if not error %}
+   {% if not one_page %}
+
+   <img width="1" height="1" src="{{ params.xtsd | raw}}.xiti.com/hit.xiti?s={{ params.xtsite | raw}}&s2={{ params.xtn2 | raw}}&p={{ params.xtpage | raw}}&vrn=1{{ params.xt_multc | raw}}&ac={{ params.xt_ac | raw}}&an={{ params.xt_an | raw}}&lng=fr&idp={{ params.sessionId | raw}}&ref={{ params.referer | raw}}" >
+
+   {% else %}
+
+      <div data-ng-controller="TagIdentificationErrorCtrl" data-ng-init=
+         '
+            ctrlActivated =1;
+            xtsd =    "{{ params.xtsd | raw}}";
+            xtsite =  "{{ params.xtsite | raw}}";
+            xtn2 =    "{{ params.xtn2 | raw}}";
+            xt_multc ="{{ params.xt_multc | raw}}";
+            xt_ac =   "{{ params.xt_ac | raw}}";
+            xt_an =   "{{ params.xt_an | raw}}";
+            xtpage =  "{{ params.xtpage | raw}}";;
+            pages =   {{ params.pages | raw}};
+            xt_form = {{ params.xt_form | raw}};
+            sessionId = "{{ params.sessionId | raw}}";
+            referer = "{{ params.referer | raw}}";
+            xtautoredir = false;
+         '
+      >
+      {% verbatim %}
+         <img data-ng-if="url != '#'" width="1" height="1" src="data:null" data-ng-src="{{url}}" />
+      {% endverbatim %}
+      <div>
+
+   {% endif %}
+
+{% endif %}

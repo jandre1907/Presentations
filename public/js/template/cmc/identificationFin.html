@@ -1,0 +1,27 @@
+<div id="step_profil_4" class="step_form">
+    <p class="title">Veuillez vous identifier :</p>
+
+
+    <div class="form-content">
+        <div class="form-group">
+
+            <div class="col-xs-11 col-md-8 col-sm-12">
+
+                <div class="radio radio-list" ng-repeat="userSig in pageCtrl.userSigCollec">
+                    <input type="radio" ng-model="pageCtrl.selectedUser" value="{{userSig.reference}}" id="userSig_{{$index}}" name="selection-user">
+                    <label for="userSig_{{$index}}" class="radio">{{userSig.prenom}} {{userSig.nom}} né le {{ userSig.dateNaissance | dateFormatStrStandart }}</label>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-4 col-sm-12"></div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button type="button" class="btn btn-primary aide-photo-btn"  ng-click="pageCtrl.onContinuer(pageCtrl.selectedUser)" Title="Valider le formulaire et continuer"><span>Continuer</span></button>
+        </div>
+    </div>
+</div>
+

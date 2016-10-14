@@ -1,0 +1,263 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block angularModule %}CMC{% endblock angularModule %}
+
+{% block meta_desc %}
+    <meta name="description" content="{{ 'cdc.cdc_transverse.meta_desc'|trans({}, 'cdc') }}">
+{% endblock %}
+
+{% block title %}Services Navigo{% endblock %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+
+    {% javascripts '@SelBundle/Resources/public/js/rattachement/*.js' output='js/rattachement.js' %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+
+    {% javascripts
+       '@SelBundle/Resources/public/js/souscription/Original/sel_model.js'
+        output='js/seltools.js'
+     %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+
+    {% javascripts
+        '@SelBundle/Resources/public/js/cmc/model.js'
+        '@SelBundle/Resources/public/js/cmc/model_io.js'
+        '@SelBundle/Resources/public/js/cmc/filter.js'
+        '@SelBundle/Resources/public/js/cmc/step_load.js'
+        '@SelBundle/Resources/public/js/cmc/Controller/*.js'
+        '@SelBundle/Resources/public/js/cmc/directives.js'
+        '@SelBundle/Resources/public/js/cmc/main.js'
+        '@SelBundle/Resources/public/js/cmc/Constant/*.js'
+        '@SelBundle/Resources/public/js/cmc/Model/CrtOrUptCardOrderModel.js'
+        output='js/cmc.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script src="//www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+    <script type="text/javascript">
+        CMC.defaultRoute = "/Profil";
+    </script>
+    <script type="text/javascript" >
+        SEL = window.SEL || {};
+        SEL.prefix = "{{ prefix }}";
+        SEL.prefix_pdf = "{{prefix_pdf}}";
+        SEL.userTry = 3;
+        SEL.test = "1";
+        SEL.userIsConnected = {% if is_granted('ROLE_USER') %}true{% else %}false{% endif %}
+
+        {% if infos.reprise is defined and infos.reprise %}
+        CMC.objects = {
+            "reprise": true,
+            "photoCropped" : '{{ infos.photoCropped }}',
+            "step": {
+                "profil": {
+                    "formState": {
+                        "error": null,
+                        "submitted": null,
+                        "valid": true
+                    },
+                    "stepState":{
+                        "hasBeenReached": true
+                    }
+                },
+                "porteur" : {
+                    "formState": {
+                        "error": null,
+                        "submitted": null,
+                        "valid": true
+                    },
+                    "stepState":{
+                        "hasBeenReached": true
+                    }
+                },
+                "photo": {
+                    "formState": {
+                        "error": null,
+                        "submitted": null,
+                        "valid": {% if infos.stepPhoto %}{{ infos.stepPhoto }}{% else %}null{% endif %}
+                    },
+                    "stepState":{
+                        "hasBeenReached": {% if infos.stepPhoto %}{{ infos.stepPhoto }}{% else %}null{% endif %}
+                    }
+                }
+            },
+            "userSig": {
+                "isNew": null,
+                "prefix": '{{ infos.userSig.civilite }}',
+                "lastname": '{{ infos.userSig.nom }}',
+                "firstname": '{{ infos.userSig.prenom }}',
+                "birthDate": {
+                    "day": {% if infos.userSig.dateNaissance %}{{ infos.userSig.dateNaissance | slice(8, 2) }}{% else %}null{% endif %},
+                    "month": {% if infos.userSig.dateNaissance %}{{ infos.userSig.dateNaissance| slice(5, 2) }}{% else %}null{% endif %},
+                    "year": {% if infos.userSig.dateNaissance %}{{ infos.userSig.dateNaissance| slice(0, 4) }}{% else %}null{% endif %}
+                },
+                "street3": '{{ infos.userSig.adresse.ligne3 }}',
+                "street2": null,
+                "postalCode": {% if infos.userSig.adresse.codePostal %}{{ infos.userSig.adresse.codePostal }}{% else %}null{% endif %},
+                "city": {
+                    "label" : '{{ infos.userSig.adresse.bureauDistributeur }}'
+                },
+                "country": "France",
+                "NPAI": null,
+                "mobile": '{{ infos.userSig.telephoneMobile }}',
+                "phone": null,
+                "office": null,
+                "email": '{{ infos.userSig.eMail }}',
+                "acceptContract": null,
+                "acceptPromotion": null,
+                "groupPay": null,
+                "socialGroup": null,
+                "stateLabel": null,
+                "reference": {% if infos.userSig.reference %}{{ infos.userSig.reference }}{% else %}null{% endif %},
+                "photoValid": '{{ infos.photoValid }}',
+                "photoOriginal": '{{ infos.photoOriginal }}'
+            },
+            "userInfo": {
+                "userPristine": false,
+                "isNewInSIG" : false,
+                "hasCard":null,
+                "isUserSel": null,
+                "isSig": false,
+                "cardOrderId": {% if infos.cardOrderId %}{{ infos.cardOrderId }}{% else %}null{% endif %},
+                "refContratSig":null,
+                "increment_id":null
+            },
+            "userSel": {
+                "email": '{{ infos.userSig.eMail }}',
+                "emailTwin": null,
+                "password": null,
+                "passwordTwin": null
+            }
+        };
+
+        reprise = {% if infos.reprise %}{{ infos.reprise }}{% else %}false{% endif %};
+        {% endif %}
+    </script>
+{% endblock javascript_foot %}
+
+{% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title="Accueil">Accueil</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title="Services Navigo">Services Navigo</a></li>
+            <li class="active">Commande de carte</li>
+          </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+{% block contentTitle %}
+    {% verbatim %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>Commande de carte</h1>
+            </div>
+        </div>
+    </div>
+    {% endverbatim %}
+{% endblock contentTitle %}
+
+{% block mainContent %}
+    {% block body %}
+        {% block content %}
+
+            {#--------------------#}
+            {# BREADCRUMBCTRL #}
+            {#--------------------#}
+            {% verbatim %}
+
+            <nav id="box_nav_step"  data-ng-controller="BreadcrumbCtrl as bread" data-ng-show="bread.isBreadActive">
+
+                <ul>
+                    <li>
+                        <!-- Start heading -->
+                        <div class="box_titre" data-ng-controller="TitleCtrl as titleCtrl">
+                            <a id="box_nav_step_action" href="#box_nav_step">
+                                <h2>{{titleCtrl.title}}</h2>
+                                <span class="box_open_close">
+                                    {% endverbatim %}<img src="{{ asset('bundles/sel/images/nav_arrow_top.png') }}" alt="Ouvrir le menu des étapes"/>{% verbatim %}
+                                </span>
+                            </a>
+                        </div>
+                        <!-- End heading -->
+                        <!-- Start progress-bar -->
+                        <div id="box_nav_step_progressbar">
+                            <div id="box_nav_step_wherein_progressbar"></div>
+                        </div>
+                        <!-- End progress-bar -->
+                        <!-- Start step-bar -->
+                        <div id="box_nav_step_sub_menu">
+                            <ol>
+                                <li class=""
+                                    data-ng-class="{
+                                    'selected':bread.routeCollec['/Porteur'].isActive,
+                                    'complete':bread.routeCollec['/Porteur'].isComplete,
+                                    'disabled':!bread.routeCollec['/Porteur'].isEnabled
+                                    }">
+                                    <a class="link" href="#Porteur" title=" {% endverbatim %}{{ 'cdc.cdc_coordonnees.lbl_step_title'|trans({}, 'cdc') }} {% verbatim %}" data-ng-if="bread.routeCollec['/Porteur'].link">
+                                        <span class="box_img">
+                                            {% endverbatim %}<img src="{{ asset('bundles/sel/images/nav_picto_ok.png') }}" alt="Etape fini"/>{% verbatim %}
+                                        </span>
+                                         {% endverbatim %}{{ 'cdc.cdc_coordonnees.lbl_step'|trans({}, 'cdc') }} {% verbatim %}
+                                    </a>
+                                    <span class="box_no_link" data-ng-if="!bread.routeCollec['/Porteur'].link">{% endverbatim %}{{ 'cdc.cdc_coordonnees.lbl_step'|trans({}, 'cdc') }} {% verbatim %}</span>
+                                </li><li class=""
+                                    data-ng-class="{
+                                    'selected':bread.routeCollec['/Photo'].isActive,
+                                    'complete':bread.routeCollec['/Photo'].isComplete,
+                                    'disabled':!bread.routeCollec['/Photo'].isEnabled
+                                    }">
+                                    <a class="link" href="#Photo" title=" {% endverbatim %}{{ 'cdc.cdc_photo.lbl_step_title'|trans({}, 'cdc') }} {% verbatim %}" data-ng-if="bread.routeCollec['/Photo'].link">
+                                        <span class="box_img">
+                                            {% endverbatim %}<img src="{{ asset('bundles/sel/images/nav_picto_ok.png') }}" alt="Etape fini"/>{% verbatim %}
+                                        </span>
+                                         {% endverbatim %}{{ 'cdc.cdc_photo.lbl_step'|trans({}, 'cdc') }}{% verbatim %}
+                                    </a>
+                                    <span class="box_no_link" data-ng-if="!bread.routeCollec['/Photo'].link"> {% endverbatim %}{{ 'cdc.cdc_photo.lbl_step'|trans({}, 'cdc') }} {% verbatim %}</span>
+                                </li><li class=""
+                                    data-ng-class="{
+                                    'selected':bread.routeCollec['/Recapitulatif'].isActive,
+                                    'complete':bread.routeCollec['/Recapitulatif'].isComplete,
+                                    'disabled':!bread.routeCollec['/Recapitulatif'].isEnabled
+                                    }">
+                                    <a class="link" href="#Photo" title=" {% endverbatim %}{{ 'cdc.cdc_recapitulatif.lbl_step_title'|trans({}, 'cdc') }} {% verbatim %}" data-ng-if="bread.routeCollec['/Recapitulatif'].link">
+                                        <span class="box_img">
+                                            {% endverbatim %}<img src="{{ asset('bundles/sel/images/nav_picto_ok.png') }}" alt="Etape fini"/>{% verbatim %}
+                                        </span>
+                                         {% endverbatim %}{{ 'cdc.cdc_recapitulatif.lbl_step'|trans({}, 'cdc') }} {% verbatim %}
+                                    </a>
+                                    <span class="box_no_link" data-ng-if="!bread.routeCollec['/Recapitulatif'].link"> {% endverbatim %}{{ 'cdc.cdc_recapitulatif.lbl_step'|trans({}, 'cdc') }} {% verbatim %}</span>
+                                </li>
+                            </ol>
+                        </div>
+                        <!-- End step-bar -->
+                    </li>
+                </ul>
+
+            </nav>
+            {% endverbatim %}
+            {#--------------------#}
+            {# END BREADCRUMBCTRL #}
+            {#--------------------#}
+
+            <div data-ng-controller="MainCtrl as main">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div id="sel_form" class="form-horizontal">
+                            <!-- Step forms -->
+                            <div class="step-content">
+                                <div data-ng-view>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock content %}
+    {% endblock body %}
+{% endblock mainContent %}

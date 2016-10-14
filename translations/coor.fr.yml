@@ -1,0 +1,91 @@
+coor.coor_change_email.accueil: Accueil
+coor.coor_show.aria_close_dial_window: 'Fermer la fenêtre de dialogue et continuer'
+coor.coor_show.aria_infos_modif_coor: 'informations sur la modification des coordonnées'
+coor.coor_change_email.aria_consigne_form: 'Les informations à saisir marquées par une * sont obligatoires'
+coor.coor_change_email.service_navigo: 'Je gère ma carte Navigo'
+coor.coor_change_email.espace_client: 'Mon espace personnel'
+coor.coor_change_email.vos_coordonnees: 'Mes informations personnelles'
+coor.coor_change_email.modifier_email: 'Modifier mon e-mail'
+coor.coor_change_email.email_lbl_titre: 'Modifier mon e-mail'
+coor.coor_change_email.act_precedent: précédent
+coor.coor_change_email.aid_identifiant: 'Votre email est aussi votre identifiant de connexion à votre espace personnel.'
+coor.coor_change_email.msg_email_already_linked: "Cette adresse email est déjà liée à un espace. Veuillez en saisir une autre\_ou vous connecter à votre espace actuel."
+coor.coor_change_email.lbl_mdp_actuel: 'Mon mot de passe actuel'
+coor.coor_change_email.lbl_nouv_email: 'Mon nouvel e-mail'
+coor.coor_change_email.lbl_conf_email: 'Confirmer mon nouvel e-mail'
+coor.coor_change_email.btn_valider: Valider
+coor.coor_change_email_confirm.accueil: Accueil
+coor.coor_change_email_confirm.service_navigo: 'Je gère ma carte Navigo'
+coor.coor_change_email_confirm.espace_client: 'Mon espace personnel'
+coor.coor_change_email_confirm.vos_coordonnees: 'Mes informations personnelles'
+coor.coor_change_email_confirm.modifier_email: 'Modifier mon e-mail'
+coor.coor_change_email_confirm.lbl_titre: 'Modifier mon email'
+coor.coor_change_email_confirm.lbl_email_ok: 'Votre nouvel email a bien été enregistré'
+coor.coor_change_email_confirm.btn_retour_espa: 'Retour à mon espace personnel'
+coor.coor_change_email_confirm.btn_retour_espa_title: 'Terminer et retourner à mon espace personnel'
+coor.coor_change_email_confirm.confirm_modifier_email: Confirmation
+coor.coor_show.accueil: Accueil
+coor.coor_show.service_navigo: 'Je gère ma carte Navigo'
+coor.coor_show.espace_client: 'Mon espace personnel'
+coor.coor_show.vos_coordonnees: 'Informations personnelles'
+coor.coor_show.lbl_titre: 'Informations personnelles'
+coor.coor_show.lbl_ne_le: 'né(e) le'
+coor.coor_show.lbl_coordonnees: 'Informations personnelles'
+coor.coor_show.lbl_num_rue: '<abbr title="Numéro">N°</abbr> et nom de la rue'
+coor.coor_show.lbl_comp_add: 'Complément d''adresse'
+coor.coor_show.lbl_cp: 'Code postal'
+coor.coor_show.lbl_ville: Ville
+coor.coor_show.lbl_pays: Pays
+coor.coor_show.lbl_tel_port: 'Téléphone portable'
+coor.coor_show.lbl_tel_fix: 'Téléphone fixe'
+coor.coor_show.lbl_modif_coord: 'Modifier mes informations personnelles'
+coor.coor_show.lbl_modif_coord_title: 'Modifier mes informations personnelles'
+coor.coor_show.lbl_con_idents: 'Codes d’accès à votre espace personnel'
+coor.coor_show.lbl_email: e-mail
+coor.coor_show.btn_modif_email: 'Modifier<br/>mon e-mail'
+coor.coor_show.btn_modif_email_title: 'Modifier mon courriel'
+coor.coor_show.lbl_mdp: 'Mot de passe'
+coor.coor_show.btn_modif_mdp: 'Modifier<br/>mon mot de passe'
+coor.coor_show.btn_modif_mdp_title: 'Modifier mon mot de passe'
+coor.coor_show.modal_title: 'Modifier les informations personnelles'
+coor.coor_show.bloc_infos_non_modifiables: 'Pour modifier les nom, pr&eacute;nom et date de naissance , veuillez-vous rendre en agence commerciale des transporteurs, dans certains comptoirs RATP ou en Guichet Services Navigo SNCF (<a class="link underline" target="_blank" title="100Ko PDF" href="%pdf_point_vente_url%">100Ko PDF</a>) muni d&rsquo;un justificatif d&rsquo;identit&eacute;.'
+coor.coor_show.modal_btn_close: Fermer
+coor.coor_show.complement1: 'Complément d’adresse 1'
+coor.coor_show.complement2: 'Complément d’adresse 2'
+coor.coor_show.complement3: 'Complément d’adresse 3'
+coor.coor_edit.accueil: Accueil
+coor.coor_edit.service_navigo: 'Je gère ma carte Navigo'
+coor.coor_edit.espace_client: 'Mon espace personnel'
+coor.coor_edit.vos_coordonnees: 'Mes informations personnelles'
+coor.coor_edit.coordonnees_lbl_titre: 'Modifier mes informations personnelles'
+coor.coor_edit.lbl_titre: 'Modifier mes informations personnelles'
+coor.coor_edit.lbl_num_rue: '<abbr title="Numéro">N°</abbr> et nom de rue'
+coor.coor_edit.lbl_comp_add_l1: 'Complément d’adresse 1'
+coor.coor_edit.lbl_comp_add_l2: 'Complément d’adresse 2'
+coor.coor_edit.lbl_comp_add_l4: 'Complément d’adresse 3'
+coor.coor_edit.lbl_ariane_modifier: Modifier
+coor.coor_edit.info_comp_add_l1: 'Chez Monsieur, appartement, étage, Escalier C ...'
+coor.coor_edit.info_comp_add_l2: 'Bâtiment A, Immeuble A, résidence ...'
+coor.coor_edit.info_comp_add_l4: 'BP, Lieu dit ...'
+coor.coor_edit.lbl_cp: 'Code postal'
+coor.coor_edit.lbl_ville: Ville
+coor.coor_edit.lbl_pays: Pays
+coor.coor_edit.lbl_tel_port: 'Téléphone portable'
+coor.coor_edit.lbl_tel_fix: 'Téléphone fixe'
+coor.coor_edit.cac_offre_comm: 'J''accepte de recevoir des offres et informations commerciales de la part des entreprises de transport en commun d''Île-de-France (OPTILE, RATP, SNCF) et de leurs partenaires'
+coor.coor_edit.btn_valider: Valider
+coor.coor_edit.btn_valider_title: 'Valider le formulaire et continuer'
+coor.coor_edit.NORM-MSS_001: 'Merci de confirmer l''adresse fournie'
+coor.coor_edit.NORM-MSS_002: 'L''adresse fournie comporte a priori une erreur, souhaitez-vous poursuivre avec cette adresse ?'
+coor.coor_edit.NORM-MSS_003: 'Le numéro de voie fourni n''est pas correct ou absent'
+coor.coor_edit.NORM-ERR_004: 'Votre adresse postale est incorrecte. Merci de renseigner une adresse postale valide.'
+coor.coor_show.aria_modif_coordonnees: 'informations sur la modification des coordonnées'
+coor.coor_show.aria_close: 'Fermer la fenêtre de dialogue et continuer'
+coor.coor_show.warning.npai: 'Un courrier a été envoyé à cette adresse et nous est revenu avec la mention « N’habite Pas à l’Adresse Indiquée ». Veuillez vérifier et mettre à jour votre adresse postale.'
+coor.coor_confirmation.lbl_coor_ok: 'Vos informations personnelles ont bien été mises à jour.'
+coor.coor_confirmation.btn_retour_coor: 'Retour à vos informations personnelles'
+coor.coor_confirmation.lbl_titre: 'Modifier mes informations personnelles'
+coor.coor_confirmation.accueil: Accueil
+coor.coor_confirmation.service_navigo: 'Je gère ma carte Navigo'
+coor.coor_confirmation.espace_client: 'Mon espace personnel'
+coor.coor_confirmation.vos_coordonnees: 'Mes informations personnelles'

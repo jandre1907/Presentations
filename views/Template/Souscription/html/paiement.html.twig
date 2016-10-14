@@ -1,0 +1,285 @@
+    <div class="step_form step_form" id="step_rib" data-ng-form name="step_form"><!-- 4 -->
+         <h2 id="saisie-rib" class="margin-ultra-bottom" tabindex="-1">{{"sna.sna_paiement.lbl_titre_content"|trans({}, "sna", "fr")|raw}}</h2>
+
+         {#<div class="modal fade" id="sModal" tabindex="-1"  aria-labelledby="fenetreDialogue">#}
+           {#<div class="modal-dialog" >#}
+             {#<div class="modal-content">#}
+               {#<div class="modal-header">#}
+                 {#<button type="button" class="close" data-dismiss="modal" aria-label="{{"sna.sna_paiement.aria_bt_popin_alt"|trans({}, "sna", "fr")|raw}}" value="{{"sna.sna_paiement.bt_popin_value"|trans({}, "sna", "fr")|raw}}">#}
+                     {#<span aria-hidden="true">&times;</span>#}
+                 {#</button>#}
+                 {#<h4 class="modal-title" id="fenetreDialogue">{{"sna.sna_paiement.title_popin"|trans({}, "sna", "fr")|raw}}</h4>#}
+               {#</div>#}
+               {#<div class="modal-body">#}
+                 {#{% verbatim %}{{ tabMsg.msg }}{% endverbatim %}#}
+               {#</div>#}
+               {#<div class="modal-footer">#}
+                 {#<button type="button" class="btn btn-default" data-dismiss="modal" value="Fermer la fenêtre de dialogue">{{"sna.sna_paiement.bt_popin_annuler"|trans({}, "sna", "fr")|raw}}</button>#}
+                 {#<button type="button" class="btn btn-default btn-modal" data-dismiss="modal" data-ng-click="submitForm()" value="{{"sna.sna_paiement.bt_popin_confirmer_alt"|trans({}, "sna", "fr")|raw}}">{{"sna.sna_paiement.bt_popin_confirmer"|trans({}, "sna", "fr")|raw}}</button>#}
+               {#</div>#}
+             {#</div>#}
+           {#</div>#}
+         {#</div>#}
+
+         <p class="warning-light red"  data-ng-show="formSubmitted && error">
+            <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/alert.png" class="picto" alt="{{"sna.sna_transverse.alt_picto_alerte"|trans({}, "sna", "fr")|raw}}">
+            <strong>{% verbatim %}{{error}}{% endverbatim %}</strong>
+        </p>
+          <div class="">
+              <div class="form-group" data-ng-hide="userSig.isNotPayer">
+                  <label for="bic" class="col-xs-12 col-sm-4 col-md-4 control-label label-rib">{{"sna.sna_paiement.lbl_bic"|trans({}, "sna", "fr")|raw}}<span class="star">*</span>
+                      <span class="sub-label">{{"sna.sna_paiement.lbl_bic_trad"|trans({}, "sna", "fr")|raw}}</span>
+                  </label>
+                  <div class="col-xs-11 col-sm-6 col-md-4">
+                      <input id="bic" type="text" class="form-control" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_bic"|trans({}, "sna", "fr")|raw}}" data-ng-model="userSig.bic" name="bic"  maxlength="12" data-ng-required="!userSig.isNotPayer">
+                         <span class="mess-error" data-ng-show="userSig.isNotPayer == false && (formSubmitted && (step_form.bic.$invalid))">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                         <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-show="userSig.isNotPayer == false && (formSubmitted && (step_form.bic.$invalid))">
+                  </div>
+
+              </div>
+               <div class="form-group" data-ng-hide="userSig.isNotPayer">
+                  <label for="iban" class="col-xs-12 col-sm-4 col-md-4 control-label label-rib">{{"sna.sna_paiement.lbl_iban"|trans({}, "sna", "fr")|raw}}<span class="star">*</span>
+                      <span class="sub-label">{{"sna.sna_paiement.lbl_iban_trad"|trans({}, "sna", "fr")|raw}}</span>
+                  </label>
+                  <div class="col-xs-11 col-sm-8 col-md-8">
+                      <div class="iban-group">
+                          <input id="iban" type="text" class="form-control pull-left" data-ng-model="userSig.ibanTab[0]" name="ibanholder[]" maxlength="4" data-ng-required="!userSig.isNotPayer" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_1"|trans({}, "sna", "fr")|raw}}">
+                          <input type="text" class="form-control pull-left" data-ng-model="userSig.ibanTab[1]" name="ibanholder[]" maxlength="4" data-ng-required="!userSig.isNotPayer" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_2"|trans({}, "sna", "fr")|raw}}">
+                          <input type="text" class="form-control pull-left" data-ng-model="userSig.ibanTab[2]" name="ibanholder[]" maxlength="4" data-ng-required="!userSig.isNotPayer" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_3"|trans({}, "sna", "fr")|raw}}">
+                          <input type="text" class="form-control pull-left" data-ng-model="userSig.ibanTab[3]" name="ibanholder[]" maxlength="4" data-ng-required="!userSig.isNotPayer" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_4"|trans({}, "sna", "fr")|raw}}">
+                          <input type="text" class="form-control pull-left" data-ng-model="userSig.ibanTab[4]" name="ibanholder[]" maxlength="4" data-ng-required="!userSig.isNotPayer" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_5"|trans({}, "sna", "fr")|raw}}">
+                          <input type="text" class="form-control pull-left" data-ng-model="userSig.ibanTab[5]" name="ibanholder[]" maxlength="4" data-ng-required="!userSig.isNotPayer" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_6"|trans({}, "sna", "fr")|raw}}">
+                          <input type="text" class="form-control pull-left" data-ng-model="userSig.ibanTab[6]" name="ibanholder[]" maxlength="3" data-ng-required="!userSig.isNotPayer" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_7"|trans({}, "sna", "fr")|raw}}">
+                      </div>
+                      <span class="mess-error" data-ng-show="userSig.isNotPayer == false && (formSubmitted && (step_form.ibanholder.$invalid))">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}"  data-ng-show="userSig.isNotPayer == false && (formSubmitted && (step_form.ibanholder.$invalid))">
+                  </div>
+              </div>
+            </div>
+            <div class="form-content">
+                <div class="col-xs-12 col-sm-5 col-md-5 col-md-offset-4">
+                      <div class="checkbox">
+                          <input id="notPayerCheck" type="checkbox" data-ng-model='userSig.isNotPayer' data-ng-checked="userSig.isNotPayer == true" name="nopayercheck" data-ng-click="error=''" >
+                          <label for="notPayerCheck">
+                             {{"sna.sna_paiement.checkbox_non_titulaire"|trans({}, "sna", "fr")|raw}}
+                          </label>
+                      </div>
+                  </div>
+            </div>
+           <div class="form-content add" data-ng-show="userSig.isNotPayer" data-ng-hide="!userSig.isNotPayer">
+              <div class="form-group">
+                 <div class="col-xs-12 col-sm-4 col-md-4">
+                     <span class="radio_label"><strong>{{"sna.sna_paiement.lbl_civilite"|trans({}, "sna", "fr")|raw}}</strong><span class="star">*</span></span>
+                 </div>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <div class="radio">
+                         <input type="radio" name="inlineRadioOption1" id="inlineRadio1" value="02" data-ng-model="payerSig.prefix" data-ng-required="userSig.isNotPayer" aria-required="true">
+                         <label class="radio-inline" for="inlineRadio1">
+                             {{"sna.sna_paiement.lbl_civilite_mme"|trans({}, "sna", "fr")|raw}}
+                         </label>
+                         <input type="radio" name="inlineRadioOption1" id="inlineRadio2" value="01" data-ng-model="payerSig.prefix" data-ng-required="userSig.isNotPayer" aria-required="true">
+                          <label class="radio-inline" for="inlineRadio2">
+                             {{"sna.sna_paiement.lbl_civilite_m"|trans({}, "sna", "fr")|raw}}
+                         </label>
+                     </div>
+                     <span class="mess-error" data-ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.inlineRadioOption1.$invalid))">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+
+                     {# <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="step_form.inlineRadioOption1.$valid">
+                                          <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && step_form.inlineRadioOption1.$invalid"> #}
+                 </div>
+
+             </div>
+             <div class="form-group" data-border-valid-mobile>
+                 <label for="nom" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_paiement.lbl_nom"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                      <input id="nom" type="text" class="form-control" data-ng-model="payerSig.lastname" data-ng-required="userSig.isNotPayer" name="nom" maxlength="20" data-ng-required="userSig.isNotPayer"  aria-required="true">
+                      <span class="mess-error" data-ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.nom.$invalid))">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="step_form.nom.$valid">
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && step_form.nom.$invalid">
+                 </div>
+                 <div class="col-xs-11 col-sm-6 col-md-4"></div>
+             </div>
+             <div class="form-group" data-border-valid-mobile>
+                 <label for="prenom" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_paiement.lbl_prenom"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                      <input id="prenom" type="text" class="form-control" data-ng-model="payerSig.firstname" data-ng-required="userSig.isNotPayer" name="prenom" maxlength="20" data-ng-required="userSig.isNotPayer" aria-required="true">
+                      <span class="mess-error" data-ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.prenom.$invalid))">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="step_form.prenom.$valid">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && step_form.prenom.$invalid">
+                 </div>
+
+             </div>
+            <div class="form-group birthdate" data-border-valid-mobile>
+               <label for="birthdate" class="col-xs-12 col-sm-4 col-md-4 control-label" for="birthdate">{{"sna.sna_paiement.lbl_date_naiss"|trans({}, "sna", "fr")|raw}}</label>
+               <div class="col-xs-11 col-sm-6 col-md-4">
+                    <div class="col_3">
+                        <div>
+                              <input id="birthdate" type="text" placeholder="JJ" class="form-control" data-ng-model="payerSig.birthDate.day" maxlength="2" data-ng-required="userSig.isNotPayer" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_champs_jour_naissance"|trans({}, "sna", "fr")|raw}}" >
+                        </div><div>
+                              <input type="text" placeholder="MM" class="form-control" data-ng-model="payerSig.birthDate.month" maxlength="2" data-ng-required="userSig.isNotPayer" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_champs_mois_naissance"|trans({}, "sna", "fr")|raw}}" >
+                        </div><div>
+                              <input type="text" placeholder="AAAA" class="form-control" data-ng-model="payerSig.birthDate.year" maxlength="4" data-ng-required="userSig.isNotPayer" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_champs_annee_naissance"|trans({}, "sna", "fr")|raw}}" >
+                        </div>
+                    </div>
+                    <span class="mess-error" data-ng-show="formSubmitted && ( step_form.day.$invalid || step_form.month.$invalid  || step_form.year.$invalid )">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="step_form.day.$invalid && step_form.month.$valid  && step_form.year.$valid ">
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && ( step_form.day.$invalid || step_form.month.$invalid  || step_form.year.$invalid )">
+                </div>
+             </div>
+
+             <div class="form-group" data-border-valid-mobile>
+                 <label for="rue" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_paiement.lbl_num_rue"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                    <input id="rue" type="text" class="form-control" data-ng-model="payerSig.street3" name="street3" data-ng-required="userSig.isNotPayer" maxlength="38" data-ng-required="userSig.isNotPayer"  aria-required="true">
+                    <span class="mess-error" data-ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.street3.$invalid))">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="step_form.street3.$valid">
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && step_form.street3.$invalid">
+                 </div>
+
+             </div>
+             <div class="form-group" data-border-valid-mobile>
+                 <label for="adresse-2" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_paiement.lbl_comp_add"|trans({}, "sna", "fr")|raw}}</label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <textarea id="adresse-2" class="form-control" placePayer="Bâtiment, étage, lieu-dit,  indication au livreur, etc." name="street2" data-ng-model="payerSig.street2" maxlength="38"></textarea>
+                      <span class="mess-error" data-ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.street2.$invalid))">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="step_form.street2.$valid">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && step_form.street2.$invalid">
+                 </div>
+
+             </div>
+
+            <div class="form-group" data-border-valid-mobile>
+                 <label for="code-postal"  class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_paiement.lbl_cp"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <input  id="code-postal" type="text" class="form-control" data-ng-model="payerSig.postalCode" name="codePostal" data-ng-change="getCities()" data-ng-required="userSig.isNotPayer" maxlength="5"  aria-required="true" >
+                     <span class="mess-error" data-ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.codePostal.$invalid))">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="step_form.codePostal.$valid">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && step_form.codePostal.$invalid">
+                 </div>
+
+             </div>
+             <div class="form-group" data-border-valid-mobile>
+                 <label for="ville" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_paiement.lbl_ville"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <select id="ville" class="form-control" name="city" data-ng-options="city.label for city in cities" data-ng-model="payerSig.city" data-ng-required="userSig.isNotPayer" aria-required="true">
+                     </select>
+                     <span class="mess-error" data-ng-show="formSubmitted && (step_form.city.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="step_form.city.$valid">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && step_form.city.$invalid">
+                 </div>
+
+             </div>
+
+             <div class="form-group" data-border-valid-mobile>
+                 <label for="pays" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_paiement.lbl_pays"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <input id="pays" type="text" class="form-control" value="France" data-ng-model="payerSig.country" data-ng-required="userSig.isNotPayer" aria-required="true" name="country">
+                 </div>
+                 <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="step_form.country.$valid">
+                 <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && step_form.country.$invalid">
+             </div>
+
+            <div class="form-group" data-border-valid-mobile>
+                 <label class="col-xs-4 control-label">{{"sna.sna_paiement.lbl_tel_port"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <input type="text" class="form-control" data-ng-model="rawMobile" name="mobile" maxlength="15" data-ng-required="userSig.isNotPayer">
+                      <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.mobile.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="!(step_form.mobile.$invalid)">
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}"  data-ng-hide="true" data-ng-show="formSubmitted && (step_form.mobile.$invalid)">
+                 </div>
+
+                 <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="box_action_show_error">
+                        <a href="#" class="action_show_error">
+                            <img  src="data:null" data-ng-src="{{ '../bundles/sel/images/picto_information.png' }}" alt="Information" />
+                        </a>
+                        <div id="phone-info" class="tooltip right tel" > <!-- class tel provisoire -->
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner">
+                                {{"sna.sna_paiement.indication_telephone_portable"|trans({}, "sna", "fr")|raw}}
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+             </div>
+             <div class="form-group" data-border-valid-mobile>
+                 <label for="tel" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_paiement.lbl_tel_fixe"|trans({}, "sna", "fr")|raw}}</label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <input id="tel" type="text" class="form-control" data-ng-model="rawFixe" name="telephoneFixe" maxlength="15" aria-described="phone-info">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="!(step_form.telephoneFixe.$invalid)">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}"  data-ng-hide="true" data-ng-show="formSubmitted && (step_form.telephoneFixe.$invalid)">
+                 </div>
+
+             </div>
+
+             <div class="form-group" data-border-valid-mobile>
+                <label for="email-payeur" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_paiement.lbl_email_payeur"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                <div class="col-xs-11 col-sm-6 col-md-4">
+                    <input id="email-payeur" type="email" data-gie-mail name="email" class="form-control" data-ng-model="payerSig.email" data-ng-required="userSig.isNotPayer" aria-required="true">
+                    <span class="mess-error" data-ng-show="formSubmitted && ( payerSig.emailTwin != payerSig.email || step_form.email.$invalid )">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="step_form.email.$valid">
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && step_form.email.$invalid">
+                </div>
+
+             </div>
+             <div class="form-group" data-border-valid-mobile>
+                <label for="email-payeur-confirmation" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_paiement.lbl_email_confirmation_payeur"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                <div class="col-xs-11 col-sm-6 col-md-4">
+                    <input id="email-payeur-confirmation" type="email" data-gie-mail class="form-control" name="mailconfirm" data-ng-model="payerSig.emailTwin" onpaste="return false;" data-ng-required="userSig.isNotPayer" aria-required="true">
+                    <span class="mess-error" data-ng-show="formSubmitted && ( payerSig.emailTwin != payerSig.email || step_form.mailconfirm.$invalid )">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="step_form.mailconfirm.$valid">
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && step_form.mailconfirm.$invalid">
+                </div>
+
+             </div>
+
+             <div class="form-group">
+                  <label for="bic" class="col-xs-12 col-sm-4 col-md-4 control-label label-rib">{{"sna.sna_paiement.lbl_bic"|trans({}, "sna", "fr")|raw}}<span class="star">*</span>
+                        <span class="sub-label">{{"sna.sna_paiement.lbl_bic_trad"|trans({}, "sna", "fr")|raw}}</span>
+                    </label>
+                  <div class="col-xs-11 col-sm-6 col-md-4">
+                      <input id="bic" type="text" class="form-control" data-ng-model="payerSig.bic" maxlength="12" name="bicpayer" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_bic"|trans({}, "sna", "fr")|raw}}">
+                      <span class="mess-error" data-ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.bicpayer.$invalid))">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.bicpayer.$invalid))">
+                  </div>
+
+             </div>
+             <div class="form-group">
+                  <label for="iban" class="col-xs-12 col-sm-4 col-md-4 control-label label-rib">{{"sna.sna_paiement.lbl_iban"|trans({}, "sna", "fr")|raw}}<span class="star">*</span>
+                        <span class="sub-label">{{"sna.sna_paiement.lbl_iban_trad"|trans({}, "sna", "fr")|raw}}</span>
+                    </label>
+                  <div class="col-xs-11 col-sm-8 col-md-8">
+                      <div class="iban-group">
+                          <input  id="iban" type="text" class="form-control pull-left" data-ng-model="payerSig.ibanTab[0]" maxlength="4" name="ibantabpayer[]" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_1"|trans({}, "sna", "fr")|raw}}">
+                          <input type="text" class="form-control pull-left" data-ng-model="payerSig.ibanTab[1]" maxlength="4" name="ibantabpayer[]" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_2"|trans({}, "sna", "fr")|raw}}">
+                          <input type="text" class="form-control pull-left" data-ng-model="payerSig.ibanTab[2]" maxlength="4" name="ibantabpayer[]" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_3"|trans({}, "sna", "fr")|raw}}">
+                          <input type="text" class="form-control pull-left" data-ng-model="payerSig.ibanTab[3]" maxlength="4" name="ibantabpayer[]" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_4"|trans({}, "sna", "fr")|raw}}">
+                          <input type="text" class="form-control pull-left" data-ng-model="payerSig.ibanTab[4]" maxlength="4" name="ibantabpayer[]" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_5"|trans({}, "sna", "fr")|raw}}">
+                          <input type="text" class="form-control pull-left" data-ng-model="payerSig.ibanTab[5]" maxlength="4" name="ibantabpayer[]" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_6"|trans({}, "sna", "fr")|raw}}">
+                          <input type="text" class="form-control pull-left" data-ng-model="payerSig.ibanTab[6]" maxlength="3" name="ibantabpayer[]" aria-required="true" aria-label="{{"sna.sna_paiement.aria_alt_iban_7"|trans({}, "sna", "fr")|raw}}">
+                          <span class="mess-error" data-ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.ibantabpayer.$invalid))">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                          <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.iban.$invalid))" >
+                      </div>
+                 </div>
+             </div>
+           </div>
+
+    {% include 'SelBundle:Rest:addressPopin.html.twig' %}
+
+                         <!-- END COORDONNEES PAYEUR -->
+            <div class="form-group">
+               <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+                    <button type="button" class="btn btn-primary aide-photo-btn" data-ng-click="submitForm()" title="{{"sna.sna_paiement.bt_valider_info"|trans({}, "sna", "fr")|raw}}"><span>{{"sna.sna_paiement.bt_valider_label"|trans({}, "sna", "fr")|raw}}</span></button>
+                </div>
+            </div>
+            <div class="form-group">
+               <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+                    <a href="#Recapitulatif" class="skip" title="{{"sna.sna_paiement.link_plus_tard_info"|trans({}, "sna", "fr")|raw}}">{{"sna.sna_paiement.link_plus_tard_label"|trans({}, "sna", "fr")|raw}}</a>
+                </div>
+            </div>
+        <span class="obligatoire">
+            <span class="star" aria-label="{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}">*</span>
+            {{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}
+        </span>
+      </div>

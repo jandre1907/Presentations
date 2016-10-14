@@ -1,0 +1,191 @@
+{% extends "SelBundle::layout.html.twig" %}
+{% block title %}Service en ligne{% endblock %}
+{% block content_header '' %}
+{% block angularModule %}faq{% endblock angularModule %}
+{% block flashMessage %}{% endblock flashMessage %}
+ {% block breadcrumb %}
+<div>
+	<div id="box_breadcrumb_id" class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12">
+			<ol class="breadcrumb">
+				<li><a href="http://www.navigo.fr" title="{{ 'faq.faq_ask_request.title'|trans({}, 'faq') }}">{{ 'faq.faq_ask_request.title'|trans({}, 'faq') }}</a></li>
+				<li><a href="{{ path('sel_homepage') }}" title="{{ 'faq.faq_ask_request.service_navigo'|trans({}, 'faq') }}">{{ 'faq.faq_ask_request.service_navigo'|trans({}, 'faq') }}</a></li>
+                <li><a href="{{ path('sel_espace_client') }}" title="{{ 'faq.faq_index.faq_mon_espace_breadcrumb'|trans({}, 'faq') }}">{{ 'faq.faq_index.faq_mon_espace_breadcrumb'|trans({}, 'faq') }}</a></li>
+				<li class="active">{{ 'faq.faq_ask_request.ask_question'|trans({}, 'faq') }}</li>
+			  </ol>
+		</div>
+	</div>
+</div>
+{% endblock breadcrumb %}
+
+{% block javascript_foot %}
+    {{parent() }}
+    {% javascripts
+        '@SelBundle/Resources/public/js/faq.js'
+        output='faq.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% javascripts
+        '@SelBundle/Resources/public/js/Faq/Module/*.js'
+        '@SelBundle/Resources/public/js/Faq/Controller/*.js'
+        '@SelBundle/Resources/public/js/Faq/Service/*.js'
+        '@SelBundle/Resources/public/js/Faq/Directive/*.js'
+        output='faq_compile.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock javascript_foot %}
+{% block contentTitle %}
+     <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12">
+             <div class="heading">
+                 <h1>{{ 'faq.faq_ask_request.ask_question_title'|trans({}, 'faq') }}</h1>
+             </div>
+         </div>
+     </div>
+{% endblock contentTitle %}
+{% block previousArrow %}
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="prev">
+            <a href="#">
+                <img src="{{ asset('bundles/sel/images/prev16.png') }}" class="picto" alt="{{ 'transverse.transverse_prev.previous_page_title' |trans({}, 'transverse') }}">
+				{{ 'transverse.transverse_prev.previous_page' |trans({}, 'transverse') }}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock previousArrow %}
+{% form_theme ask_form 'SelBundle:Faq:fields.html.twig' %}
+{% block content %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#joindre_un_fichier').on('change', function(e) {
+            var filename = $(e.currentTarget).val().replace(/^.*\\/, "");
+            $('#file_widget_info').text(filename);
+        });
+    });
+</script>
+<div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div id="sel_form" class="form-horizontal">
+                <div class="step-content">
+                    <div class="step_form" id="question"><!-- 2 -->
+                        {% if form_errors(ask_form.attachment) != "" %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(ask_form.attachment) }}
+                            </div>
+                        {% elseif (error_message) != "" %}
+                            <div class="alert alert-danger">
+                                {{ error_message }}
+                                {{ form_errors(ask_form) }}
+                            </div>
+                        {% endif %}
+                        <span id="question_step_1" class="margin-ultra-bottom general_Intext" tabindex="-1">{{ 'faq.faq_ask_request.selection_asked_label' | trans({}, 'faq') }}</span>
+
+                        <div class="form-content" >
+                            <form id="subform"  name="form" action="{{ path('sel_faq_ask_description') }}" method="post" {{ form_enctype(ask_form) }}>
+
+                                <div class="form-group form_object_form_group">
+                                    {#<div class="alert alert-danger" alt="picto valid">Choix obligatoire</div>#}
+
+                                    {% if form_errors(ask_form.object) != "" %}
+                                        <div class="alert alert-danger" alt="picto error">{{ form_errors(ask_form.object) }}</div>
+                                    {% endif %}
+                                    {{ form_label(ask_form.object) }}
+                                    {{ form_widget(ask_form.object) }}
+                                    {#<img data-ng-show="objectErrorPicto" src="{{ asset('bundles/sel/images/error.png')}}" alt="picto error">#}
+                                </div>
+
+                                <div class="form-group form_package_form_group" >
+                                    {#<div data-ng-show="packageErrorPicto && motifField == 0" class="alert alert-danger" alt="picto valid">Choix obligatoire</div>#}
+                                    {% if form_errors(ask_form.package) != "" %}
+                                        <div class="alert alert-danger" alt="picto error">{{ form_errors(ask_form.package) }}</div>
+                                    {% endif %}
+                                    {{ form_label(ask_form.package) }}
+                                    {{ form_widget(ask_form.package) }}
+                                    {#<img data-ng-show="packageErrorPicto && motifField == 0" src="{{ asset('bundles/sel/images/error.png')}}" alt="picto error">#}
+                                </div>
+
+                                <div class="form-group form_section_form_group" >
+                                    {#<div data-ng-show="sectionErrorPicto && motifField == 1" class="alert alert-danger" alt="picto valid">Choix obligatoire</div>#}
+                                    {% if form_errors(ask_form.section) != "" %}
+                                        <div class="alert alert-danger" alt="picto error">{{ form_errors(ask_form.section) }}</div>
+                                    {% endif %}
+                                    <div class="col-sm-9 col-sm-offset-3">{{ 'faq.faq_ask_request.label-rubrique' | trans({}, 'faq') }}</div>
+                                    {{ form_label(ask_form.section) }}
+                                    {{ form_widget(ask_form.section) }}
+                                    {#<img data-ng-show="sectionErrorPicto && motifField == 1" src="{{ asset('bundles/sel/images/error.png')}}" alt="picto error">#}
+                                </div>
+
+                                <div class="form-group form_description_form_group" >
+                                    {#<div data-ng-show="descriptionErrorPicto && motifField == 1" class="alert alert-danger" alt="picto valid">Le champs description ne doit pas être vide.</div>#}
+                                    {% if form_errors(ask_form.description) != "" %}
+                                        <div class="alert alert-danger" alt="picto error">{{ form_errors(ask_form.description) }}</div>
+                                    {% endif %}
+                                    <div class="col-sm-9 col-sm-offset-3">{{ 'faq.faq_ask_request.label-description' | trans({}, 'faq') }}</div>
+                                    {{ form_label(ask_form.description) }}
+                                    {{ form_widget(ask_form.description) }}
+                                    {#<img data-ng-show="descriptionErrorPicto && motifField == 1" src="{{ asset('bundles/sel/images/error.png')}}" alt="picto error">#}
+                                </div>
+
+                                {#<div data-ng-show="requestErrorPicto && motifField == 0" class="alert alert-danger" alt="picto valid">Quelle est votre demande ?</div>#}
+                                <div class="form-group form_request_form_group" >
+                                    {% if form_errors(ask_form.request) != "" %}
+                                        <div class="alert alert-danger" alt="picto error">{{ form_errors(ask_form.request) }}</div>
+                                    {% endif %}
+                                    {{ form_label(ask_form.request) }}
+                                    {{ form_widget(ask_form.request) }}
+                                    {#<img data-ng-show="requestErrorPicto && motifField == 0" src="{{ asset('bundles/sel/images/error.png')}}" alt="picto error">#}
+                                </div>
+
+                                <div class="form-group form_attachment_form_group" >
+                                    {{ form_label(ask_form.attachment) }}
+                                    {{ form_widget(ask_form.attachment) }}
+                                    <div id="info_file_loaded" >{{ info_file_loaded }}</div>
+                                </div>
+                                {{ form_rest(ask_form) }}
+                                <!-- Titres à ajouter
+                                    Choix rubrique :
+                                    <h3 class="margin-ultra-bottom">Où avez-vous constaté le problème ? :</h3>
+                                    Description :
+                                    <h3 class="margin-ultra-bottom">Décrivez précisement ce que vous avez constaté :</h3>
+                                -->
+                                <div class="row">
+                                    <div class="col-xs-12 text-center">
+                                        {#<button type="submit" data-ng-disabled="!(areaValid && forfaitField && askContentArea)" data-ng-model="faqFormButton" class="btn btn-primary aide-photo-btn" value="Valider le formulaire et continuer"><span>{{ 'faq.faq_ask_request.continue_btn'|trans({}, 'faq') }}</span></button>#}
+                                        <button id="valid-btn" type="submit"  class="btn btn-primary aide-photo-btn" value="Valider le formulaire et continuer"><span>{{ 'faq.faq_ask_request.continue_btn'|trans({}, 'faq') }}</span></button>
+                                    </div>
+                                </div>
+								<span class="obligatoire">
+									<span class="star" aria-label="{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}"></span>
+									{{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}
+								</span>
+                                <div class="modal fade" id="form_hotline_popin" tabindex="-1"  aria-labelledby="fenetreDialogue">
+                                    <div class="modal-dialog" >
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'faq.faq_ask_request.aria_close_window_to_continue_label'|trans({}, 'faq') }}" value="{{ 'faq.faq_ask_request.close_window_to_continue_label'|trans({}, 'faq') }}">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <h4 class="modal-title" id="fenetreDialogue">{{ 'faq.faq_ask_request.information_label'|trans({}, 'faq') }}</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>{{ faq_settings.SAV_FAQ_MSS_001 }}</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal" value="Fermer la fenêtre de dialogue">{{ 'faq.faq_ask_request.close'|trans({}, 'faq') }}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END MODAL -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

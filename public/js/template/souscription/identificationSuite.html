@@ -1,0 +1,97 @@
+
+<div class="step_form" id="step_identification_3"><!-- 0.3 -->
+
+    <h2 class="margin-ultra-bottom">Veuillez compléter les informations suivantes afin de pouvoir rattacher votre espace à vos données clients :</h2>
+
+    <div class="form-content" ng-form name="step_form" >
+
+        <p class="warning-light red" ng-show="error">
+            <img ng-src="{{ prefix_front }}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+            <strong>{{error}}</strong>
+        </p>
+
+        <div class="form-group">
+            <label for="email" class="col-xs-12 col-md-4 col-sm-12 control-label">Email</label>
+            <div class="col-xs-11 col-md-4 col-sm-6">
+                <input id="email" type="email" name="email" class="form-control" placeholder="" ng-model="userSig.email" aria-required="true">
+                <span class="mess-error" ng-show="step_form.email.$invalid">Information incorrecte, veuillez la saisir à nouveau.</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="step_form.email.$invalid">
+            </div>
+            <div class="col-xs-10 col-md-4 col-sm-6"></div>
+        </div>
+
+        <div class="form-group" >
+            <label for="numero-client" class="col-xs-12 col-md-4 col-sm-12 control-label">Numéro client</label>
+            <div class="col-xs-11 col-md-4 col-sm-6">
+               <input id="numero-client" type="text" name="reference" class="form-control" placeholder=""
+               ng-model="userSig.reference"
+               ng-minlength="1"
+               ng-maxlength="40"
+               ng-pattern="/[0-9]+/"
+               aria-required="true">
+               <span class="mess-error" ng-show="step_form.reference.$error.pattern">Information incorrecte, veuillez la saisir à nouveau.</span>
+               <span class="mess-error" ng-show="step_form.reference.$error.minlength || step_form.reference.$error.maxlength">Information incorrecte, veuillez la saisir à nouveau.</span>
+               <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="step_form.reference.$error.minlength || step_form.reference.$error.maxlength || step_form.reference.$error.pattern">
+            </div>
+            <div class="col-xs-10 col-md-4 col-sm-6"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="nom" class="col-xs-12 col-md-4 col-sm-12 control-label">Nom</label>
+            <div class="col-xs-11 col-md-4 col-sm-6">
+                <input id="nom" type="text" name="nom" class="form-control" placeholder="" ng-model="userSig.lastname" ng-minlength="5" ng-maxlength="40">
+            </div>
+            <div class="col-xs-10 col-md-4 col-sm-6"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="prenom" class="col-xs-12 col-md-4 col-sm-12 control-label">Prénom</label>
+            <div class="col-xs-11 col-md-4 col-sm-6">
+                <input id="prenom"  type="text" name="prenom" class="form-control" placeholder="" ng-model="userSig.firstname" ng-minlength="5" ng-maxlength="40">
+            </div>
+            <div class="col-xs-10 col-md-4 col-sm-6"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="code-postal" class="col-xs-12 col-md-4 col-sm-12 control-label">Code postal</label>
+            <div class="col-xs-11 col-md-4 col-sm-6">
+                <input id="code-postal"  type="text" name="codePostal" class="form-control" placeholder="" ng-model="userSig.postalCode" ng-minlength="5" ng-maxlength="5"  ng-pattern="/[0-9]+/">
+                <span class="mess-error" ng-show="step_form.codePostal.$invalid">Information incorrecte, veuillez la saisir à nouveau.</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="step_form.codePostal.$invalid">
+            </div>
+            <div class="col-xs-10 col-md-4 col-sm-6"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="mobile" class="col-xs-12 col-md-4 col-sm-12 control-label">Téléphone portable</label>
+            <div class="col-xs-11 col-md-4 col-sm-6">
+                <input id="mobile" type="text" class="form-control" ng-model="rawMobile" name="mobile" maxlength="15"/ required>
+                <span  aria-live="assertive" role="alert" class="mess-error" ng-hide="true" ng-show="formSubmitted && (step_form.mobile.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" ng-hide="true" ng-show="!(step_form.mobile.$invalid)">
+                <img ng-src="{{ '../bundles/sel/images/error.png" class="picto error" alt="Erreur"  ng-hide="true" ng-show="formSubmitted && (step_form.mobile.$invalid)">
+            </div>
+            <div class="col-xs-10 col-md-4 col-sm-6"></div>
+        </div>
+
+          <div class="form-group birthdate">
+            <label for="birthdate" class="col-xs-12 col-md-4 col-sm-12 control-label">Date de naissance<span class="star">*</span></label>
+            <div class="col-xs-11 col-md-4 col-sm-12">
+                <input id="birthdate" type="text" placeholder="JJ" name="birthday" class="form-control pull-left" id="birthdate" ng-model="userSig.birthDate.day" maxlength="2" required aria-required="true" aria-label="jour de votre naissance">
+                <input type="text" placeholder="MM" name="birthmonth" class="form-control pull-left" ng-model="userSig.birthDate.month"  maxlength="2" required aria-required="true" aria-label="mois de votre naissance">
+                <input type="text" placeholder="AAAA" name="birthyear" class="form-control pull-left" ng-model="userSig.birthDate.year"  maxlength="4" required aria-required="true" aria-label="année de votre naissance">
+                <span class="mess-error" ng-show="formSubmitted && (step_form.birthday.$invalid || step_form.birthmonth.$invalid || step_form.birthyear.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <span class="mess-error" ng-show="step_form.birthday.$error.date ">Cette date n'est pas valide</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur"  ng-show=" step_form.birthday.$error.date || (formSubmitted && (step_form.birthday.$invalid || step_form.birthmonth.$invalid || step_form.birthyear.$invalid))">
+            </div>
+            <div class="col-xs-2 col-md-4 col-sm-12"></div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+                 <button type="button"  class="btn btn-primary aide-photo-btn" ng-click="pageCtrl.stepSubmit()" title="Valider le formulaire et poursuivre"><span>Continuer</span></button>
+            </div>
+        </div>
+    </div>
+
+</div>
+

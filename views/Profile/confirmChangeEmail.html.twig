@@ -1,0 +1,54 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title="{{'coor.coor_change_email_confirm.accueil'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_change_email_confirm.accueil'|trans({}, 'coor', 'fr')|raw}}</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title="{{'coor.coor_change_email_confirm.service_navigo'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_change_email_confirm.service_navigo'|trans({}, 'coor', 'fr')|raw}}</a></li>
+            <li><a href="{{ path('sel_espace_client') }}" title="{{'coor.coor_change_email_confirm.espace_client'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_change_email_confirm.espace_client'|trans({}, 'coor', 'fr')|raw}}</a></li>
+            <li><a href="{{ path('sel_coordonnees') }}" title="{{'coor.coor_change_email_confirm.vos_coordonnees'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_change_email_confirm.vos_coordonnees'|trans({}, 'coor', 'fr')|raw}}</a></li>
+            <li><a href="{{ path('sel_front_profile_edit') }}" title="{{'coor.coor_change_email_confirm.modifier_email'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_change_email_confirm.modifier_email'|trans({}, 'coor', 'fr')|raw}}</a></li>
+            <li class="active">{{'coor.coor_change_email_confirm.confirm_modifier_email'|trans({}, 'coor', 'fr')|raw}}</li>
+        </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{'coor.coor_change_email_confirm.lbl_titre'|trans({}, 'coor', 'fr')|raw}}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block mainContent %}
+{% block body %}
+
+    {% block content %}
+        <div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                    <div class="confirmation text-center">
+                            <span class="general_Intext">
+                                <img src="{{ asset('bundles/sel/images/check2x.png')}}" class="picto valid" alt="Confirmation">
+                                <strong>{{'coor.coor_change_email_confirm.lbl_email_ok'|trans({}, 'coor', 'fr')|raw}}</strong>
+                            </span>
+                        </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a href="{{ path('sel_espace_client') }}" class="btn btn-default aide-photo-btn" title="{{'coor.coor_change_email_confirm.btn_retour_espa_title'|trans({}, 'coor', 'fr')|raw}}">
+                        <span>{{'coor.coor_change_email_confirm.btn_retour_espa'|trans({}, 'coor', 'fr')|raw}}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endblock content %}
+{% endblock body%}
+
+{% endblock mainContent %}

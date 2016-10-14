@@ -1,0 +1,20 @@
+{% extends (typeForfait == 1 or typeForfait == 2) ? "SelBundle::Mail/layoutIR.html.twig" : "SelBundle::Mail/layoutSNA.html.twig" %}
+{% block title %}
+	{% if typeForfait == 4 or typeForfait == 41 %}
+        <h2 style="background: #ffffff;display: inline-block;font-size: inherit;margin: 0;padding: 0 0 5px;width: auto;">{{ 'mails.mails_confirmation_change_paiement_na.subject'|trans({}, 'mails')|raw }}</h2>
+    {% elseif typeForfait == 1 or typeForfait == 2 %}
+    	<h2 style="background: #ffffff;display: inline-block;font-size: inherit;margin: 0;padding: 0 0 5px;width: auto;">{{ 'mails.mails_confirmation_change_paiement_ir.subject'|trans({}, 'mails')|raw }}</h2>
+    {% endif %}
+{% endblock title %}
+{% block body %}
+    {% block body_text %}
+        {% autoescape false %}
+        	{% if typeForfait == 4 or typeForfait == 41 %}
+                {{ 'mails.mails_confirmation_change_paiement_na.message'|trans({ '%typeForfait%': libelleForfait, '%dateValidite%': dateValidite, '%zonesForfait%': zonesForfait, '%username%': username }, 'mails')|raw }}
+            {% elseif typeForfait == 1 or typeForfait == 2 %}
+            	{{ 'mails.mails_confirmation_change_paiement_ir.message'|trans({ '%typeForfait%': libelleForfait, '%dateValidite%': dateValidite, '%zonesForfait%': zonesForfait, '%username%': username }, 'mails')|raw }}
+            {% endif %}
+        {% endautoescape %}
+    {% endblock %}
+    {% block body_html %}{% endblock %}
+{% endblock body %}

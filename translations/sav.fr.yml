@@ -1,0 +1,17 @@
+sav.sav_choix_forfait.lbl_titre: 'Sélectionner un forfait'
+sav.sav_choix_forfait.lbl_forf: Forfait
+sav.sav_choix_forfait.lbl_date_valid: 'Dates de validité'
+sav.sav_choix_forfait.lbl_zone: Zones
+sav.sav_choix_forfait.lbl_etat: Etat
+sav.sav_choix_forfait.btn_selection: Séléctionner
+sav.sav_choix_forfait.pertevol: Perte/Vol
+sav.sav_choix_forfait.attestation: Attestation
+sav.sav_choix_forfait.bonplan: 'Carte Bon Plan'
+sav.sav_choix_forfait.btn_selection_title: 'Séléctionner ce forfait'
+sav.sav_choix_forfait.accueil_link_breadcrumb: Accueil
+sav.sav_choix_forfait.accueil_link_breadcrumb_title: Accueil
+sav.sav_choix_forfait.gere_maCarte_link_breadcrumb: 'Je gère ma carte Navigo'
+sav.sav_choix_forfait.gere_maCarte_link_breadcrumb_title: 'Je gère ma carte Navigo'
+sav.sav_choix_forfait.mon_espace_link_breadcrumb: 'Mon espace personnel'
+sav.sav_choix_forfait.mon_espace_link_breadcrumb_title: 'Mon espace personnel'
+sav.sav_choix_forfait.label.legendValidite: 'La période indiquée correspond à 11 mois prélevés suivi d’un 1 mois gratuit. Seule la résiliation et la suspension du forfait arrête le prélèvement automatique mensuel. Ces actions sont réalisables à tout moment. Voir les <a href="%cgu%" class="link underline" target="_blank" title="Conditions Générales d’Utilisation du forfait Navigo Annuel (nouvelle fenêtre)">Conditions Générales d’Utilisation du forfait Navigo Annuel</a>.'

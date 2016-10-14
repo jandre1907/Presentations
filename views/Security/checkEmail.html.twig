@@ -1,0 +1,32 @@
+{% extends "SelBundle::base.html.twig" %}
+
+
+{% block title 'Sel Bundle' %}
+
+{% block body %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash-message">
+            <em>Notice</em>: {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% block content_header %}
+        <ul id="menu">
+            {% block content_header_more %}
+                <li><a href="">Sel Home</a></li>
+            {% endblock %}
+        </ul>
+
+        <div style="clear: both"></div>
+    {% endblock %}
+
+    <div class="block">
+        {% block content %}{% endblock %}
+        {% block api %}
+        <p>
+            <!-- <a href="{{ path('nelmio_api_doc_index') }}">{{ 'api.doc.link'|trans({}, 'SelBundle') }}</a>-->  
+        </p>
+        {% endblock %}
+    </div>
+    
+{% endblock %}

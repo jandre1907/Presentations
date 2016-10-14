@@ -1,0 +1,40 @@
+{% extends "SelBundle::layout.html.twig" %}
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{'cpt.cpt_expire.lbl_reinit_mdp_title'|trans({}, 'cpt', 'fr')|raw}}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block mainContent %}
+{% block body %}
+
+    {% block content %}
+<div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div class="confirmation">
+                <p>
+                    {{'cpt.cpt_expire.lbl_lien_reinit'|trans({}, 'cpt', 'fr')|raw}}<br/>
+                    <strong>{{'cpt.cpt_expire.lbl_reinit_again'|trans({}, 'cpt', 'fr')|raw}}</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <a href="{{ path('sel_front_resetting_request') }}" class="btn btn-primary aide-photo-btn">
+                <span>{{'cpt.cpt_expire.lbl_reinit_mdp'|trans({}, 'cpt', 'fr')|raw}}</span>
+             </a>
+        </div>
+    </div>
+</div>
+
+
+    {% endblock content %}
+{% endblock body%}
+
+{% endblock mainContent %}

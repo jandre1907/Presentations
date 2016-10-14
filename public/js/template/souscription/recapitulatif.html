@@ -1,0 +1,231 @@
+
+<div class="step_form" id="step_recapitulatif">
+	<!-- 5 -->
+
+    <p class="warning-light red" ng-hide="isSouscriptionDataComplete">
+        <img ng-src="{{ prefix_front }}bundles/sel/images/alert.png" class="picto" alt="Alerte"> 
+        Vous n'avez pas encore renseigné toutes les informations de votre
+		demande de souscription. Vous pouvez soit les compléter en cliquant
+		sur Modifier, soit les ajouter plus tard en cliquant sur le lien qui
+		vous sera envoyé par email. </br>
+		</br> Attention, pour bénéficier de votre forfait dès le mois prochain
+		n'oubliez pas de compléter votre dossier avant le 17 du mois en
+		cours.
+    </p>
+
+
+
+    <h2 id="recapitulatif-saisie" class="margin-ultra-bottom" tabindex="-1">Récapitulatif des informations saisies</h2>
+    <h3>Veuillez vérifier vos coordonnées personnelles et les compléter</h3>
+    
+    
+	<div class="form-content" ng-form name="step_form">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+                <h3 class="picto-recap picto-forfait">Forfait</h3>
+                <a href="#/Forfait" class="pull-right modifier" title="Modifier votre séléction de forfait">
+                    <img ng-src="{{ prefix_front }}bundles/sel/images/crayon.png" alt="Modifier"/>
+                    <span>
+                        Modifier
+                    </span>
+                </a>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12">
+						<p class="recap-line">
+							<label>Date de debut de forfait</label><strong>{{ Holder.forfait.date | dateFormatStr }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Zone du forfait</label><strong>{{ Holder.forfait.zoneForfaitDetail.title }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Montant</label><strong>{{ Holder.forfait.zoneForfaitDetail.price | euro : 2 : "," : " €" }}</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+                <h3 class="picto-recap picto-coordonnees">Coordonnees</h3>
+                <a href="/Porteur" class="pull-right modifier" title="Modifier votre séléction de forfait">
+                    <img ng-src="{{ prefix_front }}bundles/sel/images/crayon.png" alt="Modifier"/>
+                    <span>
+                        Modifier
+                    </span>
+                </a>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<p class="recap-line">
+							<label>Civilité</label><strong><span ng-show="userSig.prefix == 01 || userSig.prefix == 'Monsieur'">Monsieur</span><span ng-show="userSig.prefix == 02 || userSig.prefix == 'Madame'">Madame</span></strong>
+						</p>
+						<p class="recap-line">
+							<label>Nom</label><strong>{{ userSig.lastname }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Prénom</label><strong>{{ userSig.firstname }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Date de naissance</label><strong>{{ userSig.birthDate.day }}/{{ userSig.birthDate.month }}/{{ userSig.birthDate.year }}</strong>
+						</p>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<p class="recap-line">
+							<label><abbr title="Numéro">N°</abbr> de la rue</label><strong>{{ userSig.street3 }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Code postal</label><strong>{{ userSig.postalCode }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Ville</label><strong>{{ userSig.city.bureauDistributeur }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Pays</label><strong>{{ userSig.country }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Téléphone portable</label><strong>{{ userSig.mobile }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Téléphone fixe</label><strong>{{ userSig.phone }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Email</label><strong>{{ userSig.email }}</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+                <h3 class="picto-recap picto-photo">Photo</h3>
+                <a href="#/Photo" class="pull-right modifier" title="Modifier votre séléction de forfait">
+                    <img ng-src="{{ prefix_front }}bundles/sel/images/crayon.png" alt="Modifier"/>
+                    <span>
+                        Modifier
+                    </span>
+                </a>
+			</div>
+			<div class="panel-body">
+				<div class="preview">
+					<img ng-src="{{ cart.documents.url_photo }}" ng-hide="! (cart.documents.url_photo)" />
+				</div>
+				<p class="text-danger" ng-show="! (cart.documents.url_photo)">Vous souhaitez ajouter une photo plus tard</p>
+			</div>
+
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+                <h3 class="picto-recap picto-rib">RIB</h3>
+                <a href="#/Paiement" class="pull-right modifier" title="Modifier votre séléction de forfait">
+                    <img ng-src="{{ prefix_front }}bundles/sel/images/crayon.png" alt="Modifier"/>
+                    <span>
+                        Modifier
+                    </span>
+                </a>
+			</div>
+			<div class="panel-body" >
+				<div class="row" ng-hide="userSig.isNotPayer!=1" ng-show="userSig.isNotPayer==1">
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<p class="recap-line">
+							<label>Civilité</label><strong>{{ payerSig.prefix }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Nom</label><strong>{{ payerSig.lastname }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Prénom</label><strong>{{ payerSig.firstname }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Date de naissance</label><strong>{{ payerSig.birthDate.day }}/{{ payerSig.birthDate.month }}/{{ payerSig.birthDate.year }}</strong>
+						</p>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<p class="recap-line">
+							<label><abbr title="Numéro">N°</abbr> de la rue</label><strong>{{ payerSig.street3 }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Code postal</label><strong>{{ payerSig.postalCode }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Ville</label><strong>{{ payerSig.city.bureauDistributeur }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Pays</label><strong>{{ payerSig.country }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Téléphone portable</label><strong>{{ payerSig.mobile }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Téléphone fixe</label><strong>{{ payerSig.phone }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Email</label><strong>{{ payerSig.email }}</strong>
+						</p>
+					</div>
+				</div>
+
+
+				<div class="row" ng-hide="userSig.isNotPayer==1" ng-show="userSig.isNotPayer!=1">
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<p class="recap-line">
+							<label>BIC</label><strong>{{ userSig.bic }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>IBAN</label><strong>{{ userSig.iban }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Titulaire du compte</label><strong>{{ userSig.firstname }} {{ userSig.lastname }}</strong>
+						</p>
+						<p class="recap-line">
+							<label><abbr title="Numéro">N°</abbr> de RUM
+                                <span class="sub-label">Référence Unique de Mandat</span>
+                            </label><strong>{{ userSig.rum }}</strong>
+						</p>
+					</div>
+				</div>
+
+                <div class="row" ng-hide="userSig.isNotPayer!=1" ng-show="userSig.isNotPayer==1">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <p class="recap-line">
+                            <label>BIC</label><strong>{{ payerSig.bic }}</strong>
+                        </p>
+                        <p class="recap-line">
+                            <label>IBAN</label><strong>{{ payerSig.iban }}</strong>
+                        </p>
+                        <p class="recap-line">
+                            <label>Titulaire du compte</label><strong>{{ payerSig.firstname }} {{ payerSig.lastname }}</strong>
+                        </p>
+                        <p class="recap-line">
+                            <label><abbr title="Numéro">N°</abbr> de RUM
+                                <span class="sub-label">Référence Unique de Mandat</span>
+                            </label><strong>{{ payerSig.rum }}</strong>
+                        </p>
+                    </div>
+                </div>
+                				
+			</div>
+		</div>
+
+		<p class="title">
+            <strong>Attention, les informations de contact (adresse email et numéro de téléphone mobile) affichées sur cette page serviront à signer éléctroniquement votre dossier. Veuillez les vérifier attentivement.</strong>
+        </p>
+	</div>
+	<!-- form-content -->
+	<div class="form-group">
+        <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+			<button type="button" class="btn btn-primary aide-photo-btn" ng-click="submitForm()" title="Je certifie que ces données sont exactes">
+				<span>Je certifie que ces données sont exactes</span>
+			</button>
+		</div>
+	</div>
+</div>
+
+
+
+
+

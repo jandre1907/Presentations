@@ -1,0 +1,89 @@
+{% extends "SelBundle::layout.html.twig" %}
+{% block javascript_foot %}
+    {{ parent() }}
+    {% javascripts
+    '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/resettingConfirmation.js'
+
+    output='js/resettingConfirmation.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock javascript_foot %}
+
+{% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title='{{'mdp.mdp_request.accueil_link_breadcrumb_title'|trans({}, 'mdp', 'fr')|raw}}'>{{'mdp.mdp_request.accueil_link_breadcrumb'|trans({}, 'mdp')|raw}}</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title='{{'mdp.mdp_request.gere_maCarte_link_breadcrumb_title'|trans({}, 'mdp', 'fr')|raw}}'>{{'mdp.mdp_request.gere_maCarte_link_breadcrumb'|trans({}, 'mdp')|raw}}</a></li>
+            <li><a href="{{ path('sel_front_resetting_request') }}" title="mdp.mdp_request.mdp_oublie_link_breadcrumb_title">{{'mdp.mdp_request.mdp_oublie_link_breadcrumb'|trans({}, 'mdp')|raw}}</a></li>
+            <li class="active">{{'mdp.mdp_request.mail_reinitialisation_link_breadcrumb'|trans({}, 'mdp')|raw}}</li>
+          </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+{% block angularModule %}Resetting{% endblock angularModule %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{'mdp.mdp_reset_info.lbl_titre'|trans({}, 'mdp', 'fr')|raw}}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block mainContent %}
+{% block body %}
+
+    {% block content %}
+    <div data-ng-controller="ResettingConfirmationCtrl"  data-ng-init="email='{{ email }}'" >
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                <div class="confirmation">
+                            <p>
+                                {{'mdp.mdp_reset_info.lbl_prise_cpt'|trans({}, 'mdp', 'fr')|raw}}
+                            </p>
+                        <br/>
+                            <p>{{'mdp.mdp_reset_info.lbl_mail_again'|trans({}, 'mdp', 'fr')|raw}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <button type="button" class="btn btn-default aide-photo-btn" value="Terminer et retourner à l'accueil" onclick="location.href='{{ path("sel_homepage") }}';">
+                    <span>{{'mdp.mdp_reset_info.btn_retour_accueil'|trans({}, 'mdp', 'fr')|raw}}</span>
+                </button>
+                <!--<a href="{{ path('sel_homepage') }}" class="btn btn-primary aide-photo-btn">
+                    <span>Retour Accueil</span>
+               </a>-->
+            </div>
+        </div>
+    </div>
+
+<!-- Modal -->
+
+<div aria-labelledby="fenetreDialogue"  tabindex="-1" id="infos_renew" class="modal fade">
+    <div  class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button value="Fermer la fenêtre de dialogue et continuer" aria-label="{{ 'mdp.mdp_reset_info.btn_close_modal'|trans({}, 'mdp') }}" data-dismiss="modal" class="close" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 id="fenetreDialogue" class="modal-title">{{ 'mdp.mdp_reset_info.titre_modal'|trans({}, 'mdp') }}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{ 'mdp.mdp_reset_info.content_modal'|trans({}, 'mdp') }}</p>
+            </div>
+            <div class="modal-footer">
+                <button value="{{ 'mdp.mdp_reset_info.btn_close_modal'|trans({}, 'mdp') }}" data-dismiss="modal" class="btn btn-default" type="button">{{ 'mdp.mdp_reset_info.btn_close_modal'|trans({}, 'mdp') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endblock content %}
+{% endblock body%}
+
+{% endblock mainContent %}

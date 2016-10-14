@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="fr">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="fr">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="fr">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html lang="fr">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/sel/css/contractPDF.css') }}"/>
+	<title></title>
+</head>
+<body>
+	<div id="content">
+		<div id="payeur-1-end" class="bold">
+			MANDAT DE PRELEVEMENT SEPA
+		</div>
+		<div id="payeur-2">
+			<span id="ref-mandat">Référence Unique de Mandat :</span>
+			<div class="box">
+				
+			</div>
+			<div id="closes">
+				En signant ce formulaire de mandat, vous autorisez (A) l’Agence Navigo Annuel à envoyer des instructions à votre banque pour débiter votre compte et (B) votre banque à débiter votre compte conformément aux instructions de l’Agence Navigo Annuel. Vous bénéficiez du droit d’être remboursé par votre banque selon les conditions décrites dans la convention que vous avez passée avec elle. Toute demande de remboursement doit être présentée dans les 8 semaines suivant la date de débit de votre compte. Vos droits concernant le présent mandat sont expliqués dans un document que vous pouvez obtenir auprès de votre banque.
+			</div>
+				<span id="creancier">Désignation du créancier :</span>
+				<div id="creancier-adresse">
+					Navigo Annuel GIE COMUTITRES - 14 rue Auber - 75009 Paris - France<br>
+					Identifiant Créancier SEPA : FR42ZZZ457385
+				</div>
+				<div id="designation">
+					<span class="underline">Désignation du Titulaire du compte – Payeur du Forfait Navigo Annuel :</span><br>
+					Nom :		{{ params.payeur.nom}}<span id="titu-prenom">Prénom :	</span>{{ params.payeur.prenom}}<br>
+					Adresse :{{ params.payeur.addresse.rue}}<br>
+					<span class="adresse"></span><br>
+					CP :		{{ params.payeur.addresse.zip}}<span class="adresse">Ville :	{{ params.payeur.addresse.city}}</span>	<span class="adresse">Pays :{{ params.payeur.addresse.pays}}</span>
+				</div>
+				<div id="compte">
+					<span class="underline">Désignation du compte à débiter</span><br>
+					Code BIC :		{{ params.mandat.bic}}<span class="adresse">Code IBAN :	{{ params.mandat.iban}}</span><br>
+					<span id="ref-interne">Référence interne :</span>
+					<span class="box"></span>	
+
+					Date : le ..... / ….. / ……. <span class="adresse">Lieu : à …………………….</span>  <span class="adresse">Signature :</span><br>
+					<span id="date">indiquez la date</span><span id="lieu">indiquez le lieu</span>
+					
+				</div>
+		</div>
+	</div>
+</body>
+</html>

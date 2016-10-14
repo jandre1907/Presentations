@@ -1,0 +1,15 @@
+
+    <div class="step_form" id="step_forfait" ng-form name="step_form"><!-- 1 -->
+         <span class="obligatoire">
+            <span class="star">*</span>
+            Champs obligatoire
+         </span>
+        
+         <p class="warning-light red" ng-show="error">
+            <img ng-src="{{ prefix_front }}bundles/sel/images/alert.png" class="picto" alt="Alerte"> 
+            <strong>{{error}}</strong>
+        </p>
+         <h3 class="clearfix margin-ultra-bottom">Pour bénéficier de votre forfait dès le mois prochain, veuillez compléter votre dossier avant le <strong>17</strong> du mois en cours.</h3>
+         <div class="form-content" id="form_step_forfait"></div>
+    
+    </div>

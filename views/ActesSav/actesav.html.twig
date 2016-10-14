@@ -1,0 +1,163 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+
+    {% javascripts
+        '@SelBundle/Resources/public/js/lib/angular/angular-resource.js'
+        output='js/libAngularResourceModule.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% javascripts
+        '@SelBundle/Resources/public/js/sav/savApp.js'
+        '@SelBundle/Resources/public/js/sav/common/*.js'
+        '@SelBundle/Resources/public/js/sav/common/*/*.js'
+        '@SelBundle/Resources/public/js/sav/attestation/*.js'
+        '@SelBundle/Resources/public/js/sav/attestation/*/*.js'
+        '@SelBundle/Resources/public/js/sav/pv/*.js'
+        '@SelBundle/Resources/public/js/sav/pv/*/*.js'
+        output='js/sav.js' %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        angular.module("module.savLoadingPageData", [])
+            .constant("initData", {
+                type:'{{ type }}',
+                page:'{{ page | raw }}',
+                user: [{{ userjson | raw }}],
+                userSig: [{{ userSig | raw }}],
+                holder:  {{holderjson | raw}} ,
+                acte: '{{ acte }}',
+                contrat: [{{ contrat | raw}}],
+                refContrat: '{{ refContrat | raw}}',
+                refPass: '{{ refPass | raw | escape('js')}}',
+                typeError: {% if typeError %}{{ typeError | raw }}{% else %}{'error':''}{% endif %},
+                page: {{ landingPage | raw }},
+                modifyUrl : "{{ path('sel_edit_user',
+                    {
+                        'returnUrl': 'sel_sav'
+                    })
+                }}"
+            })
+            .value("lang", "fr");
+    </script>
+
+    <script type="text/javascript">
+        SEL = window.SEL || {};
+        SEL.prefix = "{{ prefix }}";
+        SEL.prefix_pdf = "{{prefix_pdf}}";
+        SEL.userTry = 3;
+        SEL.test = "1";
+        SEL.userIsConnected = {% if is_granted('ROLE_USER') %}true{% else %}false{% endif %}
+    </script>
+{% endblock javascript_foot %}
+
+{% block angularModule %}SAV{%  endblock angularModule %}
+
+{% block title %}Services en ligne{% endblock %}
+
+{% block throbber %}<span data-ng-controller="SpinCtrl" data-us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1"></span>{% endblock %}
+
+{% block breadcrumb %}
+    {% verbatim %}
+    <div class="row">
+        <div id="box_breadcrumb_id" class="col-xs-12 col-sm-12 col-md-12" data-ng-controller="TitleCtrl as titleCtrl">
+            <ol class="breadcrumb">
+                <li><a href="http://www.navigo.fr" {% endverbatim %}title="{{ 'att.att_list.accueil_link_breadcrumb_title'|trans({}, 'att') }}">{{ 'att.att_list.accueil_link_breadcrumb'|trans({}, 'att') }}</a></li>{% verbatim %}
+                <li><a  {% endverbatim %}href="{{ path('sel_homepage') }}" title="{{ 'att.att_list.gere_maCarte_link_breadcrumb_title'|trans({}, 'att') }}">{{ 'att.att_list.gere_maCarte_link_breadcrumb'|trans({}, 'att') }}</a></li>{% verbatim %}
+                <li><a {% endverbatim %}href="{{ path('sel_espace_client') }}" title="{{ 'att.att_list.mon_espace_link_breadcrumb_title'|trans({}, 'att') }}">{{ 'att.att_list.mon_espace_link_breadcrumb'|trans({}, 'att') }}</a></li>
+					{% if acte is defined and acte == 'attestation' %}
+                		<li class="active">{{ 'att.att_list.title_main'|trans({}, 'att') }}</li>
+					{% else %}
+						<li class="active">{{ 'att.att_list.perte_vol'|trans({}, 'att') }}</li>
+					{% endif %}
+					{% verbatim %}
+            </ol>
+        </div>
+    </div>
+    {% endverbatim %}
+{% endblock breadcrumb %}
+
+{% block contentTitle %}
+    <div class="row" >
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                {% if acte == "pertevol" %}
+                <h1>{{ 'att.att_list.perte_vol'|trans({}, 'att') }}</h1>
+                {% elseif acte == "attestation" %}
+                <h1>{{ 'att.att_list.title_main'|trans({}, 'att') }}</h1>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block mainContent %}
+    {% block body %}
+        <div data-ng-controller="SavCtrl as savCtrl">
+        {% block content %}
+
+            {% if acte == "pertevol" %}
+            <nav id="box_nav_step" class="clearfix"  data-ng-controller="ProgressBarCtrl as progressBarCtrl">
+                <ul>
+                   <li>
+                        <div class="box_titre">
+                            <a id="box_nav_step_action" href="#box_nav_step">
+                                {% verbatim %}
+                                <h2><span>{{currentStep}}/{{stepLenght}}</span><!--Titre de l'étape en cours-->{{ titleCtrl.title }}</h2>
+                                {% endverbatim %}
+                                <span class="box_open_close">
+                                   <img src="{{ asset('bundles/sel/images/new/nav-button-top.png') }}" alt="Ouvrir le menu des étapes"/>
+                                </span>
+                            </a>
+                        </div>
+
+                        <div id="box_nav_step_progressbar" data-ng-hide="failPage">
+                           <div id="box_nav_step_wherein_progressbar" data-ng-style="{'width':  barWidth}"></div>
+                        </div>
+
+                        <div id="box_nav_step_sub_menu">
+                            <ol data-auto-width='{"parentSelector":"#container", "parentTabletSelector":".content"}' class="clearfix" data-ng-hide="failPage">
+                                <data-progress-bar-drt data="progressBarCtrl.pbData"></data-progress-bar-drt>
+                            </ol>
+                        </div>
+                    </li>
+                </ul>
+             </nav>
+             {% elseif acte == "attestation" %}
+			<div data-ng-show="pageCtrl.pdfOnNewTab"
+                {% if acte == "attestation" %}
+
+                data-document-title="{{ 'home.home_espace_client.label.attestation_title_onglet' | trans({}, 'home')}}"
+                {% endif %}
+            >
+			    <div class="row">
+			        <div class="col-xs-12 col-sm-8 col-md-8">
+			            <div class="sav paiement text-center">
+			                {{"att.att_list.liste_elt_link"|trans({}, "att", "fr")|raw}}
+			            </div>
+			        </div>
+			    </div>
+			</div>
+
+            {% endif %}
+            <div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div id="sel_form" class="form-horizontal">
+                            <!-- Step forms -->
+                            <div class="step-content">
+                                <div data-ng-view>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endblock content %}
+    {% endblock body%}
+{% endblock mainContent %}

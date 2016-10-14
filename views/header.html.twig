@@ -1,0 +1,102 @@
+<header id="header_new"  class="clearfix">
+    <div id="box-nav">
+        <nav>
+            <ul class="clearfix">
+                <li class="box_area_logo_navigo">
+                    <a href="{{path('sel_homepage')}}">
+                        <img src="{{ asset('bundles/sel/images/big_logo.png') }}" alt="Navigo"/>
+                    </a>
+                </li>
+                <li class="box_area_connected">
+                    <a href="#" class="link_action_header_connected">
+                        <img src="{{ asset('bundles/sel/images/picto_connecte.png') }}" alt="connection" class="picto_connection" />
+                    </a>
+                    <div class="box_area_connected_content close_sub_menu">
+                        <ul>
+                            {% block connection %}
+                                {% if is_granted('ROLE_USER') %}
+                                    <li class="logged">
+                                        <a href="{{path('sel_espace_client')}}" title="{{ 'transverse.transverse_header.acces_espace_title'|trans({}, 'transverse') }}">
+                                            <span class="user-name show">
+                                            {% if user is defined %}
+                                                {% if user.firstName is defined and user.firstName is not empty %}
+                                                    {{ 'transverse.transverse_header.hello'|trans({}, 'transverse') }} {{user.firstName}}{# {{user.fullName}} #}
+                                                {% else %}
+                                                    {{ 'transverse.transverse_header.acces_espace'|trans({}, 'transverse') }}
+                                                    {# {{user.emailPorteur}} #}
+                                                {% endif %}
+                                            {% else %}
+                                                {{ 'transverse.transverse_header.acces_espace'|trans({}, 'transverse') }}
+                                            {% endif %}
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="deconnexion">
+                                        <a href="{{ path('sel_front_logout') }}" title="{{ 'transverse.transverse_header.deconnexion_title' | trans({}, 'transverse') }}">
+                                            <span>{{ 'transverse.transverse_header.deconnexion' | trans({}, 'transverse') }}</span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="logged">
+                                        <a href="{{ path('sel_register') }}" title="{{ 'transverse.transverse_header.creer_espace_title'|trans({}, 'transverse') }}">
+                                            <span>{{ 'transverse.transverse_header.creer_espace'|trans({}, 'transverse') }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="deconnexion">
+                                        <a href="{{ path('sel_connexion') }}" title="{{ 'transverse.transverse_header.connection_title'|trans({}, 'transverse') }}">
+                                            <span>{{ 'transverse.transverse_header.connection'|trans({}, 'transverse') }}</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endblock connection %}
+                        </ul>
+                    </div>
+                </li>
+                <li class="box_area_menu">
+                    <a href="#" class="link_action_header_nav_menu">
+                        <img src="{{ asset('bundles/sel/images/picto_menu.png') }}" alt="menu" class="picto_menu" />
+                    </a>
+                    <div class="box_area_menu_content close_sub_menu">
+                        <ul>
+                            <li><a href="http://www.navigo.fr/les-forfaits-navigo.html" title="{{ 'transverse.transverse_header.forfait_menu_link_title'|trans({}, 'transverse') }}">{{ 'transverse.transverse_header.forfait_menu_link'|trans({}, 'transverse') }}</a></li>
+                            <li>
+                                <a href="#" title="Services Navigo" class="action_box_nav_level_3">{{ 'transverse.transverse_header.services_link'|trans({}, 'transverse') }}</a>
+                                <div class="box_nav_level_3 close_sub_menu">
+                                    <ul>
+                                        <li>
+                                            <a href="{{ path('sel_homepage') }}" title="{{ 'transverse.transverse_header.home_menu_link_title'|trans({}, 'transverse') }}">
+                                                {{ 'transverse.transverse_header.home_menu_link'|trans({}, 'transverse') }}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('sel_subscriptionbundle_subscription_profil', {'courseType' : 'navigo_annuel'}) }}" title="{{ 'transverse.transverse_header.subscription_link_title'|trans({}, 'transverse') }}">
+                                                {{ 'transverse.transverse_header.subscription_link'|trans({}, 'transverse') }}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('sel_subscriptionbundle_subscription_profil', {'courseType' : 'commande_de_carte'}) }}" title="{{ 'transverse.transverse_header.card_command_link_title'|trans({}, 'transverse') }}">
+                                                {{ 'transverse.transverse_header.card_command_link'|trans({}, 'transverse') }}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="{{ 'transverse.transverse_header.card_reload_link_title'|trans({}, 'transverse') }}">
+                                                {{ 'transverse.transverse_header.card_reload_link'|trans({}, 'transverse') }}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('sel_faq') }}" title="{{ 'transverse.transverse_header.need_help_link_title'|trans({}, 'transverse') }}">
+                                                {{ 'transverse.transverse_header.need_help_link'|trans({}, 'transverse') }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li><a href="http://www.navigo.fr/navigo-c-est-aussi.html" title="{{ 'transverse.transverse_header.navigo_its_also_title'|trans({}, 'transverse') }}">{{ 'transverse.transverse_header.navigo_its_also'|trans({}, 'transverse') }}</a></li>
+                            <li><a href="http://www.navigo.fr/les-infos-navigo.html" title="{{ 'transverse.transverse_header.navigo_infos_title'|trans({}, 'transverse') }}">{{ 'transverse.transverse_header.navigo_infos'|trans({}, 'transverse') }}</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

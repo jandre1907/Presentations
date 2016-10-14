@@ -1,0 +1,129 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>Connexion à votre espace Services Navigo</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block previousArrow %}{% endblock previousArrow %}
+
+{% block mainContent %}
+{% block body %}
+
+{% block content %}
+
+<div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-horizontal connexion-form">
+                <!--<h4>Connexion</h4>-->
+                <form id="loginform" action="{{ path("sel_front_login_check") }}" method="POST" class="">
+                {% if error %}
+                    <p class="warning-light red">
+                        <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alerte">
+                        <strong>{{ error|trans }}</strong>
+                  </p>
+                {% endif %}
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-4 control-label text-right" for="username">E-mail<span class="star"></span></label>
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <input type="email" data-gie-mail id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" placeholder="nom.prenom@email.com" aria-required="true" aria-describedby="mess-error">
+                        <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error hide" alt="Erreur">
+                        <span class="mess-error hide" aria-live="assertive" >Le format n'est pas autorisé</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-4 control-label text-right" for="password">Mot de passe<span class="star"></span></label>
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <input type="password" id="password" name="_password" required="required" class="form-control" aria-required="true">
+                        <a href="{{ path('sel_front_resetting_request') }}" class="link underline" title="Réinitialiser le mot de passe oublié">Mot de passe oublié ?</a>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <div class="checkbox">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                            <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                                <label for="remember_me" class="rested_connected">
+                                    Rester connecté
+                                    <a href="#/ConnexionHelp" class="link underline rested_connected help" target="_blank" title="Page rester connecté (nouvelle fenêtre)" aria-label="{{'conn.conn_connexion.aria_cac_rest_connec'|trans({}, 'conn', 'fr')|raw}} ">
+                                        <img src="{{ asset('bundles/sel/images/question.png') }}" class="picto" alt="Aide" width="20" height="20">
+                                    </a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                {% if target_path %}
+                    <input type="hidden" name="_target_path" value="{{ target_path }}" />
+                {% endif %}
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <button type="submit" class="btn btn-primary aide-photo-btn" value="{% trans %}Connexion{% endtrans %}"><span>Connexion</span></button>
+                        </div>
+                    </div>
+                </form>
+                {{ referer }}
+            {% if '/faq/show' in referer %}
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-4">
+                        <a href="{{ path('sel_faq_contact') }}" class="link addto">
+                            <span>Ou accédez à notre page de contacts</span>
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% endblock content %}
+{% endblock body%}
+
+{% endblock mainContent %}
+
+{#<div class="form">
+    <form id="loginform" action="{{ path('sel_front_login_check') }}" method="POST" class="">
+        <div class="form_title">
+            Connexion
+        </div>
+        {% if error %}
+        <p class="error">{{ error.message|trans }}</p>
+        {% endif %}
+
+        <table>
+            <tr>
+                <td>
+                    <div class="form_item">
+                        <div class="form_label"><label for="username">{% trans %}Email{% endtrans %} :</label></div>
+                        <div class="form_widget"><input type="email" data-gie-mail id="username" name="_username" value="{{ last_username }}" required="required"/></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form_item">
+                        <div class="form_label"><label for="password">{% trans %}Mot de passe{% endtrans %} :</label></div>
+                        <div class="form_widget"><input type="password" id="password" name="_password" required="required"/></div>
+                    </div>
+                </td>
+            </tr>
+
+
+        </table>
+        <input type="hidden" id="remember_me" name="_remember_me" value="true" />
+        <div class="form_button">
+            <input type="submit" class="obj-btn" value="{% trans %}Me connecter{% endtrans %}"/>
+        </div>
+        <p class="register"><a href="{{ path('sel_front_registration') }}">{% trans %}Créer mon compte{% endtrans %}</a></p>
+        <p class="forgot"><a href="">{% trans %}Mot de passe oublié?{% endtrans %}</a></p>
+    </form>
+</div>#}

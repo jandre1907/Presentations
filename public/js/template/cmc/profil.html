@@ -1,0 +1,77 @@
+<div class="step_form" id="step_profil" ng-form name="step_form"><!-- 0 -->
+
+    <div class="infos">
+        <div class="info">
+            <p class="info-picto">
+                <img class="" ng-src="{{ prefix_front }}bundles/sel/images/info.png" class="picto" alt="Information">
+                <span> Commande de carte Navigo Mois/semaine</span>
+            </p>
+            <ul class="color_bullet">
+                <li>La commande de carte en ligne est réservée aux <strong>résidents d'Ile de France</strong></li>
+                <li>Si vous n'êtes pas résident d'Ile de France, rendez-vous en <a class="link underline" href="#" title="Fichier PDF XX Ko">point de vente (PDF-20 ko)</a> avec une attestation de votre employeur</li>
+            </ul>
+        </div>
+        <div class="info">
+            <ul class="color_bullet">
+                <li>Votre carte Navigo Mois/Semaine est envoyée par courrier <strong>sous 10 jours</strong> après validation de votre dossier par nos services</li>
+                <li>Si vous souhaitez obtenir votre carte Navigo Mois/Semaine immédiatement, veuillez vous rendre en <a class="link underline" href="#" title="Fichier PDF XX Ko">point de vente (PDF-20 ko)</a>.</li>
+            </ul>
+        </div>
+        <div class="info">
+            <p class="info-picto">
+                <img class="" ng-src="{{ prefix_front }}bundles/sel/images/info.png" class="picto" alt="Information">
+                <span> Pour commander votre carte Navigo Mois/Semaine, munissez-vous :</span>
+                <br>
+                {{errorMessages['IHM-TRANS-ERR_001']}}
+            </p>
+            <ul class="color_bullet">
+                <li>d'une <strong>photo d’identité au format numérique</strong> que vous pouvez télécharger, prendre avec votre webcam ou votre mobile.</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <span ng-show="step_form.$submitted" class="obligatoire">
+        <span class="star">*</span>
+        Champs obligatoire
+    </span>
+    <h2 id="questions-carte" tabindex="-1" ng-hide="userIsSig && hideIsUserQuestion">Veuillez répondre à ces deux questions qui vont nous permettre de personnaliser les informations à renseigner :</h2>
+    <div class="form-content" ng-hide="userIsSig && hideIsUserQuestion">
+	    <div class="form-group" ng-hide="userIsSig">
+	        <span class="radio_label"><strong>Avez-vous déjà une carte Navigo ou financez-vous un forfait Imagine R ?</strong><span class="star">*</span></span>
+	        <div class="radio">
+	            <input ng-change="onRadioChange('sigSelected')" type="radio" name="hasCard" id="inlineRadio1"   ng-model="userInfo.hasCard" value="1" required>
+	            <label class="radio-inline" for="inlineRadio1">
+	                Oui
+	              </label>
+	              <input ng-change="onRadioChange('sigSelected')" type="radio" name="hasCard" id="inlineRadio2" ng-model="userInfo.hasCard" value="0" required>
+	              <label class="radio-inline" for="inlineRadio2">
+                    Non
+                </label>
+	        </div>
+            <span class="mess-error" ng-show="step_form.$submitted && step_form.hasCard.$invalid">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+            <i class="fa fa-times fa-lg" ng-show="step_form.$submitted && step_form.hasCard.$invalid"></i>
+	    </div>
+	    <div class="form-group" ng-hide="hideIsUserQuestion">
+	        <span class="radio_label"><strong>Avez-vous déjà créé votre espace Services Navigo ?</strong><span class="star">*</span></span>
+	        <div class="radio">
+	            <input ng-change="onRadioChange('selSelected')" type="radio" name="isUserSel" id="inlineRadio3" ng-model="userInfo.isUserSel" value="1" required>
+	            <label class="radio-inline" for="inlineRadio3">
+	                Oui
+                </label>
+                <input ng-change="onRadioChange('selSelected')" type="radio" name="isUserSel" id="inlineRadio4" ng-model="userInfo.isUserSel" value="0" required>
+                <label class="radio-inline" for="inlineRadio4">
+	               Non
+                </label>
+	        </div>
+            <span class="mess-error" ng-show="step_form.$submitted && step_form.isUserSel.$invalid">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+            <i class="fa fa-times fa-lg" ng-show="step_form.$submitted && step_form.isUserSel.$invalid"></i>
+	    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button type="button" ng-disabled="!activeBoutonContinuer" class="btn btn-primary aide-photo-btn" ng-click="submitForm()" title="Valider le formulaire et poursuivre" ><span>Continuer</span></button>
+        </div>
+    </div>
+
+</div>

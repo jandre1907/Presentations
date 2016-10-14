@@ -1,0 +1,107 @@
+
+<div class="step_form" id="step_signature" ng-form name="step_form"><!-- 6.2 // Signature 2 -->
+        <p class="warning-light red" ng-show="error">
+            <img ng-src="{{ prefix_front }}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+            <strong>{{error}}</strong>
+        </p>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="jumbotron">
+                <p>
+                    <strong>{{ userSig.title }} {{ userSig.firstname }} {{ userSig.lastname }} a demandé à souscrire un forfait
+                        Navigo Annuel pour lequel vous êtes déclaré comme payeur.</strong>
+                </p>
+                <p>
+                    <strong>Les caractéristiques du forfait sont : </strong>
+                </p>
+                <dl class="dl-horizontal">
+                    <dt>Date de début du forfait</dt>
+                    <dd>{{ deliveryDate }}</dd>
+                    <dt>Zones du forfait</dt>
+                    <dd>{{ cart.zoneForfaitDetail.title }}</dd>
+                    <dt>Montant</dt>
+                    <dd>{{ cart.zoneForfaitDetail.price | euro : 2 : "," : " €" }}/mois + 7,60 € de frais de dossier prélevés une seule
+                        fois</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+     <p>
+        <strong>
+            Vous allez maintenant procéder à la signature éléctronique du Contrat Navigo Annuel et de votre mandat de prélèvement.
+            <br>
+            Pour cela vous devez <a href="#inlineRadio12" class="link" title="aller directement à la case à cocher 'conditions générales de vente et d'utilisation">accepter les conditions générales de vente</a> du forfait et renseigner un code de validation.
+        </strong>
+    </p>
+    <p>
+        Veuillez noter que le dossier ne sera transmis qu'après la
+        <a class="link" href="#inlineRadio12">finalisation de l'étape de signature éléctronique</a>.
+    </p>
+    <p>Vous avez la possibilité de :</p>
+    <ul class="color_bullet">
+        <li>visualiser un aperçu de votre contrat et de votre mandat ci-dessous</li>
+        <li><a class="link"  target="_blank" href="{{cart.documents.url_pdf}}" title="Télécharger le contrat (nouvelle fenêtre)">Télécharger le contrat (PDF)</a></li>
+        <li><a class="link"  target="_blank" href="{{cart.documents.sepa.url_pdf}}" title="Télécharger le mandat (nouvelle fenêtre)">Télécharger le mandat (PDF)</a></li>
+    </ul>
+    <br>
+     <div class="form-content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+               <div class="pdf">
+                        <img src="{{cart.documents.url_png}}" width="100%" height="100%" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+               <div class="pdf">
+                        <img src="{{cart.documents.sepa.url_png}}" width="100%" height="100%" />
+                </div>
+            </div>
+        </div>
+        <div class="checkbox" ng-click="acceptCGV()">
+            <input type="checkbox" id="inlineRadio12">
+            <label for="inlineRadio12">
+                Je certifie l'exactitude des renseignements donnés et déclare accepter les
+                <a class="link underline" href="#" target="_blank" title="Lire les conditions générales d'utilisation (nouvelle fenêtre)">conditions générales d'utilisation (CGU)</a> ainsi que les
+                <a class="link underline" href="#" target="_blank" title="Lire les conditions générales de vente (nouvelle fenêtre)">conditions générales de vente (CGV)</a>
+            </label>
+        </div>
+        <br><br>
+        <p ng-show="true" class="title"><strong>Cliquez pour recevoir votre SMS au {{phone}}</strong></p>
+        <div class="row minheight123" ng-show="true">
+            <div class="col-xs-12 col-sm-5 col-md-5">
+                <button type="button" ng-disabled="!cgvAccepted" class="btn btn-default pull-left sms" title="Recevoir votre code par sms" ng-click="getSmsOtp()"><strong>Recevoir mon code par SMS</strong></button>
+                <span class="text-center code">Ce code est valable 15 minutes.</span>
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2"></div>
+            <div class="col-xs-12 col-sm-5 col-md-5" ng-show="otpSended">
+                <p class="code-text" message-dv meskey="{{pageCtrl.meskey}}">
+                    {{pageCtrl.meskey}}
+                </p>
+            </div>
+        </div>
+        <div class="row" ng-show="true" >
+            <div class="col-xs-12 col-sm-5 col-md-5">
+                <p class="text-center code"><strong>Saisir le code reçu :</strong></p>
+                <input type="text" class="form-control pull-left" placeholder="code" ng-model="otp" ng-disabled="!cgvAccepted">
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2"></div>
+            <div class="col-xs-12 col-sm-5 col-md-5">
+                <br>
+                <button type="button" ng-disabled="!cgvAccepted" ng-show="otpSended" class="btn btn-default pull-left sms" title="Recevoir votre code par e-mail" ng-click="getPayerEmailOtp()"><strong>Recevoir mon code par e-mail {{mail}}:</strong></button>
+            </div>
+        </div>
+    </div><!-- form-content -->
+
+    <div class="row box_button">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <button type="button" class="btn btn-primary pull-right" title="Je valide la souscription"
+            ng-disabled="!cgvAccepted || !otpSended || !otp"
+            ng-click="submitForm()"><span>Valider la souscription</span></button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <button type="button" class="btn btn-primary pull-right" title="Modifier mes coordonnees"><span>Modifier mes coordonnees</span></button>
+        </div>
+    </div>
+</div>

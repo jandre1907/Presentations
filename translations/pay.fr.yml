@@ -1,0 +1,141 @@
+pay.pay_forfait_iban.back_to_previous_page: 'Retour à la page précédente'
+pay.pay_forfait_iban.back: précédent
+pay.pay_forfait_iban.service_navigo_title: 'Services Navigo'
+pay.pay_forfait_iban.accueil: Accueil
+pay.pay_forfait_iban.service_navigo_link_label: 'Services Navigo'
+pay.pay_forfait_iban.espace_client_link_label: 'Espace Client'
+pay.pay_forfait_iban.moyen_paiement_link_label: 'Changer de moyen de paiement'
+pay.pay_forfait_iban.changer_moyen_paiement_link_label: 'Changer de moyen de paiement'
+pay.pay_forfait_iban.changer_moyen_paiement_title: 'Changer de moyen de paiement'
+pay.pay_forfait_iban.precedent_btn_arrow: précédent
+pay.pay_forfait_iban.moyen_paiement_associes_sub_title_2: 'Moyen de paiement'
+pay.pay_forfait_iban.type_paiement_label: 'Type :'
+pay.pay_forfait_iban.prelevement_sepa: 'Prélèvement SEPA'
+pay.pay_forfait_iban.BIC_label: 'BIC :'
+pay.pay_forfait_iban.IBAN_label: 'IBAN :'
+pay.pay_forfait_iban.nom_titulaire_label: 'Nom du titulaire :'
+pay.pay_forfait_iban.ajout_bic_iban_label: 'Ajouter de nouvelles coordonnées bancaires'
+pay.pay_forfait_iban.ajout_bic_iban_label_title: 'Ajouter un BIC/IBAN'
+pay.pay_forfait_iban.selection_moyen_paiement_sub_title_2: 'Sélectionner le moyen de paiement que vous souhaitez utiliser :'
+pay.pay_forfait_iban.confirmer_btn: Confirmer
+pay.pay_forfait_iban.confirmer_btn_title: Confirmer
+pay.pay_manage_iban.accueil: Accueil
+pay.pay_manage_iban.service_navigo: 'Je gère ma carte Navigo'
+pay.pay_manage_iban.service_client_link_label: 'Mon espace personnel'
+pay.pay_manage_iban.moyen_de_paiement: 'Moyens de paiement'
+pay.pay_manage_iban.gerer_moyen_de_paiement: Détail
+pay.pay_manage_iban.service_navigo_title: 'Services Navigo'
+pay.pay_manage_iban.gerer_moyen_paiement_title: 'Détail d’un moyen de paiement'
+pay.pay_manage_iban.paiement_detail: 'Détail du moyen de paiement'
+pay.pay_manage_iban.type_paiement_label: Type
+pay.pay_manage_iban.prelevement_sepa: 'Prélèvement SEPA'
+pay.pay_manage_iban.BIC_label: 'BIC :'
+pay.pay_manage_iban.IBAN_label: 'IBAN :'
+pay.pay_manage_iban.nom_titulaire_label: 'Nom du titulaire :'
+pay.pay_manage_iban.supprimer_btn_link_title: 'Supprimer ce moyen de paiement'
+pay.pay_manage_iban.supprimer_btn_link: Supprimer
+pay.pay_manage_iban.supprimer_moyen_paiement_btn: 'Supprimer ce moyen de paiement'
+pay.pay_manage_iban.supprimer_moyen_paiement_btn_title: 'Supprimer ce moyen de paiement'
+pay.pay_manage_iban.payment_forfait_already_bind: 'Forfait(s) déja associé(s) à ce moyen <br> de paiement'
+pay.pay_manage_iban.payment_forfait_change_bind: 'Associer un forfait à ce moyen <br> de paiement'
+pay.pay_manage_iban.forfait_label: Forfait
+pay.pay_manage_iban.validate_label: Validité
+pay.pay_manage_iban.zones_label: Zones
+pay.pay_manage_iban.etat_label: Etat
+pay.pay_manage_iban.forfait_associe: 'Forfait associé'
+pay.pay_manage_iban.validate: Validité
+pay.pay_manage_iban.associer_forfait: 'Associer ce forfait'
+pay.pay_manage_iban.associer_forfait_title: 'Associer ce forfait'
+pay.pay_manage_iban.aria_close_dialog_window: 'Fermer la fenêtre de dialogue et continuer'
+pay.pay_manage_iban.non_suppression_moyen_paiement: 'Vous ne pouvez pas supprimer ce moyen de paiement car un forfait y est rattaché. Ajoutez un nouveau moyen de paiement et associer le à votre forfait avant de supprimer celui-ci.'
+pay.pay_manage_iban.close_dialog_window: 'Fermer la fenêtre de dialogue et continuer'
+pay.pay_manage_iban.ask_supprimer_moyen_paiement: supprimer
+pay.pay_manage_iban.ask_supprimer_moyen_paiement_modal: 'Vous êtes sur le point de supprimer le moyen de paiement suivant :'
+pay.pay_manage_iban.confirmer_suppression_moyen_paiement: 'Confirmez-vous la suppression ?'
+pay.pay_manage_iban.fermer_moyen_paiement_et_continuer: 'Fermer la fenêtre de dialogue'
+pay.pay_manage_iban.annuler_btn: Annuler
+pay.pay_manage_iban.confimer_moyen_paiement_et_continuer: Confirmer
+pay.pay_manage_iban.SAV-CMP-EC01-ERR_001: 'Vous ne pouvez pas utiliser ce mandat SEPA.Veuillez contacter le service client au 09 69 39 57 57.'
+pay.pay_add_iban.aria_infos_modif_coor: 'informations sur la modification des coordonnées'
+pay.pay_add_iban.accueil: Accueil
+pay.pay_add_iban.service_navigo: 'Je gère ma carte Navigo'
+pay.pay_add_iban.service_client_link_label: 'Mon espace personnel'
+pay.pay_add_iban.moyen_de_paiement: 'Moyens de paiement'
+pay.pay_add_iban.ajout_bic_ban: 'Ajout d’un BIC/IBAN'
+pay.pay_add_iban.service_navigo_title: 'Services Navigo'
+pay.pay_add_iban.ajout_bic_iban_title: 'Ajout d’un BIC/IBAN'
+pay.pay_add_iban.informations_banque: 'Vous trouverez les informations BIC/IBAN sur le relevé bancaire transmis par votre banque.'
+pay.pay_add_iban.titulaire_compte_label: 'Titulaire du compte'
+pay.pay_add_iban.identifiant_code_bank: 'Bank Identifier Code'
+pay.pay_add_iban.numero_compte_bancaire: 'International Bank Account Number'
+pay.pay_add_iban.declaration_honneur: 'Je déclare sur l''honneur être le titulaire du compte correspondant aux coordonnées bancaires renseignées ci-dessus'
+pay.pay_add_iban.ajouter_btn: Ajouter
+pay.pay_add_iban.ajouter_btn_title: Ajouter
+pay.pay_add_iban.aria_close_window_and_continue: 'Fermer la fenêtre de dialogue et continuer'
+pay.pay_add_iban.close_window_and_continue: 'Fermer la fenêtre de dialogue et continuer'
+pay.pay_add_iban.modification_coordonnees: 'Modification de vos coordonnées'
+pay.pay_add_iban.information_non_modifiables: 'Les informations suivantes ne sont pas modifiables :'
+pay.pay_add_iban.civilite_label: Civilité
+pay.pay_add_iban.nom_label: Nom
+pay.pay_add_iban.prenom_label: Prénom
+pay.pay_add_iban.date_naissance_label: 'Date de naissance'
+pay.pay_add_iban.invitation: 'Si vous souhaitez modifier ces informations, nous vous invitons à vous rendre en'
+pay.pay_add_iban.points_ventes: 'point de vente'
+pay.pay_add_iban.close_window_btn: 'Fermer la fenêtre de dialogue'
+pay.pay_add_iban.close_btn: Fermer
+pay.pay_confirm_iban.back_to_previous_page: 'Retour à la page précédente'
+pay.pay_confirm_iban.back: précédent
+pay.pay_confirm_iban.service_navigo_title: 'Services Navigo'
+pay.pay_confirm_iban.accueil_link_label: Accueil
+pay.pay_confirm_iban.service_navigo_link_label: 'Je gère ma carte Navigo'
+pay.pay_confirm_iban.espace_client_link_label: 'Mon espace personnel'
+pay.pay_confirm_iban.moyen_paiement_link_label: 'Moyens de paiement'
+pay.pay_confirm_iban.ajout_bic_iban_link_label: 'Confirmation d’ajout d’un BIC/IBAN'
+pay.pay_confirm_iban.ajout_bic_iban_title: 'Ajout d’un BIC/IBAN'
+pay.pay_confirm_iban.back_label_img: 'Retour à la page précédente'
+pay.pay_confirm_iban.confirmation_label_img: Confirmation
+pay.pay_confirm_iban.moyen_paiement_ajoute_sub_title_2: 'Votre moyen de paiement BIC/IBAN a bien été ajouté.'
+pay.pay_confirm_iban.moyen_paiement_associe_sub_title: 'Votre changement de moyen de paiement a bien été pris en compte.'
+pay.pay_confirm_iban.moyen_paiement_associe_sub_title_2: 'Un email vous a été envoyé à l''adresse'
+pay.pay_confirm_iban.associer_moyen_paiement_forfait: 'Voulez-vous associer ce moyen de paiement à l''un de vos forfaits ?'
+pay.pay_confirm_iban.associer_maintenant_moyen_paiement_forfait: 'Associer maintenant ce moyen de paiement à un forfait'
+pay.pay_confirm_iban.associer_a_un_forfait: 'Associer à un forfait'
+pay.pay_confirm_iban.do_that_later_title: 'je ne veux pas associer maintenant ce moyen de paiement à un forfait'
+pay.pay_confirm_iban.do_that_later: 'Non, je le ferai plus tard'
+pay.pay_confirm_iban.back_to_change_rib: 'Revenir au changement de RIB'
+pay.pay_confirm_iban.back_to_change_rib_title: 'Revenir au changement de RIB'
+pay.pay_confirm_iban.moyen_paiement_existant: 'Nous avez dèjà enregistrer ce moyen de paiement.'
+pay.pay_list.accueil: Accueil
+pay.pay_list.service_navigo: 'Je gère ma carte Navigo'
+pay.pay_list.espace_client: 'Mon espace personnel'
+pay.pay_list.moyen_de_paiement_menu: 'Moyens de paiement'
+pay.pay_list.my_moyen_de_paiement_title: 'Moyens de paiement'
+pay.pay_list.my_moyen_de_paiement_title_onglet: 'Navigo : Moyens de paiement'
+pay.pay_list.moyen_paiement_carte_bancaire: 'Moyens de paiement carte bancaire'
+pay.pay_list.type_label: 'Type :'
+pay.pay_list.numero_carte: '<abbr title="Numéro">N°</abbr> de carte :'
+pay.pay_list.expiration_carte: 'Expire fin :'
+pay.pay_list.nom_detenteur: 'Nom du détenteur :'
+pay.pay_list.gerer_link_title: 'Consulter et éditer ce moyen de paiement'
+pay.pay_list.modifier_label_img: Modifier
+pay.pay_list.gerer_link: Gérer
+pay.pay_list.moyen_paiement_subtitle_2: 'Moyens de paiement BIC/IBAN'
+pay.pay_list.aucun_moyen_paiement_bic_iban: 'Aucun moyens de paiement BIC/IBAN'
+pay.pay_list.aucun_moyen_paiement_cb: 'Aucun moyens de paiement CB'
+pay.pay_list.prelevement_sepa: 'Prélèvement SEPA'
+pay.pay_list.bic_label: 'BIC :'
+pay.pay_list.iban_label: 'IBAN :'
+pay.pay_list.nom_titulaire_label: 'Nom du titulaire :'
+pay.pay_list.modifier_img_label: Modifier
+pay.pay_list.gerer_label_btn: Gérer
+pay.pay_list.gerer_label_btn_title: 'Consulter et éditer ce moyen de paiement'
+pay.pay_list.ajouter_cb: 'Ajouter une carte bancaire'
+pay.pay_list.ajouter_cb_title: 'Ajouter une carte bancaire'
+pay.pay_list.ajouter_bic_iban: 'Ajouter un BIC/IBAN'
+pay.pay_list.ajouter_bic_iban_title: 'Ajouter un BIC/IBAN'
+pay.pay_list.legendeAddCB: Lorem ipsum dolor sit amet
+pay.pay_manage_iban.SAV-CMP-EC01-MSS_002: 'Nous avons bien pris en compte votre demande de changement de coordonnées bancaires. Elle a été envoyée pour validation au Tiers Payant.'
+pay.pay_manage_iban.SAV-GMP-EC01-ERR_003: 'Erreur de saisie de la DOM'
+pay.pay_manage_iban.SAV-GMP-EC01-ERR_004: 'Domiciliation bancaire déjà affectée à ce contrat'
+pay.pay_manage_iban.SAV-GMP-EC01-ERR_005: 'Nous ne sommes pas en mesure de donner suite à votre demande.<br>Merci de bien vouloir contacter le 09 69 39 11 11'
+pay.pay_manage_iban.SAV-GMP-EC01-ERR_006: 'Nous ne sommes pas en mesure de donner suite à votre demande.<br>Merci de bien vouloir contacter le 09 69 39 11 11'

@@ -1,0 +1,80 @@
+<div class="step_form" id="step_profil"><!-- 0 -->
+    <div class="infos">
+        <div class="info">
+            <p class="info-picto">
+                <img ng-src="{{ prefix_front }}bundles/sel/images/info.png" class="picto" alt="Information">
+                <span>En souscrivant en ligne :</span>
+            </p>
+            <ul class="color_bullet">
+                <li>plus besoin de vous déplacer en agence</li>
+                <li>votre carte Navigo est envoyée par courrier sous 10 jours après</li>
+            </ul>
+        </div>
+        <div class="info">
+            <p class="info-picto">
+                <img ng-src="{{ prefix_front }}bundles/sel/images/info.png" class="picto" alt="Information">
+                <span>Munissez-vous :</span>
+            </p>
+            <ul class="color_bullet">
+                <li>d’un <strong>Relevé d’Identité Bancaire</strong> (RIB)</li>
+                <li>d’une <strong>photo d’identité au format numérique</strong> que vous pouvez télécharger, prendre avec votre webcam ou votre mobile</li>
+            </ul>
+        </div>
+    </div>
+
+    <span ng-show="formSubmitted" class="obligatoire">
+        <span class="star">*</span>
+        Champs obligatoire
+    </span>
+
+
+    <p class="warning-light red"   ng-show="error">
+        <img ng-src="{{ prefix_front }}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+        <strong>{{error}}</strong>
+    </p>
+
+    <div ng-hide="userInfo.isConnected && userInfo.isSig">
+        <h2>Veuillez répondre à ces deux questions qui vont nous permettre de personnaliser les informations à renseigner :</h2>
+        <div class="form-content">
+    	    <div class="form-group">
+                <div class="col-xs-12 col-md-12">
+                    <span class="radio_label">
+                        <strong>Avez-vous déjà une carte Navigo ou financez-vous un forfait Imagine R ?</strong>
+                        <span ng-show="formSubmitted" class="star">*</span>
+                    </span>
+                </div>
+    	        <div class="col-xs-12 col-md-12">
+                    <div class="radio">
+                        <input type="radio" name="hasCard" id="inlineRadio1"   ng-model="userInfo.hasCard" value="1">
+                        <label class="radio-inline" for="inlineRadio1"> Oui</label>
+                        <input type="radio" name="hasCard" id="inlineRadio2" ng-model="userInfo.hasCard" value="0">
+                        <label class="radio-inline" for="inlineRadio2">Non</label>
+                    </div>
+    	        </div>
+    	    </div>
+    	    <div class="form-group" ng-hide="userInfo.isConnected">
+    	        <div class="col-xs-12 col-md-12" >
+                    <span class="radio_label">
+                        <strong>Avez-vous déjà créé votre espace Services Navigo ?</strong>
+                        <span ng-show="formSubmitted" class="star">*</span>
+                    </span>
+                </div>
+                <div class="col-xs-12 col-md-12">
+                    <div class="radio">
+                        <input type="radio" name="isUser" id="inlineRadio3" ng-model="userInfo.isUser" value="1">
+                        <label class="radio-inline" for="inlineRadio3">Oui</label>
+                        <input type="radio" name="isUser" id="inlineRadio4" ng-model="userInfo.isUser" value="0">
+                        <label class="radio-inline" for="inlineRadio4">Non</label>
+                    </div>
+                </div>
+    	    </div>
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="button" class="btn btn-primary aide-photo-btn" ng-click="gotoStep()" title="Valider le formulaire et poursuivre"><span>Continuer</span></button>
+            </div>
+        </div>
+
+</div>

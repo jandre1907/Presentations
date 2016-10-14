@@ -1,0 +1,26 @@
+{% extends "SelBundle::base.html.twig" %}
+
+{% block title 'Navigo: Accueil' %}
+
+{% block body %}
+
+   {% block flashMessage %}
+      {% for flashMessage in app.session.flashbag.get('notice') %}
+         <div class="flash-message">
+            <em>Notice</em>: {{ flashMessage }}
+         </div>
+      {% endfor %}
+   {% endblock flashMessage %}
+
+   {% block content_header %}
+      {% block content_header_more %}
+      {% endblock %}
+   {% endblock %}
+
+   {% block content %}{% endblock %}
+   {% block templateContent %}{% endblock templateContent %}
+   
+
+   {% block fos_user_content %}{% endblock fos_user_content %}
+
+{% endblock %}

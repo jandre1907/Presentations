@@ -1,0 +1,123 @@
+﻿body {
+    font-family: Verdana,Geneva,sans-serif;
+    /* font-size: 12px; */
+    //background: #878887 url("../images/bg.png") repeat-x scroll 0% 0%;
+}
+.fRight {
+    float: right;
+}
+#header {
+    color:#fff;
+    font-size: 12px;
+}
+#header .icon-stif {margin:0 50px 0 20px;}
+#header .icon-stif a{color:#fff;background:none;padding-right:8px;font-size:0.92em}
+#header .icon-stif .logo-stif{
+	display:block;
+	float:right;
+	width:55px;
+	height:20px;
+	margin-top:4px;
+	background:url("../images/sprite_navigo.png") -10px -10px no-repeat;
+	text-indent:-9999px;
+}
+#header .top-bar,#footer .bottom-bar {
+	/*height:34px;*/
+	line-height:2em;
+	color:#fff;
+	padding:4px 0;
+}
+#header .top-bar ul,#footer .bottom-bar ul{margin:0 10px;}
+#header .top-bar li a, #footer .bottom-bar li a,#aside .section a{color:#fff}
+#header .top-bar li,#footer .bottom-bar li{
+	float:left;
+	list-style:none;
+	padding:0 10px 0 0;
+	font-size:11px;
+}
+#header .top-bar li {padding:0 10px 0 0}
+#header .top-bar .separator {padding:0}
+#footer .bottom-bar li:before,#header .top-bar li:before{
+	content:"|";
+	margin-right:10px;
+}
+#header .top-bar li:first-child:before, #footer .bottom-bar li:first-child:before{
+	content:"";
+	margin-right:0px;
+}
+#header .top-bar input[type='text']{height:13px;}
+#header .header-content {
+	height:107px;
+	background:url("../images/sprite_navigo.png") -10px -420px no-repeat;
+}
+#header h1.logo {
+	padding:28px 0 0 18px;
+        margin: 0;
+}
+#header h1.logo a {
+	width:200px;
+	height:60px;
+	display:block;
+	background:url("../images/sprite_navigo.png") -10px -344px no-repeat;
+	text-indent:-9999px
+}
+/*** Navigation ***/
+#header #nav {
+	height:50px;
+	background:url("../images/sprite_navigo.png") -10px -529px no-repeat;
+}
+#header #nav ul {
+    width: 980px;
+    padding: 0;
+    margin: 0;
+}
+#header #nav li a{
+	color:#fff;
+	font-size:1.25em;
+	text-decoration:none
+}
+#header #nav li:before {
+	content:url(../images/separateur.png);
+	float:left;
+	margin:12px 0;
+}
+#header #nav li:first-child:before {content:'';float:left}
+#nav li a{
+	display:block;
+	height:27px;
+	line-height:1.7em;
+	vertical-align:middle;
+	margin:12px 0;
+}
+#header #nav li a:hover{}
+#header #nav li {
+	float:left;
+	list-style:none;
+	width:20%;
+	height:50px;
+	text-align:center;
+}
+#header #nav li:hover,#header #nav li.selected,#header #nav li.active {
+	font-weight:bold;
+	background:url("../images/sprite_navigo.png") -8px -30px no-repeat
+}
+#header #nav li:hover a,#header #nav li.selected a,#header #nav li.active a{
+	color:#7c80b1;
+}
+#header #nav li::before {
+    content: url("../images/separateur.png");
+    float: left;
+    margin: 12px 0px;
+}
+/*** Footer ***/
+#footer {
+	clear:both;
+	height:84px;
+	background:url("../images/sprite_navigo.png") -11px -590px no-repeat;
+}
+#footer .bottom-bar {
+	margin:0 auto;
+	width:360px;
+	padding-top:45px;
+	padding-left:120px;
+}

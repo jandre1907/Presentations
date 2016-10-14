@@ -1,0 +1,101 @@
+<div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12">
+			<h2 class="customer-number">{{"rat.rat_aide.lbl_action_aide_titre"|trans({}, "rat", "fr")|raw}}</h2>
+		</div>
+	</div>
+</div>
+<div>
+    <div id="step_identification_help" data-ng-form name="step_form">
+       <div class="row">
+           <div class="col-xs-12 col-sm-12 col-md-12">
+               <div class="panel-group coordonnees"  aria-multiselectable="true">
+                 <div class="panel panel-default">
+                   <div class="panel-heading slide"  id="headingOne" data-ng-class="{'open':blocks[1]}">
+                       <a  data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapseOne" data-ng-click="toggle(1)">
+                           <h3 class="panel-title">{{"rat.rat_aide.aide_panel1_titre"|trans({}, "rat", "fr")|raw}}</h3>
+                           <span class="plus">+</span>
+                           <span class="moins">-</span>
+                       </a>
+                   </div>
+                   <div id="collapseOne" class="panel-collapse collapse"  aria-labelledby="headingOne" data-ng-class="{'in':blocks[1] }">
+                     <div class="panel-body">
+                       <p><span class="inline-block">{{"rat.rat_aide.aide_panel1_corps1"|trans({}, "rat", "fr")|raw}}</span></p>
+                       <div class="row">
+                           <div class="col-xs-12 col-sm-6 col-md-6">
+                               <h3 class="under"><span>{{"rat.rat_aide.aide_panel1_corps2"|trans({}, "rat", "fr")|raw}}</span></h3>
+                               <p>{{"rat.rat_aide.aide_panel1_corps3"|trans({}, "rat", "fr")|raw}}</p>
+                               <img class="" src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}/bundles/sel/images/nouvelle-carte-navigo.jpg" alt="Nouveau modèle de carte Navigo">
+                           </div>
+                           <div class="col-xs-12 col-sm-6 col-md-6">
+                               <h3 class="under"><span>{{"rat.rat_aide.aide_panel1_corps4"|trans({}, "rat", "fr")|raw}}</span></h3>
+                               <p>{{"rat.rat_aide.aide_panel1_corps5"|trans({}, "rat", "fr")|raw}}</p>
+                               <img class="" src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}/bundles/sel/images/ancienne-carte-navigo.jpg" alt="Ancien modèle de carte Navigo">
+                           </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="panel panel-default">
+                   <div class="panel-heading slide"  id="headingTwo" data-ng-class="{'open':blocks[2]}">
+                       <a class="collapsed"  data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="collapseTwo" data-ng-click="toggle(2)" >
+                           <h3 class="panel-title">{{"rat.rat_aide.aide_panel2_titre"|trans({}, "rat", "fr")|raw}}</h3>
+                           <span class="plus">+</span>
+                           <span class="moins">-</span>
+                       </a>
+                   </div>
+                   <div id="collapseTwo" class="panel-collapse collapse"  aria-labelledby="headingTwo" data-ng-class="{'in':blocks[2] }" >
+                     <div class="panel-body">
+                       <div class="media">
+                           <div class="media-left">
+                               <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}/bundles/sel/images/alert.png" class="picto" alt="Alerte">
+                           </div>
+                           <div class="media-body">
+                              {{"rat.rat_aide.aide_panel2_corps1"|trans({}, "rat", "fr")|raw}}
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="col-xs-12 col-sm-6 col-md-6">
+                               <h3 class="under"><span>{{"rat.rat_aide.aide_panel2_corps2"|trans({}, "rat", "fr")|raw}}</span></h3>
+                               <img class="" src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}/bundles/sel/images/nouvelle-carte-navigo-decouverte.jpg" alt="{{"rat.rat_aide.alt_panel2_img1"|trans({}, "rat", "fr")|raw}}" >
+                           </div>
+                           <div class="col-xs-12 col-sm-6 col-md-6">
+                               <h3 class="under"><span>{{"rat.rat_aide.aide_panel2_corps3"|trans({}, "rat", "fr")|raw}}</span></h3>
+                               <img class="" src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}/bundles/sel/images/ancienne-carte-navigo-decouverte.jpg" alt="{{"rat.rat_aide.alt_panel2_img2"|trans({}, "rat", "fr")|raw}}" >
+                           </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="panel panel-default">
+                   <div class="panel-heading slide"  id="headingThree" data-ng-class="{'open':blocks[3]}">
+                       <a class="collapsed"  data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="collapseThree" data-ng-click="toggle(3)" >
+                           <h3 class="panel-title">{{"rat.rat_aide.aide_panel3_titre"|trans({}, "rat", "fr")|raw}}</h3>
+                           <span class="plus">+</span>
+                           <span class="moins">-</span>
+                       </a>
+                   </div>
+                   <div id="collapseThree" class="panel-collapse collapse"  aria-labelledby="headingThree" {% verbatim %}ng-class="{'in':blocks[3] }"{% endverbatim %} >
+                     <div class="panel-body">
+                       <div class="media">
+                           <div class="media-left">
+                               <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}/bundles/sel/images/info-red.png" class="picto" alt="Information">
+                           </div>
+                           <div class="media-body">
+                               <p>{{"rat.rat_aide.aide_panel3_corps1"|trans({}, "rat", "fr")|raw}}</p>
+                               <p class="no-margin">{{"rat.rat_aide.aide_panel3_corps2"|trans({}, "rat", "fr")|raw}}</p>
+                           </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               <!-- END COLLAPSE -->
+           </div>
+       </div>
+       <div class="form-group">
+           <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+               <button type="button" class="btn btn-default aide-photo-btn btn-return" value="{{"rat.rat_aide.btn_fermer_aide_info3"|trans({}, "rat", "fr")|raw}}" data-ng-click="windowClose()"><span>{{"rat.rat_aide.btn_fermer_aide_lbl3"|trans({}, "rat", "fr")|raw}}</span></button>
+           </div>
+       </div>
+    </div>
+</div>

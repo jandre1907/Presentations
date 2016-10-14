@@ -1,0 +1,117 @@
+{% verbatim %}
+<nav id="box_nav_step"  data-ng-controller="BreadcrumbCtrl as bread" data-ng-model="hide" data-ng-hide="hide">
+  <ul>
+      <li>
+          <!-- Start heading -->
+
+          <div class="box_titre" data-ng-controller="TitleCtrl as titleCtrl">
+              <a id="box_nav_step_action" href="#box_nav_step">
+                  <h2>{{titleCtrl.title}}</h2>
+                  <span class="box_open_close">
+                      {% endverbatim %}<img src="{{ asset('bundles/sel/images/nav_arrow_top.png') }}" alt="Ouvrir le menu des étapes"/>{% verbatim %}
+                  </span>
+              </a>
+          </div>
+          <!-- End heading -->
+          <!-- Start progress-bar -->
+          <div id="box_nav_step_progressbar">
+              <div id="box_nav_step_wherein_progressbar"></div>
+          </div>
+          <!-- End progress-bar -->
+          <!-- Start step-bar -->
+          <div id="box_nav_step_sub_menu">
+            <ol>
+              <li data-ng-class="{
+                'selected':isActive('/Forfait'),
+                'complete':isComplete('/Forfait'),
+                'disabled':isDisabled('/Forfait')
+              }">
+                <a class="link selected_link" href="#Forfait" title="{% endverbatim %}{{"sna.sna_transverse.step_forfait_title"|trans({}, "sna", "fr")|raw}}{% verbatim %}" data-ng-show="hasRightToGoTo('/Forfait')">
+                    <span class="box_img">
+                        {% endverbatim %}<img src="{{ asset('bundles/sel/images/nav_picto_ok.png') }}" alt="Etape fini"/>{% verbatim %}
+                    </span>
+                    {% endverbatim %}{{"sna.sna_transverse.step_forfait"|trans({}, "sna", "fr")|raw}}{% verbatim %}
+                </a>
+                <span class="box_no_link" data-ng-hide="hasRightToGoTo('/Forfait')">{% endverbatim %}{{"sna.sna_transverse.step_forfait"|trans({}, "sna", "fr")|raw}}{% verbatim %}</span>
+
+              </li><li data-ng-class="{
+                'selected':isActive('/Porteur'),
+                'complete':isComplete('/Porteur'),
+                'disabled':isDisabled('/Porteur')
+                }">
+                  <a class="link selected_link" href="#Porteur" title="{% endverbatim %}{{"sna.sna_transverse.step_coordonnees_title"|trans({}, "sna", "fr")|raw}}{% verbatim %}" data-ng-show="hasRightToGoTo('/Porteur')">
+                    <span class="box_img">
+                        {% endverbatim %}<img src="{{ asset('bundles/sel/images/nav_picto_ok.png') }}" alt="Etape fini"/>{% verbatim %}
+                    </span>
+                    {% endverbatim %}{{"sna.sna_transverse.step_coordonnees"|trans({}, "sna", "fr")|raw}}{% verbatim %}
+                </a>
+                <span class="box_no_link" data-ng-hide="hasRightToGoTo('/Porteur')">{% endverbatim %}{{"sna.sna_transverse.step_coordonnees"|trans({}, "sna", "fr")|raw}}{% verbatim %}</span>
+
+              </li><li data-ng-class="{
+                'selected':isActive('/Photo'),
+                'complete':isComplete('/Photo'),
+                'disabled':isDisabled('/Photo')}">
+                <a class="link selected_link" href="#Photo" title="{% endverbatim %}{{"sna.sna_transverse.step_photo_title"|trans({}, "sna", "fr")|raw}}{% verbatim %}" data-ng-show="hasRightToGoTo('/Photo')">
+                    <span class="box_img">
+                        {% endverbatim %}<img src="{{ asset('bundles/sel/images/nav_picto_ok.png') }}" alt="Etape fini"/>{% verbatim %}
+                    </span>
+                    {% endverbatim %}{{"sna.sna_transverse.step_photo"|trans({}, "sna", "fr")|raw}}{% verbatim %}
+                </a>
+                <span class="box_no_link" data-ng-hide="hasRightToGoTo('/Photo')">{% endverbatim %}{{"sna.sna_transverse.step_photo"|trans({}, "sna", "fr")|raw}}{% verbatim %}</span>
+
+              </li><li data-ng-class="{
+                'selected':isActive('/Paiement'),
+                'complete':isComplete('/Paiement'),
+                'disabled':isDisabled('/Paiement')}">
+                <a class="link selected_link" href="#Paiement" title="{% endverbatim %}{{"sna.sna_transverse.step_paiement_title"|trans({}, "sna", "fr")|raw}}{% verbatim %}" data-ng-show="hasRightToGoTo('/Paiement')">
+                    <span class="box_img">
+                        {% endverbatim %}<img src="{{ asset('bundles/sel/images/nav_picto_ok.png') }}" alt="Etape fini"/>{% verbatim %}
+                    </span>
+                    {% endverbatim %}{{"sna.sna_transverse.step_paiement"|trans({}, "sna", "fr")|raw}}{% verbatim %}
+                </a>
+                <span class="box_no_link" data-ng-hide="hasRightToGoTo('/Paiement')">{% endverbatim %}{{"sna.sna_transverse.step_paiement"|trans({}, "sna", "fr")|raw}}{% verbatim %}</span>
+
+              </li><li data-ng-class="{
+                'selected':isActive('/Recapitulatif'),
+                'complete':isComplete('/Recapitulatif'),
+                'disabled':isDisabled('/Recapitulatif')}">
+                <a class="link selected_link" href="#Recapitulatif" title="{% endverbatim %}{{"sna.sna_transverse.step_recapitulatif_title"|trans({}, "sna", "fr")|raw}}{% verbatim %}" data-ng-show="hasRightToGoTo('/Recapitulatif')">
+                    <span class="box_img">
+                        {% endverbatim %}<img src="{{ asset('bundles/sel/images/nav_picto_ok.png') }}" alt="Etape fini"/>{% verbatim %}
+                    </span>
+                    {% endverbatim %}{{"sna.sna_transverse.step_recapitulatif"|trans({}, "sna", "fr")|raw}}{% verbatim %}
+                </a>
+                <span class="box_no_link" data-ng-hide="hasRightToGoTo('/Recapitulatif')">{% endverbatim %}{{"sna.sna_transverse.step_recapitulatif"|trans({}, "sna", "fr")|raw}}{% verbatim %}</span>
+
+              </li><li data-ng-class="{
+                'selected':isActive('/Signature'),
+                'complete':isComplete('/Signature'),
+                'disabled':isDisabled('/Signature')}">
+                <a class="link selected_link" href="#Signature" title="{% endverbatim %}{{"sna.sna_transverse.step_signature_title"|trans({}, "sna", "fr")|raw}}{% verbatim %}" data-ng-show="hasRightToGoTo('/Signature')">
+                    <span class="box_img">
+                        {% endverbatim %}<img src="{{ asset('bundles/sel/images/nav_picto_ok.png') }}" alt="Etape fini"/>{% verbatim %}
+                    </span>
+                    {% endverbatim %}{{"sna.sna_transverse.step_signature"|trans({}, "sna", "fr")|raw}}{% verbatim %}
+                </a>
+                <span class="box_no_link" data-ng-hide="hasRightToGoTo('/Signature')">{% endverbatim %}{{"sna.sna_transverse.step_signature"|trans({}, "sna", "fr")|raw}}{% verbatim %}</span>
+              </li>
+            </ol>
+          </div>
+          <!-- End step-bar -->
+      </li>
+  </ul>
+</nav>
+
+<div data-ng-controller="MainCtrl as main">
+  <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+          <div id="sel_form" class="form-horizontal">
+              <div class="step-content" data-ng-view>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+{% endverbatim %}

@@ -1,0 +1,230 @@
+c
+    <div class="step_form" id="step_coordonnees"  data-ng-form name="step_form" ><!-- 2 -->
+
+         <p class="text-error" data-ng-show="error">{{error}}</p>
+         <p class="title">Veuillez vérifier vos coordonées data-personnelles et les compléter ou les modifier si necéssaire.</p>
+
+         <div class="form-content">
+             <div class="form-group">
+                     <div class="col-xs-4">
+                         <span class="radio_label"><strong>Civilité </strong><span class="star"></span></span>
+                     </div>
+                     <div class="col-xs-4">
+                         <div class="radio">
+                             <input type="radio" name="inlineRadioOption1" id="inlineRadio1" value="02" data-ng-model="userSig.prefix" required>
+                             <label class="radio-inline" for="inlineRadio1">
+                                 Madame
+                             </label>
+                             <input type="radio" name="inlineRadioOption1" id="inlineRadio2" value="01" data-ng-model="userSig.prefix" required>
+                              <label class="radio-inline" for="inlineRadio2">
+                                 Monsieur
+                             </label>
+                         </div>
+                         <span class="mess-error" data-ng-show="formSubmitted && (step_form.inlineRadioOption1.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                         <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.inlineRadioOption1.$invalid)"></i>
+                     </div>
+                     <div class="col-xs-4"></div>
+             </div>
+             <div class="form-group">
+                 <label class="col-xs-4 control-label">Nom<span class="star"></span></label>
+                 <div class="col-xs-4">
+                     <input type="text" class="form-control" data-ng-disabled="userSig.lastname && userInfo.IsSIG" data-ng-model="userSig.lastname" required name="nom" maxlength="20">
+                      <span class="mess-error" data-ng-show="formSubmitted && (step_form.nom.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                     <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.nom.$invalid)"></i>
+                 </div>
+                 <div class="col-xs-4"></div>
+             </div>
+             <div class="form-group">
+                 <label class="col-xs-4 control-label">Prénom<span class="star"></span></label>
+                 <div class="col-xs-4">
+                     <input type="text" class="form-control" data-ng-disabled="userSig.firstname && userInfo.IsSig" data-ng-model="userSig.firstname" required name="prenom" maxlength="20">
+                      <span class="mess-error" data-ng-show="formSubmitted && (step_form.prenom.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                     <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.prenom.$invalid)"></i>
+                 </div>
+                 <div class="col-xs-4"></div>
+             </div>
+             <div class="form-group">
+                     <label class="col-xs-4 control-label">Date de naissance<span class="star"></span></label>
+                     <div class="col-xs-4">
+                         <div class="form-inline birth_date">
+                             <div class="pull-left">
+                                 <select class="form-control data-chosen-select" id="day" data-ng-model="userSig.birthDate.day" data-ng-options="day for day in days" name="day">
+                                 </select>
+                             </div>
+                             <div class="pull-left">
+                                 <select class="form-control data-chosen-select" id="month" data-ng-model="userSig.birthDate.month" data-ng-options="month for month in months"name="month">
+                                 </select>
+                             </div>
+                             <div class="pull-left" >
+                                 <select class="form-control data-chosen-select" id="year" data-ng-model="userSig.birthDate.year" data-ng-options="year for year in years" name="year">
+                                 </select>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="col-xs-4">
+                     </div>
+                     <span class="mess-error" data-ng-show="formSubmitted && (step_form.day.$invalid || step_form.month.$invalid || step_form.year.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                     <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.day.$invalid || step_form.month.$invalid || step_form.year.$invalid)"></i>
+             </div>
+             <div class="form-group">
+                 <label class="col-xs-4 control-label">N° et nom de rue<span class="star"></span></label>
+                 <div class="col-xs-4">
+                     <input type="text" class="form-control" data-ng-model="userSig.street3" name="ligne3" required maxlength="38">
+                      <span class="mess-error" data-ng-show="formSubmitted && (step_form.street3.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                     <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.street3.$invalid)"></i>
+                 </div>
+                 <div class="col-xs-4"></div>
+             </div>
+             <div class="form-group">
+                 <label class="col-xs-4 control-label">Complément d'adresse</label>
+                 <div class="col-xs-4">
+                     <textarea class="form-control" placeholder="Bâtiment, étage, lieu-dit,  indication au livreur, etc." name="ligne2" data-ng-model="userSig.street2" maxlength="38"></textarea>
+                      <span class="mess-error" data-ng-show="formSubmitted && (step_form.street2.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                     <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.street2.$invalid)"></i>
+                 </div>
+                 <div class="col-xs-4"></div>
+             </div>
+
+            <div class="form-group">
+                 <label class="col-xs-4 control-label">Code postal<span class="star"></span></label>
+                 <div class="col-xs-4">
+                     <input type="text" class="form-control" data-ng-model="userSig.postalCode" name="postalCode" data-ng-change="getCities()" required maxlength="5">
+                     <span class="mess-error" data-ng-show="formSubmitted && (step_form.postalCode.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                     <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.postalCode.$invalid)"></i>
+                 </div>
+                 <div class="col-xs-4"></div>
+             </div>
+             <div class="form-group">
+                     <label class="col-xs-4 control-label">Ville<span class="star"></span></label>
+                     <div class="col-xs-4" >
+                        <select class="form-control data-chosen-select" name="city" data-ng-options="city.label for city in cities" data-ng-model="userSig.city">
+                          <span class="mess-error" data-ng-show="formSubmitted && (step_form.city.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                     <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.city.$invalid)"></i>
+                         </select>
+                     </div>
+                     <div class="col-xs-4"></div>
+             </div>
+             <div class="form-group">
+                 <label class="col-xs-4 control-label">Pays<span class="star"></span></label>
+                 <div class="col-xs-4">
+                     <input type="text" class="form-control" disabled value="France" data-ng-model="userSig.country" >
+                 </div>
+                 <div class="col-xs-4"></div>
+             </div>
+             <div class="form-group">
+                 <label class="col-xs-4 control-label">Téléphone portable<span class="star"></span></label>
+                 <div class="col-xs-4">
+                     <input type="text" class="form-control" data-ng-model="userSig.mobile" name="mobile" maxlength="10"/ required>
+                      <span class="mess-error" data-ng-show="formSubmitted && (step_form.mobile.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                     <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.mobile.$invalid)"></i>
+                 </div>
+                 <div class="col-xs-4"></div>
+             </div>
+             <div class="form-group">
+                 <label class="col-xs-4 control-label">Téléphone fixe</label>
+                 <div class="col-xs-4">
+                     <input type="text" class="form-control" data-ng-model="userSig.phone" name="telephoneFixe" maxlength="10">
+                 </div>
+                 <div class="col-xs-4">
+                     <div class="tooltip right tel" > <!-- class tel provisoire -->
+                             <div class="tooltip-arrow"></div>
+                             <div class="tooltip-inner">
+                                 Votre téléphone portable nous servira à finaliser votre souscription et à améliorer la gestion de votre forfait. Il ne sera en aucun cas utilisé à des fins commerciales sans votre autorisation.                                                       </div>
+                     </div>
+                 </div>
+             </div>
+                                                     <!-- Création compte SEL-->
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label create-sel">Définissez vos codes d'accès à l'espace Service en ligne</label>
+                                            <div class="col-xs-4">
+                                                <p class="create-sel">
+                                                    Votre email et votre mot de passe seront vos identifiants pour accéder à votre espace.
+                                                </p>
+                                            </div>
+                                            <div class="col-xs-4"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label">E-mail<span class="star"></span></label>
+                                            <div class="col-xs-4">
+                                                <input type="email" data-gie-mail name="email" class="form-control" data-ng-model="userSel.email" data-ng-required="emailRequired" maxlength="100" data-ng-disabled="disableEmail">
+                                                 <span class="mess-error" data-ng-show="formSubmitted && (step_form.email.$invalid)">{{errorMessages['IHM-TRANS-ERR_004']}}</span>
+                     <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.email.$invalid)"></i>
+                                            </div>
+                                            <div class="col-xs-4"></div>
+                                        </div>
+                                        <div class="form-group" data-ng-hide="disableEmail">
+                                            <label class="col-xs-4 control-label">Confirmer votre e-mail<span class="star"></span></label>
+                                            <div class="col-xs-4">
+                                                <input type="email" data-gie-mail class="form-control" data-ng-model="userSel.emailTwin" name="emailtwo" maxlength="100" onpaste="return false;" data-ng-required="emailRequired">
+                                                 <span class="mess-error" data-ng-show="userSel.emailTwin != userSel.email">{{errorMessages['IHM-TRANS-ERR_006']}}</span>
+                     <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.emailtwo.$invalid)"></i>
+                                            </div>
+                                            <div class="col-xs-4"></div>
+                                        </div>
+                                        <div class="form-group" data-ng-hide="hidePassword">
+                                            <label class="col-xs-4 control-label">Mot de passe<span class="star"></span></label>
+                                            <div class="col-xs-4">
+                                                <input type="password" name="password" class="form-control" data-ng-model="userSel.password" minlength="8" maxlength="20" data-sel-password data-ng-required="passwordRequired">
+                                                <span class="mess-error" data-ng-show="formSubmitted && (step_form.password.$error.passwordFormat)">{{errorMessages['IHM-TRANS-ERR_003']}}</span>
+
+                                                 <span data-ng-show="step_form.password.$error.minlength || step_form.password.$error.maxlength">{{errorMessages['IHM-TRANS-ERR_007-DOCA']}}</span>
+
+                                                <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.password.$invalid)"></i>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                 <div class="tooltip right password" > <!-- class password provisoire -->
+                                                        <div class="tooltip-arrow"></div>
+                                                        <div class="tooltip-inner">
+                                                            <p>Votre mot de passe doit respecter<br/>le format suivant :</p>
+                                                            <ul>
+                                                                <li>une majuscule</li>
+                                                                <li>une minuscule</li>
+                                                                <li>un chiffre</li>
+                                                                <li>minimum 8 caractères</li>
+                                                                <li>maximum 20 caractères</li>
+                                                            </ul>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" data-ng-hide="hidePassword">
+                                            <label class="col-xs-4 control-label">Confirmer votre mot de passe<span class="star"></span></label>
+                                            <div class="col-xs-4">
+                                                <input type="password" class="form-control" data-ng-model="userSel.passwordTwin" name="password2" minlength="8" maxlength="20" data-sel-password data-ng-required="passwordRequired">
+                                                <span class="mess-error" data-ng-show="userSel.password != userSel.passwordTwin">Les deux mots de passe ne concordent pas. Veuillez les saisir à nouveau.</span>
+
+                                                <span class="mess-error" data-ng-show="formSubmitted && (step_form.password.$error.passwordFormat)">{{errorMessages['IHM-TRANS-ERR_003']}}</span>
+
+                                                 <span data-ng-show="step_form.password.$error.minlength || step_form.password.$error.maxlength">{{errorMessages['IHM-TRANS-ERR_007-DOCA']}}</span>
+
+                                                <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.password.$invalid)"></i>                                                <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.passwordTwin.$invalid)"></i>
+                                            </div>
+                                            <div class="col-xs-4"></div>
+                                        </div>
+
+            <div class="checkbox margin-top-bottom">
+                <input type="checkbox" id="inlineRadio9-1" data-ng-model="userSig.acceptContract" name="donneesCommunicables" data-ng-true-value="1" data-ng-false-value="0" required>
+                <label for="inlineRadio9-1">Je déclare accépter les <a href="#" class="link underline" title="Afficher les conditions générales de vente">conditions générales d'utilisation (CGU)</a>
+                </label>
+                <span class="mess-error" data-ng-show="formSubmitted && (step_form.donneesCommunicables.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                     <i class="fa fa-times fa-lg" data-ng-show="formSubmitted && (step_form.donneesCommunicables.$invalid)"></i>
+            </div>
+
+            <div class="checkbox margin-top-bottom">
+                <input type="checkbox" data-ng-model="userSig.acceptCom" name="optin" id="inlineRadio9-2" data-ng-true-value="1" data-ng-false-value="0">
+                <label for="inlineRadio9-2">
+                J’accepte de recevoir les avantages et les offres commerciales  de la RATP, d'OPTILE et de SNCF Transilien par communications éléctroniques
+                </label>
+            </div>
+         </div><!-- form-content -->
+         <div class="row">
+             <div class="col-xs-4 col-xs-offset-4">
+                 <button type="button" class="btn btn-primary pull-right" data-ng-disabled="disableSubmit || step_form.donneesCommunicables.$invalid" data-ng-click="submitForm()" title="Valider le formulaire et poursuivre"><span>Continuer</span></button>
+             </div>
+         </div>
+         <span class="obligatoire">
+             <span class="star"></span>
+             Champs obligatoire
+         </span>
+     </div>
+{% endverbatim %}

@@ -1,0 +1,28 @@
+<div class="step_form" id="confirmation">
+    <div class="confirmation">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="confirmation">
+                    <div class="margin-bottom">
+                        <h2>
+                            <img ng-src="{{ prefix_front }}bundles/sel/images/check2x.png" class="picto valid" alt="Confirmation">
+                            <strong>
+                                Votre commande de carte est bien enregistrée.
+                            </strong>
+                        </h2>
+                    </div>
+                    <br>
+                    <p>Vous allez recevoir un mail de confirmation à l’adresse <strong>{{pageCtrl.userSel.email}}</strong></p>
+                    <p>Votre carte Navigo Mois/Semaine sera <strong>livrée chez vous d'ici les {{pageCtrl.jourDelai}} jours</strong> qui suivent la validation de votre demande par nos services. </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button type="button" class="btn btn-primary aide-photo-btn" title="Terminer et accéder à mon espace Service Navigo" ng-click="pageCtrl.onAccederEspace()">
+                    <span>Accéder à mon espace</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+
+<div class="step_form" id="step_signature" ng-form name="step_form"><!-- 6.2 // Signature 2 -->
+
+    <p class="warning-light red" ng-show="error">
+        <img ng-src="{{ prefix_front }}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+        <strong>{{error}}</strong>
+    </p>
+    <h2 id="signature-souscription" class="margin-ultra-bottom" tabindex="-1">Signature de votre souscription</h2>
+    <p>
+        <strong>
+            Vous allez maintenant signer éléctroniquement votre Contrat Navigo Annuel.
+            <br/>
+            pour cela vous devez <a href="#inlineRadio12" class="link" title="aller directement à la case à cocher 'conditions générales de vente et d'utilisation">accepter les conditions générales de vente</a> du forfait et renseigner un code de validation.
+        </strong>
+    </p>
+    <p>Votre dossier ne sera transmis qu'après la finalisation de l'étape de signature éléctronique.</p>
+    <p>Vous avez la possibilité de</p>
+    <ul class="color_bullet">
+        <li>visualiser un aperçu de votre contrat et de votre mandat ci-dessous</li>
+        <li><a class="link" href="{{cart.documents.url_pdf}}"  target="_blank" title="Télécharger le document [document name] (nouvelle fenêtre)">Télécharger le contrat Navigo Annuel [document name] (PDF, 25ko)</a></li>
+    </ul>
+    <br>
+    <div class="form-content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="pdf">
+
+                        <img ng-src="{{cart.documents.url_png}}" width="100%" height="100%" />
+
+                </div>
+            </div>
+        </div>
+        <div class="checkbox" ng-click="acceptCGV()">
+            <input type="checkbox" id="inlineRadio12">
+            <label for="inlineRadio12">
+                Je certifie l'exactitude des renseignements donnés et déclare accepter les
+                <a class="link underline" href="#" target="_blank" title="Lire les conditions générales d'utilisation (nouvelle fenêtre)">conditions générales d'utilisation (CGU)</a> ainsi que les
+                <a class="link underline" href="#" target="_blank" title="Lire les conditions générales de vente (nouvelle fenêtre)">conditions générales de vente (CGV)</a>
+            </label>
+        </div>
+        <br><br>
+        <p ng-show="!isNotPayer" class="title"><strong>Cliquez pour recevoir votre SMS au {{phone}}</strong></p>
+        <div class="box_spacer_button">
+            <div class="row minheight123" ng-show="!isNotPayer">
+                <div class="col-xs-12 col-sm-5 col-md-5">
+                    <button type="button" ng-disabled="!cgvAccepted" class="btn btn-default pull-left sms" title="Recevoir votre code par sms" ng-click="getSmsOtp()"><strong>Recevoir mon code par SMS</strong></button>
+                    <span class="text-center code">Ce code est valable 15 minutes.</span>
+                </div>
+                <div class="col-xs-12 col-sm-2 col-md-2"></div>
+                <div class="col-xs-12 col-sm-5 col-md-5" ng-show="otpSended">
+                    <p class="code-text" message-dv meskey="{{pageCtrl.meskey}}">
+                        {{pageCtrl.meskey}}
+                    </p>
+                </div>
+            </div>
+            <div class="row" ng-show="!isNotPayer" >
+                 <div class="col-xs-12 col-sm-5 col-md-5">
+                    <p class="text-center code"><strong>Saisir le code reçu :</strong></p>
+                    <input type="text" class="form-control pull-left" placeholder="code" ng-model="otp" ng-disabled="!cgvAccepted">
+                </div>
+                <div class="col-xs-12 col-sm-2 col-md-2"></div>
+                <div class="col-xs-12 col-sm-5 col-md-5">
+                    <br>
+                    <button type="button" ng-disabled="!cgvAccepted" ng-show="otpSended" class="btn btn-default pull-left sms" title="Recevoir votre code par e-mail" ng-click="getPayerEmailOtp()"><strong>Recevoir mon code par e-mail {{mail}}:</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+            <button type="button" class="btn btn-primary pull-right" title="Valider ma souscription"
+            ng-disabled="!cgvAccepted || (( !otpSended || !otp ) && !isNotPayer) "
+            ng-click="submitForm()"><span>Valider ma souscription</span></button>
+        </div>
+    </div>
+</div>

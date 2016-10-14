@@ -1,0 +1,26 @@
+{% verbatim %}
+<div id="confirmation">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div class="confirmation">
+                <div class="margin-bottom">
+                    <h2>
+                        <img src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/check2x.png" class="picto valid" alt="Confirmation">
+                        <strong>
+                            {% endverbatim %}{{"cdc.cdc_confirmation.lbl_prise_cpt"|trans({}, "cdc", "fr")|raw}}{% verbatim %}
+                        </strong>
+                    </h2>
+                    {% endverbatim %}{{"cdc.cdc_confirmation.lbl_promesse"|trans({}, "cdc", "fr")|raw}}{% verbatim %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button type="button" class="btn btn-default aide-photo-btn" title="{% endverbatim %}{{"cdc.cdc_confirmation.btn_acces_espa_info"|trans({}, "cdc", "fr")|raw}}{% verbatim %}" data-ng-click="pageCtrl.onAccederEspace()">
+                <span>{% endverbatim %}{{"cdc.cdc_confirmation.btn_acces_espa"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span>
+            </button>
+        </div>
+    </div>
+</div>
+{% endverbatim %}

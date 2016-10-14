@@ -1,0 +1,121 @@
+ {% extends "SelBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title="{{ 'bp.bp_requet.accueil'|trans({}, 'bp') }}">{{ 'bp.bp_requet.accueil'|trans({}, 'bp') }}</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title="{{ 'bp.bp_requet.service_navigo_link_label'|trans({}, 'bp') }}">{{ 'bp.bp_requet.service_navigo_link_label'|trans({}, 'bp') }}</a></li>
+            <li><a href="{{ path('sel_espace_client') }}" title="{{ 'bp.bp_requet.espace_client_link_label'|trans({}, 'bp') }}">{{ 'bp.bp_requet.espace_client_link_label'|trans({}, 'bp') }}</a></li>
+            <li class="active">{{ 'bp.bp_requet.bon_plan_renew_link_label'|trans({}, 'bp') }}</li>
+          </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+{% block title %}{{ 'home.home_espace_client.label.bon_plan_title_onglet'|trans({}, 'home') }}{% endblock %}
+
+ {% block content_header '' %}
+ {% block flashMessage %}{% endblock flashMessage %}
+ {% block contentTitle %}
+     <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12">
+             <div class="heading">
+                 <h1>{{ 'bp.bp_requet.carte_bon_plan_title'|trans({}, 'bp') }}</h1>
+             </div>
+         </div>
+     </div>
+ {% endblock contentTitle %}
+
+{% block previousArrow %}
+<div class="row" >
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        {% verbatim %}
+        <div class="prev">
+			<a href="javascript:window.history.back()">
+				{% endverbatim %}
+				<img src="{{ asset('bundles/sel/images/prev16.png') }}" class="picto" alt="{{ 'transverse.transverse_prev.previous_page_title' |trans({}, 'transverse') }}">
+				{% verbatim %}{% endverbatim %}
+				{{ 'transverse.transverse_prev.previous_page' |trans({}, 'transverse') }}
+				{% verbatim %}
+			</a>
+		</div>
+        {% endverbatim %}
+    </div>
+</div>
+{% endblock previousArrow%} {% block content %}
+
+<div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12">
+			<div id="sel_form" class="form-horizontal">
+				<div class="step-content">
+					<!-- Step forms -->
+					<div class="step_form" id="step_coordonnees">
+                        <span class="general_Intext margin-10">{{ 'bp.bp_requet.verification_coordonnees_postale_sub_title3'|trans({}, 'bp') }}</span>
+						<div class="form-content">
+							<div class="row">
+								<div class="col-xs-12 col-sm-8 col-md-8">
+									<p class="recap-line clearfix">
+										<label>{{ 'bp.bp_requet.nom_label'|trans({}, 'bp') }}</label><strong>{{ sigClient.nom }}</strong>
+									</p>
+									<p class="recap-line clearfix">
+										<label>{{ 'bp.bp_requet.prenom_label'|trans({}, 'bp') }}</label><strong>{{ sigClient.prenom }}</strong>
+									</p>
+                                    <p class="recap-line clearfix">
+                                        <label>{{ ('bp.bp_requet.adresse_complement'|trans({}, 'bp')) | raw }}</label><strong>{{
+                                            sigClient.adresse.ligne3 }}</strong>
+                                    </p>
+                                    {% if sigClient.adresse.ligne1 %}
+                                    <p class="recap-line clearfix">
+                                        <label>{{ ('bp.bp_requet.adresse_complement1'|trans({}, 'bp')) | raw }}</label><strong>{{ sigClient.adresse.ligne1 }}</strong>
+                                    </p>
+                                    {% endif %}
+                                    {% if sigClient.adresse.ligne2 %}
+                                    <p class="recap-line clearfix">
+                                        <label>{{ ('bp.bp_requet.adresse_complement2'|trans({}, 'bp')) | raw }}</label><strong>{{ sigClient.adresse.ligne2 }}</strong>
+                                    </p>
+                                    {% endif %}
+                                    {% if sigClient.adresse.ligne4 %}
+                                    <p class="recap-line clearfix">
+                                        <label>{{ ('bp.bp_requet.adresse_complement3'|trans({}, 'bp')) | raw }}</label><strong>{{ sigClient.adresse.ligne4 }}</strong>
+                                    </p>
+                                    {% endif %}
+
+									<p class="recap-line clearfix">
+										<label>{{ 'bp.bp_requet.code_postal_label'|trans({}, 'bp') }}</label><strong>{{
+											sigClient.adresse.codePostal }}</strong>
+									</p>
+									<p class="recap-line clearfix">
+										<label>{{ 'bp.bp_requet.ville_label'|trans({}, 'bp') }}</label><strong>{{
+											sigClient.adresse.bureauDistributeur }}</strong>
+									</p>
+									<p class="recap-line clearfix">
+										<label>{{ 'bp.bp_requet.pays_label'|trans({}, 'bp') }}</label><strong>{{ sigClient.adresse.pays
+											}}</strong>
+									</p>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-6"></div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12 box_button">
+									<div class="col-xs-12 col-sm-6 col-md-6">
+
+										<button type="button" class="btn btn-default " value="{{ 'bp.bp_requet.modifier_coordonnees_label_btn'|trans({}, 'bp') }}" onclick="location.href='{{ path('sel_edit_user', {'referenceSig': sigClient.reference, 'contract': contract, 'codeProduit': codeProduit , 'returnUrl': 'sel_contrat_bonplan'})  }}';">
+											<span>{{ 'bp.bp_requet.modifier_btn'|trans({}, 'bp') }}</span>
+										</button>
+									</div>
+									<div class="col-xs-12 col-sm-6 col-md-6">
+										<button type="button" class="btn btn-primary" value="Continuer sans modifier les coordonnées" onclick="location.href='{{ path('sel_contrat_bonplan_confirm',{'contract': contract, 'codeProduit': codeProduit , 'returnUrl' : returnUrl})  }}';">
+											<span>{{ 'bp.bp_requet.continuer_btn'|trans({}, 'bp') }}</span>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content%}

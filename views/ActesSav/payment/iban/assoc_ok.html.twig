@@ -1,0 +1,82 @@
+{% extends "SelBundle::layout.html.twig" %}
+ {% block title %}{{ 'pay.pay_confirm_iban.service_navigo_title'|trans({}, 'pay') }}{% endblock %}
+
+ {% block content_header '' %}
+ {% block flashMessage %}{% endblock flashMessage %}
+
+ {% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title="{{ 'pay.pay_confirm_iban.accueil_link_label'|trans({}, 'pay') }}">{{ 'pay.pay_confirm_iban.accueil_link_label'|trans({}, 'pay') }}</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title="{{ 'pay.pay_confirm_iban.service_navigo_link_label'|trans({}, 'pay') }}">{{ 'pay.pay_confirm_iban.service_navigo_link_label'|trans({}, 'pay') }}</a></li>
+            <li><a href="{{ path('sel_espace_client') }}" title="{{ 'pay.pay_confirm_iban.espace_client_link_label'|trans({}, 'pay') }}">{{ 'pay.pay_confirm_iban.espace_client_link_label'|trans({}, 'pay') }}</a></li>
+            <li><a href="{{ path('sel_payment_list') }}" title="{{ 'pay.pay_confirm_iban.moyen_paiement_link_label'|trans({}, 'pay') }}">{{ 'pay.pay_confirm_iban.moyen_paiement_link_label'|trans({}, 'pay') }}</a></li>
+            <li class="active">{{ 'pay.pay_confirm_iban.ajout_bic_iban_link_label'|trans({}, 'pay') }}</li>
+          </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+ {% block contentTitle %}
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<div class="heading">
+			<h1>{{ 'pay.pay_confirm_iban.ajout_bic_iban_title'|trans({}, 'pay') }}</h1>
+		</div>
+	</div>
+</div>
+ {% endblock contentTitle %}
+
+{% block previousArrow %}
+<!-- pas de bouton précédent sur les page de confirmation -->
+
+{# <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="prev">
+            <a href="javascript:window.history.back()">
+                <img src="{{ asset('bundles/sel/images/prev16.png') }}" class="picto" alt="{{ 'pay.pay_confirm_iban.back_label_img'|trans({}, 'pay') }}">
+                {{ 'pay.pay_confirm_iban.back_link'|trans({}, 'pay') }}
+            </a>
+        </div>
+    </div>
+</div> #}
+{% endblock previousArrow %}
+
+{% block content %}
+<div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+			<div class="confirmation">
+				 <span class="general_Intext">
+					<img src="{{ asset('bundles/sel/images/check2x.png') }}" class="picto valid" alt="{{ 'pay.pay_confirm_iban.confirmation_label_img'|trans({}, 'pay') }}">
+					<strong>
+						{{ 'pay.pay_confirm_iban.moyen_paiement_associe_sub_title'|trans({}, 'pay') }}
+					</strong>
+				</span>
+				{{ 'pay.pay_confirm_iban.moyen_paiement_associe_sub_title_2'|trans({}, 'pay') }} {{ email }}
+			</div>
+		</div>
+	</div>
+
+	{% if returnUrl == 'sel_contrat_iban_manage' %}
+	<div class="row">
+		<div class="col-xs-12 text-center">
+			<a href="{{ path('sel_contrat_iban_manage', { 'contract': contract, 'codeProduit': codeProduit }) }}" class="link addto margin-top" title="{{ 'pay.pay_confirm_iban.back_to_change_rib_title'|trans({}, 'pay') }}">
+				<span>{{ 'pay.pay_confirm_iban.back_to_change_rib'|trans({}, 'pay') }}</span>
+			</a>
+		</div>
+	</div>
+	{% endif %}
+    {% if returnUrl == 'sel_iban_manage' %}
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <a href="{{ path('sel_iban_manage', { 'md5iban': md5iban }) }}" class="link addto margin-top" title="{{ 'pay.pay_confirm_iban.back_to_change_rib_title'|trans({}, 'pay') }}">
+                <span>{{ 'pay.pay_confirm_iban.back_to_change_rib'|trans({}, 'pay') }}</span>
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock content%}

@@ -1,0 +1,80 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block meta_desc %}
+    <meta name="description" content="{{'cpt.cpt_inscription.meta_desc'|trans({}, 'cpt', 'fr')|raw}}">
+{% endblock %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+
+    {% javascripts
+        '@SelBundle/Resources/public/js/uniqAccount/model.js'
+        '@SelBundle/Resources/public/js/uniqAccount/filter.js'
+        '@SelBundle/Resources/public/js/uniqAccount/model_io.js'
+        '@SelBundle/Resources/public/js/uniqAccount/step_load.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/confirmation.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/connexionHelp.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/coordonnees.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/detail.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/formulaire.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/IdentificationFailureCtrl.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/verification.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/multiple.js'
+        '@SelBundle/Resources/public/js/uniqAccount/directives.js'
+        '@SelBundle/Resources/public/js/uniqAccount/main.js'
+
+        output='js/cx_uniqAccount_new.js'
+     %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+
+
+    <script src="//www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async></script>
+    <script type="text/javascript">
+        var onloadCallback = function() {
+            //console.log("grecaptcha is ready!");
+        };
+
+        CX.secretCaptcha = "{{ public_key_captcha }}";
+        CX.defaultRoute = "saisie_donnees_client";
+    </script>
+{% endblock javascript_foot %}
+
+{% block angularModule %}CX{% endblock angularModule %}
+
+{% block title %}{{ 'cpt.cpt_inscription.titre_etape_onglet'|trans({}, 'cpt') }}{% endblock %}
+
+{% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row" data-ng-controller="TitleCtrl">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title="Accueil">Accueil</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title="{{ 'cpt.cpt_inscription.services_link_breadcrumb' |trans({}, 'cpt') }}">{{ 'cpt.cpt_inscription.services_link_breadcrumb' |trans({}, 'cpt') }}</a></li>
+            <li class="active" data-ng-show="!breadcrumb">{% verbatim %}{{title}}{% endverbatim %}</li>
+            <li class="active" data-ng-show="breadcrumb"><a href="{{ path('sel_register') }}#/saisie_donnees_client">{% verbatim %}{{title}}{% endverbatim %}</a></li>
+            <li class="active" data-ng-show="breadcrumb">{% verbatim %}{{breadcrumb}}{% endverbatim %}</li>
+        </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+{% block contentTitle %}
+{% verbatim %}
+<div class="row" data-ng-controller="TitleCtrl">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="heading">
+            <h1>{{title}}</h1>
+        </div>
+    </div>
+</div>
+{% endverbatim %}
+{% endblock contentTitle %}
+
+{% block mainContent %}
+    {% block body %}
+        {% block content %}
+            <div data-ng-controller="MainCtrl as main" data-ng-view>
+            </div>
+        {% endblock content %}
+    {% endblock body%}
+{% endblock mainContent %}

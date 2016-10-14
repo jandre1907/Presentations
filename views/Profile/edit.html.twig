@@ -1,0 +1,184 @@
+{% extends "SelBundle::layout.html.twig" %}
+{% block title %}{{ 'home.home_espace_client.link.change_email_title_onglet'|trans({}, 'home') }}{% endblock %}
+{% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title="{{'coor.coor_change_email.accueil'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_change_email.accueil'|trans({}, 'coor', 'fr')|raw}}</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title="{{'coor.coor_change_email.service_navigo'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_change_email.service_navigo'|trans({}, 'coor', 'fr')|raw}}</a></li>
+            <li><a href="{{ path('sel_espace_client') }}" title="{{'coor.coor_change_email.espace_client'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_change_email.espace_client'|trans({}, 'coor', 'fr')|raw}}</a></li>
+            {% if user.referenceSig is not null %}
+                <li><a href="{{ path('sel_coordonnees') }}" title="{{'coor.coor_change_email.vos_coordonnees'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_change_email.vos_coordonnees'|trans({}, 'coor', 'fr')|raw}}</a></li>
+            {% endif %}
+            <li class="active">{{'coor.coor_change_email.modifier_email'|trans({}, 'coor', 'fr')|raw}}</li>
+          </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+    {% javascripts
+        '@SelBundle/Resources/public/js/Connexion/Module/*.js'
+        '@SelBundle/Resources/public/js/Connexion/Controller/*.js'
+        '@SelBundle/Resources/public/js/Connexion/Directive/*.js'
+        output='js/connexion.js' %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+{% endblock javascript_foot %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{'coor.coor_change_email.email_lbl_titre'|trans({}, 'coor', 'fr')|raw}}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block angularModule %}connexion{% endblock %}
+
+{% form_theme form _self  %}
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            {% for error in errors %}
+                <strong>{{ error.message }}</strong>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+{% block mainContent %}
+{% block body %}
+    {% block content %}
+        <div data-ng-controller="PasswordManagerController">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-horizontal">
+                        {% if tentatives %}
+                            <p class="warning-light red">
+                                <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alerte">
+                                {{ form_errors(form.current_password) }}
+                                {{tentatives}}
+                            </p>
+                        {% endif %}
+                        {% if error %}
+                            <p class="warning-light red">
+                                <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alerte">
+                                {{ error|trans({}, 'messages')|raw }}
+                            </p>
+                        {% endif %}
+                        <div class="step_form creation-compte" >
+                            <form name="form" action="{{ path('sel_front_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+                                <div class="form-content">
+                                    <div class="info">
+                                        <p class="info-picto">
+                                                <img src="{{ asset('bundles/sel/images/info.png') }}" class="picto" alt="Information">
+                                                {{'coor.coor_change_email.aid_identifiant'|trans({}, 'coor', 'fr')|raw}}
+                                        </p>
+                                        {% for flashMessage in app.session.flashbag.get('error') %}
+                                            <p class="warning-light red">
+                                                <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alerte">
+                                                <strong>{{'coor.coor_change_email.msg_email_already_linked'|trans({}, 'coor', 'fr')|raw}}</strong>
+                                            </p>
+                                        {% endfor %}
+                                    </div>
+                                <div class="form-group" data-border-valid-mobile>
+                                            <label for="{{ form.current_password.vars.id }}" class="col-xs-12 col-sm-4 col-md-3 control-label">{{'coor.coor_change_email.lbl_mdp_actuel'|trans({}, 'coor', 'fr')|raw}}<span class="star">
+                                            </span></label>
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                {{form_widget(form.current_password, {'attr': {
+                                                            'minlength' : 8,
+                                                            'data-ng-focus'  : "focus=1",
+                                                            'class': 'form-control',
+                                                            'aria-required': 'true',
+                                                            'data-ng-password': null,
+                                                            'data-ng-model':'password',
+                                                            'autocomplete':"off"
+                                                        },
+                                                    'required': true
+                                                    }
+                                                )}}
+                                                {#<input id="{{ form.current_password.vars.id }}" name="{{ form.current_password.vars.full_name }}" type="password" autocomplete="off" class="form-control" required="required" aria-required="true">#}
+
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group" data-border-valid-mobile>
+                                            <label for="{{form.email.first.vars.id }}" class="col-xs-12 col-sm-4 col-md-3 control-label">{{'coor.coor_change_email.lbl_nouv_email'|trans({}, 'coor', 'fr')|raw}}<span class="star"></span></label>
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                {{ form_widget(form.email.first, {'attr': {
+                                                            'minlength' : 8,
+                                                            'data-ng-focus'  : "focus=2",
+                                                            'class': 'form-control',
+                                                            'aria-required': 'true',
+                                                            'data-gie-mail':'',
+                                                            'data-ng-model':'email',
+                                                            'data-twin':'\{\{emailTwin\}\}'
+                                                        },
+                                                        'required': true
+                                                    }
+                                                )}}
+                                                {#<input id="{{ form.email.first.vars.id }}" ng-model="email" twin="{% verbatim %}{{emailTwin}}{% endverbatim %}" name="{{form.email.first.vars.full_name }}" type="email" gie-mail class="form-control" value="" required="required" aria-required="true">#}
+                                                <img class="picto error" data-ng-show="!form['{{form.email.first.vars.full_name}}'].$pristine && form['{{form.email.first.vars.full_name}}'].$invalid" src="{{prefix_front}}bundles/sel/images/error.png" alt="Erreur">
+                                                <img class="picto valid" data-ng-show="!form['{{form.email.first.vars.full_name}}'].$pristine && form['{{form.email.first.vars.full_name}}'].$valid" src="{{prefix_front}}bundles/sel/images/check.png" alt="Ok">
+
+                                                <span aria-live="assertive"  class="mess-error" data-ng-show="isRequiredInvalid('{{form.email.first.vars.full_name }}')">{{"sna.sna_erreur.IHM-TRANS-ERR_002"|trans({}, "sna", "fr")|raw}}</span>
+                                                <span aria-live="assertive"  class="mess-error" data-ng-show="isEmailFormatInvalid('{{form.email.first.vars.full_name }}')">{{"sna.sna_erreur.IHM-TRANS-ERR_004"|trans({}, "sna", "fr")|raw}}</span>
+                                                <span aria-live="assertive"  class="mess-error" data-ng-show="areNotEqual('{{form.email.first.vars.full_name }}')">{{"sna.sna_erreur.IHM-TRANS-ERR_006"|trans({}, "sna", "fr")|raw}}</span>
+
+                                            </div>
+                                        </div>
+                                       <div class="form-group" data-border-valid-mobile>
+                                            <label for="{{form.email.second.vars.id }}" class="col-xs-12 col-sm-4 col-md-3 control-label">{{'coor.coor_change_email.lbl_conf_email'|trans({}, 'coor', 'fr')|raw}}<span class="star"></span></label>
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                {{ form_widget(form.email.second, {'attr': {
+                                                            'minlength' : 8,
+                                                            'data-ng-focus'  : "focus=3",
+                                                            'class': 'form-control',
+                                                            'aria-required': 'true',
+                                                            'data-gie-mail':'',
+                                                            'data-ng-model':'emailTwin',
+                                                            'onpaste' : 'return false;',
+                                                            'data-twin':'\{\{email\}\}'
+                                                        },
+                                                        'required': true
+                                                    }
+                                                )}}
+                                                {#<input id="{{form.email.second.vars.id }}" onpaste="return false;" ng-model="emailTwin" twin="{% verbatim %}{{email}}{% endverbatim %}" name="{{form.email.second.vars.full_name }}" type="email" gie-mail class="form-control" value="" required="required" aria-required="true">#}
+                                                <img class="picto error" data-ng-show="!form['{{form.email.second.vars.full_name }}'].$pristine && form['{{form.email.second.vars.full_name }}'].$invalid" src="{{prefix_front}}bundles/sel/images/error.png" alt="Erreur">
+                                                <img class="picto valid" data-ng-show="!form['{{form.email.second.vars.full_name }}'].$pristine && form['{{form.email.second.vars.full_name}}'].$valid" src="{{prefix_front}}bundles/sel/images/check.png" alt="Ok">
+
+                                                <span aria-live="assertive"  class="mess-error" data-ng-show="isRequiredInvalid('{{form.email.second.vars.full_name }}')">{{"sna.sna_erreur.IHM-TRANS-ERR_002"|trans({}, "sna", "fr")|raw}}</span>
+                                                <span aria-live="assertive"  class="mess-error" data-ng-show="isEmailFormatInvalid('{{form.email.second.vars.full_name }}')">{{"sna.sna_erreur.IHM-TRANS-ERR_004"|trans({}, "sna", "fr")|raw}}</span>
+                                                <span aria-live="assertive"  class="mess-error" data-ng-show="areNotEqual('{{form.email.second.vars.full_name }}')">{{"sna.sna_erreur.IHM-TRANS-ERR_006"|trans({}, "sna", "fr")|raw}}</span>
+
+                                            </div>
+                                        </div>
+                                </div><!-- form-content -->
+
+                                <div class="row">
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                        <button type="submit" data-ng-disabled="form.$invalid || email != emailTwin" class="btn btn-primary aide-photo-btn" value="Réinitialiser votre email" ><span>{{'coor.coor_change_email.btn_valider'|trans({}, 'coor', 'fr')|raw}}</span></button>
+                                    </div>
+                                </div>
+                                    {{ form_rest(form) }}
+                            </form>
+                            <span class="obligatoire">
+                                <span class="star" aria-label="{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}"></span>
+                                {{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock content %}
+{% endblock body%}
+
+{% endblock mainContent %}

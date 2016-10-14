@@ -1,0 +1,81 @@
+.bs-wizard {
+    margin-top: 80px;padding: 0 0 10px 0;
+    li {
+        list-style: outside none none;
+    }
+    .progress{background: @light-grey;}
+    .bs-wizard-step {
+        padding: 0; position: relative;
+        
+        .bs-wizard-stepnum {
+            color: @mid-grey;
+            font-size: @font-small-mid;
+            margin-bottom: 5px;
+            //font-weight: @bold;
+            font-family: @bold;
+            position: absolute;
+            top: -42px;
+            left: 53px;
+            width: 160px;
+            .transform(rotate(-25deg));
+            
+            }
+        .bs-wizard-info {color: @grey; font-size: @font-small-mid;}
+        .bs-wizard-dot {
+            position: absolute; width: 24px; height: 24px; display: block; background: @dark-grey; top: 27px; left: 50%;
+            margin-top: -15px; margin-left: -15px; border-radius: 50%;
+            &:after {
+                content: ' '; width: 18px; height: 18px; background: @white; border-radius: 50px; position: absolute;
+                top: 3px; left: 3px;
+                }
+            } 
+        .progress {
+            position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 20px 0;
+            .progress-bar {
+                width:0px; box-shadow: none; background: @mauve;
+                }
+            }
+        &.complete > .progress > .progress-bar {width:100%;}
+        &.active > .progress > .progress-bar {width:50%;}
+        &:first-child.active > .progress > .progress-bar {width:0%;}
+        &:last-child.active > .progress > .progress-bar {width: 100%;}
+        &.disabled > .bs-wizard-dot {background-color: @light-grey;}
+        &:first-child  > .progress {left: 50%; width: 50%;}
+        &:last-child  > .progress {width: 50%;}
+        &.disabled a.bs-wizard-dot{ pointer-events: none; }
+        
+        &.active .bs-wizard-stepnum{
+            color: @mauve;
+            top: -55px;
+            left: 51px;
+            
+            span.number{
+                width: 32px;
+                color: @white;
+                font-size: @font-mid-lg;
+                background: @mauve;
+                border-radius: 4px;
+                text-align: center;
+                display: inline-block;
+                height: 32px;
+                line-height: 1.7;
+            }
+        }
+        &.disabled .bs-wizard-stepnum{
+            color: @light-grey;
+        }
+    }
+    &.perte-vol, &.commande-carte{
+         .bs-wizard-step .bs-wizard-stepnum, .bs-wizard-step.active .bs-wizard-stepnum{
+            left: 148px;
+         }
+    }
+    &.perte-vol-ir{
+         .bs-wizard-step .bs-wizard-stepnum, .bs-wizard-step.active .bs-wizard-stepnum{
+            left: 108px;
+         }
+    }
+}
+
+.active span.tiret{display: none;}
+/*END Form Wizard*/

@@ -1,0 +1,225 @@
+<!-- Confirmation porteur différent payeur -->
+<div class="step_form" id="confirmation" ng-show="blockNumber == '1111'" ng-form name="step_form">
+    <div class="confirmation">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <p>
+                    <strong>La souscription est maintenant terminée.</strong><br />
+                    Vous allez recevoir un email de confirmation à l'adresse <strong>{{ payerSig.email }}.</strong>
+                </p>
+                <p>
+                    Nous avons également envoyé un mail de confirmation à l'adresse <strong>{{ userSig.email }}.</strong>
+                </p>
+                <p>
+                    Votre prochain prélèvement d'un montant de  {{ cart.zoneForfaitDetail.price*100 | euro : 2 : "," : " €" }}
+                     sera effectué le  {{ deliveryDate }}.
+                </p>
+                <br>
+                <br>
+                <br>
+                <p>
+                    <strong>Pour gérer tous vos forfaits créer votre espace Services Navigo</strong>
+                </p>
+                <p>
+                    Depuis votre espace <strong>vous pourrez obtenir vos attestations</strong>, 
+                    déclarer la perte/vol ou changer vos coordonnées personnelles et bancaires.
+                </p>
+                <br>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+                <button type="button" class="btn btn-primary aide-photo-btn" onclick="location.href='./login'">
+                    <span>Créer votre espace</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation porteur égal payeur / photo issue du SIG -->
+<div class="step_form" id="confirmation" ng-show="blockNumber == '0111'" ng-form name="step_form">
+    <div class="confirmation">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <p>
+                    <strong>Votre souscription est maintenant terminée.</strong><br />
+                    Vous allez recevoir un email de confirmation à l'adresse <strong>{{ userSig.email }}.</strong>
+                </p>
+                <p>
+                    <strong>Vous allez recevoir votre carte à votre domicile d'ici
+                        le {{ deliveryDate }}.</strong>
+                </p>
+                <br/>
+                <br/>
+                <br/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+                <button type="button" class="btn btn-primary aide-photo-btn" onclick="location.href='./espace_client'">
+                    <span>Accéder à votre espace Service en ligne</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation porteur égal payeur / photo non issue du SIG -->
+<div class="step_form" id="confirmation" ng-show="blockNumber == '0110'" ng-form name="step_form">
+    <div class="confirmation">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <p>
+                    <strong>Votre dossier de souscription est bien enregistré.</strong>
+                </p>
+                <p>
+                    Vous allez recevoir un mail de confirmation à l'adresse<br /> <strong>{{ userSig.email }}</strong>
+                </p>
+                <br>
+                <br>
+                <p>
+                    Votre carte Navigo sera <strong>livrée chez vous d'ici le {{ deliveryDate }}</strong> 
+                    sous réserve de validation de votre dossier par nos services.
+                </p>
+                <p>
+                    <strong>Retrouvez dès maintenant votre demande de souscrition dans votre Espace Service en ligne</strong>
+                </p>
+                <p>Pour vous connecter, renseignez les identifiants que vous  avez choisis (votre email et votre mot de passe).</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+                <button type="button" class="btn btn-primary aide-photo-btn" onclick="location.href='./espace_client'">
+                    <span>Accéder à votre espace</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation porteur/payeur dossier incomplet photo-->
+<div class="step_form" id="confirmation" ng-show="blockNumber == '0010' || blockNumber == '0011'" ng-form name="step_form">
+    <div class="confirmation">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <p><strong>Votre demande de souscription est bien enregistrée. Il vous reste à ajouter votre photo.</strong></p>
+                <p class="warning-light">
+                    <img ng-src="{{ prefix_front }}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+                    <strong>Attention, pour bénéficier de votre forfait dès le mois prochain,<br>
+                            n'oubliez pas de compléter votre dossier avant le 17 du mois en cours.
+                    </strong>
+                </p>
+                <p>
+                    <strong>Pour venir compléter votre dossier,</strong> veuillez cliquer sur le lien indiqué dans le mail qui vous a été envoyé à l'adresse
+                    <br/>
+                    <strong>{{ userSig.email }}.</strong> 
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+                <button type="button" class="btn btn-primary aide-photo-btn" onclick="location.href='./'">
+					<span>Retour accueil</span>
+				</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation porteur/payeur dossier incomplet photo / RIB-->
+<div class="step_form" id="confirmation" ng-show="blockNumber == '0100' || blockNumber == '0101'" ng-form name="step_form">
+    <div class="confirmation">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <p><strong>Votre demande de souscription est bien enregistrée. Il vous reste à renseigner votre RIB.</strong></p>
+                <p class="warning-light">
+                    <img ng-src="{{ prefix_front }}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+                    <strong>Attention, pour bénéficier de votre forfait dès le mois prochain,<br>
+                            n'oubliez pas de compléter votre dossier avant le 17 du mois en cours.
+                    </strong>
+                </p>
+                <p>
+                    <strong>Pour venir compléter votre dossier,</strong> veuillez cliquer sur le lien indiqué dans le mail qui vous a été envoyé à l'adresse<br/>
+                    <strong>{{ userSig.email }}.</strong> 
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+                <button type="button" class="btn btn-primary aide-photo-btn" onclick="location.href='./'">
+                    <span>Retour accueil</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation porteur/payeur dossier incomplet photo / RIB-->
+<div class="step_form" id="confirmation" ng-show="blockNumber == '0000' || blockNumber == '0001'" ng-form name="step_form">
+    <div class="confirmation">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <p><strong>Votre demande de souscription est bien enregistrée. Il vous reste à ajouter votre photo et à renseigner votre RIB.</strong></p>
+                <p class="warning-light">
+                    <img ng-src="{{ prefix_front }}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+                    <strong>Attention, pour bénéficier de votre forfait dès le mois prochain,<br>
+                            n'oubliez pas de compléter votre dossier avant le 17 du mois en cours.
+                    </strong>
+                </p>
+                <p>
+                    <strong>Pour venir compléter votre dossier,</strong> veuillez cliquer sur le lien indiqué dans le mail qui vous a été envoyé à l'adresse<br/>
+                    <strong>{{ userSig.email }}.</strong> 
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+                <button type="button" class="btn btn-primary aide-photo-btn" onclick="location.href='./'">
+                    <span>Retour accueil</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation payeur différent //-->
+<div class="step_form" id="confirmation" ng-show="blockNumber == '1110'" ng-form name="step_form">
+    <div class="confirmation">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <p>
+					<strong>Votre souscription est presque terminée.</strong>
+				</p>
+				<br />
+				<p>
+					Pour finaliser votre souscription, la personne qui finance votre forfait doit maintenant signer le mandat de prélèvement. 
+                    <br>
+                    Pour cela il lui suffit de cliquer sur le lien qui lui à été envoyé par email à l'adresse 
+                    <br/> 
+                    <strong>{{ payerSig.email }}</strong>
+				</p>
+				<br/>
+				<br/>
+				<p>
+                    Dès que le mandat aura été signé, votre carte Navigo sera livrée chez vous sous 10 jours
+                </p>
+                <br>
+                <br>
+                <p>
+					<strong>Retrouvez dès maintenant votre demande de souscrition dans votre Espace Service en ligne</strong>
+				</p>
+				<p>
+                    Pour vous connecter, renseignez les identifiants que vous avez choisis (votre email et votre mot de passe).
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+                <button type="button" class="btn btn-primary aide-photo-btn" onclick="location.href='./espace_client'">
+					<span>Accéder à votre espace</span>
+				</button>
+            </div>
+        </div>
+    </div>
+</div>

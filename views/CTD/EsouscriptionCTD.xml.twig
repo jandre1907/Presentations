@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <SEL>
+        <NumeroFormulaire>{{ numeroFormulaire }}</NumeroFormulaire>
+        <iteration>{{ contract.iterationCtd }}</iteration>
+        <RefdocPhoto>{{ refdocPhoto }}</RefdocPhoto>
+        <Porteur>
+            <NumAbo>{{ numeroPorteur }}</NumAbo>
+        </Porteur>
+        <Contrat>
+            <Produit>{{ codeProduit }}</Produit>
+            <DateSaisieContrat>{{ contract.updateDate|date("Ymd H:i:s.000") }}</DateSaisieContrat>
+        </Contrat>
+        <Justificatifs>
+            <ImgPhoto>{{ numeroFormulaire }}_{{ contract.iterationCtd }}_ImgPhoto_1.jpg</ImgPhoto>
+        </Justificatifs>
+    </SEL>

@@ -1,0 +1,138 @@
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    width: 45%;
+    margin: 0px 10px;
+    vertical-align: middle;
+    display: inline;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+      }
+
+      &:focus {
+        //outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+      }
+
+      &::-ms-track {
+        width: 100%;
+        cursor: pointer;
+        background: transparent; /* Hides the slider so custom styles can be added */
+        border-color: transparent;
+        color: transparent;
+      }
+      /* Special styling for WebKit/Blink */
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: 0;
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        background: @light-grey;
+        cursor: pointer;
+        margin-top: -7px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+      }
+
+      /* All the same stuff for Firefox */
+      &::-moz-range-thumb {
+        border: 0;
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        background: @light-grey;
+        cursor: pointer;
+      }
+
+      /* All the same stuff for IE */
+      &::-ms-thumb {
+        border: 0;
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        background: @light-grey;
+        cursor: pointer;
+      }
+      &::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 2px;
+        cursor: pointer;
+        background: @mid-grey;
+        border-radius: 1.3px;
+        border: 0;
+      }
+
+      &:focus::-webkit-slider-runnable-track {
+        background: @mid-grey;
+      }
+
+      &::-moz-range-track {
+        width: 100%;
+        height: 2px;
+        cursor: pointer;
+        background: @mid-grey;
+        border-radius: 1.3px;
+        border: 0;
+      }
+
+      &::-ms-track {
+        width: 100%;
+        height: 2px;
+        cursor: pointer;
+        background: transparent;
+        border-color: transparent;
+        border-width: 16px 0;
+        color: transparent;
+      }
+      &::-ms-fill-lower {
+        background: @mid-grey;
+        border: 0;
+        border-radius: 50%;
+      }
+      &:focus::-ms-fill-lower {
+        background: @mid-grey;
+      }
+      &::-ms-fill-upper {
+        background: @mid-grey;
+        border:0;
+        border-radius: 50%;
+      }
+      &:focus::-ms-fill-upper {
+        background: @mid-grey;
+      }
+}
+
+
+.FilterSetting,.slider-wrapper {
+    text-align: left;
+    margin-bottom: 20px;
+}
+span.FilterName {
+    text-align: left;
+    width: 30%;
+    display: inline-block;
+    //font-family: lato-bold,arial,sans-serif;
+    font-size: @font-small-mid;
+}
+.retoucher{
+    font-size: @font-small-mid;
+    margin-bottom: 20px;
+}
+.redo.rotate,.undo.rotate {
+    position: relative;
+    display: inline;
+    margin: 0px 15px 0 0;
+}
+input.redo, input.undo{
+    opacity: 0;
+    position: absolute;
+    left: 0px;
+}
+.rotate-control {
+    width: 70%;
+    display: inline;
+}
+#Filters {
+    margin: 25px 0 50px;
+}
+.slider-wrapper *, .FilterSetting * {
+    vertical-align: middle;
+}

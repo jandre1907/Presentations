@@ -1,0 +1,248 @@
+﻿body {
+    font-size: 20px;
+}
+p {
+    margin: 0px 0px 0px 0px;
+}
+.italic {
+    font-style: italic;
+}
+.bold {
+    font-weight: bold;
+}
+.underline {
+    text-decoration: underline;
+}
+.bleu {
+    color: blue;
+}
+#bleu {
+    color: blue;
+}
+#content {
+    width: 960px;
+    margin: auto;
+}
+
+/*--------block détails contract-------*/
+
+#details {
+    width: 960px;
+    height: 112px;
+    border-bottom: 1px solid black;
+    text-align: justify;
+    padding: 12px 12px 0px 12px;
+}
+#ex-client {
+    display: block;
+    width: 960px;
+    text-align: center;
+    padding-right: 30px;
+}
+#details-1 {
+    width: 580px;
+    height: 65px;
+    float: left;
+    padding-right: 30px;
+}
+#details-2 {
+    width: 310px;
+    height: 65px;
+    float: right;
+}
+#details-end {
+    display: block;
+    width: 960px;
+    text-align: center;
+}
+
+/*--------block titulaire-------*/
+
+#titulaire {
+    width: 960px;
+    height: 175px;
+    border-bottom: 1px solid black;
+    text-align: justify;
+    padding: 0px 12px 0px 12px;
+}
+#titulaire-1 {
+    width: 580px;
+    height: 100px;
+    float: left;
+}
+.nom {
+    margin-left: 40px;
+}
+.adresse {
+    margin-left: 80px;
+}
+#titulaire-2 {
+    width: 360px;
+    height: 100px;
+    float: right;
+}
+#titu-nom {
+    margin-left: 80px;
+}
+#prenom {
+    display: block;
+    width: 270px;
+}
+#titulaire-end {
+    width: 960px;
+    padding-top: 150px;
+    text-align: center;
+}
+
+/*--------block forfait-------*/
+
+#forfait {
+    width: 960px;
+    height: 125px;
+    border-bottom: 1px solid black;
+    text-align: justify;
+    padding: 0px 12px 0px 12px;
+}
+#forfait-1 {
+    width: 400px;
+    float: left;
+    margin-right: 70px;
+}
+#forfait-2 {
+    width: 600px;
+    float: left;
+}
+#forfait-date {
+    margin-left: 100px;
+}
+#forfait-end {
+    width: 960px;
+    padding-top: 105px;
+    text-align: center;
+}
+
+/*--------block payeur part 1 -------*/
+
+#payeur-1{
+    width: 982px;
+    height: 403px;
+}
+#content-payeur-1 {
+    width: 960px;
+    height: 115px;
+}
+#payeur-1A {
+    width: 506px;
+    float: left;
+}
+#payeur-nom {
+    margin-left: 80px;
+}
+#payeur-1B {
+    width: 360px;
+    float: right;
+}
+#content-payeur-2 {
+    width: 960px;
+}
+#sign-titulaire {
+    width: 465px;
+    height: 200px;
+    float: left;
+    border: solid;
+    border-width: 2px;
+    text-align: center;
+}
+#sign-debiteur {
+    width: 485px;
+    height: 200px;
+    float: right;
+    border: solid;
+    border-width: 2px;
+    text-align: center;
+}
+#payeur-1-end {
+    width: 960px;
+    height: 30px;
+    float: left;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/*--------block payeur part 2 -------*/
+
+#payeur-2 {
+    width: 960px;
+    height: 576px;
+    border: 1px solid;
+    margin-top: 35px;
+    padding: 0px 10px 10px 10px;
+}
+#ref-mandat {
+    display: block;
+    width: 250px;
+    height: 30px;
+    float: left;
+    text-align: center;
+}
+.box {
+    width: 450px;
+    height: 47px;
+    float: right;
+    margin-right: 237px;
+    border: 1px dashed red;
+    text-align: center;
+    color: blue;
+}
+#closes {
+    width: 958px;
+    float: left;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-style: italic;
+}
+#creancier {
+    display: block;
+    width: 250px;
+    height: 30px;
+    float: left;
+    text-align: center;
+    text-decoration:underline;
+}
+#creancier-adresse {
+    width: 640px;
+    height: 54px;
+    float: right;
+    margin-right: 20px;
+}
+#designation {
+    width: 960px;
+    height: 120px;
+    float: left;
+    margin-top: 30px;
+}
+#titu-prenom {
+    display: inline-block;
+    margin-left: 246px;
+}
+#compte {
+    width: 960px;
+    height: 200px;
+    float: left;
+}
+#ref-interne {
+    display: block;
+    width: 250px;
+    height: 34px;
+    float: left;
+    padding-top: 15px;
+    text-align: center;
+}
+#lieu {
+    margin-left: 160px;
+    color: grey;
+}
+#date {
+    color: grey;
+}

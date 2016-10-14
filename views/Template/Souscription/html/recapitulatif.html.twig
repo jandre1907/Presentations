@@ -1,0 +1,220 @@
+<div class="step_form" id="step_recapitulatif">
+	<!-- 5 -->
+
+    <p class="warning-light red" data-ng-hide="isSouscriptionDataComplete || ( cart.documents.url_photo && (userSig.rum || payerSig.rum ))">
+        <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+        {{"sna.sna_recapitulatif.lbl_avertissement_incompletude"|trans({}, "sna", "fr")|raw}}
+    </p>
+
+
+<!--
+    <h2 id="recapitulatif-saisie" class="margin-ultra-bottom" tabindex="-1">{{"sna.sna_recapitulatif.lbl_avertissement_incompletude"|trans({}, "sna", "fr")|raw}}</h2>
+    -->
+    <h3>{{"sna.sna_recapitulatif.lbl_verif_info"|trans({}, "sna", "fr")|raw}}</h3>
+
+
+	<div class="form-content" data-ng-form name="step_form">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+                <h3 class="picto-recap picto-forfait">{{"sna.sna_recapitulatif.lbl_recap_forfait"|trans({}, "sna", "fr")|raw}}</h3>
+                <a href="#/Forfait" class="pull-right modifier" title="Modifier votre séléction de forfait">
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/crayon.png" alt="Modifier"/>
+                    <span>
+                        {{"sna.sna_recapitulatif.act_modif_forfait"|trans({}, "sna", "fr")|raw}}
+                    </span>
+                </a>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12">
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_debut_forfait"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ Holder.forfait.date | dateFormatStr }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_zone_forfait"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ Holder.forfait.zoneForfaitDetail.title }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_montant_forfait"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ Holder.forfait.zoneForfaitDetail.price | euro : 2 : "," : " €" }}{% endverbatim %}</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+                <h3 class="picto-recap picto-coordonnees">{{"sna.sna_recapitulatif.lbl_recap_coordonnees"|trans({}, "sna", "fr")|raw}}</h3>
+                <a href="/Porteur" class="pull-right modifier" title="Modifier votre séléction de forfait">
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/crayon.png" alt="Modifier"/>
+                    <span>
+                        {{"sna.sna_recapitulatif.act_modif_coordonnees"|trans({}, "sna", "fr")|raw}}
+                    </span>
+                </a>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_civilite"|trans({}, "sna", "fr")|raw}}</label><strong><span data-ng-show="userSig.prefix == 01 || userSig.prefix == 'Monsieur'">Monsieur</span><span data-ng-show="userSig.prefix == 02 || userSig.prefix == 'Madame'">Madame</span></strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_nom"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ userSig.lastname }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_prenom"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ userSig.firstname }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_date_naiss"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ userSig.birthDate.day }}/{{ userSig.birthDate.month }}/{{ userSig.birthDate.year }}{% endverbatim %}</strong>
+						</p>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_num_rue"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ userSig.street3 }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_cp"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ userSig.postalCode }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_ville"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ userSig.city.bureauDistributeur }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_pays"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ userSig.country }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_tel_port"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ userSig.mobile }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_tel_fixe"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ userSig.phone }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_email"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ userSig.email }}{% endverbatim %}</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+                <h3 class="picto-recap picto-photo">{{"sna.sna_recapitulatif.lbl_recap_photo"|trans({}, "sna", "fr")|raw}}</h3>
+                <a href="#/Photo" class="pull-right modifier" title="{{"sna.sna_recapitulatif.act_modif_photo_info"|trans({}, "sna", "fr")|raw}}">
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/crayon.png" alt="Modifier"/>
+                    <span>
+                        {{"sna.sna_recapitulatif.act_modif_photo"|trans({}, "sna", "fr")|raw}}
+                    </span>
+                </a>
+			</div>
+			<div class="panel-body">
+				<div class="preview">
+					<img src="data:null" data-ng-src="{% verbatim %}{{ cart.documents.url_photo }}{% endverbatim %}" data-ng-hide="! (cart.documents.url_photo)" />
+				</div>
+				<p class="text-danger" data-ng-show="! (cart.documents.url_photo)">{{"sna.sna_recapitulatif.lbl_photo_attente"|trans({}, "sna", "fr")|raw}}</p>
+			</div>
+
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+                <h3 class="picto-recap picto-rib">{{"sna.sna_recapitulatif.lbl_recap_payeur"|trans({}, "sna", "fr")|raw}}</h3>
+                <a href="#/Paiement" class="pull-right modifier" title="Modifier votre séléction de forfait">
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/crayon.png" alt="Modifier"/>
+                    <span>
+                        {{"sna.sna_recapitulatif.act_modif_payeur"|trans({}, "sna", "fr")|raw}}
+                    </span>
+                </a>
+			</div>
+			<div class="panel-body" >
+				<div class="row" data-ng-hide="userSig.isNotPayer!=1" data-ng-show="userSig.isNotPayer==1">
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_payeur_civilite"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.prefix }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_payeur_nom"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.lastname }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_payeur_prenom"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.firstname }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_payeur_date_naiss"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.birthDate.day }}/{{ payerSig.birthDate.month }}/{{ payerSig.birthDate.year }}{% endverbatim %}</strong>
+						</p>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<p class="recap-line">
+							<label><abbr title="Numéro">{{"sna.sna_recapitulatif.lbl_payeur_num_rue"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.street3 }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_payeur_cp"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.postalCode }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_payeur_ville"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.city.bureauDistributeur }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_payeur_pays"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.country }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_payeur_tel_port"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.mobile }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_payeur_tel_fixe"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.phone }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_payeur_email"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.email }}{% endverbatim %}</strong>
+						</p>
+					</div>
+				</div>
+
+
+				<div class="row" data-ng-hide="userSig.isNotPayer==1" data-ng-show="userSig.isNotPayer!=1">
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_porteur_bic"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ userSig.bic }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_porteur_iban"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ userSig.iban }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_porteur_titulaire"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ userSig.firstname }} {{ userSig.lastname }}{% endverbatim %}</strong>
+						</p>
+						<p class="recap-line">
+							<label>{{"sna.sna_recapitulatif.lbl_porteur_rum"|trans({}, "sna", "fr")|raw}}
+                                <span class="sub-label">{{"sna.sna_recapitulatif.lbl_porteur_rum_ref"|trans({}, "sna", "fr")|raw}}</span>
+                            </label><strong>{% verbatim %}{{ userSig.rum }}{% endverbatim %}</strong>
+						</p>
+					</div>
+				</div>
+
+                <div class="row" data-ng-hide="userSig.isNotPayer!=1" data-ng-show="userSig.isNotPayer==1">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <p class="recap-line">
+                            <label>{{"sna.sna_recapitulatif.lbl_payeur_bic"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.bic }}{% endverbatim %}</strong>
+                        </p>
+                        <p class="recap-line">
+                            <label>{{"sna.sna_recapitulatif.lbl_payeur_iban"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.iban }}{% endverbatim %}</strong>
+                        </p>
+                        <p class="recap-line">
+                            <label>{{"sna.sna_recapitulatif.lbl_payeur_titulaire"|trans({}, "sna", "fr")|raw}}</label><strong>{% verbatim %}{{ payerSig.firstname }} {{ payerSig.lastname }}{% endverbatim %}</strong>
+                        </p>
+                        <p class="recap-line">
+                            <label><abbr title="Numéro">{{"sna.sna_recapitulatif.lbl_payeur_rum"|trans({}, "sna", "fr")|raw}}
+                                <span class="sub-label">{{"sna.sna_recapitulatif.lbl_payeur_rum_ref"|trans({}, "sna", "fr")|raw}}</span>
+                            </label><strong>{% verbatim %}{{ payerSig.rum }}{% endverbatim %}</strong>
+                        </p>
+                    </div>
+                </div>
+
+			</div>
+		</div>
+
+		<p class="title">
+            <strong>{{"sna.sna_recapitulatif.lbl_avertissement_signature"|trans({}, "sna", "fr")|raw}}</strong>
+        </p>
+	</div>
+	<!-- form-content -->
+	<div class="form-group">
+        <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+			<button type="button" class="btn btn-primary aide-photo-btn" data-ng-click="submitForm()" title="{{"sna.sna_recapitulatif.btn_certif_donnee_info"|trans({}, "sna", "fr")|raw}}">
+				<span>{{"sna.sna_recapitulatif.btn_certif_donnee"|trans({}, "sna", "fr")|raw}}</span>
+			</button>
+		</div>
+	</div>
+</div>

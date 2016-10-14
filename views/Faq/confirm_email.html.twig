@@ -1,0 +1,12 @@
+{% extends "SelBundle::Mail/layout.html.twig" %}
+{% block title %}<h2>{{ 'faq.faq_ask_confirm_email.question_saved_label'|trans({}, 'faq') }}</h2>{% endblock title %}
+{% block body %}
+{% block body_text %}
+{% autoescape false %}
+{{ 'faq.faq_ask_confirm_email.content'|trans({}, 'faq') }}
+{{champ_texte}}
+
+{% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}
+{% endblock body %}

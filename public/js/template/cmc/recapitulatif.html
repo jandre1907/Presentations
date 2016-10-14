@@ -1,0 +1,127 @@
+<div class="step_form" id="step_recapitulatif">
+	<!-- 5 -->
+	<p class="red" ng-hide="true">
+		Vous n'avez pas encore renseigné toutes les informations de votre
+		demande de souscription. Vous pouvez soit les compléter en cliquant
+		sur Modifier, soit les ajouter plus tard en cliquant sur le lien qui
+		vous sera envoyé par email. </br>
+		</br> Attention, pour bénéficier de votre forfait dès le mois prochain
+		n'oubliez pas de compléter votre dossier avant le 17 du mois en
+		cours.
+	</p>
+	<p class="title">
+		<strong>Veuillez vérifier vos coordonnées personnelles et les
+			compléter</strong>
+	</p>
+	<span>{{recapCtrl.test}}</span>
+	<div class="form-content" ng-form name="step_form">
+
+		<!--
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="picto-recap picto-forfait">Forfait</span> <a href="#/Forfait"
+					class="pull-right modifier" title="Modifier le choix du forfait">Modifier</a>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-12">
+						<p class="recap-line">
+							<label>Date de debut de forfait</label><strong>{{ Holder.forfait.date.day }} {{ Holder.forfait.date.month }} {{ Holder.forfait.date.year }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Zone du forfait</label><strong>{{ Holder.forfait.zones[Holder.forfait.zone].shortTitle }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Montant</label><strong>{{ Holder.forfait.zones[Holder.forfait.zone].longTitle }}</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		-->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="picto-recap picto-coordonnees">Coordonnées</span> <a
+					href="#/Porteur" class="pull-right modifier">Modifier</a>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-6">
+						<p class="recap-line">
+							<!--<label>Civilité</label><strong><span> ng-show="Holder.civilite == 01 || Holder.civilite == 'Monsieur'">Monsieur</span><span ng-show="Holder.civilite == 02 || Holder.civilite == 'Madame'">Madame</span></strong>-->
+							<label>Civilité</label>
+							<strong>
+								<span>{{ recapCtrl.userSig.prefix | civiliteFtr }}</span>
+							</strong>
+						</p>
+						<p class="recap-line">
+							<label>Nom</label><strong>{{ recapCtrl.userSig.lastname }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Prénom</label><strong>{{ recapCtrl.userSig.firstname }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Date de naissance</label><strong>{{ recapCtrl.userSig.birthDate.day }}/{{ recapCtrl.userSig.birthDate.month }}/{{ recapCtrl.userSig.birthDate.year }}</strong>
+						</p>
+					</div>
+					<div class="col-xs-6">
+						<p class="recap-line">
+							<label>N° de la rue</label><strong>{{ recapCtrl.userSig.street3 }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Code postal</label><strong>{{ recapCtrl.userSig.postalCode }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Ville</label><strong>{{ recapCtrl.userSig.city.label }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Pays</label><strong>{{ recapCtrl.userSig.country }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Téléphone portable</label><strong>{{ recapCtrl.userSig.mobile }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Téléphone fixe</label><strong>{{ recapCtrl.userSig.phone }}</strong>
+						</p>
+						<p class="recap-line">
+							<label>Email</label><strong>{{ recapCtrl.userSel.email }}</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="picto-recap picto-photo">Photo</span> <a href="#/Photo"
+					class="pull-right modifier" title="Modifier la photo">Modifier</a>
+			</div>
+			<div class="panel-body">
+				<div class="preview">
+					<img src="{{ recapCtrl.userSig.photoValid }}" ng-hide="recapCtrl.userSig.photoValid == null" />
+				</div>
+				<p class="text-danger" ng-show="recapCtrl.userSig.photoValid == null">Vous
+					souhaitez ajouter une photo plus tard</p>
+			</div>
+
+		</div>
+
+		<p class="title">
+			<strong>Attention, les informations de contact (adresse
+				email et numéro de téléphone mobile) affichées sur cette page
+				serviront à signer éléctroniquement votre dossier. Veuillez les
+				vérifier attentivement.</strong>
+		</p>
+
+	</div>
+	<!-- form-content -->
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3">
+			<button type="button" class="btn btn-primary pull-right"
+				ng-click="recapCtrl.onCertifie()" title="Certifier les informations saisies et poursuivre">
+				<span>Je certifie que ces données sont exactes</span>
+			</button>
+			<p class="text-error" ng-show="recapCtrl.error">{{recapCtrl.error}}</p>
+		</div>
+	</div>
+</div>

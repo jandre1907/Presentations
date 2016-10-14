@@ -1,0 +1,66 @@
+<div class="step_form" id="step_identification_2"><!-- 0.2 -->
+    <h2 class="margin-ultra-bottom">{{"rat.rat_identification.lbl_action_utilisateur_titre"|trans({}, "rat", "fr")|raw}}</h2>
+    <div class="form-content form-horizontal" data-ng-form name="step_form" novalidate>
+        <p class="warning-light red"  data-ng-show="(error != '' && error != null)" class="text-error">
+            <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+            <strong>{% verbatim %}{{error}}{% endverbatim %}</strong>
+        </p>
+
+        <div class="form-group">
+            <label for="numero-client" class="col-xs-12 col-sm-12 col-md-4 control-label">{{"rat.rat_identification.lbl_num_client"|trans({}, "rat", "fr")|raw}}<span class="star">*</span></label>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <input id="numero-client" type="text" name="reference" class="form-control" placeholder="Inscrit à coté de la photo" data-ng-model="userSig.reference" data-ng-minlength="1" data-ng-maxlength="20" data-ng-pattern="/[0-9]+/" data-ng-required="userSig.unknowReference != true" data-ng-disabled="userSig.unknowReference == true"  aria-required="true">
+                <span class="mess-error" data-ng-show="formSubmitted && (step_form.reference.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                <span class="mess-error" data-ng-show="step_form.reference.$error.pattern && userSig.unknowReference != true">{{"rat.rat_identification.err_num_client_invalid"|trans({}, "rat", "fr")|raw}}</span>
+                <span class="mess-error" data-ng-show="step_form.reference.$error.minlength || step_form.reference.$error.maxlength">{{"rat.rat_identification.err_num_client_invalid"|trans({}, "rat", "fr")|raw}}</span>
+                <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="Erreur" data-ng-show="formSubmitted && (step_form.reference.$invalid)">
+            </div>
+
+            <div class="col-xs-12 col-sm-2 col-md-4">
+                <a href="#/IdentificationHelp" target="_blank" class="btn btn-default btn-sm identification-help" title="{{"rat.rat_identification.lbl_aide_num_client_title"|trans({}, "rat", "fr")|raw}}">{{"rat.rat_identification.lbl_aide_num_client"|trans({}, "rat", "fr")|raw}}</a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-12 col-sm-8 col-md-8 col-md-offset-4">
+                <div class="checkbox creation-compte margin-bottom">
+                    <input id="checkbox02" type="checkbox" data-ng-model='userSig.unknowReference'  data-ng-true-value="true" data-ng-false-value="false" >
+                    <label for="checkbox02">
+                        {{"rat.rat_identification.ckbox_sans_num_label"|trans({}, "rat", "fr")|raw}}
+                        <a class="bullet-help" href="#/IdentificationHelp#collapseTwo" target="_blank" title="{{"rat.rat_identification.title_lbl_trouver_numero_client"|trans({}, "rat", "fr")|raw}}" aria-label="{{"rat.rat_identification.aria_lbl_trouver_numero_client"|trans({}, "rat", "fr")|raw}}">
+                            <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/question.png" class="picto" alt="Aide" width="20" height="20">
+                        </a>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group birthdate">
+            <label for="birthdate" class="col-xs-12 col-sm-12 col-md-4 control-label">{{"rat.rat_identification.lbl_champs_date_naissance"|trans({}, "rat", "fr")|raw}}<span class="star">*</span></label>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="col_3">
+                    <div>
+                        <input id="birthdate" class="form-control" name="birthday" type="text" placeholder="JJ" data-ng-model="userSig.birthDate.day" maxlength="2" required aria-required="true" aria-label="{{"rat.rat_details.aria_alt_champs_mois_naissance"|trans({}, "rat", "fr")|raw}}">
+                    </div><div>
+                        <input class="form-control" type="text" name="birthmonth" placeholder="MM" data-ng-model="userSig.birthDate.month"  maxlength="2" required aria-required="true" aria-label="{{"rat.rat_details.aria_alt_champs_mois_naissance"|trans({}, "rat", "fr")|raw}}">
+                    </div><div>
+                        <input class="form-control" type="text" name="birthyear" placeholder="AAAA" data-ng-model="userSig.birthDate.year"  maxlength="4" required aria-required="true" aria-label="{{"rat.rat_details.aria_alt_champs_mois_naissance"|trans({}, "rat", "fr")|raw}}">
+                    </div>
+                </div>
+                <span class="mess-error" data-ng-show="formSubmitted && (step_form.birthday.$invalid || step_form.birthmonth.$invalid || step_form.birthyear.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                <span class="mess-error" data-ng-show="step_form.birthday.$error.date ">{{"rat.rat_identification.err_date_naissance"|trans({}, "rat", "fr")|raw}}</span>
+                <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="Erreur" data-ng-show="step_form.birthday.$error.date || (formSubmitted && (step_form.birthday.$invalid || step_form.birthmonth.$invalid || step_form.birthyear.$invalid))">
+            </div>
+        </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="button" class="btn btn-primary aide-photo-btn" data-ng-click="identification.stepSubmit()" title="{{"rat.rat_identification.btn_continuer_info"|trans({}, "rat", "fr")|raw}}" data-ng-disabled="(step_form.reference.$invalid && userSig.unknowReference != true) || (step_form.birthday.$invalid || step_form.birthmonth.$invalid || step_form.birthyear.$invalid) || disableSubmit" ><span>{{"rat.rat_identification.btn_continuer_lbl"|trans({}, "rat", "fr")|raw}}</span></button>
+            </div>
+        </div>
+        <span class="obligatoire">
+            <span class="star" aria-label="{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}">*</span>
+            {{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}
+        </span>
+</div>

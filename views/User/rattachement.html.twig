@@ -1,0 +1,263 @@
+{% extends "SelBundle::layout.html.twig" %}
+{% block angularModule %}Rattachement{% endblock angularModule %}
+{% block breadcrumb %}
+    <div>
+        <div id="box_breadcrumb_id" class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="http://www.navigo.fr" title="{{ 'home.home_espace_client.accueil_link_breadcrumb_title' | trans({}, 'home') }}">{{ 'home.home_espace_client.accueil_link_breadcrumb' | trans({}, 'home') }}</a></li>
+                    <li><a href="{{ path('sel_homepage') }}" title="{{ 'home.home_espace_client.gere_maCarte_link_breadcrumb_title' | trans({}, 'home') }}">{{ 'home.home_espace_client.gere_maCarte_link_breadcrumb' | trans({}, 'home') }}</a></li>
+                    <li class="active">{{ 'home.home_espace_client.bloc.rapatrier' | trans({}, 'home') }}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock breadcrumb %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+    {% javascripts
+        '@SelBundle/Resources/public/js/rattachement/rattachementModule.js'
+        '@SelBundle/Resources/public/js/rattachement/Controller/RattachementCtrl.js'
+        output='js/home_rattachement.js' %}
+    <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+    <script src="//www.google.com/recaptcha/api.js?render=explicit" async></script>
+{% endblock %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{ 'home.home_espace_client.bloc.rapatrier' | trans({}, 'home') }}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% form_theme form _self %}
+{%- block date_widget -%}
+
+    {%- if widget == 'single_text' -%}
+        {{ block('form_widget_simple') }}
+    {%- else -%}
+        <div class='col_3' {{ block('widget_container_attributes') }}>
+            {{- date_pattern|replace({
+                '{{ year }}':  form_widget(form.year, {'attr': {
+                                        'class': 'form-control',
+                                        'data-ng-model': 'birthYear',
+                                        'data-ng-pattern': '/^[0-9]{4}$/',
+                                        'maxlength':'4'
+                                    },
+                                    'required' : false
+                                }),
+                '{{ month }}': form_widget(form.month, {'attr': {
+                                        'class': 'form-control',
+                                        'data-ng-model': 'birthMonth',
+                                        'data-ng-pattern': '/^[0-9]{2}$/',
+                                        'maxlength':'2'
+                                    },
+                                    'required' : false
+                                }),
+                '{{ day }}':   form_widget(form.day, {'attr': {
+                                        'class': 'form-control',
+                                        'data-ng-model': 'birthDay',
+                                        'data-ng-pattern': '/^[0-9]{2}$/',
+                                        'maxlength':'2'
+                                    },
+                                    'required' : false
+                                })
+            })|raw -}}
+        </div>
+    {%- endif -%}
+{%- endblock date_widget -%}
+
+{% block mainContent %}
+    {% block body %}
+
+{% block content %}
+<div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-horizontal" data-ng-controller="RattachementCtrl as pageCtrl"
+                data-ng-init="
+                    emailFieldName = '{{form.email.vars.full_name}}';
+                    sigClientNumberFieldName = '{{form.numero.vars.full_name}}';
+                    lastnameFieldName = '{{form.nom.vars.full_name}}';
+                    firstnameFieldName = '{{form.prenom.vars.full_name}}';
+                    postalCodeFieldName = '{{form.codePostal.vars.full_name}}';
+                    mobileFieldName = '{{form.phoneNumber.vars.full_name}}';
+                    birthDayFieldName = '{{form.date.children.day.vars.full_name}}';
+                    birthMonthFieldName = '{{form.date.children.month.vars.full_name}}';
+                    birthYearFieldName = '{{form.date.children.year.vars.full_name}}';
+                    secretCaptcha = '{{ public_key_captcha }}';
+                "
+            >
+                    <div class="form-content">
+                        {% if errorMessage is defined %}
+                            <p class="warning-light red" class="text-error">
+                                <img src="{{ asset('bundles/sel/images/alert.png') }}" class="picto" alt="Alerte">
+                                <strong>{{errorMessage}}</strong>
+                            </p>
+
+                            {% render controller("SelBundle:Tracking:identificationErrorTracker", {'request': app.request, 'mapperParameters': {
+                                'identification_error': true
+                            }}) %}
+                        {% endif %}
+                        <h2>{{ 'home.home_espace_client.message.complete_infos'|trans({}, 'home')| raw }}</h2><br/><br/>
+                        <form id="formRegister"  method="POST" {{ form_enctype(form) }} novalidate action="{{ path('sel_user_rattachement') }}" name="form">
+
+                        {#<p data-ng-show="(error != '' && error!=null)" class="text-error">{{ error }}</p>#}
+                        <div class="form-group">
+                            <label for="sel_rattachement_email" class="col-xs-12 col-sm-3 col-md-3 control-label">E-mail</label>
+                            <div class="col-xs-11 col-sm-6 col-md-6">
+                                {{ form_widget(form.email, {'attr': {
+                                            'class': 'form-control',
+                                            'placeholder': 'Email',
+                                            'data-ng-model': 'email',
+                                            'novalidate': 'novalidate'
+                                        },
+                                        'required' : false
+                                    })
+                                }}
+                                <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="showInvalidPicto(emailFieldName)">
+                                <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto error" alt="Erreur" data-ng-show="showValidPicto(emailFieldName)">
+                                <span class="mess-error" aria-live="assertive"  data-ng-show="showInvalidPicto(emailFieldName)">Information incorrecte, veuillez la saisir à nouveau.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sel_rattachement_numero" class="col-xs-12 col-sm-3 col-md-3 control-label">Numéro client</label>
+                            <div class="col-xs-11 col-sm-6 col-md-6">
+                                {{ form_widget(form.numero, {'attr': {
+                                            'class': 'form-control',
+                                            'placeholder': 'Numéro client',
+                                            'data-ng-model': 'sigClientNumber',
+                                            'data-ng-pattern':"/^[0-9]{1,10}$/",
+                                            'novalidate': 'novalidate',
+                                            'minlength': "1"
+                                        }
+                                    })
+                                }}
+                                <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="showInvalidPicto(sigClientNumberFieldName)">
+                                <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto error" alt="Erreur" data-ng-show="showValidPicto(sigClientNumberFieldName)">
+                                <span class="mess-error" aria-live="assertive"  data-ng-show="showInvalidPicto(sigClientNumberFieldName)">Information incorrecte, veuillez la saisir à nouveau.</span>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="sel_rattachement_nom" class="col-xs-12 col-sm-3 col-md-3 control-label">Nom</label>
+                            <div class="col-xs-11 col-sm-6 col-md-6">
+                                {{ form_widget(form.nom, {'attr': {
+                                            'class': 'form-control',
+                                            'placeholder': 'Nom',
+                                            'data-ng-model': 'name',
+                                            'data-ng-pattern': "/^[a-zA-ZáàâäçéèêëíìîïôöúùûüÿæœÁÀÂÄÇÉÈÊËÍÌÎÏÓÒÔÖÚÙÛÜŸÆŒ\\-\\ \\']{2,20}$/",
+                                            'novalidate': 'novalidate',
+                                            'maxlength': 20
+                                        }
+                                    })
+                                }}
+                                <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="showInvalidPicto(lastnameFieldName)">
+                                <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto error" alt="Erreur" data-ng-show="showValidPicto(lastnameFieldName)">
+                                <span class="mess-error" aria-live="assertive"  data-ng-show="showInvalidPicto(lastnameFieldName)">Information incorrecte, veuillez la saisir à nouveau.</span>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="sel_rattachement_prenom" class="col-xs-12 col-sm-3 col-md-3 control-label">Prénom</label>
+                            <div class="col-xs-11 col-sm-6 col-md-6">
+                                {{ form_widget(form.prenom, {'attr': {
+                                            'class': 'form-control',
+                                            'placeholder': 'Prénom',
+                                            'data-ng-model': 'firstname',
+                                            'data-ng-pattern': "/^[a-zA-ZáàâäçéèêëíìîïôöúùûüÿæœÁÀÂÄÇÉÈÊËÍÌÎÏÓÒÔÖÚÙÛÜŸÆŒ\\-\\ \\']{2,20}$/",
+                                            'novalidate': 'novalidate',
+                                            'maxlength': 20
+                                        }
+                                    })
+                                }}
+                                <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="showInvalidPicto(firstnameFieldName)">
+                                <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto error" alt="Erreur" data-ng-show="showValidPicto(firstnameFieldName)">
+                                <span class="mess-error" aria-live="assertive"  data-ng-show="showInvalidPicto(firstnameFieldName)">Information incorrecte, veuillez la saisir à nouveau.</span>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="sel_rattachement_codePostal" class="col-xs-12 col-sm-3 col-md-3 control-label">Code postal</label>
+                            <div class="col-xs-11 col-sm-6 col-md-6">
+                                {{ form_widget(form.codePostal, {'attr': {
+                                            'class': 'form-control',
+                                            'placeholder': 'Code postal',
+                                            'data-ng-model': 'postalCode',
+                                            'data-ng-pattern': "/^[0-9]{5}$/",
+                                            'novalidate': 'novalidate',
+                                            'maxlength': 5
+                                        }
+                                    })
+                                }}
+                                <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="showInvalidPicto(postalCodeFieldName)">
+                                <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto error" alt="Erreur" data-ng-show="showValidPicto(postalCodeFieldName)">
+                                <span class="mess-error" aria-live="assertive"  data-ng-show="showInvalidPicto(postalCodeFieldName)">Information incorrecte, veuillez la saisir à nouveau.</span>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-3 control-label">Téléphone portable</label>
+                            <div class="col-xs-11 col-sm-6 col-md-6">
+                                {{ form_widget(form.phoneNumber, {'attr': {
+                                            'class': 'form-control',
+                                            'placeholder': 'Téléphone portable',
+                                            'data-ng-model': 'mobile',
+                                            'data-ng-pattern': '/^(06|07)[ ]?[0-9]{2}[ ]?[0-9]{2}[ ]?[0-9]{2}[ ]?[0-9]{2}[ ]?$/',
+                                            'novalidate': 'novalidate',
+                                            'maxlength': '15'
+                                        }
+                                    })
+                                }}
+                                <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="showInvalidPicto(mobileFieldName)">
+                                <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto error" alt="Erreur" data-ng-show="showValidPicto(mobileFieldName)">
+                                <span class="mess-error" aria-live="assertive"  data-ng-show="showInvalidPicto(mobileFieldName)">Information incorrecte, veuillez la saisir à nouveau.</span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group birthdate">
+                            <label for="sel_rattachement_date" class="col-xs-12 col-sm-3 col-md-3 control-label">Date de naissance</label>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                {{ form_widget(form.date) }}
+                                <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="showInvalidDatePicto()">
+                                <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto error" alt="Erreur" data-ng-show="showValidDatePicto()">
+                                <span class="mess-error" aria-live="assertive"  data-ng-show="showInvalidDatePicto()">Information incorrecte, veuillez la saisir à nouveau.</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-9 col-xs-offset-3 col-sm-4 col-md-4" >
+                                <!-- Captcha -->
+                                 <div id="g-recaptcha" class="g-recaptcha" data-sitekey="{{ public_key_captcha }}"  >
+                                 </div>
+                                 <input type="hidden" name="captchaResponse" data-ng-model="captchaResponse" required />
+                                 <br>
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <button type="submit" class="btn btn-primary aide-photo-btn" data-ng-click="ignoreFormat()" value="Valider le formulaire et continuer" data-ng-disabled="form.$invalid"><span>Continuer</span></button>
+                        </div>
+                    </div>
+                    {{ form_rest(form) }}
+                    </form>
+                    {#<span class="obligatoire">
+                        <span class="star" aria-label="{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}"></span>
+                            {{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}
+                    </span>#}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}
+    {% endblock body%}
+
+{% endblock mainContent %}

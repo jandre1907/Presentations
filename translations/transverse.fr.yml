@@ -1,0 +1,104 @@
+transverse.transverse_obli.aria_lbl_obli: 'Les informations à saisir marquées par une * sont obligatoires'
+transverse.transverse_obli.lbl_obli: 'Champs obligatoires'
+transverse.transverse_cookie.main_message: 'En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de cookies pour vous proposer la meilleure expérience en ligne et réaliser des statistiques.'
+transverse.transverse_cookie.more_infos_title: 'En savoir plus (nouvelle fenêtre)'
+transverse.transverse_cookie.more_infos: '> En savoir plus.'
+transverse.transverse_cookie.accept: 'Accepter et fermer'
+transverse.transverse_prev.previous_page: Précédent
+transverse.transverse_prev.previous_page_title: 'retour à la page précédente'
+transverse.transverse_base.main_title: 'Tous les services'
+transverse.transverse_cnil.footer_cnil: '<strong class="cnil-title">Mention CNIL.</strong><br/>Le GIE Comutitres, met en œuvre un traitement de données personnelles dans le cadre de la gestion des commandes de carte et de la relation clients.Conformément à la loi du 06/01/1978, toute personne concernée dispose d''un droit d’accès, d''interrogation, de rectification, et d''opposition pour des motifs légitimes et à la prospection commerciale.Pour les exercer, il faut s’adresser à contact@comutitres.fr.'
+transverse.transverse_cnil.footer_cnil: '<strong class="cnil-title">Mention CNIL.</strong><br />Le GIE Comutitres, met en &oelig;uvre un traitement de donn&eacute;es personnelles dans le cadre de la gestion des commandes de carte et de la relation clients. Conform&eacute;ment &agrave; la loi du 06/01/1978, toute personne concern&eacute;e dispose d''un droit d&rsquo;acc&egrave;s, d''interrogation, de rectification, et d''opposition pour des motifs l&eacute;gitimes et &agrave; la prospection commerciale. L&rsquo;ensemble de ces droits s&rsquo;exerce &agrave; l&rsquo;adresse suivante :&nbsp;<a href="mailto:contact@comutitres.fr">contact@comutitres.fr</a>.'
+transverse.transverse_header.acces_espace: 'Accéder à mon espace personnel'
+transverse.transverse_header.acces_espace_title: 'Accéder à mon espace Services Navigo'
+transverse.transverse_header.hello: Bonjour
+transverse.transverse_header.deconnexion_title: Déconnexion
+transverse.transverse_header.deconnexion: Déconnexion
+transverse.transverse_header.creer_espace: 'Créer mon espace personnel'
+transverse.transverse_header.creer_espace_title: 'Créer mon espace Services Navigo'
+transverse.transverse_header.connection: 'Me connecter'
+transverse.transverse_header.connection_title: 'Me connecter à mon espace Services Navigo'
+transverse.transverse_header.forfait_menu_link: 'Les forfaits Navigo'
+transverse.transverse_header.forfait_menu_link_title: 'Les forfaits Navigo'
+transverse.transverse_header.home_menu_link: 'Accueil Services Navigo'
+transverse.transverse_header.home_menu_link_title: 'Accueil Services Navigo'
+transverse.transverse_header.services_link: 'Services Navigo'
+transverse.transverse_navigation.navigo_logo_title: Navigo
+transverse.transverse_navigation.actuality_link: Actualités
+transverse.transverse_navigation.actuality_link_title: Actualités
+transverse.transverse_navigation.choice_forfait_link: 'Je choisis<br />mon forfait'
+transverse.transverse_navigation.choice_forfait_link_title: 'Je choisis mon forfait'
+transverse.transverse_navigation.control_card_link: 'Je gère ma carte'
+transverse.transverse_navigation.control_card_link_title: 'Je gère ma carte'
+transverse.transverse_navigation.services_link: 'Les services'
+transverse.transverse_navigation.services_link_title: 'Les services'
+transverse.transverse_navigation.download_attestation_link: 'Télécharger mon attestation'
+transverse.transverse_navigation.download_attestation_link_title: 'Télécharger mon attestation'
+transverse.transverse_navigation.declare_perte_vol_link: 'Déclarer la perte/vol de ma carte'
+transverse.transverse_navigation.declare_perte_vol_link_title: 'Déclarer la perte/vol de ma carte'
+transverse.transverse_navigation.souscription_forfait_link: 'Souscrire à un forfait'
+transverse.transverse_navigation.souscription_forfait_link_title: 'Souscrire à un forfait'
+transverse.transverse_navigation.command_card_link: 'Commander une carte'
+transverse.transverse_navigation.command_card_link_title: 'Commander une carte'
+transverse.transverse_navigation.recharger_link: 'Recharger ma carte'
+transverse.transverse_navigation.recharger_link_title: 'Recharger ma carte'
+transverse.transverse_navigation.create_space_link: 'Créer mon espace personnel'
+transverse.transverse_navigation.create_space_link_title: 'Créer mon espace personnel'
+transverse.transverse_navigation.all_services_link: 'Tous les services'
+transverse.transverse_navigation.all_services_link_title: 'Tous les services'
+transverse.transverse_navigation.organise_mouvement_link: "J'organise<br />mon déplacement"
+transverse.transverse_navigation.organise_mouvement_link_title: "J'organise mon déplacement"
+transverse.transverse_navigation.titre_transport_link_title: "Trouver mon titre de transport"
+transverse.transverse_navigation.titre_transport_link: "Trouver mon titre de transport"
+transverse.transverse_navigation.dezonage_link: "Dézonage et complément de parcours"
+transverse.transverse_navigation.dezonage_link_title: "Dézonage et complément de parcours"
+transverse.transverse_navigation.parcs_relais_link: "Parcs Relais"
+transverse.transverse_navigation.parcs_relais_link_title: "Parcs Relais"
+transverse.transverse_navigation.veligo_link: "Véligo"
+transverse.transverse_navigation.veligo_link_title: "Véligo"
+transverse.transverse_navigation.velos_service_link: "Vélos en libre service"
+transverse.transverse_navigation.velos_service_link_title: "Vélos en libre service"
+transverse.transverse_navigation.fileo_link: "Filéo"
+transverse.transverse_navigation.fileo_link_title: "Filéo"
+transverse.transverse_navigation.noctilien_link: "Noctilien"
+transverse.transverse_navigation.noctilien_link_title: "Noctilien"
+transverse.transverse_navigation.vianavigo_logo_title: Itinéraires, horaires et info trafic en Île-de-France (nouvelle fenêtre)
+transverse.transverse_navigation.vianavigo_logo: Itinéraires, horaires et info trafic<br />en Île-de-France
+transverse.transverse_header.menu_mobile_title: Navigation
+transverse.transverse_header.entry_connection_title: Connection
+transverse.transverse_header.navigo_logo_title: Navigo
+transverse.transverse_header.main_title: 'Tous mes déplacements en Île-de-France'
+transverse.transverse_header.main_title_desc: 'Carte Navigo, forfait, gestion.'
+transverse.transverse_header.subscription_link: 'Souscrire un forfait'
+transverse.transverse_header.subscription_link_title: 'Souscrire un forfait'
+transverse.transverse_header.card_command_link: 'Commander une carte'
+transverse.transverse_header.card_command_link_title: 'Commander une carte'
+transverse.transverse_header.card_reload_link: 'Recharger votre carte'
+transverse.transverse_header.card_reload_link_title: 'Recharger votre carte'
+transverse.transverse_header.card_reload_link_value: 'https://rechargercommandernavigo.fr/nfc/'
+transverse.transverse_header.need_help_link: "Besoin d’aide\_?"
+transverse.transverse_header.need_help_link_title: "Besoin d’aide\_?"
+transverse.transverse_header.navigo_its_also: 'Navigo, c’est aussi'
+transverse.transverse_header.navigo_its_also_title: 'Navigo, c’est aussi'
+transverse.transverse_header.navigo_infos: 'Les infos Navigo'
+transverse.transverse_header.navigo_infos_title: 'Les infos Navigo'
+transverse.transverse_header.stif_sites: 'Un service délégué par le'
+transverse.transverse_header.stif_sites_alt: 'Logo du Stif'
+transverse.transverse_footer.footer_copyright: '© 2014 Docapost-BPO. All Rights Reserved.'
+transverse.transverse_footer.legal_mentions_link: '© 2016 Navigo Mentions légales'
+transverse.transverse_footer.legal_mentions_link_title: '© 2016 Navigo Mentions légales'
+transverse.transverse_footer.cgu_link: CGU
+transverse.transverse_footer.cgu_link_title: CGU
+transverse.transverse_footer.sitemap_link: 'Plan du site'
+transverse.transverse_footer.sitemap_link_title: 'Plan du site'
+transverse.transverse_footer.stif_sites_link: 'Les sites du STIF'
+transverse.transverse_footer.stif_sites_link_title: 'Les sites du STIF'
+transverse.transverse_footer.stif_sites_img: 'Un service délégué par le'
+transverse.transverse_footer.stif_sites_alt: 'Logo du Stif'
+transverse.transverse_footer.logo_optile_alt: 'Logo d''Optile'
+transverse.transverse_footer.logo_ratp_alt: 'Logo du RATP'
+transverse.transverse_footer.logo_sncf_alt: 'Logo du SNCF'
+transverse.transverse_footer.logo_optile_title: 'Site officiel du transporteur Optile'
+transverse.transverse_footer.logo_ratp_title: 'Site officiel du transporteur RATP'
+transverse.transverse_footer.logo_sncf_title: 'Site officiel du transporteur SNCF'
+transverse.error.email_format: 'Le format n''est pas autorisé'

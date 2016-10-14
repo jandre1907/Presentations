@@ -1,0 +1,242 @@
+ {% extends "SelBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title="{{ 'pay.pay_manage_iban.accueil'|trans({}, 'pay') }}">{{ 'pay.pay_manage_iban.accueil'|trans({}, 'pay') }}</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title="{{ 'pay.pay_manage_iban.service_navigo'|trans({}, 'pay') }}">{{ 'pay.pay_manage_iban.service_navigo'|trans({}, 'pay') }}</a></li>
+            <li><a href="{{ path('sel_espace_client') }}" title="{{ 'pay.pay_manage_iban.service_client_link_label'|trans({}, 'pay') }}">{{ 'pay.pay_manage_iban.service_client_link_label'|trans({}, 'pay') }}</a></li>
+            <li><a href="{{ path('sel_payment_list') }}" title="{{ 'pay.pay_manage_iban.moyen_de_paiement'|trans({}, 'pay') }}">{{ 'pay.pay_manage_iban.moyen_de_paiement'|trans({}, 'pay') }}</a></li>
+            <li class="active">{{ 'pay.pay_manage_iban.gerer_moyen_de_paiement'|trans({}, 'pay') }}</li> <!-- pas de lien sur le dernier item du fil d'ariane !!!!! -->
+          </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+ {% block title %}{{ 'pay.pay_list.my_moyen_de_paiement_title_onglet'|trans({}, 'pay') }}{% endblock %}
+
+ {% block content_header '' %}
+ {% block flashMessage %}{% endblock flashMessage %}
+ {% block contentTitle %}
+     <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12">
+             <div class="heading">
+                 <h1>{{ 'pay.pay_manage_iban.gerer_moyen_paiement_title'|trans({}, 'pay') }}</h1>
+             </div>
+         </div>
+     </div>
+ {% endblock contentTitle %}
+
+{% block previousArrow %}
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="prev">
+			<a href="javascript:window.history.back()">
+			<img src="{{ asset('bundles/sel/images/prev16.png') }}" class="picto" alt="{{ 'transverse.transverse_prev.previous_page_title' |trans({}, 'transverse') }}">
+			{{ 'transverse.transverse_prev.previous_page' |trans({}, 'transverse') }}
+			</a>
+		</div>
+	</div>
+</div>
+{% endblock  %}
+
+{% block content %}
+<div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="sav paiement detail">
+				<div class="detail-paiement">
+					{#<h2>{{ 'pay.pay_manage_iban.paiement_detail'|trans({}, 'pay') }}</h2>#}
+                    {% for item in ibans %}
+                    {% if item.codeStatut == 1 %}
+                    <div class="panel panel-default">
+                       <div class="panel-body">
+							<div class="row">
+                                <div class="col-xs-12 col-sm-7 col-md-7">
+									<p class="recap-line clearfix">
+										<label>{{ 'pay.pay_manage_iban.type_paiement_label'|trans({}, 'pay') }}:</label><strong>{{ 'pay.pay_manage_iban.prelevement_sepa'|trans({}, 'pay') }}</strong>
+									</p>
+									<p class="recap-line clearfix">
+										<label>{{ 'pay.pay_manage_iban.BIC_label'|trans({}, 'pay') }}</label><strong>{{ item.codeBic }}</strong>
+									</p>
+									<p class="recap-line clearfix">
+										<label>{{ 'pay.pay_manage_iban.IBAN_label'|trans({}, 'pay') }}</label><strong>{{ item.iban | hideIbanChars}}</strong>
+									</p>
+									<p class="recap-line clearfix">
+										<label>{{ 'pay.pay_manage_iban.nom_titulaire_label'|trans({}, 'pay') }}</label><strong>{{ item.titulaireDuCompte }}</strong>
+									</p>
+								</div>
+								<div class="col-xs-12 col-sm-5 col-md-5">
+                                    <div class="action">
+										{% if canBeRemove %}
+                                        <a href="#" class="delete " title="{{ 'pay.pay_manage_iban.supprimer_btn_link_title'|trans({}, 'pay') }}" data-toggle="modal" data-target="#myModal">
+                                            <img src="{{ asset('bundles/sel/images/delete.png') }}" class="picto" alt="{{ 'pay.pay_manage_iban.supprimer_btn_link'|trans({}, 'pay') }}">
+                                            <span>{{ 'pay.pay_manage_iban.supprimer_btn_link'|trans({}, 'pay') }}</span>
+                                        </a>
+										{% else %}
+										<a href="#" class="delete " title="{{ 'pay.pay_manage_iban.supprimer_moyen_paiement_btn_title'|trans({}, 'pay') }}" data-toggle="modal" data-target="#myModal2">
+                                            <img src="{{ asset('bundles/sel/images/delete.png') }}" class="picto" alt="{{ 'pay.pay_manage_iban.supprimer_moyen_paiement_btn_title'|trans({}, 'pay') }}">
+                                            <span>{{ 'pay.pay_manage_iban.supprimer_moyen_paiement_btn'|trans({}, 'pay') }}</span>
+                                        </a>
+										{% endif %}
+                                    </div>
+                                </div>
+							</div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+				</div>
+				<div class="row show-grid">
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<h2>
+                            {% if associateForfaits == 1 %}
+								{{ 'pay.pay_manage_iban.payment_forfait_already_bind'|trans({}, 'pay', 'fr')| raw }}
+							{% endif %}
+                            {% if typeError %}
+                                <p class="warning-light red" class="text-error">
+                                    <img src="{{ asset('bundles/sel/images/alert.png') }}" class="picto" alt="Alerte">
+                                    <strong>{{ typeError|trans({}, 'pay', 'fr')| raw }}</strong>
+                                </p>
+                            {% endif %}
+						</h2>
+                        {% for item in forfaits %}
+                        {% if item.isAssociate == 1 %}
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<strong>{{ item.identitePorteur }}</strong>
+							</div>
+							<div class="panel-body">
+								<p class="recap-line clearfix">
+									<label>{{ 'pay.pay_manage_iban.forfait_label'|trans({}, 'pay') }}</label><strong>{{ item.nameProduit }}</strong>
+								</p>
+								<p class="recap-line clearfix">
+									<label>{{ 'pay.pay_manage_iban.validate_label'|trans({}, 'pay') }}</label><strong>{{ item.dateDebut | date('d/m/Y') }} - {{ item.dateFin  | date('d/m/Y') }}</strong>
+								</p>
+                               {% if item.zones is not empty %}
+								<p class="recap-line clearfix">
+									<label>{{ 'pay.pay_manage_iban.zones_label'|trans({}, 'pay') }}</label><strong>{{ item.zones }}</strong>
+								</p>
+								{% endif %}
+								<p class="recap-line clearfix">
+									<label>{{ 'pay.pay_manage_iban.etat_label'|trans({}, 'pay') }}</label><strong>{{ item.etat }}</strong>
+								</p>
+								<div class="action-bt">
+									<span>{{ 'pay.pay_manage_iban.forfait_associe'|trans({}, 'pay') }}</span>
+								</div>
+							</div>
+						</div>
+                        {% endif %}
+                        {% endfor %}
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<h2>
+                            {% if freeForfaits == 1 %}
+								{{ 'pay.pay_manage_iban.payment_forfait_change_bind'|trans({}, 'pay', 'fr')| raw }}
+							{% endif %}
+						</h2>
+                        {% for item in forfaits %}
+                        {% if item.isAssociate == 0  %}
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<strong>{{ item.identitePorteur }}</strong>
+							</div>
+							<div class="panel-body">
+								<p class="recap-line clearfix">
+									<label>{{ 'pay.pay_manage_iban.forfait_label'|trans({}, 'pay') }}</label><strong>{{ item.nameProduit }}</strong>
+								</p>
+								<p class="recap-line clearfix">
+									<label>{{ 'pay.pay_manage_iban.validate'|trans({}, 'pay') }}</label><strong>{{ item.dateDebut | date('d/m/Y') }} - {{ item.dateFin  | date('d/m/Y') }}</strong>
+								</p>
+                                {% if item.zones is not empty %}
+								<p class="recap-line clearfix">
+									<label>{{ 'pay.pay_manage_iban.zones_label'|trans({}, 'pay') }}</label><strong>{{ item.zones }}</strong>
+								</p>
+                                {% endif %}
+								<p class="recap-line clearfix">
+									<label>{{ 'pay.pay_manage_iban.etat_label'|trans({}, 'pay') }}</label><strong>{{ item.etat }}</strong>
+								</p>
+								<div class="action-bt">
+									<button onclick="location.href='{{ path('sel_iban_associate', { 'md5iban': md5iban, 'contract': item.reference, 'codeProduit': item.codeProduit , 'returnUrl' : 'sel_iban_manage'}) }}';" value="{{ 'pay.pay_manage_iban.associer_forfait'|trans({}, 'pay') }}" class="btn btn-default pull-right" type="button"
+										title="{{ 'pay.pay_manage_iban.associer_forfait_title'|trans({}, 'pay') }}">
+										<span>{{ 'pay.pay_manage_iban.associer_forfait'|trans({}, 'pay') }}</span>
+									</button>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+                        {% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1"  aria-labelledby="fenetreDialogue">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'pay.pay_manage_iban.aria_close_dialog_window'|trans({}, 'pay') }}" value="{{ 'pay.pay_manage_iban.close_dialog_window'|trans({}, 'pay') }}">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="fenetreDialogue">{{ 'pay.pay_manage_iban.supprimer_moyen_paiement_btn_title'|trans({}, 'pay') }}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{ 'pay.pay_manage_iban.ask_supprimer_moyen_paiement_modal'|trans({}, 'pay') }}</p>
+                {% for item in ibans %}
+                    {% if item.codeStatut == 1 %}
+						<div class="sav paiement">
+							<p class="recap-line clearfix">
+								<label>{{ 'pay.pay_manage_iban.type_paiement_label'|trans({}, 'pay') }}:</label><strong>{{ 'pay.pay_manage_iban.prelevement_sepa'|trans({}, 'pay') }}</strong>
+							</p>
+							<p class="recap-line clearfix">
+								<label>{{ 'pay.pay_manage_iban.BIC_label'|trans({}, 'pay') }}</label><strong>{{ item.codeBic }}</strong>
+							</p>
+							<p class="recap-line clearfix">
+								<label>{{ 'pay.pay_manage_iban.IBAN_label'|trans({}, 'pay') }}</label><strong>{{ item.iban | hideIbanChars}}</strong>
+							</p>
+							<p class="recap-line clearfix">
+								<label>{{ 'pay.pay_manage_iban.nom_titulaire_label'|trans({}, 'pay') }}</label><strong>{{ item.titulaireDuCompte }}</strong>
+							</p>
+						</div>
+
+                    {% endif %}
+				{% endfor %}
+
+                <p>{{ 'pay.pay_manage_iban.confirmer_suppression_moyen_paiement'|trans({}, 'pay') }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" value="{{ 'pay.pay_manage_iban.fermer_moyen_paiement_et_continuer'|trans({}, 'pay') }}">{{ 'pay.pay_manage_iban.annuler_btn'|trans({}, 'pay') }}</button>
+                <button onclick="location.href='{{ path('sel_iban_remove', { 'md5iban': md5iban }) }}';"  type="button" class="btn btn-default btn-modal" >{{ 'pay.pay_manage_iban.confimer_moyen_paiement_et_continuer'|trans({}, 'pay') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal2" tabindex="-1"  aria-labelledby="fenetreDialogue">
+	<div class="modal-dialog" >
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="{{ 'pay.pay_manage_iban.aria_close_dialog_window'|trans({}, 'pay') }}" value="{{ 'pay.pay_manage_iban.close_dialog_window'|trans({}, 'pay') }}">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="fenetreDialogue">{{ 'pay.pay_manage_iban.supprimer_moyen_paiement_btn_title'|trans({}, 'pay') }}</h4>
+			</div>
+			<div class="modal-body">
+			{{ 'pay.pay_manage_iban.non_suppression_moyen_paiement'|trans({}, 'pay') }}
+			   <!--
+
+				{{ 'pay.pay_manage_iban.ask_supprimer_moyen_paiement'|trans({}, 'pay') }}
+				<br>
+				{{ 'pay.pay_manage_iban.confirmer_suppression_moyen_paiement'|trans({}, 'pay') }}-->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" value="{{ 'pay.pay_manage_iban.fermer_moyen_paiement_et_continuer'|trans({}, 'pay') }}">{{ 'pay.pay_manage_iban.annuler_btn'|trans({}, 'pay') }}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- // Modal  -->
+{% endblock content%}

@@ -1,0 +1,284 @@
+{% verbatim %}
+<style>
+.image-editor {
+	margin-left: 150px;
+}
+
+.cropit-image-preview {
+	background-color: #f8f8f8;
+	background-size: cover;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-top: 7px;
+	width: 104px;
+	height: 123px;
+	cursor: move;
+}
+
+.cropit-image-background {
+	opacity: .2;
+	cursor: auto;
+}
+
+.image-size-label {
+	margin-top: 0.6rem;
+}
+
+input {
+	/* Use relative position to prevent from being covered by image background */
+	position: relative;
+	z-index: 10;
+}
+</style>
+<div class="step_form" id="step_photo">
+	<!-- 3 -->
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3">
+			<p class="title">
+				<strong>Votre photo doit être <span class="fw-normal">(<a
+						href="#" class="link underline">en savoir plus</a>)
+				</span>:
+				</strong>
+			</p>
+			<div class="infos no-border no-margin">
+				<div class="info">
+					<ul class="color_bullet">
+						<li>de face, tête nue, sur fond clair, type photo d’identité
+						</li>
+						<li>en couleur</li>
+						<li>aux formats : JPEG, GIF, BMP, TIFF, GIF, PNG ou PDF</li>
+						<li>d’un poids maximum de 5 Mo</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-content" data-ng-form="myForm">
+
+		<div class="row">
+			<div class="media photo col-xs-6 col-xs-offset-3"
+				ng-hide="Holder.CropedFileUrl == null || Holder.CropedFileUrl == '' ">
+				<p>
+					<i class="fa fa-check fa-2x"></i> <span>Votre photo après
+						traitement</span>
+				</p>
+				<div class="media-left">
+					<span class="photo-identite">
+						<div class="preview">
+							<img class="media-object" src="{{ Holder.CropedFileUrl }}"
+								ng-show="Holder.CropedFileUrl != null && CropedFileUrl != ''"
+								alt="photo identité" width="104" />
+						</div>
+					</span>
+				</div>
+				<div class="media-body">
+					<a href="#/Photo" class="delete" data-ng-click="deletePhoto()"> <i
+						class="fa fa-trash fa-2x"></i> <span>Supprimer</span>
+					</a>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row" data-ng-hide="Holder.CropedFileUrl != null && Holder.CropedFileUrl != ''">
+			<div class="col-xs-3 col-xs-offset-3">
+				<div data-ngf-select="" class="fileUpload btn btn-default"
+					ng-model="files" class="upload-button" data-ngf-multiple="false"
+					ngf-accept="'*.pdf,*.jpg,*.png'" data-ng-model-rejected="rejFiles"
+					tabindex="0" title="Choisir une photo">
+					<span>Parcourir</span>
+				</div>
+				<p>
+					<span class="mess-error"
+						ng-show="!files[0] && rejFiles.length != 0 && rejFiles != empty">Le
+						fichier n'est pas valide</span>
+				</p>
+			</div>
+			<div class="col-xs-3">
+				<button type="button" class="btn btn-default">
+					<span>Prendre une photo</span>
+				</button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-3">
+				<button type="button" class="btn btn-primary"
+					ng-click="gotoStep('/Paiement')">
+					<span>Valider cette photo et continuer</span>
+				</button>
+			</div>
+		</div>
+		<div class="row" data-ng-hide="Holder.CropedFileUrl == null || Holder.CropedFileUrl == '' || showOriginalPhoto ">
+			<div class="col-xs-6 col-xs-offset-3">
+				<a href="#/Photo" class="link text-center return" data-ng-click="showOriginalPhoto = true" > <i
+					class="fa fa-undo fa-2x"></i> <span> Utiliser la photo
+						originale </span>
+				</a>
+			</div>
+		</div>
+
+		<div class="row"
+			ng-show="Holder.CropedFileUrl == null || Holder.CropedFileUrl == ''">
+			<div class="col-xs-4 col-xs-offset-4">
+				<a href="#/Paiement" class="link addto"> <span>Ajouter
+						une photo plus tard et continuer</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- form-content -->
+
+	<div class="form-content center-block" data-ng-hide="Holder.CropedFileUrl == null || Holder.CropedFileUrl == '' || !showOriginalPhoto ">
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-3">
+				<p class="row">
+					<i class="fa fa-exclamation-triangle fa-2x col-xs-1"></i> <span
+						class="col-xs-11"> <strong> ATTENTION<br> Si
+							votre photo n'est pas conforme, votre dossier ne sera pas validé
+							dans les délais habituellement annoncés.
+					</strong>
+					</span>
+				</p>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="media photo col-xs-6 col-xs-offset-3">
+				<p>
+					<span>Votre photo originale</span>
+				</p>
+				<div id="image-cropper" >
+					<div class="row">
+						<div class="media-left">
+
+							<div class="cropit-image-preview-container">
+								<div class="cropit-image-preview"></div>
+							</div>
+						</div>
+                        <div class="media-body ">
+                            &nbsp;
+                        </div>
+
+						<div class="media-body ">
+							<a href="#/Photo" class="delete" data-ng-click="deleteOriginalPhoto()"> <i class="fa fa-trash fa-2x"></i>
+								<span>Supprimer</span>
+							</a>
+						</div>
+					</div>
+                    <div class="row">
+                        <div class="col-xs-12">&nbsp;
+                        </div>
+                    </div>
+
+					<div class="row">
+						<div class="col-xs-12">
+							<p class="retoucher">
+								<strong>Vous pouvez modifier l'apparence de votre photo
+									avant de l'envoyer :</strong>
+							</p>
+							<div id="Filters">
+
+								<div class="Filter">
+									<!-- CamanJS rotate plugin => https://github.com/meltingice/CamanJS-Plugins/commit/baf52aeef87e0730e37f336b53728484c8eab3c1 -->
+									<div class="FilterSetting">
+										<span class="FilterName">Orientation</span>
+										<div class="rotate-control">
+											<div class="redo rotate">
+												<span class="icon icon-undo small-image"></span>
+												<input
+													type="button"
+													class="undo"
+													value=""
+													data-filter=""
+													title="Pivoter à gauche"
+													>
+											</div>
+											<div class="redo rotate">
+												<span class="icon icon-redo small-image"></span>
+												<input
+													type="button"
+													class="redo"
+													value=""
+													data-filter=""
+													title="Pivoter à droite"
+													>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="slider">
+									<!-- Cropit => http://scottcheng.github.io/cropit/  -->
+									<div class="slider-wrapper">
+										<span class="FilterName">Recadrer</span> <span
+											class="icon icon-image small-image"></span>
+											<input
+											type="range"
+											class="cropit-image-zoom-input custom"
+											min="0"
+											max="1"
+											step="0.01"
+											> <span
+											class="icon icon-image large-image"></span>
+									</div>
+								</div>
+								<!-- // slider cropit -->
+
+								<!-- // CamanJS => http://camanjs.com/examples/  -->
+
+								<div class="Filter">
+									<div class="FilterSetting">
+										<span class="FilterName">Luminosité</span> <span
+											class="icon icon-sun small-image"></span>
+											<input
+											type="range"
+											min="-100"
+											max="100"
+											step="1"
+											value="0"
+											data-filter="brightness"
+											id="brightness"
+											> <span
+											class="icon icon-sun large-image"
+											></span>
+									</div>
+								</div>
+								<div class="Filter">
+									<div class="FilterSetting">
+										<span class="FilterName">Contraste</span> <span
+											class="icon icon-contrast small-image"></span>
+											<input
+											type="range"
+											min="-100"
+											max="100"
+											step="1"
+											value="0"
+											data-filter="contrast"
+											id="contrast"
+											> <span
+											class="icon icon-contrast large-image"></span>
+									</div>
+								</div>
+							</div>
+							<!-- filters -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-3">
+                <button type="button" class="btn btn-primary"
+                    data-ng-click="gotoStep('/Paiement')">
+                    <span>Valider cette photo et continuer</span>
+                </button>
+            </div>
+        </div>
+	</div>
+	<!-- form-content -->
+</div>
+
+
+{% endverbatim %}

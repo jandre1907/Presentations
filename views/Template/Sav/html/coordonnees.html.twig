@@ -1,0 +1,73 @@
+{% verbatim %}<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div id="sel_form" class="form-horizontal">
+            <div class="step-content">
+                <!-- Step forms -->
+                <div class="step_form" id="step_coordonnees">
+                    <!-- 1 -->
+                    <span class="margin-ultra-bottom general_Intext">{% endverbatim %}{{"pv.pv_coordonnees.lbl_verif"|trans({}, "pv", "fr")|raw}}{% verbatim %}</span>
+
+                    <div class="form-content">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <p class="recap-line clearfix">
+                                    <label>{% endverbatim %}{{"pv.pv_coordonnees.lbl_nom"|trans({}, "pv", "fr")|raw}}{% verbatim %}</label><strong>{{ pageCtrl.userSig.nom }}</strong>
+                                </p>
+                                <p class="recap-line clearfix">
+                                    <label>{% endverbatim %}{{"pv.pv_coordonnees.lbl_prenom"|trans({}, "pv", "fr")|raw}}{% verbatim %}</label><strong>{{ pageCtrl.userSig.prenom}}</strong>
+                                </p>
+
+                                <p class="recap-line clearfix" data-ng-show="pageCtrl.userSig.adresse.ligne1">
+                                    <label>{% endverbatim %}{{"pv.pv_coordonnees.lbl_addresse_1"|trans({}, "pv", "fr")|raw}}{% verbatim %}</label><strong>{{ pageCtrl.userSig.adresse.ligne1 }}</strong>
+                                </p>
+
+                                <p class="recap-line clearfix" data-ng-show="pageCtrl.userSig.adresse.ligne2" >
+                                    <label>{% endverbatim %}{{"pv.pv_coordonnees.lbl_addresse_2"|trans({}, "pv", "fr")|raw}}{% verbatim %}</label><strong>{{ pageCtrl.userSig.adresse.ligne2 }}</strong>
+                                </p>
+
+                                <p class="recap-line clearfix">
+                                    <label>{% endverbatim %}{{"pv.pv_coordonnees.lbl_num_rue"|trans({}, "pv", "fr")|raw}}{% verbatim %}</label><strong>{{ pageCtrl.userSig.adresse.ligne3 }}</strong>
+                                </p>
+
+                                <p class="recap-line clearfix" data-ng-show="pageCtrl.userSig.adresse.ligne4">
+                                    <label>{% endverbatim %}{{"pv.pv_coordonnees.lbl_addresse_3"|trans({}, "pv", "fr")|raw}}{% verbatim %}</label><strong>{{ pageCtrl.userSig.adresse.ligne4 }}</strong>
+                                </p>
+
+                                <p class="recap-line clearfix">
+                                    <label>{% endverbatim %}{{"pv.pv_coordonnees.lbl_cp"|trans({}, "pv", "fr")|raw}}{% verbatim %}</label><strong>{{ pageCtrl.userSig.adresse.codePostal }}</strong>
+                                </p>
+
+                                <p class="recap-line clearfix">
+                                    <label>{% endverbatim %}{{"pv.pv_coordonnees.lbl_ville"|trans({}, "pv", "fr")|raw}}{% verbatim %}</label><strong>{{ pageCtrl.userSig.adresse.bureauDistributeur }}</strong>
+                                </p>
+                                <p class="recap-line clearfix">
+                                    <label>{% endverbatim %}{{"pv.pv_coordonnees.lbl_pays"|trans({}, "pv", "fr")|raw}}{% verbatim %}</label><strong>{{ pageCtrl.userSig.adresse.pays }}</strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row box_button">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <button data-ng-click="pageCtrl.modifyUrl()" type="button" class="btn btn-default pull-right" title="{% endverbatim %}{{"pv.pv_coordonnees.Bt_modify_title"|trans({}, "pv", "fr")|raw}}{% verbatim %}">
+                                <span>{% endverbatim %}{{"pv.pv_coordonnees.Bt_modify_title"|trans({}, "pv", "fr")|raw}}{% verbatim %}</span>
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <button data-ng-click="pageCtrl.stepSubmit()"  type="button" class="btn btn-primary pull-right" title="{% endverbatim %}{{"pv.pv_coordonnees.Bt_ok_title"|trans({}, "pv", "fr")|raw}}{% verbatim %}">
+                                <span>{% endverbatim %}{{"pv.pv_coordonnees.Bt_ok_msg"|trans({}, "pv", "fr")|raw}}{% verbatim %}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>{% endverbatim %}
+
+{% block tag %}
+            {# set declaration to true to access subsection declaration in get_template in rtracking.yml #}
+            {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': {
+                    "coordonnees": true
+                }})
+            %}
+{% endblock tag %}

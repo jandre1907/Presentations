@@ -1,0 +1,8 @@
+{% for page in pages %}
+    {% if page.title and page.text and page.isPublished %}{# Links are displayed only for translated pages #}
+     <li><a href="{{ path('sel_cms_db', {slug: page.slug}) }}">{{ page.title }}</a></li>
+    {% endif %}
+{% endfor %}
+
+
+

@@ -1,0 +1,352 @@
+{% extends "SelBundle::layout.html.twig" %}
+{% import "SelBundle:User:macros.html.twig" as macro %}
+
+{% block title %}{{ 'home.home_espace_client.title_onglet'|trans({}, 'home') }}{% endblock %}
+
+{% block breadcrumb %}
+<div class="row">
+    <div id="box_breadcrumb_id" class="col-xs-12 col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title="{{ 'home.home_espace_client.accueil_link_breadcrumb_title' | trans({}, 'home') }}">{{ 'home.home_espace_client.accueil_link_breadcrumb' | trans({}, 'home') }}</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title="{{ 'home.home_espace_client.gere_maCarte_link_breadcrumb_title' | trans({}, 'home') }}">{{ 'home.home_espace_client.gere_maCarte_link_breadcrumb' | trans({}, 'home') }}</a></li>
+            <li class="active">{{ 'home.home_espace_client.mon_espace' | trans({}, 'home') }}</li>
+        </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{ 'home.home_espace_client.title' | trans({}, 'home') }}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block previousArrow %}{% endblock previousArrow %}
+
+{% block mainContent %}
+    {% block body %}
+        {% block content %}
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="home">
+                {% if suiviDemande is not empty %}
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading slide open" >
+                                    <a  data-toggle="collapse" href="#body-1" aria-expanded="true" aria-controls="body-1">
+                                        <h3 class="panel-title" id="heading-1">{{ 'home.home_espace_client.suivi.title' | trans({}, 'home') }}</h3>
+                                        <span class="plus">+</span><span class="moins">-</span>
+                                    </a>
+                                </div>
+                                <div id="body-1" class="panel-collapse in"  aria-labelledby="heading-1">
+                                {% for demande in suiviDemande %}
+                                    <div class="panel-body slide">
+                                        <span class="panel-title">{{demande.nom}}</span>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                                <p class="recap-line clearfix">
+                                                    <label>{{ 'home.home_espace_client.suivi.date' | trans({}, 'home') }}</label>
+                                                    <strong>{{demande.date}}</strong>
+                                                </p>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                                <p class="recap-line clearfix">
+                                                    <label>{{ 'home.home_espace_client.suivi.status' | trans({}, 'home') }}</label>
+                                                {% if demande.status is iterable %}
+                                                    {% if demande.status.code is defined and demande.status.code in [11, 100, 300] %}
+                                                    <strong>
+                                                        <span>
+                                                    <img src="{{ asset('bundles/sel/images/alert16.png')}}" class="picto" alt="Alerte"> {{demande.status.name}}</span></strong>
+                                                    {% elseif demande.status.code is defined and demande.status.code in [50, 51, 400, 401, 410, 601] %}
+                                                    <strong>
+                                                        <span class="alert-warning">
+                                                    <img src="{{ asset('bundles/sel/images/info16.png')}}" class="picto" alt="Information"> {{demande.status.name}}</span></strong>
+                                                    {% else %}
+                                                    <strong>{{demande.status.name}}</strong>
+                                                    {% endif %}
+                                                {% else %}
+                                                    <strong>{{demande.status}}</strong>
+                                                {% endif %}
+                                                </p>
+                                                {% if demande.lien is defined %}
+                                                <ul class="color_bullet">
+                                                    <li>
+                                                        {% if demande.status.code == 401 %}
+                                                        <a href="{{demande.lien}}" onclick="return xt_click(this,'C','3','merci_saisir_votre_rib','A')" title="{{demande.status.lien_label}}" class="link">
+                                                            {{demande.status.lien_label}}
+                                                        </a>
+                                                        {% else %}
+                                                        <a href="{{demande.lien}}" title="{{demande.status.lien_label}}" class="link">
+                                                            {{demande.status.lien_label}}
+                                                        </a>
+                                                        {% endif %}
+                                                    </li>
+                                                </ul>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                                <p class="recap-line clearfix">
+                                                    <label>{{ 'home.home_espace_client.suivi.porteur' | trans({}, 'home') }}</label>
+                                                    <strong>{{demande.porteur}}</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if demande.context is defined %}
+                                    <div class="bg-{{demande.context.type}} context">
+                                        <p class="heading">
+                                            {{demande.context.text | raw}}
+                                        </p>
+                                        {% if demande.context.help is defined and demande.context.help %}
+                                            <span class="mess no-padding">
+                                                {{ 'home.home_espace_client.suivi.help' | trans({'%link%': path('sel_faq')}, 'home') | raw }}
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                    <div class="row margin-top-bottom">
+                    {% if contrats %}
+                        <div class="col-xs-12 col-sm-12 col-md-8">
+                        {% set hasDebt = 0 %}
+                        {% set legendValidity = 0 %}
+                        {% set legendZoneValidity = 0 %}
+                        {% for contratPorteur in contrats %}
+                            <div class="panel panel-default">
+                                <div class="panel-heading clearfix">
+                                    <div class="panel-block">
+                                       <h3 class="panel-title">{{info.prenom[contratPorteur.0.numeroPorteur]}} {{info.nom[contratPorteur.0.numeroPorteur]}}</h3>
+                                       <span class="clientSig">{{ 'home.home_espace_client.info_numero_sig' | trans({}, 'home') }} {{contratPorteur.0.numeroPorteur}}</span>
+                                    </div>
+                                    <a href="{{ path('sel_coordonnees') }}#collapse_{{contratPorteur.0.numeroPorteur}}" class="pull-right modifier" title="Voir les coordonnées de {{contratPorteur.0.identitePorteur}}">
+                                        <img src="{{ asset('bundles/sel/images/crayon.png')}}" alt="Modifier">
+                                       <span>
+                                          {{ 'home.home_espace_client.contrat.coordonnees' | trans({}, 'home') }}
+                                       </span>
+                                    </a>
+                                </div>
+                            {% for contrat in contratPorteur %}
+
+                                {% if contrat.contratsTransport is defined and contrat.codeProduit in [1, 2, 3, 4, 80, 90, 93] %}
+                                    {% if  contrat.codeProduit not in [3, 93] or not contrat.noContratsTransport%}
+                                        {% set legendZoneValidity = 1 %}
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if contrat.codeProduit in [1, 2, 4] %}
+                                    {% if contrat.dette is defined %}
+                                        {% set hasDebt = 1 %}
+                                    {% endif %}
+
+                                    {% if (contrat.situationFinanciere.modePaiement == "Prélevement" and contrat.codeProduit in [4])  %}
+                                        {% set legendValidity = 1 %}
+                                    {% endif %}
+
+
+
+                                <div class="child-panel child-two padding-none">
+                                    {{ macro.show_infosContract(contrat, loop, user) }}
+                                    <div class="panel-body slide" style="display:{% if loop.index == 1 and contrat.numeroPorteur == user.referenceSig %} block;{% else %}none;{% endif %}">
+                                    {{ macro.show_particulariteContract(contrat, loop) }}
+                                    {{ macro.show_optionsContract(contrat, loop) }}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if contrat.codeProduit == 3 %}
+                                <div class="child-panel child-two padding-none">
+                                    {{ macro.show_infosContract(contrat, loop, user) }}
+                                    <div class="panel-body slide" style="display: {% if loop.index == 1 and contrat.numeroPorteur == user.referenceSig %} block;{% else %}none;{% endif %}">
+                                    {{ macro.show_particulariteContract(contrat, loop) }}
+                                    {{ macro.show_optionsContract(contrat, loop) }}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if contrat.codeProduit == 80 %}
+                                <div class="child-panel child-two padding-none">
+                                    {{ macro.show_infosContract(contrat, loop, user) }}
+                                    {% if contrat.etat != "Résilié" %}
+                                    <div class="panel-body slide" style="display: {% if loop.index == 1 and contrat.numeroPorteur == user.referenceSig %} block;{% else %}none;{% endif %}">
+                                        {{ macro.show_optionsContract(contrat, loop) }}
+                                    </div>
+                                    {% endif %}
+                                 </div>
+                                {% endif %}
+                                {% if contrat.codeProduit in [90, 93] %}
+                                <div class="child-panel child-two padding-none">
+                                {{ macro.show_infosContract(contrat, loop, user) }}
+                                    <div class="panel-body slide" style="display: {% if loop.index == 1 and contrat.numeroPorteur == user.referenceSig %} block;{% else %}none;{% endif %}">
+                                        {% if contrat.codeProduit == 93 and info.dateFinSolidarite is defined and info.dateFinSolidarite  and msgSolidarite is not defined %}
+                                            {% set msgSolidarite = true %}
+                                            <div class="bg-warning context">
+                                                <p class="heading">
+                                                    <img src="{{ asset('bundles/sel/images/info16.png')}}" class="picto" alt="Information">
+                                                   {{ 'home.home_espace_client.message.fin_solidarite'|trans({'%date%': info.dateFinSolidarite|date('d/m/Y')}, 'home') }}
+                                                </p>
+                                            </div>
+                                        {% endif %}
+                                        {% if contrat.recharger is defined %}
+                                            <div class="bg-warning context">
+                                                <p class="heading">
+                                                    <img src="{{ asset('bundles/sel/images/info16.png') }}" class="picto" alt="Information">
+                                                   {{ 'home.home_espace_client.message.recharger'|trans({}, 'home') }}
+                                                </p>
+                                            </div>
+                                        {% endif %}
+                                        {{ macro.show_particulariteContract(contrat, loop) }}
+                                        {{ macro.show_optionsContract(contrat, loop) }}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                        {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="col-xs-12 col-sm-12 col-md-8">
+                        {% if user.referenceSig is null %}
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">{{ 'home.home_espace_client.bloc.rapatrier'|trans({}, 'home') }}</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p>
+                                        {{ 'home.home_espace_client.message.rapatrier'|trans({}, 'home')| raw }}
+                                    </p>
+                                    <ul class="color_bullet">
+                                        <li>
+                                            <a href="{{path('sel_user_rattachement')}}" title="{{ 'home.home_espace_client.link.rapatrier_title'|trans({}, 'home') }}" class="link">{{ 'home.home_espace_client.link.rapatrier'|trans({}, 'home') }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class=panel-title>{{ 'home.home_espace_client.bloc.no_forfait'|trans({}, 'home') }}</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="color_bullet">
+                                        <li>
+                                            <a href="{{ path('sel_subscriptionbundle_subscription_profil', {'courseType' : 'navigo_annuel'}) }}" onclick="return xt_click(this,'C','3','souscrire_navigo_annuel','A')" title="{{ 'home.home_espace_client.link.souscription_title'|trans({}, 'home') }}" class="link">{{ 'home.home_espace_client.link.souscription'|trans({}, 'home') }}</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('sel_subscriptionbundle_subscription_profil', {'courseType' : 'commande_de_carte'}) }}" title="{{ 'home.home_espace_client.link.command_de_carte_title'|trans({}, 'home') }}" class="link">{{ 'home.home_espace_client.link.command_de_carte'|trans({}, 'home') }}</a>
+                                        </li>
+                                    </ul>
+                                    <p class="margin-top-bottom">{{ 'home.home_espace_client.message.command_de_carte'|trans({}, 'home') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                        {% if info.notNavigoAnnuel %}
+                            <a href="{{ path('sel_subscriptionbundle_subscription_profil', {'courseType' : 'navigo_annuel'}) }}" class="link col-right panel-top" title="{{ 'home.home_espace_client.link.souscription_title'|trans({}, 'home') }}">
+                                <button type="submit" class="btn btn-default">{{ 'home.home_espace_client.link.souscription'|trans({}, 'home') }}</button>
+                            </a>
+                        {% endif %}
+                        {% if user.referenceSig is null or userSig is null %}
+                            <a href="{{ path('sel_change_password') }}" class="link col-right panel-right" title="{{ 'home.home_espace_client.link.change_password_title'|trans({}, 'home') }}">
+                                <button type="submit" class="btn btn-default">{{ 'home.home_espace_client.link.change_password'|trans({}, 'home') }}</button>
+                            </a>
+                            <a href="{{ path('sel_front_profile_edit') }}" class="link col-right panel-right" title="{{ 'home.home_espace_client.link.change_email_title'|trans({}, 'home') }}">
+                                <button type="submit" class="btn btn-default">{{ 'home.home_espace_client.link.change_email'|trans({}, 'home') }}</button>
+                            </a>
+                        {% else %}
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h3 class="panel-title">{{ 'home.home_espace_client.link.coordonnees'|trans({}, 'home') }}</h3></div>
+                                {% if npai %}
+                                <div class="bg-danger context" >
+                                    <p class="heading">
+                                        <img src="{{ asset('bundles/sel/images/alert16.png') }}" class="picto" alt="Alerte">
+                                        {{ 'home.home_espace_client.warning.npai' | trans({}, 'home') }}
+                                    </p>
+                                </div>
+                                {% endif %}
+                                <div class="panel-body wrap_body">
+                                    <p>
+                                        {% if userSig.adresse.ligne1 %}{{ userSig.adresse.ligne1 }}<br/>{% endif %}
+                                        {% if userSig.adresse.ligne2 %}{{ userSig.adresse.ligne2 }}<br/>{% endif %}
+                                        {% if userSig.adresse.ligne3 %}{{ userSig.adresse.ligne3 }}<br/>{% endif %}
+                                        {% if userSig.adresse.ligne4 %}{{ userSig.adresse.ligne4 }}<br/>{% endif %}
+                                        {{ userSig.adresse.codePostal }} {{ userSig.adresse.bureauDistributeur }}
+                                    </p>
+                                    <p>
+                                        {{ userSig.telephoneMobile | phoneFormatter }}<br/>
+                                        {{ userSig.adresse.telephone | phoneFormatter }}
+                                    </p>
+                                    <p><span class="mail">{{user.email}}</span></p>
+                                    <a href="{{ path('sel_coordonnees') }}" class="link panel-right" title="{{ 'home.home_espace_client.title_link.toutes_coordonnees'|trans({}, 'home') }}">
+                                        <button type="submit" class="btn btn-default">{{ 'home.home_espace_client.link.toutes_coordonnees'|trans({}, 'home') }}</button>
+                                    </a>
+                                </div>
+                            </div>
+                           <div class="wrap_button">
+                               {% if pegi16 == false %}
+                               <a href="{{ path('sel_payment_list') }}" class="link col-right" title="{{ 'home.home_espace_client.title_link.moyen_paiement'|trans({}, 'home') }}">
+
+                                   <button type="submit" class="btn btn-default">{{ 'home.home_espace_client.link.moyen_paiement'|trans({}, 'home') }}</button>
+                               </a>
+                               {% endif %}
+                           {% endif %}
+                               <a href="{{ path('sel_faq') }}" class="link col-right panel-right" title="{{ 'home.home_espace_client.title_link.need_help'|trans({}, 'home') }}">
+
+                                   <button type="submit" class="btn btn-default">{{ 'home.home_espace_client.link.need_help'|trans({}, 'home') }}</button>
+                               </a>
+                           {% if user.referenceSig is not null or userSig is not null %}
+                            </div>
+                           {% endif %}
+                           </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-8">
+                                <div class="lecteur-carte">
+                                    <img src="{{ asset('bundles/sel/images/usb.png')}}" class="picto usb-medium" alt="Service disponible avec un lecteur de carte">
+                                    <span><strong>{{ 'home.home_espace_client.message.lecteur'|trans({}, 'home') }}</strong>
+                                        <br>
+                                        <a href="{{ 'home.home_espace_client.link.lecteur_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_espace_client.link.lecteur_title'|trans({}, 'home') }}">{{ 'home.home_espace_client.link.lecteur'|trans({}, 'home') }}</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    {% if hasDebt is defined and hasDebt == 1 %}
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-8">
+                                <p><span class="star"></span>{{ 'home.home_espace_client.message.debt'|trans({}, 'home') }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if legendValidity is defined and legendValidity == 1 %}
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-8">
+                                <p><sup>(1)</sup> {{ 'home.home_espace_client.label.legendValidite'|trans({'%cgu%':  asset('bundles/sel/pdf/CGU_NA.pdf')}, 'home')| raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if legendZoneValidity is defined and legendZoneValidity == 1 %}
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-8">
+                                <p><sup>(2)</sup> {{ 'home.home_espace_client.label.legendZoneValidite'|trans({}, 'home')| raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    </div>
+                </div>
+              </div>
+
+        {% endblock content %}
+    {% endblock body%}
+
+{% endblock mainContent %}

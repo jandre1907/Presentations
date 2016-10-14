@@ -1,0 +1,221 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block title %}{{ 'home.home_espace_client.title_onglet'|trans({}, 'home') }}{% endblock %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            url = unescape(self.document.location.hash.substring(2));
+            if (url != '') {
+                $('#'+url).addClass('in');
+                $('#'+url.replace('collapse', 'heading')).addClass('open');
+            } else {
+                $($('.panel-heading')[0]).addClass('open');
+                $($('.panel-collapse')[0]).addClass('in');
+            }
+        });
+    </script>
+{% endblock javascript_foot %}
+
+{% block breadcrumb %}
+    <div id="box_breadcrumb_id" class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="http://www.navigo.fr" title="{{'coor.coor_show.accueil'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_show.accueil'|trans({}, 'coor', 'fr')|raw}}</a></li>
+                <li><a href="{{ path('sel_homepage') }}" title="{{'coor.coor_show.service_navigo'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_show.service_navigo'|trans({}, 'coor', 'fr')|raw}}</a></li>
+                <li><a href="{{ path('sel_espace_client') }}" title="{{'coor.coor_show.espace_client'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_show.espace_client'|trans({}, 'coor', 'fr')|raw}}</a></li>
+                <li class="active">{{'coor.coor_show.vos_coordonnees'|trans({}, 'coor', 'fr')|raw}}</li>
+              </ol>
+        </div>
+    </div>
+{% endblock breadcrumb %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{'coor.coor_show.lbl_titre'|trans({}, 'coor', 'fr')|raw}}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+
+{% block mainContent %}
+    {% block body %}
+        {% block content %}
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="home">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+            {% for key, user in users %}
+                            <div class="panel panel-default">
+                                <div class="panel-heading slide"  id="heading_{{key}}">
+                                    <a  data-toggle="collapse" href="#collapse_{{key}}" aria-expanded="true" aria-controls="collapse_{{key}}">
+                                        <h3 class="panel-title" id="heading-{{key}}">{{user.prenom}} {{user.nom}}</h3>
+                                        <span class="plus">+</span>
+                                        <span class="moins">-</span>
+                                    </a>
+                                </div>
+                                <div id="collapse_{{key}}" class="panel-collapse collapse"  aria-labelledby="heading_{{key}}">
+                                    {% if user.adresse.nPAI %}
+                                    <div class="bg-danger context" >
+                                        <p class="heading star">
+                                            <img src="{{ asset('bundles/sel/images/alert16.png') }}" class="picto" alt="Alerte">
+                                            {{ 'coor.coor_show.warning.npai' | trans({}, 'coor') }}
+                                        </p>
+                                    </div>
+                                    {% endif %}
+                                    <div class="panel-body">
+                                        <div class="content-coordonnees">
+                                        <p>{% if user.civilite is not empty or user.civilite != 0 %}
+                                                {% if user.civilite == 1 %}M.{% else %}Mme{% endif %}
+                                            {% endif %}
+                                            {{ user.prenom}} {{ user.nom}} {% if user.dateNaissance %} {{'coor.coor_show.lbl_ne_le'|trans({}, 'coor', 'fr')|raw}} {{user.dateNaissance|date("d/m/Y")}} {% endif %}
+                                            <a class="link help" href="#" aria-label="{{'coor.coor_show.aria_modif_coordonnees'|trans({}, 'coor', 'fr')|raw}}" data-target="#infos_coordonnees" data-toggle="modal">
+                                                <img src="{{ asset('bundles/sel/images/question.png') }}" class="picto" alt="Aide" width="20" height="20">
+                                            </a>
+                                        </p>
+                                        <div class="row show-grid">
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                <h4>{{'coor.coor_show.lbl_coordonnees'|trans({}, 'coor', 'fr')|raw}}</h4>
+                                                <div class="row show-grid">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12">
+
+                                                        <p class="recap-line clearfix">
+                                                            <label>{{'coor.coor_show.lbl_num_rue'|trans({}, 'coor', 'fr')|raw}}</label><strong>{{ user.adresse.ligne3 }}</strong>
+                                                        </p>
+
+                                                        {% if user.adresse.ligne1 %}
+                                                        <p class="recap-line clearfix">
+                                                            <label>{{'coor.coor_show.complement1'|trans({}, 'coor', 'fr')|raw}}</label><strong>{{ user.adresse.ligne1 }}</strong>
+                                                        </p>
+                                                        {% endif %}
+
+                                                        {% if user.adresse.ligne2 %}
+                                                        <p class="recap-line clearfix">
+                                                            <label>{{'coor.coor_show.complement2'|trans({}, 'coor', 'fr')|raw}}</label><strong>{{ user.adresse.ligne2 }}</strong>
+                                                        </p>
+                                                        {% endif %}
+
+                                                        {% if user.adresse.ligne4 %}
+                                                        <p class="recap-line clearfix">
+                                                            <label>{{'coor.coor_show.complement3'|trans({}, 'coor', 'fr')|raw}}</label><strong>{{ user.adresse.ligne4 }}</strong>
+                                                        </p>
+                                                        {% endif %}
+
+                                                        <p class="recap-line clearfix">
+                                                            <label>{{'coor.coor_show.lbl_cp'|trans({}, 'coor', 'fr')|raw}}</label><strong>{{ user.adresse.codePostal }}</strong>
+                                                        </p>
+                                                        <p class="recap-line clearfix">
+                                                            <label>{{'coor.coor_show.lbl_ville'|trans({}, 'coor', 'fr')|raw}}</label><strong>{{ user.adresse.bureauDistributeur }}</strong>
+                                                        </p>
+                                                        <p class="recap-line clearfix">
+                                                            <label>{{'coor.coor_show.lbl_pays'|trans({}, 'coor', 'fr')|raw}}</label><strong>{{ user.adresse.pays }}</strong>
+                                                        </p>
+                                                        <p class="recap-line clearfix">
+                                                            <label>{{'coor.coor_show.lbl_tel_port'|trans({}, 'coor', 'fr')|raw}}</label><strong>{{ user.telephoneMobile | phoneFormatter }}</strong>
+                                                        </p>
+                                                        <p class="recap-line clearfix">
+                                                            <label>{{'coor.coor_show.lbl_tel_fix'|trans({}, 'coor', 'fr')|raw}}</label><strong>{{ user.adresse.telephone | phoneFormatter }}</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="row show-grid">
+                                                    <div class="col-xs-12 col-sm-8 col-md-8">
+                                                        <a href="{{path('sel_edit_user', {'referenceSig': key})}}" class="btn btn-default pull-right" title="Modifier mes coordonées"><span>{{'coor.coor_show.lbl_modif_coord'|trans({}, 'coor', 'fr')|raw}}</span></button></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                {% if key == userSig.resultatClient.client.reference %}
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                <h4>{{'coor.coor_show.lbl_con_idents'|trans({}, 'coor', 'fr')|raw}}</h4>
+                                                <div class="row show-grid">
+                                                    <div class="col-xs-12">
+                                                        <p class="recap-line clearfix">
+                                                            <label>{{'coor.coor_show.lbl_email'|trans({}, 'coor', 'fr')|raw}}</label>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="row show-grid">
+                                                    <div class="col-xs-12">
+                                                        <p class="recap-line clearfix">
+                                                            <strong>{{user.eMail}}</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="row show-grid">
+                                                    <div class="col-xs-12">
+                                                        <p class="recap-line clearfix">
+                                                            <label>{{'coor.coor_show.lbl_mdp'|trans({}, 'coor', 'fr')|raw}}</label>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="row show-grid">
+                                                    <div class="col-xs-12">
+                                                        <p class="recap-line clearfix">
+                                                            <strong>........</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row show-grid">
+                                                    <div class="col-xs-12 col-sm-6 margin-10">
+                                                        <a href="{{ path('sel_front_profile_edit') }}" class="btn btn-default pull-right btn-sm" title="Modifier mon email"><span>{{'coor.coor_show.btn_modif_email'|trans({}, 'coor', 'fr')|raw}}</span></button></a>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <a href="{{ path('sel_change_password') }}" class="btn btn-default pull-right btn-sm" title="Modifier mon mot de passe"><span>{{'coor.coor_show.btn_modif_mdp'|trans({}, 'coor', 'fr')|raw}}</span></button></a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                {% endif %}
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div><!-- collapse 1 -->
+                            </div>
+            {% endfor %}
+                    <!-- Pour activer "l'accordéon" : (
+                        - Ajouter la class "slide" et supprimer la class "hide" sur tous les heading et ajouter la class "open" sur le premier panel-heading
+                        - Incrémenter les ID "collapse_1 et heading_1, ainsi que les attributs "Aria"
+                        )
+
+                    <div class="panel-heading slide open"  id="heading_1">
+                            <a  data-toggle="collapse" data-parent="#accordion" href="#collapse_1" aria-expanded="true" aria-controls="collapse_1">
+                                <h3 class="panel-title">Jean DUPONT</h3>
+                                <span class="plus">+</span>
+                                <span class="moins">-</span>
+                            </a>
+                    </div>
+                    -->
+                        </div>
+                    </div><!-- row -->
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div aria-labelledby="fenetreDialogue"  tabindex="-1" id="infos_coordonnees" class="modal fade">
+                <div  class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button value="Fermer la fenêtre de dialogue et continuer" aria-label="{{'coor.coor_show.aria_close'|trans({}, 'coor', 'fr')|raw}}" data-dismiss="modal" class="close" type="button">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 id="fenetreDialogue" class="modal-title">{{'coor.coor_show.modal_title'|trans({}, 'coor', 'fr')|raw}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            {{'coor.coor_show.bloc_infos_non_modifiables'|trans({'%pdf_point_vente_url%':  asset('bundles/sel/pdf/liste_agences.pdf')}, 'coor', 'fr')|raw}}
+                        </div>
+                        <div class="modal-footer">
+                            <button value="Fermer la fenêtre de dialogue" title="Fermer la fenêtre de dialogue" data-dismiss="modal" class="btn btn-default" type="button">{{'coor.coor_show.modal_btn_close'|trans({}, 'coor', 'fr')|raw}}</button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        {% endblock content %}
+    {% endblock body%}
+{% endblock mainContent %}

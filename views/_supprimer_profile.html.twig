@@ -1,0 +1,80 @@
+<script type="text/ng-template" id="profil.html">
+    {% verbatim %}
+        <div class="step_form" id="step_profil">
+            <!-- todo : create cms bloc for this -->
+            <div class="infos">
+                <div class="info">
+                    <span><strong>En souscrivant en ligne : </strong></span>
+                    <ul class="color_bullet">
+                        <li>plus besoin de vous déplacer en agence</li>
+                        <li>votre carte Navigo est envoyée par courrier sous 10 jours après</li>
+                    </ul>
+                </div>
+                <div class="info">
+                    <span><strong>Munissez-vous : </strong></span>
+                    <ul class="color_bullet">
+                        <li>d’un <strong>Relevé d’Identité Bancaire</strong> (RIB)</li>
+                        <li>d’une <strong>photo d’identité au format numérique</strong> que vous pouvez télécharger, prendre avec votre webcam ou votre mobile</li>
+                    </ul>
+                </div>
+            </div>
+			<!-- end todo -->
+            <p class="title">
+		{% endverbatim %}
+            {{ 'footer.please_answer' | trans }}
+		{% verbatim %}
+			</p>
+			<div class="form-content">
+            	<div class="form-group">
+                	<span class="radio_label"><strong>
+				{% endverbatim %}
+                	{{ 'footer.already_sig' | trans }}
+				{% verbatim %}
+					</strong></span>
+                	<div class="radio">
+                    	<input type="radio" name="hasCard" id="inlineRadio1" data-ng-model="hasCard" value="true">
+                    	<label class="radio-inline" for="inlineRadio1">
+						{% endverbatim %}
+                         	{{ 'footer.yes' | trans }}
+						{% verbatim %}
+                      	</label>
+                      	<input type="radio" name="hasCard" id="inlineRadio2" data-ng-model="hasCard" value="false">
+                      	<label class="radio-inline" for="inlineRadio2">
+						{% endverbatim %}
+                      		{{ 'footer.no' | trans }}
+						{% verbatim %}
+						</label>
+                	</div>
+            	</div>
+            	<div class="form-group">
+                	<span class="radio_label"><strong>{{ 'footer.already_sel' | trans }}</strong></span>
+                	<div class="radio">
+                    	<input type="radio" name="isUser" id="inlineRadio3" data-ng-model="isUser" value="true">
+                    	<label class="radio-inline" for="inlineRadio3">
+						{% endverbatim %}
+                         	{{ 'footer.yes' | trans }}
+						{% verbatim %}
+                      	</label>
+                        <input type="radio" name="isUser" id="inlineRadio4" data-ng-model="isUser" value="false">
+                      	<label class="radio-inline" for="inlineRadio4">
+						{% endverbatim %}
+                       		{{ 'footer.no' | trans }}
+						{% verbatim %}
+                     	</label>
+                	</div>
+            	</div>
+			</div>
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                	<button type="button" class="btn btn-primary pull-right" data-ng-click="setProfil()"><span>
+					{% endverbatim %}
+                		{{ 'profile.continue' | trans }}
+					{% verbatim %}
+					</span></button>
+                </div>
+            </div>
+        </div>
+    {% endverbatim %}
+</script>
+
+

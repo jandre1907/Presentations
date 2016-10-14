@@ -1,0 +1,166 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="heading">
+                <h1>Renseigner vos coordonnées</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block previousArrow %}{% endblock previousArrow%}
+
+{% block mainContent %}
+{% block body %}
+
+    {% block content %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-horizontal">
+                        <div class="step_form creation-compte">
+
+                            <p>{{ 'registration.confirmed'|trans({'%username%': user.username}, 'FOSUserBundle') }}</p>
+                            <div class="form-content">
+                                {%  if (form is defined) %}
+                                <form action="{{ url('post_update_user_sel') }}" method="POST" {{ form_enctype(form) }}>
+
+                                {% if form_errors(form) %}<div class="obj-errorBlock">{{ form_errors(form) }}</div>{% endif %}
+                                <div class="form-group">
+                                    <label class="col-xs-4 control-label">N° et nom de rue<span class="star">*</span></label>
+                                    <div class="col-xs-4">
+                                        <input id="{{form.street1.vars.id }}" name="{{form.street1.vars.full_name }}" type="password" class="form-control" value="" required="required">
+                                    </div>
+                                    <div class="col-xs-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-4 control-label">Complément adresse</label>
+                                    <div class="col-xs-4">
+                                        <input id="{{form.street2.vars.id }}" name="{{form.street2.vars.full_name }}" type="password" class="form-control" value="" required="required">
+                                    </div>
+                                    <div class="col-xs-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-4 control-label">Code postal</label>
+                                    <div class="col-xs-4">
+                                        <input id="{{form.zip.vars.id }}" name="{{form.zip.vars.full_name }}" type="password" class="form-control" value="" required="required">
+                                    </div>
+                                    <div class="col-xs-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-4 control-label">Ville</label>
+                                    <div class="col-xs-4">
+                                        <input id="{{form.city.vars.id }}" name="{{form.city.vars.full_name }}" type="password" class="form-control" value="" required="required">
+                                    </div>
+                                    <div class="col-xs-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-4 control-label">Pays</label>
+                                    <div class="col-xs-4">
+                                        <input id="{{form.country.vars.id }}" name="{{form.country.vars.full_name }}" type="password" class="form-control" value="" required="required">
+                                    </div>
+                                    <div class="col-xs-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-4 control-label">Téléphone portable</label>
+                                    <div class="col-xs-4">
+                                        <input id="{{form.phoneNumber.vars.id }}" name="{{form.phoneNumber.vars.full_name }}" type="password" class="form-control" value="" required="required">
+                                    </div>
+                                    <div class="col-xs-4"></div>
+                                </div>
+                                {#<div class="form-group">
+                                    <label class="col-xs-4 control-label">Téléphone fixe</label>
+                                    <div class="col-xs-4">
+                                        <input type="text" class="form-control" value="+33">
+                                    </div>
+                                    <div class="col-xs-4"></div>
+                                </div>#}
+                                <div class="checkbox">
+                                    <input type="checkbox" id="inlineRadio9" checked="checked">
+                                    <label for="inlineRadio9">J’accepte de recevoir les avantages et les offres commerciales  de la RATP, d'OPTILE et de SNCF Transilien par communications éléctroniques
+                                    </label>
+                                </div>
+                                </form>
+                                {% endif %}
+                            </div><!-- form-content -->
+                            <div class="row">
+                                <div class="col-xs-4 col-xs-offset-4">
+                                    <button type="button" class="btn btn-primary pull-right" title="Valider le formulaire et continuer"><span>Valider</span></button>
+                                </div>
+                            </div>
+                            <span class="obligatoire">
+                                <span class="star">*</span>
+                                Champs obligatoire
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock content %}
+{% endblock body%}
+
+{% endblock mainContent %}
+
+{#
+{% block fos_user_content %}
+    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}, 'FOSUserBundle') }}</p>
+    {%  if (form is defined) %}
+        <form action="{{ url('post_update_user_sel') }}" method="POST" {{ form_enctype(form) }}>
+
+        {% if form_errors(form) %}<div class="obj-errorBlock">{{ form_errors(form) }}</div>{% endif %}
+            <div class="row">
+                <div class="columns column_mobile_100 input">
+                    {{ form_errors(form.street1) }}
+                    {{ form_label(form.street1) }}
+                    {{ form_widget(form.street1) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns column_50 column_mobile_100 input">
+                    {{ form_errors(form.street2) }}
+                    {{ form_label(form.street2) }}
+                    {{ form_widget(form.street2) }}
+                </div>
+                <div class="columns column_50 column_mobile_100 input">
+                    {{ form_errors(form.zip) }}
+                    {{ form_label(form.zip) }}
+                    {{ form_widget(form.zip) }}
+                </div>
+            </div>
+           <div class="row">
+                <div class="columns column_mobile_100 input">
+                    {{ form_errors(form.city) }}
+                    {{ form_label(form.city) }}
+                    {{ form_widget(form.city) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns column_mobile_100 input">
+                    {{ form_errors(form.country) }}
+                    {{ form_label(form.country) }}
+                    {{ form_widget(form.country) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns column_mobile_100 input">
+                    {{ form_errors(form.phoneNumber) }}
+                    {{ form_label(form.phoneNumber) }}
+                    {{ form_widget(form.phoneNumber) }}
+                </div>
+            </div>
+            {{ form_rest(form) }}
+            <input type="submit" value="Valider">
+
+        </form>
+    {% endif %}
+    {% if app.session is not empty %}
+        {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+        {% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans({}, 'FOSUserBundle') }}</a></p>{% endif %}
+    {% endif %}
+{% endblock fos_user_content %}
+#}

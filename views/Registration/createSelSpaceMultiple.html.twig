@@ -1,0 +1,32 @@
+{% verbatim %}
+<div id="step_profil_4" class="step_form">
+
+    <p class="text-error" data-ng-show="pageCtrl.isMsg" data-template-content="{{pageCtrl.msg}}"></p>
+    {% endverbatim %}
+        <p class="title">{{'cpt.cpt_rattachement_identite.identification'|trans({}, 'cpt', 'fr')|raw}}</p>
+    {% verbatim %}
+    <div class="">
+
+        <div class="form-group">
+            <div class="col-xs-11 col-md-8 col-sm-12">
+
+                <div class="radio radio-list" data-ng-repeat="userSig in pageCtrl.userSigCollec">
+                    <input type="radio" id="userSig_{{$index}}" value="{{$index}}" data-ng-model="pageCtrl.selectedUser" name="selection-user">
+                    <label for="userSig_{{$index}}" class="radio">{{userSig.prenom}} {{userSig.nom}} né le {{ userSig.dateNaissance | dateFormat}}</label>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-md-4 col-sm-12"></div>
+        </div>
+    </div>
+    {% endverbatim %}
+    <div class="row">
+        <div class="col-xs-12 text-center">
+
+            <button data-ng-click="pageCtrl.onContinuer(pageCtrl.selectedUser)"
+                    value="Valider le formulaire et continuer"
+                    class="btn btn-primary aide-photo-btn"
+                    type="button"><span>{{'cpt.cpt_rattachement_identite.btn_continuer'|trans({}, 'cpt', 'fr')|raw}}</span></button>
+        </div>
+    </div>
+</div>

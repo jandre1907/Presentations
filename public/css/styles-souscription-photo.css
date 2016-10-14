@@ -1,0 +1,43 @@
+﻿canvas{
+    border: 1px solid #ccc;
+    cursor: move;
+    background-color: #f8f8f8;
+}
+
+input {
+    position: relative;
+    z-index: 10;
+}
+
+.btPrendrePhotoDisabled {
+    width: 100%;
+}
+
+#msgNavigateurIncompatible {
+    font-size: 0.9em;
+}
+/*---------------------*/
+/*  modal capture imageWebcam   */
+/*---------------------*/
+.bt_capture {
+    width: 208px;
+    margin-top: 15px;
+}
+
+#videoCanvas, .previewCapture {
+    width: 208px;
+}
+
+#canvasPreviewCapture {
+    width: 208px;
+    overflow: hidden;
+    border: 1px solid lightgrey;
+}
+
+#canvasPreviewCapture > img {
+    width: 100%;
+}
+
+.rowHiddenCanvas {
+    display: none;
+}

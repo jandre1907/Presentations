@@ -1,0 +1,76 @@
+<div class="container-fluid" ng-show="pageCtrl.isForfaits && pageCtrl.afficheWordingSelection">
+
+    <!--    LISTE DES FORFAITS   -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-8">
+            <div class="sav paiement">
+                <h2>Pour quel forfait souhaitez-vous obtenir votre attestation ?</h2>
+
+                <div class="panel panel-default" ng-repeat="forfait in pageCtrl.contratCollec">
+                    <div class="panel-body">
+                        <p class="pdf-line">
+
+                        <h3>Forfait {{ forfait.forfait }} <span ng-show="pageCtrl.displayDateForfait">{{ forfait.annee }}</span>
+                            de {{ forfait.porteur }}</h3>
+                            <!-- (voir commentaire AttestationCtrl.js ligne 94 ) origin : <span ng-click="pageCtrl.onTelecharger(forfait.refUrl)">-->
+                            <span>
+                                <img ng-src="{{ element.image || '../bundles/sel/images/pdf.png' }}" class="picto" alt="Fichier PDF">
+                                <a href="{{forfait.refUrl}}" class="" title="télécharger l'attestation PDF du Forfait {{ forfait.codeProduit | forfaitName }} {{ forfait.dateDebut | forfaitYear }} de {{ forfait.identitePorteur }}" download>
+                                    Télécharger ({{ forfait.size/1024 | number:0 }} Ko)
+                                </a>
+                            </span>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--    MESSAGE : cas -2- le PDF s'ouvre dans un nouvel onglet-
+   on informe l'utilisateur de cet action ! -->
+<div class="container-fluid" ng-show="pageCtrl.pdfOnNewTab">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-8">
+            <div class="sav paiement text-center">
+                <div message-dv meskey="INFO_ATTESTATION"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--    MESSAGE : PAS DE FORFAIT DISPONIBLE   -->
+<div class="container-fluid" ng-hide="pageCtrl.isForfaits">           
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-8">
+            <div class="sav paiement text-center">
+                <div message-dv meskey="SAV-ATT-EC01-RG_006"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--    MESSAGE : Erreur Serveur/Probleme technique   -->
+<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1" ng-show="pageCtrl.isError">
+    <div class="warning">
+        <img ng-src="{{ element.image || '../bundles/sel/images/warning.png'}}" class="picto" alt="Attention">
+        <br>
+        <div class="col-xs-10 col-xs-offset-1" message-dv meskey="SERVER_ERROR"></div>
+        <br>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button ng-click="pageCtrl.onRetourEspace()" type="button" class="btn btn-primary aide-photo-btn" title="Retour à mon espace Service navigo">
+                <span>Retour à mon espace</span>
+           </button>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-10 col-xs-offset-1" message-dv meskey="SAV-ATT-EC01-RG_006"></div>

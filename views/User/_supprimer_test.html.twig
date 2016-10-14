@@ -1,0 +1,43 @@
+{% verbatim %}
+<h1>TEST {{3 + 4}} {{test}}</h1>
+<input type="text" data-ng-model="test"/>
+{{test}}
+{% endverbatim %}
+{#{%  if (form is defined) %}
+    <form action="{{ url('post_users') }}" method="POST" {{ form_enctype(form) }}>
+
+{% if form_errors(form) %}<div class="obj-errorBlock">{{ form_errors(form) }}</div>{% endif %}
+        <div class="row">
+            <div class="columns column_mobile_100 input">
+                {{ form_errors(form.email) }}
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="columns column_50 column_mobile_100 input">
+                {{ form_errors(form.plainPassword.first) }}
+                {{ form_label(form.plainPassword.first) }}
+                {{ form_widget(form.plainPassword.first) }}
+            </div>
+            <div class="columns column_50 column_mobile_100 input">
+                {{ form_errors(form.plainPassword.second) }}
+                {{ form_label(form.plainPassword.second) }}
+                {{ form_widget(form.plainPassword.second) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="columns column_mobile_100 input">
+                {{ form_errors(form.captcha) }}
+                {{ form_label(form.captcha) }}
+                {{ form_widget(form.captcha) }}
+            </div>
+        </div>
+
+        {{ form_rest(form) }}
+        <input type="submit" value="Valider">
+
+    </form>
+    </div>
+    {% endif %}
+#}

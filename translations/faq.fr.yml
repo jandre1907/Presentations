@@ -1,0 +1,77 @@
+faq.faq_index.meta_desc: 'Aide en ligne'
+faq.faq_index.title: 'Aide en ligne'
+faq.faq_index.article.title: 'Votre espace personnel en vidéo'
+faq.faq_index.article.content: 'Depuis votre espace personnel, retrouvez les forfaits que vous détenez ou que vous financez et gérez vos informations personnelles et moyens de paiement.'
+faq.faq_index.espace_services_video: "<h3 class=\"normal\"><strong>Votre espace personnel en vid&eacute;o</strong></h3>\r\n<a class=\"video-img\" title=\"Vid&eacute;o de d&eacute;monstration des Services Navigo\" href=\"#\"><img src=\"{{prefix_front}}bundles/sel/images/video-services-en-ligne.jpg\" alt=\"Vid&eacute;o de d&eacute;monstration des Services Navigo\" width=\"340\" /></a>"
+faq.faq_index.search_name_label: 'Nom de la recherche'
+faq.faq_index.parcourir_btn: Parcourir
+faq.faq_index.home_link_breadcrumb: Accueil
+faq.faq_index.home_services_navigo_link_breadcrumb: 'Je gère ma carte Navigo'
+faq.faq_index.faq_lbl_breadcrumb: 'Aide en ligne'
+faq.faq_ask_confirm.accueil: Accueil
+faq.faq_ask_confirm.lbl.question: 'Poser une question'
+faq.faq_ask_confirm.title.question: 'Poser une question'
+faq.faq_ask_confirm.messsage.pris_en_compte: 'Votre demande a bien été prise en compte'
+faq.faq_ask_confirm.messsage.mail_sent: 'Nous vous avons envoyé un e-mail de confirmation d’enregistrement de votre demande à l’adresse :'
+faq.faq_ask_confirm.messsage.anwswer_advicer: 'Un conseiller vous répondra par e-mail dans les meilleurs délais.'
+faq.faq_ask_confirm.messsage.back_to_myspace: 'Retour à mon espace personnel'
+faq.faq_ask_confirm.messsage.back_to_myspace_title: 'Retour à mon espace personnel'
+faq.faq_ask_request.title: Accueil
+faq.faq_ask_request.service_navigo: 'Je gère ma carte Navigo'
+faq.faq_ask_request.ask_question: 'Poser une question'
+faq.faq_ask_request.ask_question_title: 'Poser une question'
+faq.faq_ask_request.selection_asked_label: 'Veuillez tout d''abord sélectionner l''objet de votre demande :'
+faq.faq_ask_request.continue_btn: Envoyer
+faq.faq_ask_request.aria_close_window_to_continue_label: 'Fermer la fenêtre de dialogue et continuer'
+faq.faq_ask_request.close_window_to_continue_label: 'Fermer la fenêtre de dialogue et continuer'
+faq.faq_ask_request.information_label: Information
+faq.faq_ask_request.close: Fermer
+faq.faq_ask_request.parcourir_btn: Parcourir
+faq.faq_ask_request.asked_format_label: "<p>Votre fichier doit respecter<br />le format suivant :</p>\r\n<ul>\r\n<li>JPEG, GIF, BMP, TIFF, GIF, PNG ou PDF</li>\r\n<li>d&rsquo;un poids maximum de 5 Mo</li>\r\n</ul>"
+faq.faq_contacts.meta_desc: 'Contacter les services Navigo'
+faq.faq_contacts.service_en_ligne_label: 'Service en ligne'
+faq.faq_contacts.accueil: Accueil
+faq.faq_contacts.service_navigo: 'Je gère ma carte Navigo'
+faq.faq_contacts.contact: Contacts
+faq.faq_contacts.contact_title: Contacts
+faq.faq_contacts.ask_question_message: 'Vous souhaitez nous contacter à propos des forfaits ci-dessous :'
+faq.faq_contacts.heading_bloc_1: 'Forfait Navigo Annuel'
+faq.faq_contacts.content_bloc_1: '<p class="recap-line clearfix"><strong>Agence Navigo Annuel</strong></p><p>Tél : <a href="tel:0969392222">09 69 39 22 22</a> (appel non surtaxé)</p><p>E-mail : <a href="mailto:gestion@agencenavigoannuel.fr">gestion@agencenavigoannuel.fr</a></p>'
+faq.faq_contacts.heading_bloc_2: 'Forfait imagine R'
+faq.faq_contacts.content_bloc_2: '<p class="recap-line clearfix"><strong>Agence imagine R</strong></p><p>Tél : <a href="tel:0969395555">0969 39 55 55</a> (appel non surtaxé)</p><p><a href="http://www.imagine-r.com/">Envoyer un e-mail depuis le site imagine-r.com</a></p>'
+faq.faq_contacts.heading_bloc_3: 'Forfait Navigo Mois et Semaine <strong class="normal">et suivi de commande de carte</strong> Navigo'
+faq.faq_contacts.content_bloc_3: '<p class="recap-line clearfix"><strong>Agence Navigo</strong></p><p>Tél : <a href="tel:0969396666">09 69 39 66 66</a> (appel non surtaxé)</p>'
+faq.faq_contacts.heading_bloc_4: 'Forfait Gratuité et Solidarité'
+faq.faq_contacts.content_bloc_4: '<p class="recap-line clearfix"><strong>Agence Solidarité</strong></p><p>Tél : <a href="tel:0800948999">0800 948 999</a> (appel gratuit depuis un poste fixe)</p><a href="http://www.solidaritetransport.fr">Envoyer un e-mail depuis le site solidaritetransport.fr</a>'
+faq.faq_contacts.back_to_myspace: 'Retour à mon espace personnel'
+faq.faq_search_results.engine.title: 'MOTEUR DE RECHERCHE'
+faq.faq_search_results.engine.label: 'Résultats de votre recherche'
+faq.faq_search_results.engine.placeholder: 'Nom de la recherche'
+faq.faq_search_results.service_en_ligne_label: 'Service en ligne'
+faq.faq_search_results.accueil: Accueil
+faq.faq_search_results.service_navigo: 'Je gère ma carte Navigo'
+faq.faq_search_results.help_online: 'Aide en ligne'
+faq.faq_search_results.help_online_title: 'Résultat de votre recherche'
+faq.faq_search_results.back: précédent
+faq.faq_search_results.search_engine_title: Recherche
+faq.faq_search_results.filter_results_title: 'Filtrer les résultats'
+faq.faq_search_results.more_information_link_label: 'Avoir plus d''information sur ce résultat de recherche Titre de la FAQ / thématique'
+faq.faq_search_results.more_information_label: 'En savoir plus'
+faq.faq_show.service_online_title: 'Service en ligne'
+faq.faq_show.article_util_title: 'Cet article vous a t-il été utile ?'
+faq.faq_show.yes_label: oui
+faq.faq_show.no_label: non
+faq.faq_show.thx_trust: 'Merci de votre confiance.'
+faq.faq_show.on_the_same_theme_subtitle_2: 'Sur le même thème'
+faq.faq_show.ask_question: 'Votre question ?'
+faq.faq_show.find_answer: 'Vous n''avez pas trouvé la réponse à votre question ?'
+faq.faq_show.ask_question_btn: 'Poser une question'
+faq.faq_show.ask_question_btn_title: 'Poser une question'
+faq.faq_index.home_gere_macarte_link_breadcrumb: 'Je gère ma carte Navigo'
+faq.faq_index.faq_posez_question_breadcrumb: 'Poser une question'
+faq.faq_index.faq_mon_espace_breadcrumb: 'Mon espace personnel'
+faq.faq_ask_request.label-rubrique: 'Où avez-vous constaté le problème ?'
+faq.faq_ask_request.label-description: 'Décrivez précisément ce que vous constaté :'
+faq.faq_connexion.title-page: 'Connectez-vous pour poser une question'
+faq.faq_connexion.btn_connexion: 'Me connecter'
+faq.faq_connexion.lbl-contact: 'Nous contacter autrement'

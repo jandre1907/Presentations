@@ -1,0 +1,87 @@
+<div class="step_form" id="step_identification_3"><!-- 0.3 -->
+    <p class="title">Veuillez compléter les informations suivantes afin de pouvoir rattacher votre espace à vos données clients :</p>
+    <div class="form-content" ng-form name="step_form" >
+        <p class="warning-light red" ng-show="(error != '' && error!=null)">
+            <img ng-src="{{ prefix_front }}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+            <strong>{{error}}</strong>
+        </p>
+
+        <div class="form-group">
+            <label for="email" class="col-xs-12 col-md-4 col-sm-12 control-label">E-mail<span class="star">*</span></label>
+            <div class="col-xs-11 col-md-4 col-sm-12">
+                <input id="email" type="email" name="email" class="form-control" placeholder="" ng-model="userSel.email" required>
+                <span aria-live="assertive" role="alert" class="mess-error" ng-show="step_form.email.$invalid && step_form.email.$dirty" >Information incorrecte, veuillez la saisir à nouveau.</span>
+                <img alt="Erreur" class="picto error" ng-show="step_form.email.$invalid && step_form.email.$dirty " ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+           
+        </div>
+
+        <div class="form-group" ng-show="userSig.reference">
+            <label for="numero-client" class="col-xs-12 col-md-4 col-sm-12 control-label">Numéro client<span class="star"></span></label>
+            <div class="col-xs-11 col-md-4 col-sm-12">
+               <input id="numero-client" type="text" name="reference" class="form-control" placeholder="" ng-model="userSig.reference" ng-maxlength="40" ng-pattern="/[0-9]+/"  >
+               <span aria-live="assertive" role="alert" class="mess-error" ng-show="step_form.reference.$error.pattern">Information incorrecte, veuillez la saisir à nouveau.</span>
+               <span aria-live="assertive" role="alert" class="mess-error" ng-show="step_form.reference.$error.minlength || step_form.reference.$error.maxlength">Information incorrecte, veuillez la saisir à nouveau.</span>
+                <img alt="Erreur" class="picto error" ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+            
+        </div>
+
+        <div class="form-group">
+            <label for="nom" class="col-xs-12 col-md-4 col-sm-12 control-label">Nom</label>
+            <div class="col-xs-11 col-md-4 col-sm-12">
+                <input id="nom" type="text" name="nom" class="form-control" placeholder="" ng-model="userSig.lastname"  >
+            </div>
+           
+        </div>
+
+        <div class="form-group">
+            <label for="prenom" class="col-xs-12 col-md-4 col-sm-12 control-label">Prénom</label>
+            <div class="col-xs-11 col-md-4 col-sm-12">
+                <input id="prenom" type="text" name="prenom" class="form-control" placeholder="" ng-model="userSig.firstname"  >
+            </div>
+           
+        </div>
+        <div class="form-group">
+            <label for="code-postal" class="col-xs-12 col-md-4 col-sm-12 control-label">Code postal</label>
+            <div class="col-xs-11 col-md-4 col-sm-12">
+                <input id="code-postal" type="text" name="codePostal" class="form-control" placeholder="" ng-model="userSig.postalCode" ng-minlength="5" ng-maxlength="5"  ng-pattern="/[0-9]+/">
+                <span aria-live="assertive" role="alert" class="mess-error" ng-show="step_form.codePostal.$invalid && step_form.codePostal.$dirty">Information incorrecte, veuillez la saisir à nouveau.</span>
+                <img alt="Erreur" class="picto error" ng-show="step_form.codePostal.$invalid && step_form.codePostal.$dirty" ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label for="mobile" class="col-xs-12 col-md-4 col-sm-12 control-label">Téléphone portable</label>
+            <div class="col-xs-11 col-md-4 col-sm-12">
+                 <input id="mobile" type="text" class="form-control" ng-model="rawMobile" name="mobile" maxlength="15">
+                 <span  aria-live="assertive" role="alert" class="mess-error" ng-hide="!rawMobile" ng-show="step_form.mobile.$invalid && step_form.mobile.$dirty">Information incorrecte, veuillez la saisir à nouveau.</span>
+                 <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" ng-hide="true" ng-show="!(step_form.mobile.$invalid)">
+                 <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur"  ng-hide="!rawMobile" ng-show="step_form.mobile.$invalid && step_form.mobile.$dirty" >
+            </div>
+            
+        </div>
+
+        <div class="form-group birthdate">
+            <label for="birthdate" class="col-xs-12 col-md-4 col-sm-12 control-label">Date de naissance<span class="star">*</span></label>
+            <div class="col-xs-11 col-md-4 col-sm-12">
+                <input id="birthdate" class="form-control pull-left" name="birthday" type="text" placeholder="JJ" aria-required="true" aria-label="jour de votre naissance"
+                       ng-model="userSig.birthDate.day">
+                <input class="form-control pull-left" name="birthmonth" type="text" placeholder="MM" aria-required="true" aria-label="mois de votre naissance"
+                       ng-model="userSig.birthDate.month">
+                <input class="form-control pull-left" name="birthyear" type="text" placeholder="AAAA" aria-required="true" aria-label="année de votre naissance"
+                       ng-model="userSig.birthDate.year">
+                <img ng-hide="isDateValide" alt="Erreur" class="picto error"  ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+                <span class="mess-error" ng-hide="isDateValide">Cette date n'est pas valide</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button type="button" class="btn btn-primary aide-photo-btn" ng-click="submitForm()" title="Valider le formulaire et poursuivre" ><span>Continuer</span></button>
+        </div>
+    </div>
+</div>

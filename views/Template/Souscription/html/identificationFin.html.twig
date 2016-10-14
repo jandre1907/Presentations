@@ -1,0 +1,21 @@
+<div class="step_form" id="step_identification_4"><!-- 0.4 -->
+    <h2 class="margin-ultra-bottom">{{"rat.rat_choix_identite.lbl_action_identification_titre"|trans({}, "rat", "fr")|raw}}</h2>
+        <div class="form-content">
+            <div class="form-group">
+                <div class="col-xs-11 col-md-8 col-sm-12">
+                    <div class="radio radio-list">
+                        <input type="radio" name="radio15" id="inlineRadio15" data-ng-init="isMe = false" data-ng-model="isMe"  value="1" />
+                        <label class="radio" for="inlineRadio15">{{ Holder.prenom}} {{ Holder.nom}}{{"rat.rat_choix_identite.item_identite"|trans({}, "rat", "fr")|raw}}{{ Holder.birthDay }}/{{ Holder.birthMonth }}/{{ Holder.birthYear }}</label>
+
+                    </div>
+                 </div>
+                <div class="col-xs-12 col-md-4 col-sm-12">{% verbatim %}{{ isMe }}{% endverbatim %}</div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+                <button type="button" class="btn btn-primary aide-photo-btn" data-ng-click="gotoStep('/Forfait')" data-ng-disabled="disableSubmit" title="{{"rat.rat_choix_identite.btn_continuer_info3"|trans({}, "rat", "fr")|raw}}"><span>{{"rat.rat_choix_identite.btn_continuer_lbl3"|trans({}, "rat", "fr")|raw}}</span></button>
+            </div>
+        </div>
+    </div>
+</div>

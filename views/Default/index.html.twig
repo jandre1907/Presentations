@@ -1,0 +1,289 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block meta_desc %}
+    <meta name="description" content="{{ 'home.home_homepage.home.home_homepage.home_meta_desc'|trans({}, 'home') | raw }}">
+{% endblock %}
+
+{% block throbber %}{% endblock throbber %}
+{% block title 'Navigo: Accueil' %}
+{% block contentTitle %}
+   <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="heading">
+            <h1>{{ 'home.home_homepage.home_title'|trans({}, 'home') }}</h1>
+
+
+         </div>
+      </div>
+   </div>
+{% endblock contentTitle %}
+
+{% block previousArrow %}{% endblock previousArrow%}
+
+{% block mainContent %}
+{% block body %}
+    {% block content %}
+        <div class="video-box">
+
+            <div class="row video-show-grid-top">
+                <div class="media box_spacer_xs12">
+                    {{ 'home.home_homepage.sel_description'|trans({}, 'home') | raw }}
+                </div>
+            </div>
+        </div>
+        <div class="row show-grid">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <h2 class="normal">
+                    {{ 'home.home_homepage.find_services_by_forfait'|trans({}, 'home') | raw }}
+                </h2>
+            </div>
+        </div>
+        <div class="row margin-10">
+            <div class="col-xs-12" data-ng-controller="noneCtrl">
+                <div class="panel-group" id="forfaits"  aria-multiselectable="false">
+                    <div class="panel panel-default no-margin">
+                        <div class="panel-heading slide" >
+                            <a  data-toggle="collapse" data-ng-click="controlHash($event)" data-parent="#forfaits" href="#imagine-r" aria-expanded="true" aria-controls="imagine-r">
+                                <h3 id="headingOne">{{ 'home.home_homepage.imaginr.title'|trans({}, 'home') }}</h3>
+                                <span class="plus">+</span><span class="moins">-</span>
+                            </a>
+                        </div>
+                        <div id="imagine-r" class="panel-collapse collapse"  aria-labelledby="headingOne">
+                            <div class="panel-body slide">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <ul class="color_bullet list_3_cols">
+                                            <!-- Souscription  -->
+                                            <li><a href="{{ 'home.home_homepage.imaginr.souscription_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.imaginr.souscription_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.imaginr.souscription_link'|trans({}, 'home') }}</a></li>
+                                            {#TODO: type peut etre 2 aussi (ImaginR scolaire ou ImaginR etudiant) #}
+                                            <!-- Suivre ma souscription  -->
+                                            <li><a href="{{ path('sel_espace_client') }}" class="link" title="{{ 'home.home_homepage.imaginr.suivre_souscription_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.imaginr.suivre_souscription_link'|trans({}, 'home') }}</a></li>
+                                            {#TODO: type peut etre 2 aussi (ImaginR scolaire ou ImaginR etudiant) #}
+                                            <!-- Attestation  -->
+                                            <li><a href="{{ path('sel_actesav_list', {'type': 1, 'acte': 'attestation'}) }}" class="link" title="{{ 'home.home_homepage.imaginr.attestation_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.imaginr.attestation_link'|trans({}, 'home') }}<img src="{{ asset('bundles/sel/images/pdf.png') }}" class="picto pdf-medium" alt="Fichier PDF"></a></li>
+                                            {#TODO: type peut etre 2 aussi (ImaginR scolaire ou ImaginR etudiant) #}
+                                            <!-- Recharger le forfait sur ma carte  -->
+                                            <li><a href="{{ 'home.home_homepage.imaginr.recharger_forfait_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.imaginr.recharger_forfait_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.imaginr.recharger_forfait_link'|trans({}, 'home') }}<img src="{{ asset('bundles/sel/images/usb.png')}}" class="picto usb-medium" alt="Service disponible avec un lecteur de carte" ></a></li>
+                                            {#TODO: type peut etre 2 aussi (ImaginR scolaire ou ImaginR etudiant) #}
+                                            <!-- Perte / Vol -->
+                                            <li><a href="{{ path('sel_actesav_list', {'type': 1, 'acte': 'pertevol'}) }}" class="link" title="{{ 'home.home_homepage.imaginr.perte_vol_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.imaginr.perte_vol_link'|trans({}, 'home') }}</a></li>
+                                            <!-- Commander une nouvelle carte Bons plans  -->
+                                            <li><a href="{{ 'home.home_homepage.imaginr.commender_carteBon_plans_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.imaginr.commender_carteBon_plans_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.imaginr.commender_carteBon_plans_link'|trans({}, 'home') }}</a></li>
+                                            {#TODO: type peut etre 2 aussi (ImaginR scolaire ou ImaginR etudiant) #}
+                                            <!--  Coordonnées -->
+                                            <li><a href="{{ path('sel_coordonnees') }}" class="link" title="{{ 'home.home_homepage.imaginr.personal_infos_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.imaginr.personal_infos_link'|trans({}, 'home') }}</a></li>
+                                            {#TODO: type peut etre 2 aussi (ImaginR scolaire ou ImaginR etudiant) #}
+                                            <!--  Moyens de paiement -->
+                                            <li><a href="{{ path('sel_payment_list') }}" class="link" title="{{ 'home.home_homepage.imaginr.paiement_infos_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.imaginr.paiement_infos_link'|trans({}, 'home') }}</a></li>
+                                            <!-- Comment déclarer la non-réception de ma carte ? -->
+                                            <li><a href="{{ 'home.home_homepage.imaginr.comment_declarer_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.imaginr.comment_declarer_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.imaginr.comment_declarer_link'|trans({}, 'home') }}</a></li>
+                                            {#TODO: type peut etre 2 aussi (ImaginR scolaire ou ImaginR etudiant) #}
+                                            <!--  forfait tarif - CGU Etudiant -->
+                                            <li><a href="{{ asset('bundles/sel/pdf/CGU_IR_ETU.pdf') }}" target="_blank">{{ 'home.home_homepage.imaginr.tarifs_CGU_link'|trans({}, 'home')|raw }}</a></li>
+                                            {#TODO: type peut etre 2 aussi (ImaginR scolaire ou ImaginR etudiant) #}
+                                            <!--  forfait tarif - CGU Scolaire -->
+                                            <li><a href="{{ asset('bundles/sel/pdf/CGU_IR_SCO.pdf') }}" target="_blank" class="link" title="{{ 'home.home_homepage.imaginr.tarifs_CGU_Scolaire_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.imaginr.tarifs_CGU_Scolaire_link'|trans({}, 'home')|raw }}</a></li>
+                                            {#TODO: type peut etre 2 aussi (ImaginR scolaire ou ImaginR etudiant) #}
+                                        </ul>
+                                        <small>{{ 'home.home_homepage.panel_section_mention'|trans({}, 'home')|raw }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default no-margin">
+                        <div class="panel-heading slide" >
+                            <a  data-toggle="collapse" data-ng-click="controlHash($event)" data-parent="#forfaits" href="#navigo-annuel" aria-expanded="true" aria-controls="navigo-annuel">
+                                <h3 id="headingTwo">{{ 'home.home_homepage.na.title'|trans({}, 'home') }}</h3>
+                                <span class="plus">+</span><span class="moins">-</span>
+                            </a>
+                        </div>
+                        <div id="navigo-annuel" class="panel-collapse collapse"  aria-labelledby="headingTwo">
+                            <div class="panel-body slide">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <ul class="color_bullet list_3_cols">
+                                            <!-- Souscription  -->
+                                            <li><a href="{{ path('sel_subscriptionbundle_subscription_profil', {'courseType' : 'navigo_annuel'}) }}" class="link" title="{{ 'home.home_homepage.na.souscription_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.na.souscription_link'|trans({}, 'home') }}</a></li>
+                                            {#TODO: type peut etre 41 aussi (Navigo Annuel a 2 codes !) #}
+                                            <!-- Suivre ma souscription  -->
+                                            <li><a href="{{ 'home.home_homepage.na.souscription_suivre_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.na.souscription_suivre_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.na.souscription_suivre_link'|trans({}, 'home') }}</a></li>
+                                            {#TODO: type peut etre 41 aussi (Navigo Annuel a 2 codes !) #}
+                                            <!-- Attestation  -->
+                                            <li><a href="{{ path('sel_actesav_list', {'type': 4, 'acte': 'attestation'}) }}" class="link" title="{{ 'home.home_homepage.na.attestation_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.na.attestation_link'|trans({}, 'home') }}<img src="{{ asset('bundles/sel/images/pdf.png') }}" class="picto pdf-medium" alt="Fichier PDF"></a></li>
+                                            <!-- Perte / Vol -->
+                                            <li><a href="{{ path('sel_actesav_list', {'type': 4, 'acte': 'pertevol'}) }}" class="link" title="{{ 'home.home_homepage.na.perte_vol_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.na.perte_vol_link'|trans({}, 'home') }}</a></li>
+                                            <!--<li><a href="#" class="link" title="Changer de zones">Changer de zones</a></li>-->
+                                            <!--  Coordonnées -->
+                                            <li><a href="{{ path('sel_coordonnees') }}" class="link" title="{{ 'home.home_homepage.na.personal_infos_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.na.personal_infos_link'|trans({}, 'home') }}</a></li>
+                                            <!--  Moyens de paiement -->
+                                            <li><a href="{{ path('sel_payment_list') }}" class="link" title="{{ 'home.home_homepage.na.paiement_infos_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.na.paiement_infos_link'|trans({}, 'home') }}</a></li>
+                                            <!--  Non réception -->
+                                            <li><a href="{{ 'home.home_homepage.na.non_reception_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.na.non_reception_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.na.non_reception_link'|trans({}, 'home') }}</a></li>
+                                            <!--  Changer de zones -->
+                                            <li><a href="{{ 'home.home_homepage.na.changer_de_zones_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.na.changer_de_zones_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.na.changer_de_zones_link'|trans({}, 'home') }}</a></li>
+                                            <!-- Suspendre  -->
+                                            <li><a href="{{ 'home.home_homepage.na.manage_forfait_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.na.manage_forfait_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.na.manage_forfait_link'|trans({}, 'home') }}</a></li>
+                                            {#TODO: type peut etre 41 aussi (Navigo Annuel a 2 codes !) #}
+                                            <!-- Renouveler le paiement  -->
+                                            <li><a href="{{ 'home.home_homepage.na.renouveler_le_paiement_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.na.renouveler_le_paiement_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.na.renouveler_le_paiement_link'|trans({}, 'home') }}</a></li>
+                                            {#TODO: type peut etre 41 aussi (Navigo Annuel a 2 codes !) #}
+                                            <!-- Comment résilier ?  -->
+                                            <li><a href="{{ 'home.home_homepage.na.comment_resilier_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.na.comment_resilier_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.na.comment_resilier_link'|trans({}, 'home') }}</a></li>
+                                            {#TODO: type peut etre 41 aussi (Navigo Annuel a 2 codes !) #}
+                                            <!--  forfait tarif -->
+                                            <li><a href="{{ asset('bundles/sel/pdf/CGU_NA.pdf') }}" target="_blank" class="link" title="{{ 'home.home_homepage.na.tarifs_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.na.tarifs_link'|trans({}, 'home')|raw }}</a></li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default no-margin">
+                        <div class="panel-heading slide" >
+                            <a  data-toggle="collapse" data-ng-click="controlHash($event)" data-parent="#forfaits" href="#navigo-mois-semaine" aria-expanded="true" aria-controls="navigo-mois-semaine">
+                                <h3 id="headingThree">{{ 'home.home_homepage.nms.title'|trans({}, 'home') }}</h3>
+                                <span class="plus">+</span><span class="moins">-</span>
+                            </a>
+                        </div>
+                        <div id="navigo-mois-semaine" class="panel-collapse collapse"  aria-labelledby="headingThree">
+                            <div class="panel-body slide">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                    <ul class="color_bullet list_3_cols">
+                                        <!-- Souscription  -->
+                                        <li><a href="{{ path('sel_subscriptionbundle_subscription_profil', {'courseType' : 'commande_de_carte'}) }}" class="link" title="{{ 'home.home_homepage.nms.card_command_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.nms.card_command_link'|trans({}, 'home') }}</a></li>
+                                        <!--  Suivre / reprendre -->
+                                        <li><a href="{{ path('sel_cmc_reprise') }}" class="link" title="{{ 'home.home_homepage.nms.check_command_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.nms.check_command_link'|trans({}, 'home') }}</a></li>
+                                        <!-- Attestation  -->
+                                        <li><a href="{{ path('sel_actesav_list', {'type': 3, 'acte': 'attestation'}) }}" class="link" title="{{ 'home.home_homepage.nms.attestation_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.nms.attestation_link'|trans({}, 'home') }}<img src="{{ asset('bundles/sel/images/pdf.png') }}" class="picto pdf-medium" alt="Fichier PDF"></a></li>
+                                        <!--  changer forfait -->
+                                        <li><a href="{{ 'home.home_homepage.nms.reload_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link plug" title="{{ 'home.home_homepage.nms.reload_link_title'|trans({}, 'home') }}" onclick="document.formMenuReload.submit();">{{ 'home.home_homepage.nms.reload_link'|trans({}, 'home') }} <img src="{{ asset('bundles/sel/images/usb.png')}}" class="picto usb-medium" alt="Service disponible avec un lecteur de carte" ></a></li>
+                                        <!--  Consulter l'historique -->
+                                        <li><a href="{{ 'home.home_homepage.nms.consulter_historique_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link plug" title="{{ 'home.home_homepage.nms.consulter_historique_link_title'|trans({}, 'home') }}" onclick="document.formMenuReload.submit();">{{ 'home.home_homepage.nms.consulter_historique_link'|trans({}, 'home') }} <img src="{{ asset('bundles/sel/images/usb.png')}}" class="picto usb-medium" alt="Service disponible avec un lecteur de carte" ></a></li>
+                                        <!--  Coordonnées -->
+                                        <li><a href="{{ path('sel_coordonnees') }}" class="link" title="{{ 'home.home_homepage.nms.personal_infos_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.nms.personal_infos_link'|trans({}, 'home') }}</a></li>
+                                        <!--  Moyens de paiement -->
+                                        <li><a href="{{ path('sel_payment_list') }}" class="link" title="{{ 'home.home_homepage.nms.paiement_infos_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.nms.paiement_infos_link'|trans({}, 'home') }}</a></li>
+                                        <!-- Perte / Vol -->
+                                        <li><a href="{{ path('sel_actesav_list', {'type': 3, 'acte': 'pertevol'}) }}" class="link" title="{{ 'home.home_homepage.nms.perte_vol_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.nms.perte_vol_link'|trans({}, 'home') }}</a></li>
+                                        <!--  Non réception -->
+                                        <li><a href="{{ 'home.home_homepage.nms.non_reception_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.nms.non_reception_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.nms.non_reception_link'|trans({}, 'home') }}</a></li>
+                                        <!--  changer de zone -->
+                                        <li><a href="{{ 'home.home_homepage.nms.change_zone_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link plug" title="{{ 'home.home_homepage.nms.change_zone_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.nms.change_zone_link'|trans({}, 'home') }}</a></li>
+                                        <!--  forfait tarif CGU Semaine -->
+                                        <li><a href="{{ asset('bundles/sel/pdf/CGU_NMS.pdf') }}" target="_blank" class="link" title="{{ 'home.home_homepage.nms.tarifs_CGU_Semaine_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.nms.tarifs_CGU_Semaine_link'|trans({}, 'home')|raw }}</a></li>
+                                        <!--  forfait tarif CGU Mois -->
+                                        <li><a href="{{ asset('bundles/sel/pdf/CGU_NMS.pdf') }}" target="_blank" class="link" title="{{ 'home.home_homepage.nms.tarifs_CGU_Mois_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.nms.tarifs_CGU_Mois_link'|trans({}, 'home')|raw }}</a></li>
+                                    </ul>
+                                    <small>{{ 'home.home_homepage.panel_section_mention'|trans({}, 'home')|raw }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default no-margin">
+                        <div class="panel-heading slide" >
+                            <a  data-toggle="collapse" data-ng-click="controlHash($event)" data-parent="#forfaits" href="#gratuite-solidarite-transport" aria-expanded="true" aria-controls="gratuite-solidarite-transport">
+                                <h3 id="headingFour">{{ 'home.home_homepage.free_shipping.title'|trans({}, 'home') }}</h3>
+                                <span class="plus">+</span><span class="moins">-</span>
+                            </a>
+                        </div>
+                        <div id="gratuite-solidarite-transport" class="panel-collapse collapse"  aria-labelledby="headingFour">
+                            <div class="panel-body slide">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <ul class="color_bullet list_3_cols">
+                                            <!--  demande de droit -->
+                                            <li><a href="{{ 'home.home_homepage.free_shipping.inline_ask_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link ext" target="_blank" title="{{ 'home.home_homepage.free_shipping.inline_ask_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.free_shipping.inline_ask_link'|trans({}, 'home') }} <img src="{{ asset('bundles/sel/images/link.png')}}" class="picto" alt="lien externe"></a></li>
+                                            <!-- Souscription  -->
+                                            <li><a href="{{ path('sel_subscriptionbundle_subscription_profil', {'courseType' : 'commande_de_carte'}) }}" class="link" title="{{ 'home.home_homepage.free_shipping.card_command_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.free_shipping.card_command_link'|trans({}, 'home') }}</a></li>
+                                            <!--  Suivre / reprendre -->
+                                            <li><a href="{{ path('sel_cmc_reprise') }}" class="link" title="{{ 'home.home_homepage.free_shipping.check_command_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.free_shipping.check_command_link'|trans({}, 'home') }}</a></li>
+                                            <!-- Attestation  -->
+                                            <li><a href="{{ path('sel_actesav_list', {'type': 90, 'acte': 'attestation'}) }}" class="link" title="{{ 'home.home_homepage.free_shipping.attestation_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.free_shipping.attestation_link'|trans({}, 'home') }}<img src="{{ asset('bundles/sel/images/usb.png')}}" class="picto usb-medium" alt="Service disponible avec un lecteur de carte"></a></li>
+                                            <!--  Recharger -->
+                                            <li><a href="{{ 'home.home_homepage.free_shipping.reload_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link plug" title="{{ 'home.home_homepage.free_shipping.reload_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.free_shipping.reload_link'|trans({}, 'home') }} <img src="{{ asset('bundles/sel/images/usb.png')}}" class="picto usb-medium" alt="Service disponible avec un lecteur de carte"></a></li>
+                                            <!--  Coordonnées -->
+                                            <li><a href="{{ path('sel_coordonnees') }}" class="link" title="{{ 'home.home_homepage.free_shipping.personal_infos_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.free_shipping.personal_infos_link'|trans({}, 'home') }}</a></li>
+                                            <!--  Moyens de paiement -->
+                                            <li><a href="{{ path('sel_payment_list') }}" class="link" title="{{ 'home.home_homepage.free_shipping.paiement_infos_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.free_shipping.paiement_infos_link'|trans({}, 'home') }}</a></li>
+                                            <!--  changer de zone -->
+                                            <li><a href="{{ 'home.home_homepage.free_shipping.change_zone_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.free_shipping.change_zone_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.free_shipping.change_zone_link'|trans({}, 'home') }}</a></li>
+                                            <!-- Perte / Vol -->
+                                            <li><a href="{{ 'home.home_homepage.free_shipping.perte_vol_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.free_shipping.perte_vol_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.free_shipping.perte_vol_link'|trans({}, 'home') }}</a></li>
+                                            <!--  Non réception -->
+                                            <li><a href="{{ 'home.home_homepage.free_shipping.non_reception_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.free_shipping.non_reception_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.free_shipping.non_reception_link'|trans({}, 'home') }}</a></li>
+                                            <!--  L’Agence solidarité transport -->
+                                            <li><a href="{{ 'home.home_homepage.agence_solidarite_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" target="_blank" title="{{ 'home.home_homepage.agence_solidarite_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.agence_solidarite_link'|trans({}, 'home') }}<img src="{{ asset('bundles/sel/images/link.png')}}" class="picto" alt="lien externe"></a></li>
+                                            <!--  Forfait, tarifs -->
+                                            <li><a href="{{ 'home.home_homepage.forfait_tarifs_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.forfait_tarifs_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.forfait_tarifs_link'|trans({}, 'home')|raw }}</a></li>
+                                        </ul>
+                                        <small>{{ 'home.home_homepage.panel_section_mention'|trans({}, 'home')|raw }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default no-margin">
+                        <div class="panel-heading slide" >
+                            <a  data-toggle="collapse" data-ng-click="controlHash($event)" data-parent="#forfaits" href="#amethyste" aria-expanded="true" aria-controls="amethyste">
+                                <h3 id="headingFive">{{ 'home.home_homepage.amethyste.title'|trans({}, 'home') }}</h3>
+                                <span class="plus">+</span><span class="moins">-</span>
+                            </a>
+                        </div>
+                        <div id="amethyste" class="panel-collapse collapse"  aria-labelledby="headingFive">
+                            <div class="panel-body slide">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <ul class="color_bullet list_3_cols">
+                                            <li><a href="{{ path('sel_subscriptionbundle_subscription_profil', {'courseType' : 'commande_de_carte'}) }}" class="link" title="{{ 'home.home_homepage.amethyste.card_command_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.amethyste.card_command_link'|trans({}, 'home') }}</a></li>
+                                            <li><a href="{{ path('sel_cmc_reprise') }}" class="link" title="{{ 'home.home_homepage.amethyste.check_command_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.amethyste.check_command_link'|trans({}, 'home') }}</a></li>
+                                            <li><a href="{{ path('sel_actesav_list', {'type': 90, 'acte': 'attestation'}) }}" class="link" title="{{ 'home.home_homepage.amethyste.telecharger_attestation_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.amethyste.telecharger_attestation_link'|trans({}, 'home') }}<img src="{{ asset('bundles/sel/images/pdf.png') }}" class="picto pdf-medium" alt="Fichier PDF"></a></li>
+                                            <li><a href="{{ 'home.home_homepage.amethyste.reload_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.amethyste.reload_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.amethyste.reload_link'|trans({}, 'home') }} <img src="{{ asset('bundles/sel/images/usb.png')}}" class="picto usb-medium" alt="Service disponible avec un lecteur de carte"></a></li>
+                                            <li><a href="{{ path('sel_coordonnees') }}" class="link" title="{{ 'home.home_homepage.amethyste.gerer_mes_informations_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.amethyste.gerer_mes_informations_link'|trans({}, 'home') }}</a></li>
+                                            <li><a href="{{ 'home.home_homepage.amethyste.declarer_non_reception_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.amethyste.declarer_non_reception_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.amethyste.declarer_non_reception_link'|trans({}, 'home')|raw }}</a></li>
+                                            <li><a href="{{ 'home.home_homepage.amethyste.perte_vol_link_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.amethyste.perte_vol_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.amethyste.perte_vol_link'|trans({}, 'home') }}</a></li>
+                                            <li><a href="{{ asset('bundles/sel/pdf/CGU_Amethyste.pdf') }}" target="_blank" class="link" title="{{ 'home.home_homepage.amethyste.conditions_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.amethyste.conditions_link'|trans({}, 'home')|raw }}</a></li>
+                                        </ul>
+                                        <small>{{ 'home.home_homepage.panel_section_mention'|trans({}, 'home')|raw }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row margin-ultratop">
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="lecteur-carte">
+                    <img src="{{ asset('bundles/sel/images/usb.png')}}" class="picto" alt="{{ 'home.home_homepage.card_reader_required_message_title'|trans({}, 'home') }}">
+                    <span><strong>{{ 'home.home_homepage.card_reader_required_message'|trans({}, 'home') }}</strong>
+                    <br>
+                    <a href="{{ 'home.home_homepage.how_get_card_reader_url'|trans({'%prefix_front%': prefix_front}, 'home') }}" class="link" title="{{ 'home.home_homepage.how_get_card_reader_title'|trans({}, 'home') }}">{{ 'home.home_homepage.how_get_card_reader'|trans({}, 'home') }}</a>
+                    </span>
+
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="faq faq-accueil">
+                    <img src="{{ asset('bundles/sel/images/info.png')}}" class="picto" alt="{{ 'home.home_homepage.faq_img'|trans({}, 'home') }}">
+                    <span>{{ 'home.home_homepage.check_if_question'|trans({}, 'home') | raw }} <a href="{{ path('sel_faq') }}" class="link" title="{{ 'home.home_homepage.faq_link_title'|trans({}, 'home') }}">{{ 'home.home_homepage.faq_link'|trans({}, 'home') }}</a></span>
+                </div>
+            </div>
+        </div>
+
+
+
+    {% endblock content %}
+{% endblock body%}
+
+{% endblock mainContent %}

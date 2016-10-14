@@ -1,0 +1,153 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block meta_desc %}
+    <meta name="description" content="{{'conn.conn_et_inscription.meta_desc'|trans({}, 'conn', 'fr')|raw}}">
+{% endblock %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+    {% javascripts
+        '@SelBundle/Resources/public/js/Connexion/Module/*.js'
+        '@SelBundle/Resources/public/js/Connexion/Controller/*.js'
+        '@SelBundle/Resources/public/js/Connexion/Directive/*.js'
+        output='js/connexion.js' %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+{% endblock javascript_foot %}
+
+{% block title %}{{ 'home.home_espace_client.link.change_email_title_onglet' |trans({}, 'home') }}{% endblock title %}
+
+{% block angularModule %}connexion{% endblock %}
+
+{% block breadcrumb %}
+    <div id="box_breadcrumb_id" class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="http://www.navigo.fr" title="Accueil">Accueil</a></li>
+                <li><a href="{{ path('sel_homepage') }}" title="{{'conn.conn_connexion.gere_maCarte_link_breadcrumb'|trans({}, 'conn')}}">{{ 'conn.conn_connexion.gere_maCarte_link_breadcrumb'|trans({}, 'conn') }}</a></li>
+                <li class="active">{{ 'conn.conn_connexion.connexion_link_breadcrumb'|trans({}, 'conn') }}</li>
+            </ol>
+        </div>
+    </div>
+{% endblock breadcrumb %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{'conn.conn_et_inscription.lbl_titre'|trans({}, 'conn', 'fr')|raw}}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block previousArrow %}{% endblock previousArrow %}
+
+{% block mainContent %}
+    {% block body %}
+        {% block content %}
+
+            <div>
+            {% if error %}
+                <div class="warning-light red box_errors_loggin">
+                    <div class="row margin-top">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-10 col-md-10 col-md-offset-1">
+                                    <div class="media-left">
+                                        <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alert">
+                                    </div>
+                                    <div class="media-body">
+                                        <p class="text-danger no-margin">
+                                            {{ error|trans({}, 'messages')|raw }}<br/>{{tentatives}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            {% endif %}
+
+                <div class="row" >
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="form-horizontal connexion-sel login" >
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-10 col-md-9 col-md-offset-1">
+                                    <h4>{{'conn.conn_et_inscription.lbl_connexion'|trans({}, 'conn', 'fr')|raw}}</h4>
+                                </div>
+                            </div>
+                            <form id="loginform" name="form" action="{{ path("sel_front_login_check") }}" method="POST" class="">
+
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-10 col-md-9 col-md-offset-1">
+                                        <label for="email" class="control-label text-right">{{'conn.conn_et_inscription.lbl_email'|trans({}, 'conn', 'fr')|raw}}<span class="star"></span></label>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-10 col-md-9 col-md-offset-1">
+                                        <input type="email" data-gie-mail data-email-validator class="form-control" placeholder="email@nomdedomaine.com" id="username" data-ng-model="mail" name="_username" value="{{ last_username }}" required="required" aria-required="true"/>
+                                        {#<img class="picto valid" data-ng-show="form._username.$valid || formatNum" src="{{prefix_front}}/bundles/sel/images/check.png" alt="Ok">#}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-10 col-md-9 col-md-offset-1">
+                                        <label for="password" class="control-label text-right">{{'conn.conn_et_inscription.lbl_mdp'|trans({}, 'conn', 'fr')|raw}}<span class="star"></span></label>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-10 col-md-9 col-md-offset-1">
+                                        <input id="password" data-ng-password-connect type="password" autocomplete="off" data-ng-init="passVisibility='hidden'" data-ng-model="passField" class="form-control" name="_password" required="required" aria-required="true">
+                                        <a href="{{ path('sel_front_resetting_request') }}" title="{{'conn.conn_connexion.act_mdp_oubli_title'|trans({}, 'conn', 'fr')|raw}}" class="link underline">{{'conn.conn_et_inscription.lbl_mdp_oubli'|trans({}, 'conn', 'fr')|raw}}</a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-10 col-md-9 col-md-offset-1">
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                            <label for="remember_me" class="rested_connected">
+                                                {{'conn.conn_et_inscription.cac_rest_connec'|trans({}, 'conn', 'fr')|raw}}
+                                                <a href="{{ path('sel_rest_connect') }}" class="link underline rested_connected help" target="_blank" title="{{'conn.conn_et_inscription.rester_connecte_page_link_title'|trans({}, 'conn', 'fr')|raw}}" aria-label="{{'conn.conn_et_inscription.aria_rester_connecte_page_link_title'|trans({}, 'conn', 'fr')|raw}}">
+                                                    <img src="{{ asset('bundles/sel/images/question.png')}}" class="picto" alt="Aide" width="20" height="20">
+                                                </a>
+                                            </label>
+                                            {% if target_path is not empty %}
+                                                <input type="hidden" name="_target_path" value="{{ target_path }}" />
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-10 col-md-9 col-md-offset-1">
+                                        <button type="submit" data-ng-disabled="!((form._username.$valid || formatNum) && form._password.$valid)" class="btn btn-primary pull-right margin-top" value="Connectez-vous à votre espace Service Navigo"><span>{{'conn.conn_et_inscription.btn_connexion'|trans({}, 'conn', 'fr')|raw}}</span></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="form-horizontal connexion-sel creation">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-10 col-md-9 col-md-offset-1">
+                                    <h4>{{'conn.conn_et_inscription.lbl_creer_espa'|trans({}, 'conn', 'fr')|raw}}</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-10 col-md-9 col-md-offset-1">
+                                    <div class="fixed-height">
+                                        {{'conn.conn_et_inscription.lbl_content'|trans({}, 'conn', 'fr')|raw}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-10 col-md-9 col-md-offset-1">
+                                    <a href="{{ path('sel_register') }}#/saisie_donnees_client" class="btn btn-default pull-right">
+                                        <span>{{'conn.conn_et_inscription.btn_creer_compte'|trans({}, 'conn', 'fr')|raw}}</span>
+                                    </a>
+                                    <!--<button type="button" class="btn btn-default pull-right" value="Créer un compte Service Navigo"><span>Créer un compte</span></button>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock content %}
+    {% endblock body%}
+{% endblock mainContent %}

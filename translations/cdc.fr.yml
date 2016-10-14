@@ -1,0 +1,216 @@
+cdc.cdc_coordonnees.lbl_step_title: 'Saisir vos coordonnées'
+cdc.cdc_coordonnees.lbl_step: Coordonnées
+cdc.cdc_photo.lbl_step_title: 'Ajouter votre photo'
+cdc.cdc_photo.lbl_step: Photo
+cdc.cdc_recapitulatif.lbl_step_title: Récapitulatif
+cdc.cdc_recapitulatif.lbl_step: Récapitulatif
+cdc.cdc_coordonnees.lbl_titre: 'Saisie de vos coordonnées'
+cdc.cdc_coordonnees.aria_birthday: 'jour de votre naissance'
+cdc.cdc_coordonnees.aria_birthmonth: 'mois de votre naissance'
+cdc.cdc_coordonnees.aria_birthyear: 'année de votre naissance'
+cdc.cdc_coordonnees.lbl_action_utilisateur: 'Veuillez renseigner/vérifier vos coordonnées'
+cdc.cdc_coordonnees.aria_bt_fermer_popin_info: 'Fermer la fenêtre de dialogue et continuer'
+cdc.cdc_coordonnees.bt_fermer_popin_info: 'Fermer la fenêtre de dialogue et continuer'
+cdc.cdc_coordonnees.bt_fermer_popin_lbl: 'Fermer la fenêtre de dialogue et continuer'
+cdc.cdc_coordonnees.lbl_verfication_adresse: 'Vérification de l’adresse'
+cdc.cdc_coordonnees.lbl_resutlat_verification: 'N° et nom de rue aprés vérification :'
+cdc.cdc_coordonnees.bt_modifier_info: 'Fermer la fenêtre de dialogue'
+cdc.cdc_coordonnees.bt_modifier: Modifier
+cdc.cdc_coordonnees.bt_poursuivre: Poursuivre
+cdc.cdc_coordonnees.bt_confirmer_info: 'Confirmer la suppréssion de ce moyen de paiement et continuer'
+cdc.cdc_coordonnees.bt_confirmer: Confirmer
+cdc.cdc_coordonnees.bt_stop_info: 'Arrêter la commande'
+cdc.cdc_coordonnees.bt_stop: Arrêter
+cdc.cdc_coordonnees.lbl_civilite: Civilité
+cdc.cdc_coordonnees.lbl_madame: Madame
+cdc.cdc_coordonnees.lbl_monsieur: Monsieur
+cdc.cdc_coordonnees.lbl_nom: Nom
+cdc.cdc_coordonnees.lbl_prenom: Prénom
+cdc.cdc_coordonnees.lbl_date_naissance: 'Date de naissance'
+cdc.cdc_coordonnees.erreur_date_naissance: 'Cette date n’est pas valide'
+cdc.cdc_coordonnees.lbl_addresse: '<abbr title="Numéro">N°</abbr> et nom de la rue'
+cdc.cdc_coordonnees.lbl_complement_addresse: 'Complément d’adresse'
+cdc.cdc_coordonnees.info_complement_addresse: 'Bâtiment, étage, lieu-dit,  indication au livreur, etc.'
+cdc.cdc_coordonnees.lbl_code_postal: 'Code postal'
+cdc.cdc_coordonnees.lbl_ville: Ville
+cdc.cdc_coordonnees.lbl_pays: Pays
+cdc.cdc_coordonnees.lbl_telephone_portable: 'Téléphone portable'
+cdc.cdc_coordonnees.lbl_telephone_fixe: 'Téléphone fixe'
+cdc.cdc_coordonnees.img_info_alt: Information
+cdc.cdc_coordonnees.indication_telephone_portable: 'Votre téléphone portable nous servira à améliorer la gestion de votre forfait. Il ne sera en aucun cas utilisé à des fins commerciales sans votre autorisation.'
+cdc.cdc_coordonnees.lbl_action_utilisateur_mdp: 'Définissez vos codes accès à votre espace personnel'
+cdc.cdc_coordonnees.info_email: 'Votre courriel et votre mot de passe seront vos identifiants pour accéder à votre espace personnel.'
+cdc.cdc_coordonnees.lbl_email: E-mail
+cdc.cdc_coordonnees.lbl_email_confirmation: 'Confirmer votre e-mail'
+cdc.cdc_coordonnees.lbl_mdp: 'Mot de passe'
+cdc.cdc_coordonnees.info_mdp: '<p>Votre mot de passe doit respecter<br/>le format suivant :</p><ul><li>minimum une majuscule</li><li>minimum une minuscule</li><li>minimum un chiffre</li><li>minimum 8 caractères</li><li>maximum 20 caractères</li></ul>'
+cdc.cdc_coordonnees.lbl_mdp_confirmation: 'Confirmer votre mot de passe'
+cdc.cdc_coordonnees.err_concordance_mdp: 'Les deux mots de passe ne concordent pas. Veuillez les saisir à nouveau.'
+cdc.cdc_coordonnees.ckbok_cgv_debut: 'Je déclare accépter les'
+cdc.cdc_coordonnees.ckbok_cgv_link_title: 'Lire les conditions Générales de Vente (nouvelle fenêtre)'
+cdc.cdc_coordonnees.ckbox_cgv_link: 'conditions générales d’utilisation (CGU)'
+cdc.cdc_coordonnees.ckbox_offre_commerciale: 'J’accepte de recevoir des offres et informations commerciales de la part des entreprises de transport en commun d’Île-de-France (OPTILE, RATP, SNCF) et de ses partenaires'
+cdc.cdc_coordonnees.bt_ok: Continuer
+cdc.cdc_coordonnees.bt_ok_title: Continuer
+cdc.cdc_coordonnees.bt_modifier_popin_info: 'Fermer la fenêtre de dialogue'
+cdc.cdc_coordonnees.aria_alt_champs_jour_naissance: 'jour de votre naissance'
+cdc.cdc_coordonnees.aria_alt_champs_mois_naissance: 'mois de votre naissance'
+cdc.cdc_coordonnees.aria_alt_champs_annee_naissance: 'année de votre naissance'
+cdc.cdc_profil.lbl_titre: 'Commande de carte Navigo Mois/semaine'
+cdc.cdc_profil.lbl_condition_debut: '<ul class="color_bullet"><li>La commande de carte Navigo en ligne est réservée aux <strong>résidents d''Ile-de-France</strong></li><li>Si vous n''êtes pas résident d''Ile-de-France, rendez-vous en agence commerciale RATP, SNCF ou Optile, ou dans certains comptoirs RATP avec une attestation de votre employeur</li></ul><div class="info"><ul class="color_bullet"><li>Votre carte Navigo est envoyée par courrier <strong>sous 10 jours</strong> après validation de votre dossier par nos services</li><li>Si vous souhaitez obtenir votre carte Navigo immédiatement, veuillez vous rendre en agence commerciale RATP, SNCF ou Optile, ou dans certains comptoirs RATP. Les personnes hébergées devront présenter une attestation de l’hébergeur.</li></ul></div>'
+cdc.cdc_profil.lbl_condition_fin: '<span>Pour commander votre carte Navigo en ligne, vous devez :</span>'
+cdc.cdc_profil.lbl_condition_fin_list: "<ul class=\"color_bullet\">\r\n<li>R&eacute;sider en &Icirc;le-de-France<sup>(1)</sup>,</li>\r\n<li>Renseigner votre adresse postale<sup>(2)</sup></li>\r\n<li>T&eacute;l&eacute;charger une photo d&rsquo;identit&eacute;</li>\r\n</ul>\r\n<br /><br />\r\n<p>Votre carte Navigo est envoy&eacute;e par courrier sous 21 jours apr&egrave;s validation de votre photo par nos services.</p>\r\n<br />\r\n<p>Pour obtenir votre carte Navigo imm&eacute;diatement, rendez-vous en agence des transporteurs, certains comptoirs RATP et Guichets Services Navigo SNCF (<a href=\"%agenceLink%\" target=\"_blank\">%poidsDoc% PDF</a>).</p>"
+cdc.cdc_profil.lbl_action_utilisateur: 'Veuillez répondre à ces deux questions qui vont nous permettre de personnaliser les informations à renseigner :'
+cdc.cdc_profil.lbl_client_sig: 'Avez-vous déjà une carte Navigo ou financez-vous un forfait ?'
+cdc.cdc_profil.btn_rad_oui: Oui
+cdc.cdc_profil.btn_rad_non: Non
+cdc.cdc_profil.lbl_cpt_navigo: 'Avez-vous déjà créé votre espace personnel ?'
+cdc.cdc_profil.btn_etape_suiv_info: Continuer
+cdc.cdc_profil.btn_etape_suiv: Continuer
+cdc.cdc_photo.aria_close: Close
+cdc.cdc_photo.lbl_aide_ident: '<p class="title"><strong>Votre photo doit être <span class="fw-normal">(<a href="#" class="link underline">en savoir plus</a>)</span>:</strong></p><div class="infos no-border no-margin"><div class="info"><ul class="color_bullet"><li>de face, tête nue, sur fond clair, type photo d’identité </li><li>en couleur</li><li>aux formats : JPEG, GIF, BMP, TIFF, GIF, PNG ou PDF</li><li>d’un poids maximum de 5 Mo</li></ul></div></div>'
+cdc.cdc_photo.err_detection: 'Nous n''avons pas détecté de visage sur votre photo.'
+cdc.cdc_photo.btn_parcourrir: Parcourir
+cdc.cdc_photo.btn_prise_photo: 'Prendre une photo'
+cdc.cdc_photo.lbl_avertissement_delai: 'ATTENTION<br>Si votre photo n''est pas conforme, votre dossier ne sera pas validé dans les délais habituellement annoncés.'
+cdc.cdc_photo.btn_supprimer_photo_info: Supprimer
+cdc.cdc_photo.btn_supprimer_photo_lbl: Supprimer
+cdc.cdc_photo.btn_valider_photo_lbl: 'Valider cette photo et continuer'
+cdc.cdc_photo.btn_valider_photo_info: 'Valider cette photo et continuer'
+cdc.cdc_photo.btn_retoucher_photo_lbl: 'Retoucher cette photo'
+cdc.cdc_photo.lbl_photo_original: 'Votre photo originale'
+cdc.cdc_photo.lbl_actions_utilisateur_retouche: 'Vous pouvez modifier l''apparence de votre photo avant de l''envoyer :'
+cdc.cdc_photo.ctrl_orientation_lbl: Orientation
+cdc.cdc_photo.ctrl_cadre_lbl: Cadrage
+cdc.cdc_photo.ctrl_luminosite_lbl: Luminosité
+cdc.cdc_photo.ctrl_contraste_lbl: Contraste
+cdc.cdc_photo.btn_webcam_lbl: 'Prendre une photo avec votre webcam :'
+cdc.cdc_photo.btn_snapshot_lbl: 'Prendre une image'
+cdc.cdc_photo.err_photo_invalide: 'Votre photo est invalide'
+cdc.cdc_photo.btn_select_photo_lbl: 'Garder cette image'
+cdc.cdc_photo.btn_fermer_popin_lbl: Fermer
+cdc.cdc_photo.aria_btn_fermer_popin_lbl: Fermer
+cdc.cdc_recapitulatif.title: 'Commande de carte'
+cdc.cdc_recapitulatif.lbl_civilite: Civilité
+cdc.cdc_recapitulatif.lbl_nom: Nom
+cdc.cdc_recapitulatif.lbl_prenom: Prénom
+cdc.cdc_recapitulatif.lbl_date_naiss: 'Date de naissance'
+cdc.cdc_recapitulatif.lbl_num_rue: 'N° et nom de la rue'
+cdc.cdc_recapitulatif.lbl_comp_add: 'Complément d’adresse'
+cdc.cdc_recapitulatif.lbl_cp: 'Code postal'
+cdc.cdc_recapitulatif.lbl_ville: Ville
+cdc.cdc_recapitulatif.lbl_pays: Pays
+cdc.cdc_recapitulatif.lbl_tel_port: 'Téléphone portable'
+cdc.cdc_recapitulatif.lbl_tel_fixe: 'Téléphone fixe'
+cdc.cdc_recapitulatif.lbl_email: E-mail
+cdc.cdc_recapitulatif.lbl_recap_photo: Photo
+cdc.cdc_recapitulatif.act_modif_photo: Modifier
+cdc.cdc_recapitulatif.act_modif_photo_info: 'Modifier la photo'
+cdc.cdc_recapitulatif.lbl_photo_attente: 'Vous souhaitez ajouter une photo plus tard'
+cdc.cdc_recapitulatif.cac_accep_cgu: 'Je déclare accepter les Conditions Générales d’Utilisation de la carte Navigo (CGU)'
+cdc.cdc_recapitulatif.btn_certif_donnee: 'Je certifie que ces données sont exactes'
+cdc.cdc_recapitulatif.btn_certif_donnee_info: 'Je certifie que ces données sont exactes'
+cdc.cdc_recapitulatif.lbl_avertissement_incompletude: 'Vous n''avez pas encore renseigné toutes les informations de votre demande de souscription. Vous pouvez soit les compléter en cliquant sur Modifier, soit les ajouter plus tard en cliquant sur le lien qui vous sera envoyé par email. </br></br> Attention, pour bénéficier de votre forfait dès le mois prochain n''oubliez pas de compléter votre dossier avant le 17 du mois en cours.'
+cdc.cdc_recapitulatif.lbl_verif_info: 'Veuillez vérifier que les informations renseignées sont exactes ;'
+cdc.cdc_recapitulatif.picto_coordonees_info: 'Informations personnelles'
+cdc.cdc_recapitulatif.lbl_avertissement_signature: 'Attention, les informations de contact (adresse email et numéro de téléphone mobile) affichées sur cette page serviront à signer éléctroniquement votre dossier. Veuillez les vérifier attentivement.'
+cdc.cdc_recapitulatif.ckbox_cgu: 'Je déclare accepter les <a href="%cgu%" class="link underline" target="_blank" title="Conditions Générales d''Utilisation de la carte Navigo (CGU) (nouvelle fenêtre)">Conditions Générales d''Utilisation de la carte Navigo</a> (CGU)'
+cdc.cdc_confirmation.lbl_titre: 'Commande de carte'
+cdc.cdc_confirmation.lbl_prise_cpt: 'Votre commande de carte Navigo est bien enregistrée.'
+cdc.cdc_confirmation.btn_acces_espa: 'Accéder à mon espace personnel'
+cdc.cdc_confirmation.btn_acces_espa_info: 'Accéder à mon espace personnel'
+cdc.cdc_confirmation.lbl_promesse: '<br><p>Vous allez recevoir un mail de confirmation à l’adresse <strong>{{pageCtrl.userSel.email}}</strong></p><p>Votre carte Navigo Mois/Semaine sera <strong>livrée chez vous d''ici les {{pageCtrl.jourDelai}} jours</strong> qui suivent la validation de votre demande par nos services. </p>'
+cdc.cdc_confirmation.lbl_promesse_1: '<br><p>Vous allez recevoir un mail de confirmation à l’adresse <strong>%email%</strong></p><p>Votre carte Navigo sera livrée chez vous sous %jourDelai% jours suite à la validation de votre demande par nos services.</p><br /><br /><p>Vous pouvez dès maintenant suivre l’état d’avancement de votre commande de carte Navigo dans votre espace personnel.</p><br /><br /><p>Votre espace personnel vous permet de visualiser et gérer les forfaits dont vous êtes le titulaire ou ceux que vous financez. Vous pouvez obtenir vos attestations, déclarer la perte/vol d’une carte, modifier vos informations personnelles ou bancaires.</p>'
+cdc.cdc_transverse.meta_desc: 'Commande de carte'
+cdc.cdc_transverse.asterisque: '*'
+cdc.cdc_transverse.title: 'Commande de carte'
+cdc.cdc_transverse.title_onglet: 'Navigo : Commande de carte Navigo'
+cdc.cdc_erreur.SNA-CO-EC01-MSS_001: 'Votre téléphone portable nous servira à finaliser votre souscription. Il ne sera en aucun cas utilisé à des fins commerciales sans votre autorisation.'
+cdc.cdc_erreur.SNA-CO-EC01-MSS_002: 'Votre email et votre mot de passe seront vos identifiants pour accéder à votre compte Services Navigo personnalisé.'
+cdc.cdc_erreur.SNA-CO-EC01-ERR_003: 'Vous disposez déjà d’un forfait annuel à votre nom. Vous ne pouvez pas souscrire un 2e forfait.'
+cdc.cdc_erreur.SNA-CO-EC01-MSS_004: 'Un courrier envoyé à cette adresse n’a pas pu vous être remis. Veuillez mettre à jour votre adresse postale.'
+cdc.cdc_erreur.SNA-CO-EC01-MSS_005: 'Veuillez-ressaisir votre code postal ou saisir la commune'
+cdc.cdc_erreur.SNA-CO-EC01-ERR_006: 'L''âge minimum pour souscrire à un forfait Navigo Annuel est de 4 ans.'
+cdc.cdc_erreur.SNA-CO-EC01-ERR_007: 'Erreur dans la saisie de la date de naissance. Merci de la saisir à nouveau.'
+cdc.cdc_erreur.SNA-CO-EC01-ERR_008: 'Nous ne sommes pas en mesure de donner suite à votre demande.'
+cdc.cdc_erreur.SNA-CO-EC01-ERR_010: 'Nous ne sommes pas en mesure de donner suite à votre demande, nous vous remercions de bien vouloir vous rapprocher du service client Navigo au 09 63 39 22 22.'
+cdc.cdc_erreur.SNA-CO-EC01-ERR_011: 'Cette adresse email est déjà liée à un espace client. Veuillez en saisir une autre ou de vous connecter à votre espace actuel.'
+cdc.cdc_erreur.SNA-CO-EC01-ERR_013: 'Nous ne sommes pas en mesure de donner suite à votre demande, nous vous remercions de bien vouloir vous rapprocher du service client Navigo au 09 63 39 22 22.'
+cdc.cdc_erreur.SNA-PAI-EC01-MSS_001: 'Votre téléphone portable nous servira à finaliser votre souscription. Il ne sera en aucun cas utilisé à des fins commerciales sans votre autorisation.'
+cdc.cdc_erreur.SNA-PAI-EC01-MSS_002: 'Vous trouverez ces informations sur le RIB transmis par votre banque.'
+cdc.cdc_erreur.SNA-PAI-EC01-ERR_003: 'Le code banque de votre RIB n’est pas reconnu. Merci de saisir un nouveau BIC / IBAN.'
+cdc.cdc_erreur.SNA-PAI-EC01-ERR_004: 'L''IBAN et le BIC saisis ne sont pas valides. Veuillez les saisir à nouveau.'
+cdc.cdc_erreur.SNA-PAI-EC01-ERR_005: 'Le payeur désigné possède au moins un contrat débiteur. Merci de régulariser le contrat débiteur.'
+cdc.cdc_erreur.SNA-PAI-EC01-ERR_006: 'L''âge minimum pour souscrire à un forfait Navigo Annuel est de 4 ans.'
+cdc.cdc_erreur.SNA-PAI-EC01-ERR_007: 'Erreur dans la saisie de la date de naissance. Merci de la saisir à nouveau.'
+cdc.cdc_erreur.SNA-PAI-EC01-ERR_008: 'Nous ne sommes pas en mesure de donner suite à votre demande.'
+cdc.cdc_erreur.SNA-SIG-EC01-MSS_001: 'Vous ne pouvez pas redemander l’envoi d’un code de signature par SMS. Vous pouvez demander l’envoi d’un code par email.'
+cdc.cdc_erreur.SNA-SIG-EC01-MSS_002: 'Un code de signature vous a déjà été transmis par email à l’adresse [mail du signataire].'
+cdc.cdc_erreur.SNA-SIG-EC01-MSS_003: 'Vous allez maintenant signer électroniquement votre contrat Navigo Annuel. Pour cela vous devez accepter les conditions générales d’utilisation et de vente du forfait et renseigner un code de validation.<br/>Votre dossier ne sera transmis qu’après la finalisation de l’étape de signature électronique.'
+cdc.cdc_erreur.SNA-SIG-EC01-MSS_004: '%s a demandé à souscrire un forfait navigo Annuel pour lequel vous êtes déclaré comme payeur.<br/>Les caractéristiques du forfait sont :<br/>Date de début du forfait    %S<br/>Zones du forfait                   %s<br/>Montant                                %s<br/>Vous allez procéder maintenant à la signature électronique du contrat Navigo Annuel et de votre mandat de prélèvement.<br/>Veuillez-noter que votre dossier ne sera transmis qu’après la finalisation de l’étape de signature électronique.'
+cdc.cdc_erreur.SNA-SIG-EC01-MSS_005: 'Vous allez procéder maintenant à la signature électronique de votre contrat Navigo Annuel.<br/>Veuillez-noter que votre dossier ne sera transmis qu’après la finalisation de l’étape de signature électronique.'
+cdc.cdc_erreur.SNA-SIG-EC01-MSS_006: 'Nous vous avons envoyé un SMS. Si vous ne l’avez pas reçu après 5 minutes, vous pouvez demander à recevoir un autre code par Email à l’adresse %s.<br/>Attention le code reçu par SMS ne sera plus valable.'
+cdc.cdc_erreur.SNA-SIG-EC01-MSS_007: 'Un code va vous être envoyé par email dans quelques instants.<br/>Vous aurez alors moins de 15 minutes pour le saisir dans la zone de saisie ci-dessous.'
+cdc.cdc_erreur.SNA-SIG-EC01-MSS_008: 'Nous vous avons envoyé un SMS. Si vous ne l’avez pas reçu après 5 minutes, vous pouvez demander à recevoir un autre code par email à l’adresse %s. Attention, le code envoyé par SMS ne sera plus valable'
+cdc.cdc_erreur.SNA-SIG-EC01-ERR_003: 'Le code de signature saisi est incorrect, veuillez le saisir à nouveau.'
+cdc.cdc_erreur.SNA-SIG-EC01-ERR_004: 'Le code de signature saisi est incorrect et il a été verrouillé. Vous devez attendre 24h pour réessayer. Vous pourrez alors recommencer votre processus de signature électronique ou souscrire à imagine R grâce au formulaire papier.'
+cdc.cdc_erreur.SNA-RAT-EC02-ERR_001: 'L''âge minimum pour souscrire à un forfait Navigo Annuel est de 4 ans.'
+cdc.cdc_erreur.SNA-RAT-EC02-ERR_002: 'Erreur dans la saisie de la date de naissance. Merci de la saisir à nouveau.'
+cdc.cdc_erreur.SNA-FOR-EC01-MSS_001: 'Votre choix n’est pas disponible pour la souscription en ligne. Pour en bénéficier rendez-vous en point de vente.'
+cdc.cdc_erreur.IHM-TRANS-ERR_001: 'Informations obligatoires.'
+cdc.cdc_erreur.IHM-TRANS-ERR_002: 'Information incorrecte, veuillez les saisir à nouveau.'
+cdc.cdc_erreur.IHM-TRANS-ERR_002_PLURIEL: 'Informations incorrectes, veuillez les saisir à nouveau.'
+cdc.cdc_erreur.IHM-TRANS-ERR_003: 'Mot de passe incorrecte, veuillez le saisir à nouveau.'
+cdc.cdc_erreur.IHM-TRANS-ERR_004: 'L''adresse email saisie est invalide. Veuillez la saisir à nouveau.'
+cdc.cdc_erreur.IHM-TRANS-ERR_005: 'Les deux mots de passe ne concordent pas. Veuillez les saisir à nouveau.'
+cdc.cdc_erreur.IHM-TRANS-ERR_006: 'Les deux adresses email ne concordent pas. Veuillez les saisir à nouveau.'
+cdc.cdc_erreur.CU-INS-EC01-ERR_001: 'Cette adresse email est déjà liée à un espace client. Veuillez en saisir une autre ou vous connecter à votre espace actuel.'
+cdc.cdc_erreur.CU-INS-EC01-ERR_002: 'Vous avez mal recopié le code.Veuillez recommencer.'
+cdc.cdc_erreur.CU-INS-EC01-ERR_003: 'Vous devez accepter les Conditions Générales d''Utilisation pour créer votre espace personnel.'
+cdc.cdc_erreur.CU-INS-EC01-ERR_004: 'Vous avez déclaré être client Navigo. Vous devez soit fournir votre numéro client soit cocher la case « Je ne connais pas mon numéro client.'
+cdc.cdc_erreur.CU-INS-EC02-ERR_001: 'Trois mails d’activation vous ont déjà été envoyés. Merci de créer un nouvel espace personnel.'
+cdc.cdc_erreur.CU-INS-EC02-ERR_002: 'Votre espace personnel a bien été créé.'
+cdc.cdc_erreur.CU-INS-EC02-MSG_002: 'Votre espace personel a bien été créé.'
+cdc.cdc_erreur.CU-INS-EC02-ERR_003: 'Votre espace personnel a déjà été activé. Merci d’utiliser vos identifiants pour y accéder.'
+cdc.cdc_erreur.CU-INS-EC02-ERR_004: 'Votre lien d’activation n’est plus valide. Veuillez recommencer le processus de création de votre espace personnel.'
+cdc.cdc_erreur.CU-INS-EC03-MSS_001: 'Un courrier envoyé à cette adresse n’a pas pu vous être remis. Veuillez vérifier et mettre à jour votre adresse postale.'
+cdc.cdc_erreur.CU-INS-EC03-MSS_002: 'Nous vous recommandons de renseigner un numéro de téléphone portable car celui-ci vous sera nécessaire lors de vos futures souscriptions.'
+cdc.cdc_erreur.CU-RAT-EC01-MSS_001: 'Nous ne sommes pas parvenus à retrouver vos informations client à partir des données que vous nous avez fournies.<br/>Nous vous invitons à contacter le service client au <b>09 69 39 57 57</b> (appel non surtaxé) du lundi au vendredi de 8h à 20h et le samedi de 9h à 20h.'
+cdc.cdc_erreur.CU-RAT-EC01-MSS_002: 'Nous ne sommes pas en mesure de donner suite à votre demande.<br/>Nous vous invitons à contacter le service client au <b>09 69 39 57 57</b>.'
+cdc.cdc_erreur.CU-CON-EC01-ERR_001: 'Données de connexion incorrectes.'
+cdc.cdc_erreur.CU-CON-EC01-ERR_002: 'Compte bloqué. Nous vous avons envoyé un email pour modifier votre mot de passe.'
+cdc.cdc_erreur.CU-CON-EC01-ERR_003: 'Compte à activer. Veuillez activer votre compte  en cliquant sur le lien envoyé par email.'
+cdc.cdc_erreur.CU-CON-EC01-ERR_004: 'Mot de passe est incorrect. Veuillez recommencer. <br/>Il vous reste %s tentatives.'
+cdc.cdc_erreur.CU-CON-EC01-ERR_005: 'Vous avez été déconnecté suite à une trop longue inactivité sur notre site.'
+cdc.cdc_erreur.CU-CON-EC01-ERR_006: 'Nous ne sommes pas parvenus à retrouver vos informations client à partir des données que vous nous avez fournies.<br/>Nous vous invitons à contacter le service client au n° <b>09 69 39 57 57</b> (appel non surtaxé) du lundi au vendredi de 8h à 20h et le samedi de 9h à 20h.'
+cdc.cdc_erreur.CU-REI-EC03-MSS_001: 'Votre nouveau mot de passe a bien été enregistré.'
+cdc.cdc_erreur.CU-REI-EC03-MSS_002: 'Votre nouveau mot de passe a bien été enregistré. Nous vous confirmons le déblocage de votre compte.'
+cdc.cdc_erreur.CMC-CO-EC01-MSS_001: 'Pour information, vous pouvez également utiliser votre carte Navigo Annuel/Navigo imagine R pour acheter un forfait Mois ou un forfait semaine sur un automate de vente et de rechargement.'
+cdc.cdc_erreur.CMC-CO-EC01-ERR_001: 'Vous possédez déjà une carte Navigo. Si vous souhaitez déclarer la perte ou le vol de votre carte vous pouvez vous rendre en agence commerciale des transporteurs, dans certains comptoirs RATP ou en Guichets Services Navigo SNCF (<a class="red" href="%point_vente%">100Ko PDF</a>).'
+cdc.cdc_erreur.CMC-CO-EC01-ERR_002: 'Pour commander une carte Navigo en ligne vous devez résider en Ile-de France.'
+cdc.cdc_erreur.legals: 'Le GIE Comutitres, responsable du traitement,  met en œuvre un traitement de données personnelles dans le cadre de la gestion de forfaits Navigo et de la relation clients. Les données identifiées par un astérisque sont obligatoires. Conformément à la loi du 6 janvier 1978, toute personne concernée dispose d’un droit d’accès, d’interrogation, de rectification et d’opposition pour des motifs légitimes. Pour les exercer, merci de vous adresser à contact@comutitres.fr, accompagné d''une copie d''un titre d''identité signé.'
+cdc.cdc_erreur.CDC-CO-EC01-ERR_010: 'Nous ne sommes pas en mesure de donner suite à votre demande, nous vous remercions de bien vouloir vous rapprocher du service client Navigo Annuel au 09 63 39 22 22.'
+cdc.cdc_erreur.NORM-MSS_001: 'Merci de confirmer l’adresse fournie'
+cdc.cdc_erreur.NORM-MSS_002: 'L’adresse fournie comporte a priori une erreur, souhaitez-vous poursuivre avec cette adresse ?'
+cdc.cdc_erreur.NORM-MSS_003: 'Le format ou l''adresse fournis ne sont pas corrects ou absents'
+cdc.cdc_erreur.NORM-ERR_004: 'Votre adresse postale est incorrecte. Merci de renseigner une adresse postale valide.'
+cdc.cdc_erreur.has_na_ir_title: Information
+cdc.cdc_erreur.CMC-CO-EC01-MSS_001_invitation: 'Souhaitez-vous toujours continuer votre commande ?'
+cdc.cdc_erreur.bt_oui: Oui
+cdc.cdc_erreur.bt_non: Non
+cdc.cdc_coordonnees.cgu_cgv_link: 'Je déclare accepter les <a href="%cgu%" class="link underline" target="_blank" title="Conditions Générales d''''Utilisation (CGU) (nouvelle fenêtre)">Conditions Générales d’Utilisation de l’espace personnel (CGU) </a>'
+cdc.cdc_coordonnees.informations_personnelles: 'Informations personnelles'
+cdc.cdc_coordonnees.lbl_texte_introduction: 'Votre e-mail et votre mot de passe seront vos codes d’accès à votre espace personnel. Vous pourrez ainsi suivre l’avancement de votre commande de carte Navigo dans le suivi de vos demandes.'
+cdc.cdc_profil.lbl_compte_bancaire: 'Votre compte bancaire doit être domicilié en France,  DROM-COM inclus (hors compte épargne)'
+cdc.cdc_profil.lbl_mention_1: 'Pour les clients ne résidant pas en Île-de-France mais y travaillant, la carte Navigo peut uniquement être commandée par correspondance auprès de l’Agence Navigo. La personne doit renvoyer un formulaire de demande de carte Navigo (disponible en <a href="#" class="link underline" target="_blank" title="agence commerciale des transporteurs, certains comptoirs RATP ou Guichet Services Navigo SNCF (nouvelle fenêtre)">agence commerciale des transporteurs, certains comptoirs RATP ou Guichet Services Navigo SNCF</a>) en joignant une attestation de l’employeur ou de stage sur papier à entête mentionnant l’identité de l’employeur ou de l’organisme de stage et le numéro SIRET de l’établissement situé en Île-de-France, ainsi qu’une photo d’identité récente (voir <a href="%cgu%" class="link underline" target="_blank" title="Conditions Générales d’utilisation de la carte Navigo (nouvelle fenêtre)">Conditions Générales d’utilisation de la carte Navigo</a>). La carte Navigo est reçue à domicile, sous 21 jours au plus tard à réception du dossier complet par l’Agence.'
+cdc.cdc_profil.lbl_mention_2: 'Les personnes hébergées devront présenter une attestation de l’hébergeur.'
+cdc.cdc_recapitulatif.lbl_addresse_1: 'Complément d’adresse 1'
+cdc.cdc_recapitulatif.lbl_addresse_2: 'Complément d’adresse 2'
+cdc.cdc_recapitulatif.lbl_addresse_3: 'Complément d’adresse 3'
+cdc.cdc_transverse.lbl_commande_carte_link_breadcrumb: 'Commande de carte'
+cdc.cdc_transverse.lbl_identification_client: 'Identification client'
+cdc.cdc_transverse.chemin_fer_informationsPer: 'Informations personnelles'
+cdc.cdc_transverse.chemin_fer_informationsPer_title: 'Informations personnelles'
+cdc.cdc_transverse.chemin_fer_photo: Photo
+cdc.cdc_transverse.chemin_fer_photo_title: Photo
+cdc.cdc_transverse.lbl_commande_carte_confirmation_link: Confirmation

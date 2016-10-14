@@ -1,0 +1,136 @@
+{% extends "SelBundle::layout.html.twig" %}
+{% form_theme search_form 'SelBundle:Faq:fields_search.html.twig' %}
+
+{% block title %}{{ 'faq.faq_search_results.service_en_ligne_label'|trans({}, 'faq') }}{% endblock %}
+
+{% block content_header '' %}
+{% block flashMessage %}{% endblock flashMessage %}
+
+{% block breadcrumb %}
+    <div>
+        <div id="box_breadcrumb_id" class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="http://www.navigo.fr" title="{{ 'faq.faq_search_results.accueil'|trans({}, 'faq') }}">{{ 'faq.faq_search_results.accueil'|trans({}, 'faq') }}</a></li>
+                    <li><a href="{{ path('sel_homepage') }}" title="{{ 'faq.faq_search_results.service_navigo'|trans({}, 'faq') }}">{{ 'faq.faq_search_results.service_navigo'|trans({}, 'faq') }}</a></li>
+                    {% if is_granted('ROLE_USER') %}
+                        <li><a href="{{ path('sel_espace_client') }}" title="{{ 'faq.faq_index.faq_mon_espace_breadcrumb'|trans({}, 'faq') }}">{{ 'faq.faq_index.faq_mon_espace_breadcrumb'|trans({}, 'faq') }}</a></li>
+                    {% endif %}
+                    <li><a href="{{ path('sel_faq') }}" title="{{ 'faq.faq_search_results.help_online'|trans({}, 'faq') }}">{{ 'faq.faq_search_results.help_online'|trans({}, 'faq') }}</a></li>
+                    <li>{{ 'faq.faq_search_results.engine.label'|trans({}, 'faq') }}</li>
+                  </ol>
+            </div>
+        </div>
+    </div>
+{% endblock breadcrumb %}
+
+{% block contentTitle %}
+     <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12">
+             <div class="heading">
+                 <h1>{{ 'faq.faq_search_results.help_online_title'|trans({}, 'faq') }}</h1>
+             </div>
+         </div>
+     </div>
+{% endblock contentTitle %}
+
+{% block previousArrow %}
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="prev">
+            <a href="#">
+                <img src="{{ asset('bundles/sel/images/prev16.png') }}" class="picto" alt="Retour à la page précédente">
+                {{ 'faq.faq_search_results.back'|trans({}, 'faq') }}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock previousArrow %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+    {% javascripts
+        '@SelBundle/Resources/public/js/faq.js'
+        output='faq.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock javascript_foot %}
+
+{% block content %}
+<div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="home">
+                <div class="row margin-top-bottom">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <label class="control-label general_Intext" for="form_keywords">{{ 'faq.faq_search_results.search_engine_title'|trans({}, 'faq') }}</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <form action="{{ path('sel_faq_search') }}" method="post" {{ form_enctype(search_form) }}>
+                            {{ form_row(search_form.keywords) }}
+                            {{ form_rest(search_form) }}
+                            <input type="hidden" name="results_page" value="1" />
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <label class="control-label general_Intext">{{ 'faq.faq_search_results.filter_results_title'|trans({}, 'faq') }}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="checkbox clearfix">
+                        {% for category_id, category_label in categories %}
+                        <div class="col-xs-12 col-sm-4 col-md-4">
+                            <input type="checkbox" class="faq_them_checkbox" id="them-{{ category_id }}" checked>
+                            <label for="them-{{ category_id }}">
+                              {{ category_label }}
+                            </label>
+                        </div>
+                       {% endfor %}
+                       <br /><br />
+                    </div>
+                </div>
+
+        <script type="text/javascript">
+        <!--
+        xt_mtcl = "{{ search_form.keywords.vars.value | striptags }}";
+        {% if search_results|length > 0 %}xt_npg = "1";{% else %}xt_npg = "0";{% endif %}
+        //do not modify below
+        if (window.xtparam!=null){window.xtparam+="&mc="+xt_mtcl+"&np="+xt_npg;}
+        else{window.xtparam ="&mc="+xt_mtcl+"&np="+xt_npg;};
+        //-->
+        </script>
+
+        {% if search_results|length > 0 %}
+            {% for element in search_results %}
+                {% set index_parent = loop.index %}
+            <div class="row cat{{ element.category_id }} border-bottom">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-9">
+                            {% set faq_category = element.category_id %}
+                            <h2>
+                              {{ element.title }} / {{ attribute(categories, element.category_id)}}
+                            </h2>
+                            <p>
+                             {{ element.description|length > 80 ? element.description|slice(0, 80)|striptags ~ '...' : element.description  }}
+                            </p>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3">
+                            <p class="text-center more">
+                                <a title="{{ 'faq.faq_search_results.more_information_link_label'|trans({}, 'faq') }}" class="link col-right btn btn-default btn-search" href="article/{{ element.faq_id }}">
+                                    <b>{{ 'faq.faq_search_results.more_information_label'|trans({}, 'faq') }}</b>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,82 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+
+{% block content %}
+<div class="form">
+<form action="{{ app.request.uri }}{# path('sel_front_register') #}" method="POST" {{ form_enctype(form) }} class="">
+        {{ form_errors(form) }}
+                <div class="form_item">
+                        {{ form_label(form.customer.title) }}
+                        {{ form_widget(form.customer.title) }}
+{{ form_errors(form.customer.title) }}
+                </div>
+                <div class="form_item">
+                        {{ form_label(form.customer.firstname) }}
+                        {{ form_widget(form.customer.firstname) }}
+{{ form_errors(form.customer.firstname) }}
+                </div>
+                <div class="form_item">
+                        {{ form_label(form.customer.lastname) }}
+                        {{ form_widget(form.customer.lastname) }}
+{{ form_errors(form.customer.lastname) }}
+                </div>
+                <div class="form_item">
+                        {{ form_label(form.customer.email) }}
+                        {{ form_widget(form.customer.email) }}
+{{ form_errors(form.customer.email) }}
+                </div>
+                <div class="form_item">
+                        {{ form_label(form.customer.password) }}
+                        {{ form_widget(form.customer.password) }}
+{{ form_errors(form.customer.password) }}
+                </div>
+                <div class="form_item">
+                        {{ form_label(form.address.phoneNumber) }}
+                        {{ form_widget(form.address.phoneNumber) }}
+{{ form_errors(form.address.phoneNumber) }}
+                </div>
+                <div class="form_item">
+                        {{ form_label(form.address.company) }}
+                        {{ form_widget(form.address.company) }}
+{{ form_errors(form.address.company) }}
+                </div>
+                <div class="form_item">
+                        {{ form_label(form.address.street1) }}
+                        {{ form_widget(form.address.street1) }}
+{{ form_errors(form.address.street1) }}
+                </div>
+                <div class="form_item">
+                        {{ form_label(form.address.street2) }}
+                        {{ form_widget(form.address.street2) }}
+{{ form_errors(form.address.street2) }}
+                </div>
+                <div class="form_item">
+                        {{ form_label(form.address.state) }}
+                        {{ form_widget(form.address.state) }}
+{{ form_errors(form.address.state) }}
+                </div>
+                <div class="form_item">
+                        {{ form_label(form.address.zip) }}
+                        {{ form_widget(form.address.zip) }}
+{{ form_errors(form.address.zip) }}
+                </div>
+                <div class="form_item">
+                        {{ form_label(form.address.city) }}
+                        {{ form_widget(form.address.city) }}
+{{ form_errors(form.address.city) }}
+                </div>
+                <div class="form_item">
+                        {{ form_label(form.address.country) }}
+                        {{ form_widget(form.address.country) }}
+{{ form_errors(form.address.country) }}
+                </div>
+
+        <div class="hide">{{ form_rest(form) }}</div>
+        <p class="info-required">{% trans %}* Champs obligatoires{% endtrans %}</p>
+        <div class="form_button">
+            <input type="submit" class="obj-btn" value="{% trans %}Créer mon compte{% endtrans %}"/>
+        </div>
+</form>
+</div>
+
+{% endblock %}

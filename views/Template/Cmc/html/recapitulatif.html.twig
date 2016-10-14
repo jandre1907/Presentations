@@ -1,0 +1,103 @@
+{% verbatim %}<div class="step_form" id="step_recapitulatif">
+	<!-- 5 -->
+	<p class="red" data-ng-hide="true">
+		{% endverbatim %}
+            {{"cdc.cdc_recapitulatif.lbl_avertissement_incompletude"|trans({}, "cdc", "fr")|raw}}
+        {% verbatim %}
+	</p>
+	<p class="title">
+		<strong>{% endverbatim %}
+            {{"cdc.cdc_recapitulatif.lbl_verif_info"|trans({}, "cdc", "fr")|raw}}
+        {% verbatim %}</strong>
+	</p>
+	<span>{{recapCtrl.test}}</span>
+	<div class="form-content" data-ng-form name="step_form">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="picto-recap picto-coordonnees">{% endverbatim %}
+            {{"cdc.cdc_recapitulatif.picto_coordonees_info"|trans({}, "cdc", "fr")|raw}}
+        {% verbatim %}</span> <a href="#/Porteur" class="pull-right modifier" title=" {{"cdc.cdc_recapitulatif.picto_coordonees_info"|trans({}, "cdc", "fr")|raw}}">Modifier</a>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-6">
+						<p class="recap-line clearfix">
+							<label>{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_civilite"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label>
+							<strong>
+								<span>{{ recapCtrl.userSig.prefix | civiliteFtr }}</span>
+							</strong>
+						</p>
+						<p class="recap-line clearfix">
+							<label>{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_nom"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label><strong>{{ recapCtrl.userSig.lastname }}</strong>
+						</p>
+						<p class="recap-line clearfix">
+							<label>{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_prenom"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label><strong>{{ recapCtrl.userSig.firstname }}</strong>
+						</p>
+						<p class="recap-line clearfix">
+							<label>{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_date_naiss"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label><strong>{{ recapCtrl.userSig.birthDate.day }}/{{ recapCtrl.userSig.birthDate.month }}/{{ recapCtrl.userSig.birthDate.year }}</strong>
+						</p>
+					</div>
+					<div class="col-xs-6">
+						<p class="recap-line clearfix">
+							<label>{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_num_rue"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label><strong>{{ recapCtrl.userSig.street3 }}</strong>
+						</p>
+						<p class="recap-line clearfix">
+							<label>{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_cp"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label><strong>{{ recapCtrl.userSig.postalCode }}</strong>
+						</p>
+						<p class="recap-line clearfix">
+							<label>{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_ville"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label><strong>{{ recapCtrl.userSig.city.label }}</strong>
+						</p>
+						<p class="recap-line clearfix">
+							<label>{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_pays"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label><strong>{{ recapCtrl.userSig.country }}</strong>
+						</p>
+						<p class="recap-line clearfix">
+							<label>{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_tel_port"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label><strong>{{ recapCtrl.userSig.mobile }}</strong>
+						</p>
+						<p class="recap-line clearfix">
+							<label>{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_tel_fixe"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label><strong>{{ recapCtrl.userSig.phone }}</strong>
+						</p>
+						<p class="recap-line clearfix">
+							<label>{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_email"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</label><strong>{{ recapCtrl.userSel.email }}</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="picto-recap picto-photo">
+				{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_recap_photo"|trans({}, "cdc", "fr")|raw}}{% verbatim %}Photo
+				</span>
+				<a href="#/Photo" class="pull-right modifier" title="{% endverbatim %}{{"cdc.cdc_recapitulatif.act_modif_photo_info"|trans({}, "cdc", "fr")|raw}}{% verbatim %}">
+					{% endverbatim %}{{"cdc.cdc_recapitulatif.act_modif_photo"|trans({}, "cdc", "fr")|raw}}{% verbatim %}
+				</a>
+			</div>
+			<div class="panel-body">
+				<div class="preview">
+					<img src="{{ recapCtrl.userSig.photoValid }}" data-ng-hide="recapCtrl.userSig.photoValid == null" />
+				</div>
+				<p class="text-danger" data-ng-show="recapCtrl.userSig.photoValid == null">
+					{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_photo_attente"|trans({}, "cdc", "fr")|raw}}{% verbatim %}
+				</p>
+			</div>
+
+		</div>
+
+		<p class="title">
+			<strong>
+				{% endverbatim %}{{"cdc.cdc_recapitulatif.lbl_avertissement_signature"|trans({}, "cdc", "fr")|raw}}{% verbatim %}
+			</strong>
+		</p>
+
+	</div>
+	<!-- form-content -->
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3">
+			<button type="button" class="btn btn-primary pull-right"
+				ng-click="recapCtrl.onCertifie()" title="{% endverbatim %}{{"cdc.cdc_recapitulatif.btn_certif_donnee_info"|trans({}, "cdc", "fr")|raw}}{% verbatim %}">
+				<span>{% endverbatim %}{{"cdc.cdc_recapitulatif.btn_certif_donnee"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span>
+			</button>
+			<p class="text-error" data-ng-show="recapCtrl.error">{{recapCtrl.error}}</p>
+		</div>
+	</div>
+</div>{% endverbatim %}

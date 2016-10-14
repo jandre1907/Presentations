@@ -1,0 +1,171 @@
+ <script type="text/javascript">
+ try  {
+      window.xtsd =    "{{ params.xtsd | raw}}";
+      window.xtsite =  "{{ params.xtsite | raw}}";
+      window.xtn2 =    "{{ params.xtn2 | raw}}";
+      window.pages = {{ params.pages | raw}};
+      window.xt_multc ="{{ params.xt_multc | raw}}";
+      window.xt_ac =   "{{ params.xt_ac | raw}}";
+      window.xt_an =   "{{ params.xt_an | raw}}";
+      window.xt_page = "{{params.xtpage | raw}}";
+      window.xt_form = {{ params.xt_form | raw}};
+      window.sessionId = "{{ params.sessionId | raw}}";
+      window.referer = "{{ params.referer | striptags}}";
+   } catch (e) {
+      // TODO something
+   }
+
+</script>
+
+{% if not error %}
+{# tag form #}
+   <div data-ng-controller="TagFormCtrl" data-ng-init=
+            '
+               xtsd =    "{{ params.xtsd | raw}}";
+               xtsite =  "{{ params.xtsite | raw}}";
+               xtn2 =    "{{ params.xtn2 | raw}}";
+               pages = {{ params.pages | raw}};
+               xt_multc ="{{ params.xt_multc | raw}}";
+               xt_ac =   "{{ params.xt_ac | raw}}";
+               xt_an =   "{{ params.xt_an | raw}}";
+               xt_page = "{{params.xtpage | raw}}";
+               xt_form = {{ params.xt_form | raw}};
+               sessionId = "{{ params.sessionId | raw}}";
+               referer = "{{ params.referer | striptags}}";
+               xtautoredir = false;
+            '
+         >
+
+      <img width="1" height="1" src="data:null" data-ng-src="{% verbatim %}{{urlTagForm}}{% endverbatim %}" ng-if="img" alt="tagForm" />
+   </div>
+{% endif %}
+
+{% if not error and not one_page and not one_page_ajax %}
+
+      {% if request.attributes.get('_route') == 'sel_homepage' %}
+         <script type="text/javascript">
+         <!--
+         xtergo = "1";
+         //-->
+         </script>
+
+         {% javascripts '@SelBundle/Resources/public/js/lib/tracking/xtclicks.js' output='js/xtclicks.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+      {% endif %}
+
+      <script type="text/javascript">
+
+         xtnv =     "{{params.xtnv | raw}}";        //parent.document or top.document or document
+         xtsd =     "{{params.xtsd | raw}}";
+         xtsite =   "{{params.xtsite | raw}}";
+         xtn2 =     "{{params.xtn2 | raw}}";        // level 2 site ID
+         xtpage =   "{{params.xtpage | raw}}"; //page name (with the use of :: to create chapters)
+         //xtdi =     "{#params.xtdi#}";        //implication degree
+         xt_multc = "{{params.xt_multc | raw}}";  //all the xi indicators (like "&x1=...&x2=....&x3=...")
+         xt_an =    "{{params.xt_an | raw}}";        //user ID
+         xt_ac =    "{{params.xt_ac | raw}}";        //category ID
+         xtautoredir = false;
+         //do not modify below
+         if (window.xtparam!=null) {
+            window.xtparam+=xt_multc+"&ac="+xt_ac+"&an="+xt_an;
+         } else {
+            window.xtparam=xt_multc+"&ac="+xt_ac+"&an="+xt_an;
+         }
+         //-->
+      </script>
+
+      {% javascripts '@SelBundle/Resources/public/js/lib/tracking/xtcore.js' output='js/xtcore.js' %}
+         <script type="text/javascript" src="{{ asset_url }}"></script>
+      {% endjavascripts %}
+
+      <noscript>
+          <img width="1" height="1" alt="tagForm" src="{{ params.xtsd | raw}}.xiti.com/hit.xiti?s={{ params.xtsite | raw}}&s2={{ params.xtn2 | raw}}&p={{ params.xtpage | raw}}&vrn=1{{ params.xt_multc | raw}}&ac={{ params.xt_ac | raw}}&an={{ params.xt_an | raw}}&lng=fr&idp={{ params.sessionId | raw}}&ref={{ params.referer | raw}}" >
+      </noscript>
+{% elseif one_page %}
+   <img width="1" height="1" alt="tagForm" src="{{ params.xtsd | raw}}.xiti.com/hit.xiti?s={{ params.xtsite | raw}}&s2={{ params.xtn2 | raw}}&p={{ params.xtpage | raw}}&vrn=1{{ params.xt_multc | raw}}&ac={{ params.xt_ac | raw}}&an={{ params.xt_an | raw}}&lng=fr&idp={{ params.sessionId | raw}}&ref={{ params.referer | raw}}" >
+{% elseif one_page_ajax %}
+      <div data-ng-controller="TagCtrl" data-ng-init=
+         '
+            ctrlActivated =1;
+            xtsd =    "{{ params.xtsd | raw}}";
+            xtsite =  "{{ params.xtsite | raw}}";
+            xtn2 =    "{{ params.xtn2 | raw}}";
+            pages = {{ params.pages | raw}};
+            xt_multc ="{{ params.xt_multc | raw}}";
+            xt_ac =   "{{ params.xt_ac | raw}}";
+            xt_an =   "{{ params.xt_an | raw}}";
+            xt_page = "";
+            xt_form = {{ params.xt_form | raw}};
+            sessionId = "{{ params.sessionId | raw}}";
+            referer = "{{ params.referer | raw}}";
+         '
+      >
+
+      <img ng-if="url != '#'" width="1" height="1" alt="tagForm" src="data:null" ng-src="{% verbatim %}{{url}}{% endverbatim %}" />
+      <img ng-if="urlClic != '#'" width="1" height="1" alt="tagForm" src="data:null" ng-src="{% verbatim %}{{urlClic}}{% endverbatim %}" />
+   </div>
+{% endif %}
+
+
+
+{###################################################################################################################}
+
+
+
+{% if tag_block %}{# defined in dev only#}
+   {% if error %}
+      <div class="error" style="background-color:#FCC;border:1px black; width:1000px; min-height:20px; position:fixed; bottom:0px;padding:10px;z-index:998;">
+          {{ error }}
+      </div>
+   {% else %}
+
+   <div data-ng-controller="tagBlockCtrl">
+
+      <div style="background-color:orange;border:1px black; position:fixed; bottom:50px;padding:4px 2px;z-index:999;border-radius: 5px;">
+         <div data-ng-click="toggle()" style="border-radius: 5px; background-color: #FAC; float:right; padding: 1px 2px; border: 1px solid blueviolet;">{% verbatim %}{{ symbole }}{% endverbatim %}</div>
+         <div  data-ng-show='open'>
+            <div class="title"><h3>Paramètre tag de page
+               {% if not error and not one_page_ajax %}: {{ params.xtpage | raw}}
+               {% else  %}
+                  :{% verbatim %}{{tagUrl}}{% endverbatim %}
+               {% endif %}
+               </h3>
+               {{ currentRoute }}, {{ environment }}
+            </div>
+
+            {% if not error and not one_page_ajax %}
+            <div class="title">
+               <span style="font-family: sans-serif;">{{ params.xtsd | raw}}.xiti.com/hit.xiti?s={{ params.xtsite | raw}}&s2={{ params.xtn2 | raw}}&p={{ params.xtpage | raw}}&vrn=1{{ params.xt_multc | raw}}&ac={{ params.xt_ac | raw}}&an={{ params.xt_an | raw}}&lng=fr&idp={{ params.sessionId | raw}}&ref={{ params.referer | striptags}}</span>
+            </div>
+            {% endif %}
+
+            <div>
+               {% for paramKey, paramValue in params %}
+                  <div style="float:left; padding: 3px;margin:1px 2px; border-radius: 4px; background-color: #DDD ">{{ paramKey }} : {{ paramValue }}</div>
+               {% endfor %}
+            </div>
+            <br/>
+
+            <div>
+               <div style="clear:both;">
+                  Template param:
+               </div>
+               {% for paramKey, paramValue in mapperParameters %}
+                  <div style="float:left; padding: 3px;margin:1px 2px; border-radius: 4px; background-color: #CCC ">{{ paramKey }} : {{ paramValue }}</div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+   </div>
+   {% endif %}
+{% endif %}
+<script type="text/javascript">
+	if (typeof xt_click != 'function') {
+		xt_click = function() {
+			if (console) {
+				console.log && console.log('xt_click is not defined');
+			}
+		}
+	}
+</script>

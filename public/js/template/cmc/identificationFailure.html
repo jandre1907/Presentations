@@ -1,0 +1,19 @@
+<div class="step_form" id="echec"><!-- Echec -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+            <div class="warning">
+                <img ng-src="{{ prefix_front }}bundles/sel/images/warning.png" class="picto" alt="Attention">
+                <br>
+                <br>
+                <p ng-bind-html="pageCtrl.errorMsg"></p>
+                <div class="col-xs-10 col-xs-offset-1" message-dv meskey="{{pageCtrl.meskey}}"></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button ng-click="pageCtrl.onTerminer()" type="button" class="btn btn-primary aide-photo-btn" title="Terminer et retourner à la page d'accueil"><span>Terminer</span></button>
+        </div>
+    </div>
+</div>

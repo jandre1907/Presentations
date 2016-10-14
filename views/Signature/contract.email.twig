@@ -1,0 +1,19 @@
+{% block subject %}Confirmation de signature{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+Bonjour {{ user.username }} !
+
+Vous devez confirmé voter Signature [....] en cliquant sur le lien suivant :<a href="{{ confirmUrl }}">Validation</a>
+
+Amicalement,
+Administrateur de sel.com
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+{#
+    Vous pouvez ici définir le HTML que vous souhaitez ou même utiliser la force de twig, à savoir l'inclusion de template : 
+    include 'MyAppMonBundle:User:registration_email.html.twig'
+#}
+{% endblock %}

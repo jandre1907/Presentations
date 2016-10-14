@@ -1,0 +1,91 @@
+ {% extends "SelBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title="{{ 'bp.bp_confirm.accueil'|trans({}, 'bp') }}">{{ 'bp.bp_confirm.accueil'|trans({}, 'bp') }}</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title="{{ 'bp.bp_confirm.service_navigo'|trans({}, 'bp') }}">{{ 'bp.bp_confirm.service_navigo'|trans({}, 'bp') }}</a></li>
+            <li><a href="{{ path('sel_espace_client') }}" title="{{ 'bp.bp_confirm.espcace_client'|trans({}, 'bp') }}">{{ 'bp.bp_confirm.espcace_client'|trans({}, 'bp') }}</a></li>
+            <li class="active">{{ 'bp.bp_confirm.renew_carte_bon_plan_label_link'|trans({}, 'bp') }}</li>
+          </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+ {% block title %}{{ 'home.home_espace_client.label.bon_plan_title_onglet'|trans({}, 'home') }}{% endblock %}
+
+ {% block content_header '' %}
+ {% block flashMessage %}{% endblock flashMessage %}
+ {% block contentTitle %}
+     <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12">
+             <div class="heading">
+                 <h1>{{ 'bp.bp_confirm.renew_carte_bon_plan_title'|trans({}, 'bp') }}</h1>
+             </div>
+         </div>
+     </div>
+ {% endblock contentTitle %}
+
+{% block previousArrow %}
+<div class="row" >
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        {% verbatim %}
+        <div class="prev">
+			<a href="javascript:window.history.back()">
+				{% endverbatim %}
+				<img src="{{ asset('bundles/sel/images/prev16.png') }}" class="picto" alt="{{ 'transverse.transverse_prev.previous_page_title' |trans({}, 'transverse') }}">
+
+				{{ 'transverse.transverse_prev.previous_page' |trans({}, 'transverse') }}</a>
+				{% verbatim %}
+		</div>
+        {% endverbatim %}
+    </div>
+</div>
+
+{% endblock previousArrow%} {% block content %}
+
+          <div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div id="sel_form" class="form-horizontal">
+                            <div class="step-content">
+                                <div class="step_form" id="step_confirmation"><!-- 2 -->
+                                <div class="confirmation">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                                            {% if error == false %}
+                                            <div class="margin-bottom">
+                                                <span class="general_Intext"><img src="data:null" data-ng-src="{{ asset('bundles/sel/images/check2x.png') }}" class="picto valid" alt="{{ 'bp.bp_confirm.confirmation_img_label'|trans({}, 'bp') }}">
+                                                    <strong>
+                                                        {{ 'bp.bp_confirm.demande_enregistree_subtitle_2'|trans({}, 'bp') }}
+                                                    </strong>
+                                                </span>
+                                            </div>
+                                            <br>
+											<p>{{ 'bp.bp_confirm.delai_reception_carte_bon_plan_label'|trans({}, 'bp') }}</p>
+                                            <p>{{ 'bp.bp_confirm.email_confirmation_envoye_check_adresse'|trans({}, 'bp') }} <strong>{{ sigClient.eMail }}</strong>.</p>
+
+                                            {% else %}
+                                            <p>
+                                                <strong>{{ 'bp.bp_confirm.vous_ne_pouvez_commander_carte'|trans({}, 'bp') }}</strong>
+                                            </p>
+                                            <br>
+                                                {{ ('bp.bp_confirm.merci_de_vous_rendre'|trans({}, 'bp')) | raw }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <button type="button" class="btn btn-default aide-photo-btn" value="{{ 'bp.bp_confirm.terminer_back_to_myspace'|trans({}, 'bp') }}" onclick="location.href='{{ path('sel_espace_client')  }}';"><span>{{ 'bp.bp_confirm.back_to_myspace_btn'|trans({}, 'bp') }}</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock content%}

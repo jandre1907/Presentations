@@ -1,0 +1,31 @@
+ {% extends "SelBundle::layout.html.twig" %}
+
+{% block meta_desc %}
+    <meta name="description" content='{{'conn.conn_help.meta_desc'|trans({}, 'conn', 'fr')|raw}}'>
+{% endblock %}
+
+ {% block content_header '' %}
+ {% block flashMessage %}{% endblock flashMessage %}
+
+{% block content %}
+    <div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="rester-connecte">
+                    <br/>
+                    {{'conn.conn_help.lbl_info'|trans({'%polique_de_confidentialite%': asset('bundles/sel/pdf/mentions_legales.pdf')}, 'conn', 'fr')|raw}}
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <a href="javascript:window.close()"><button type="button" class="btn btn-default aide-photo-btn btn-return" value="{{'rat.rat_aide.btn_fermer_aide_info3'|trans({}, 'rat', 'fr')|raw}}"><span>{{'rat.rat_aide.btn_fermer_aide_info3'|trans({}, 'rat', 'fr')|raw}}</span></button></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block tag %}
+    {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': {}}) %}
+{% endblock tag %}

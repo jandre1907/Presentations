@@ -1,0 +1,273 @@
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-horizontal">
+                        <div class="step_form creation-compte">
+                            <p class="warning-light red" data-ng-show="formSubmitted && error">
+
+                                <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alerte">
+                                {% verbatim %}
+                                    <strong>{{error}}</strong>
+                                {% endverbatim %}
+                            </p>
+
+
+                            <div class="form-content" data-ng-form="createCustomerSpaceForm">
+
+                                <div class="form-group" data-border-valid-mobile >
+
+                                    <label for="email" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'cpt.cpt_inscription.lbl_email'|trans({}, 'cpt', 'fr')|raw}}<span class="star"></span></label>
+                                    <div class="col-xs-11 col-sm-6 col-md-6">
+                                        <input id="email" type="email" data-gie-mail class="form-control"
+                                         name="emailSel"
+                                         data-ng-model="mail"
+                                         required aria-required="true">
+                                        <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="!createCustomerSpaceForm.emailSel.$pristine && (createCustomerSpaceForm.emailSel.$invalid)">
+                                        {% verbatim %}
+                                        <span class="mess-error" aria-live="assertive"  data-ng-show="!createCustomerSpaceForm.emailSel.$pristine && (createCustomerSpaceForm.emailSel.$error.required)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                                        <span class="mess-error" aria-live="assertive"  data-ng-show="!createCustomerSpaceForm.emailSel.$pristine && (createCustomerSpaceForm.emailSel.$error.email)">{{errorMessages['IHM-TRANS-ERR_004']}}</span>
+                                        {% endverbatim %}
+
+                                        <img src="{{asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Ok" data-ng-hide="true" data-ng-show="!createCustomerSpaceForm.emailSel.$pristine && (createCustomerSpaceForm.emailSel.$valid)">
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group" data-border-valid-mobile >
+                                    <label for="password" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'cpt.cpt_inscription.lbl_mdp'|trans({}, 'cpt', 'fr')|raw}}<span class="star"></span></label>
+                                    <div class="col-xs-11 col-sm-6 col-md-6">
+                                        <input id="password" type="password" autocomplete="off" name="passwordSel" class="form-control" minlength="8" maxlength="20" data-ng-model="password" data-ng-paste="clear('password')" required data-sel-password  aria-describedby="password-info" aria-required="true">
+                                        <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="!createCustomerSpaceForm.passwordSel.$pristine && (createCustomerSpaceForm.passwordSel.$invalid)">
+                                        {% verbatim %}
+                                        <span class="mess-error" aria-live="assertive"  data-ng-show="!createCustomerSpaceForm.passwordSel.$pristine &&  (createCustomerSpaceForm.passwordSel.$error.minlength || createCustomerSpaceForm.passwordSel.$error.maxlength || createCustomerSpaceForm.passwordSel.$error.passwordFormat)">{{errorMessages['IHM-TRANS-ERR_003']}}</span>
+                                        <span class="mess-error" aria-live="assertive"  data-ng-show="!createCustomerSpaceForm.passwordSel.$pristine &&  (createCustomerSpaceForm.passwordSel.$error.required)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                                        {% endverbatim %}
+
+                                        <img src="{{asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Ok" data-ng-hide="true" data-ng-show="!createCustomerSpaceForm.passwordSel.$pristine && (createCustomerSpaceForm.passwordSel.$valid) && (password == passwordConf)">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3">
+                                            <div class="box_action_show_error">
+                                                <a href="#" class="action_show_error">
+                                                    <img src="{{ asset('bundles/sel/images/picto_information.png') }}" alt="Information"/>
+                                                </a>
+                                                <div id="password-info" class="tooltip right password" > <!-- class password provisoire -->
+                                                    <div class="tooltip-arrow"></div>
+                                                    <div class="tooltip-inner">
+                                                        {{'cpt.cpt_inscription.aid_mdp'|trans({}, 'cpt', 'fr')|raw}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" data-border-valid-mobile>
+                                        <label for="confirme-password" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'cpt.cpt_inscription.lbl_conf_mdp'|trans({}, 'cpt', 'fr')|raw}}<span class="star"></span></label>
+                                        <div class="col-xs-11 col-sm-6 col-md-6">
+                                            <input type="password" autocomplete="off" id="confirme-password" name="passwordConf" data-ng-model="passwordConf" class="form-control" onpaste="return false;" data-ng-paste="clear('passwordConf')" minlength="8" maxlength="20" required data-sel-password aria-required="true">
+                                            <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="!createCustomerSpaceForm.passwordConf.$pristine && (createCustomerSpaceForm.passwordConf.$invalid)">
+                                            {% verbatim %}
+                                            <span class="mess-error" aria-live="assertive"  data-ng-show="!createCustomerSpaceForm.passwordConf.$pristine && (createCustomerSpaceForm.passwordConf.$error.minlength || createCustomerSpaceForm.passwordConf.$error.maxlength || createCustomerSpaceForm.passwordConf.$error.passwordFormat)">{{errorMessages['IHM-TRANS-ERR_003']}}</span>
+                                            <span class="mess-error" aria-live="assertive"  data-ng-show="!createCustomerSpaceForm.passwordConf.$pristine && (createCustomerSpaceForm.passwordConf.$error.required)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                                            <span class="mess-error" aria-live="assertive"  data-ng-show="!createCustomerSpaceForm.passwordConf.$pristine && (password != passwordConf)">{{errorMessages['IHM-TRANS-ERR_005']}}</span>
+                                            {% endverbatim %}
+
+                                            <img src="{{asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Ok" data-ng-hide="true" data-ng-show="!createCustomerSpaceForm.passwordConf.$pristine && (createCustomerSpaceForm.passwordConf.$valid) && (password == passwordConf)">
+                                        </div>
+
+                                    </div>
+
+                                <div class="form-group creation-compte">
+                                        <div class="col-xs-12 col-sm-3 col-md-3 text-right">
+                                            <span class="radio_label">{{'cpt.cpt_inscription.lbl_client_sig'|trans({}, 'cpt', 'fr')|raw}}<span class="star"></span></span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-6">
+                                            <div class="radio">
+                                                <input type="radio" value="1" id="inlineRadio1" name="sig" data-ng-model="hasCard" data-ng-change="setUseCase()" aria-required="true">
+                                                <label for="inlineRadio1" class="radio-inline">{{'cpt.cpt_inscription.btn_rad_oui'|trans({}, 'cpt', 'fr')|raw}}</label>
+                                                <input type="radio" value="0" id="inlineRadio2" name="sig" data-ng-model="hasCard" data-ng-change="setUseCase()" aria-required="true">
+                                                <label for="inlineRadio2" class="radio-inline">{{'cpt.cpt_inscription.btn_rad_non'|trans({}, 'cpt', 'fr')|raw}}</label>
+                                                <span class="radio-text">{{'cpt.cpt_inscription.btn_rad_text'|trans({}, 'cpt', 'fr')|raw}}</span>
+                                            </div>
+
+                                            {# <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="formSubmitted && (createCustomerSpaceForm.sig.$invalid)"> #}
+                                            {% verbatim %}
+                                            <span class="mess-error" aria-live="assertive"  data-ng-show="formSubmitted && (createCustomerSpaceForm.sig.$error.required)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                                            {% endverbatim %}
+
+                                            <img src="{{asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Ok" data-ng-hide="true" data-ng-show="!createCustomerSpaceForm.sig.$pristine && (createCustomerSpaceForm.sig.$valid)">
+                                        </div>
+                                    </div>
+
+
+                                <div class="client-sel show" data-ng-show="hasCard == 1">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-sm-3 col-md-3">
+                                                <label for="numero-client" class="text-right">{{'cpt.cpt_inscription.lbl_num_cli'|trans({}, 'cpt', 'fr')|raw}}<span class="star" data-ng-show="hasCard && !referenceUnknown"></span></label>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-6" data-border-valid-mobile>
+                                                <input id="numero-client" type="text" class="form-control" placeholder="Inscrit à coté de la photo" aria-required="{% verbatim %}{{ !referenceUnknown && (hasCard == 1)}}{% endverbatim %}" data-ng-model="reference" data-ng-disabled= "referenceUnknown == true" name="reference" data-ng-pattern="/^[0-9]*$/" minlength="1" maxlength="10" data-ng-required="!referenceUnknown && (hasCard == 1)">
+                                                <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="formSubmitted && (createCustomerSpaceForm.emailSel.$invalid)">
+
+                                                <span class="mess-error" data-ng-show="!createCustomerSpaceForm.reference.$pristine && hasCard && createCustomerSpaceForm.reference.$error.required && !referenceUnknown" aria-live="assertive" >{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+
+                                                <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="!createCustomerSpaceForm.reference.$pristine && createCustomerSpaceForm.reference.$error.pattern">
+
+                                                <span class="mess-error" data-ng-show="!createCustomerSpaceForm.reference.$pristine && createCustomerSpaceForm.reference.$error.pattern" aria-live="assertive" >
+                                                {% verbatim %}{{errorMessages['IHM-TRANS-ERR_008']}}{% endverbatim %}
+                                                </span>
+
+                                                <img src="{{asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Ok" data-ng-hide="true" data-ng-show="!createCustomerSpaceForm.reference.$pristine && (createCustomerSpaceForm.reference.$valid)">
+
+                                                <br/>
+                                                <a href="{{ path('sel_aide_numero_client') }}" target="_blank" class="btn btn-default btn-sm" title="{{'cpt.cpt_inscription.lbl_ou_le_trouv_title'|trans({}, 'cpt', 'fr')|raw}}">{{'cpt.cpt_inscription.lbl_ou_le_trouv'|trans({}, 'cpt', 'fr')|raw}}</a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-3">
+                                                <div class="checkbox creation-compte margin-bottom">
+                                                    <input id="checkbox02" type="checkbox" data-ng-model="referenceUnknown" data-ng-change="setUseCase()">
+                                                    <label for="checkbox02">
+                                                        {{'cpt.cpt_inscription.lbl_num_cli_inconnu'|trans({}, 'cpt', 'fr')|raw}}
+                                                        <a class="bullet-help" href="{{ path('sel_aide_numero_client') }}#collapseTwo" target="_blank" title="{{'cpt.cpt_inscription.title_link_ou_le_trouv'|trans({}, 'cpt', 'fr')|raw}}" aria-label="{{'cpt.cpt_inscription.aria_link_ou_le_trouv'|trans({}, 'cpt', 'fr')|raw}}">
+                                                            <!-- Ancre vers la page "ou le trouver" section carte navigo decouverte -->
+                                                            <img src="{{ asset('bundles/sel/images/question.png') }}" class="picto" alt="Aide" width="20" height="20">
+                                                        </a>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group birthdate" data-ng-show="hasCard">
+                                            <label for="birthdate" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'cpt.cpt_inscription.lbl_date_naiss'|trans({}, 'cpt', 'fr')|raw}}<span class="star"></span></label>
+                                            <div class="col-xs-11 col-sm-6 col-md-6" data-border-valid-mobile>
+                                                <div class="col_3 clearfix">
+													<fieldset>
+	                                                    <div>
+	                                                        <input id="birthdate" class="form-control" type="text" placeholder="JJ" aria-required="{% verbatim %}{{ hasCard == 1 }}{% endverbatim %}" aria-label="{{'cpt.cpt_inscription.aria_jour_date_naiss'|trans({}, 'cpt', 'fr')|raw}}" data-ng-model="birthDay" data-ng-change="setBirthDate()" maxlength="2" data-ng-required="hasCard == 1" name="birthDay">
+	                                                    </div>
+	                                                    <div>
+	                                                        <input class="form-control" type="text" placeholder="MM" aria-required="{% verbatim %}{{ hasCard == 1 }}{% endverbatim %}" aria-label="{{'cpt.cpt_inscription.aria_mois_date_naiss'|trans({}, 'cpt', 'fr')|raw}}" data-ng-model="birthMonth" data-ng-change="setBirthDate()" maxlength="2" data-ng-required="hasCard == 1" name="birthMonth">
+	                                                    </div>
+	                                                    <div>
+	                                                        <input class="form-control year" type="text" placeholder="AAAA" aria-required="{% verbatim %}{{ hasCard == 1 }}{% endverbatim %}" aria-label="{{'cpt.cpt_inscription.aria_annee_date_naiss'|trans({}, 'cpt', 'fr')|raw}}" data-ng-model="birthYear" data-ng-change="setBirthDate()" maxlength="4" data-ng-required="hasCard == 1" name="birthYear">
+	                                                    </div>
+													</fieldset>
+                                                </div>
+                                                {% verbatim %}
+
+                                                {% endverbatim %}
+                                                <span class="mess-error"
+                                                    data-ng-show="((!createCustomerSpaceForm.birthDay.$pristine
+                                                            && !createCustomerSpaceForm.birthMonth.$pristine
+                                                            && !createCustomerSpaceForm.birthYear.$pristine)
+                                                        && (createCustomerSpaceForm.birthDay.$invalid
+                                                            || createCustomerSpaceForm.birthMonth.$invalid
+                                                            || createCustomerSpaceForm.birthYear.$invalid)
+                                                    )"
+                                                    aria-live="assertive"
+                                                    >
+                                                    {% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}
+                                                </span>
+
+                                                <span class="mess-error"
+                                                    data-ng-show="(!createCustomerSpaceForm.birthDay.$pristine
+                                                            && !createCustomerSpaceForm.birthMonth.$pristine
+                                                            && !createCustomerSpaceForm.birthYear.$pristine)
+                                                        && !!getDateError()"
+                                                    aria-live="assertive"
+                                                    >
+                                                    {% verbatim %}{{errorMessages['CU-DET-EC01-ERR_002']}}{% endverbatim %}
+                                                </span>
+
+                                                <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur"
+                                                    data-ng-show="(!createCustomerSpaceForm.birthDay.$pristine
+                                                            && !createCustomerSpaceForm.birthMonth.$pristine
+                                                            && !createCustomerSpaceForm.birthYear.$pristine)
+                                                        &&
+                                                            (!!getDateError()
+                                                            || createCustomerSpaceForm.birthDay.$invalid
+                                                            || createCustomerSpaceForm.birthMonth.$invalid
+                                                            || createCustomerSpaceForm.birthYear.$invalid)"
+                                                >
+
+                                                <img src="{{asset('bundles/sel/images/check.png')}}"
+                                                    data-ng-show="((!createCustomerSpaceForm.birthDay.$pristine
+                                                            && !createCustomerSpaceForm.birthMonth.$pristine
+                                                            && !createCustomerSpaceForm.birthYear.$pristine)
+                                                        && (!!!getDateError())
+                                                    )" class="picto valid" alt="Ok" data-ng-hide="true">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-sm-3 col-md-3 control-label">{{'cpt.cpt_inscription.lbl_recop_carac'|trans({}, 'cpt', 'fr')|raw}}<span class="star"></span></label>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div id="g-recaptcha" class="g-recaptcha" data-sitekey="{{ public_key_captcha }}">
+                                        </div>
+
+                                        {# <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="formSubmitted && !captchaResponse"> #}
+                                        {% verbatim %}
+                                        <span class="mess-error" aria-live="assertive"  data-ng-show="formSubmitted && !captchaResponse">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                                        {% endverbatim %}
+
+
+                                    </div>
+
+                                </div>
+
+                                 <div class="checkbox margin-top-bottom">
+                                        <input type="checkbox" id="inlineRadio9-1" required data-ng-model="cgv">
+                                        <label for="inlineRadio9-1">{{'cpt.cpt_inscription.cac_accep_cgu'|trans({'%cgu%':  asset('bundles/sel/pdf/CGU_SEL.pdf') , '%cgv%' :  asset('bundles/sel/pdf/CGV_SEL.pdf')  }, 'cpt', 'fr')|raw}}
+                                        </label>
+
+                                        <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="formSubmitted && cgv != true">
+                                        {% verbatim %}
+                                        <span class="mess-error" aria-live="assertive"  data-ng-show="formSubmitted && cgv != true ">{{errorMessages['IHM-TRANS-ERR_007']}}</span>
+                                        {% endverbatim %}
+                                </div>
+
+                                <div class="checkbox">
+                                    <input type="checkbox" id="inlineRadio9">
+                                    <label for="inlineRadio9">{{'cpt.cpt_inscription.cac_rec_offre'|trans({}, 'cpt', 'fr')|raw}}
+                                    </label>
+                                </div>
+                            </div><!-- form-content -->
+                            <div class="row">
+
+                                <div class="col-xs-12 text-center">
+                                    <button type="bouton" class="btn btn-primary aide-photo-btn" value="Valider le formulaire de création de mon espace" data-ng-disabled="createCustomerSpaceForm.$invalid" data-ng-click="gotoStep(null, null, $event)"><span>{{'cpt.cpt_inscription.btn_valider'|trans({}, 'cpt', 'fr')|raw}}</span></button>
+                                </div>
+                            </div>
+                            <span class="obligatoire">
+								<span class="star" aria-label="{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}"></span>
+								{{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}
+							</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+<!-- Modal -->
+
+<div aria-labelledby="fenetreDialogue"  tabindex="-1" id="infos_renew" class="modal fade">
+    <div  class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button value="Fermer la fenêtre de dialogue et continuer" aria-label="{{ 'cpt.cpt_envoi_activation.btn_close_modal'|trans({}, 'cpt') }}" data-dismiss="modal" class="close" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 id="fenetreDialogue" class="modal-title">{{ 'cpt.cpt_envoi_activation.titre_modal'|trans({}, 'cpt') }}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{ 'cpt.cpt_envoi_activation.content_modal'|trans({}, 'cpt') }}</p>
+            </div>
+            <div class="modal-footer">
+                <button value="{{ 'cpt.cpt_envoi_activation.btn_close_modal'|trans({}, 'cpt') }}" data-dismiss="modal" class="btn btn-default" type="button">{{ 'cpt.cpt_envoi_activation.btn_close_modal'|trans({}, 'cpt') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block tag %}
+    {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': {}}) %}
+{% endblock tag %}

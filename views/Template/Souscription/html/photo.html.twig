@@ -1,0 +1,296 @@
+<div class="step_form" id="step_photo">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+            <h2 id="chargement-photo" class="margin-ultra-bottom" tabindex="-1">{{"sna.sna_photo.lbl_titre"|trans({}, "sna", "fr")|raw}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+            <p class="title">
+                <strong>{{"sna.sna_photo.lbl_aide_ident_1"|trans({}, "sna", "fr")|raw}}
+                <span class="fw-normal">(<a href="{{ path('sel_aide_photo') }}" target="_blank" class="link underline" title="{{"sna.sna_photo.lbl_aide_ident_lien_savoir_plus_title"|trans({}, "sna", "fr")|raw}}">{{"sna.sna_photo.lbl_aide_ident_lien_savoir_plus"|trans({}, "sna", "fr")|raw}}</a>)
+                </span>:
+                </strong>
+            </p>
+            <div class="infos no-border no-margin">
+                <div class="info">
+                    {{"sna.sna_photo.lbl_aide_ident_liste_imperative"|trans({}, "sna", "fr")|raw}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-content box_btn_action_pictures" data-ng-form="myForm">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+                <p class="warning-light red" class="mess-error"
+                    data-ng-show="!files[0] && rejFiles.length != 0 && rejFiles != empty">
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/alert.png"
+                        class="picto" alt="Alerte"> <strong>{{"sna.sna_photo.err_detection"|trans({}, "sna", "fr")|raw}} </strong>
+                </p>
+                <p class="warning-light">
+                    <strong>{{"sna.sna_photo.lbl_avertissement_delai"|trans({}, "sna", "fr")|raw}}
+                    </strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="media photo col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3"
+                data-ng-hide="Holder.CropedFileUrl == null || Holder.CropedFileUrl == '' ">
+                <p>
+                    <span>{{"sna.sna_photo.lbl_photo_apres_recadrage"|trans({}, "sna", "fr")|raw}}</span>
+                </p>
+                <div class="media-left">
+                    <span class="photo-identite">
+                        <div class="preview">
+                            <img class="media-object" src="data:null" data-ng-src="{% verbatim %}{{ Holder.CropedFileUrl }}{% endverbatim %}"
+                                data-ng-show="Holder.CropedFileUrl != null && CropedFileUrl != ''"
+                                alt="photo identité" width="104" />
+                        </div>
+                    </span>
+                </div>
+                <div class="media-body">
+                    <a href="#/Photo" class="delete" data-ng-click="deletePhoto()"> <img
+                        data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/delete.png" class="picto"
+                        alt="{{"sna.sna_photo.btn_supprimer_photo_info"|trans({}, "sna", "fr")|raw}}"> <span>{{"sna.sna_photo.btn_supprimer_photo_lbl"|trans({}, "sna", "fr")|raw}}</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="form-group" data-ng-hide="Holder.CropedFileUrl != null && Holder.CropedFileUrl != ''">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+                    <div data-ngf-select="" class="fileUpload btn btn-default"
+                        data-ng-model="files" class="upload-button" data-ngf-multiple="false"
+                        data-ngf-accept="'*.pdf,*.jpg,*.png'" data-ng-model-rejected="rejFiles"
+                        tabindex="0" title="{{"sna.sna_photo.btn_parcourir_photo_info"|trans({}, "sna", "fr")|raw}}">
+                        <span>{{"sna.sna_photo.btn_parcourir_photo_lbl"|trans({}, "sna", "fr")|raw}}</span> <input type="file" class="upload" value="" />
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+                    <button id="prendrePhoto" type="button"
+                        data-ng-class="{% verbatim %}{'btn btPrendrePhotoDisabled' : !isUserMedia, 'btn btn-default' : isUserMedia}{% endverbatim %}"
+                        data-ng-click="onTakePic()" data-ng-disabled="!isUserMedia"
+                        value="Retoucher cette photo{{"sna.sna_photo.btn_retoucher_photo_info"|trans({}, "sna", "fr")|raw}}">
+                        <span>{{"sna.sna_photo.btn_webcam_lbl"|trans({}, "sna", "fr")|raw}}</span> <span data-ng-show="!isUserMedia"
+                            id="msgNavigateurIncompatible">{{"sna.sna_photo.err_webcam_lbl"|trans({}, "sna", "fr")|raw}}</span>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div
+                    class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3"
+                    data-ng-show="Holder.CropedFileUrl == null || Holder.CropedFileUrl == ''">
+                    <a href="#/Paiement" class="link addto"> <span>{{"sna.sna_photo.link_photo_plus_tard_lbl"|trans({}, "sna", "fr")|raw}}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+                <button type="button"
+                data-ng-disabled="!isUserPhoto"
+                        data-ng-hide="!isUserPhoto || showOriginalPhoto"
+                    class="btn btn-primary aide-photo-btn"
+                    value="Valider cette photo et continuer{{"sna.sna_photo.btn_select_photo_info"|trans({}, "sna", "fr")|raw}}"
+                    data-ng-click="submitForm()"
+                    >
+                    <span>{{"sna.sna_photo.btn_select_photo_lbl"|trans({}, "sna", "fr")|raw}}</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="row" data-ng-hide="Holder.CropedFileUrl == null || Holder.CropedFileUrl == '' || showOriginalPhoto ">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+                <a href="#/Photo" class="link text-center return"
+                    data-ng-click="showOriginalPhoto = true"> <span class="icon icon-equalizer small-image"></span> <span>{{"sna.sna_photo.btn_retoucher_photo_info"|trans({}, "sna", "fr")|raw}}</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <!-- form-content -->
+    <div class="form-content center-block" data-ng-hide="Holder.CropedFileUrl == null || Holder.CropedFileUrl == '' || !showOriginalPhoto" id="image-cropper">
+        <!-- data-ng-hide="Holder.CropedFileUrl == null || Holder.CropedFileUrl == '' || !showOriginalPhoto " -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+                <p class="warning-light">
+                    <strong>{{"sna.sna_photo.lbl_avertissement_delai"|trans({}, "sna", "fr")|raw}}
+                    </strong>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="media photo col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+                <p>
+                    <span>{{"sna.sna_photo.lbl_photo_original"|trans({}, "sna", "fr")|raw}}</span>
+                </p>
+                <div class="media-left">
+                    <span class="photo-identite">
+                        <canvas id="canvasImg"></canvas> <!-- HTML Canvas -->
+                    </span>
+                </div>
+                <div class="media-body">
+                    <a href="#/Photo" class="delete" data-ng-click="deleteOriginalPhoto()">
+
+                        <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/delete.png"
+                        class="picto" alt="{{"sna.sna_photo.btn_supprimer_photo_info"|trans({}, "sna", "fr")|raw}}"> <span>{{"sna.sna_photo.btn_supprimer_photo_lbl"|trans({}, "sna", "fr")|raw}}</span>
+
+                    </a>
+                </div>
+            </div>
+            <div class="row show-grid">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+                    <p>
+                        <strong>?{{"sna.sna_photo.link_photo_force_lbl"|trans({}, "sna", "fr")|raw}}</strong>
+                    </p>
+                    <div class="checkbox margin-bottom">
+                        <input id="checkbox96" type="checkbox" data-ng-model="acceptPhoto" > <label
+                            for="checkbox96">{{"sna.sna_photo.checkbox_photo_valide"|trans({}, "sna", "fr")|raw}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+                <p class="retoucher">
+                    <strong>{{"sna.sna_photo.lbl_actions_utilisateur_retouche"|trans({}, "sna", "fr")|raw}}</strong>
+                </p>
+                <div id="Filters">
+                    <div class="Filter">
+                        <!-- CamanJS rotate plugin => https://github.com/meltingice/CamanJS-Plugins/commit/baf52aeef87e0730e37f336b53728484c8eab3c1 -->
+                        <div class="FilterSetting">
+                            <span class="FilterName">{{"sna.sna_photo.ctrl_orientation_lbl"|trans({}, "sna", "fr")|raw}}</span>
+                            <div class="rotate-control">
+                                <div class="redo rotate">
+                                    <span class="icon icon-undo small-image"></span> <input
+                                        type="button" class="undo" value="" data-filter=""
+                                        title="{{"sna.sna_photo.ctrl_orientation_gauche_info"|trans({}, "sna", "fr")|raw}}" data-ng-click="onRotateImg('undo')">
+                                </div>
+                                <div class="redo rotate">
+                                    <span class="icon icon-redo small-image"></span> <input
+                                        type="button" class="redo" value="" data-filter=""
+                                        title="{{"sna.sna_photo.ctrl_orientation_droite_info"|trans({}, "sna", "fr")|raw}}" data-ng-click="onRotateImg('redo')">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slider">
+                        <!-- Cropit => http://scottcheng.github.io/cropit/  -->
+                        <div class="slider-wrapper">
+                            <span class="FilterName">{{"sna.sna_photo.ctrl_cadre_lbl"|trans({}, "sna", "fr")|raw}}</span> <span
+                                class="icon icon-image small-image"></span> <input type="range"
+                                class="cropit-image-zoom-input custom" value="100" min="0"
+                                max="200" step="1" data-ng-model="zoomValue"
+                                data-ng-change="onZoom(zoomValue)">
+                            <span class="icon icon-image large-image"></span>
+                        </div>
+                    </div>
+                    <!-- // slider cropit -->
+
+                    <!-- // CamanJS => http://camanjs.com/examples/  -->
+
+                    <div class="Filter">
+                        <div class="FilterSetting">
+                            <span class="FilterName">{{"sna.sna_photo.ctrl_luminosite_lbl"|trans({}, "sna", "fr")|raw}}</span> <span
+                                class="icon icon-sun small-image"></span> <input type="range"
+                                min="0" max="200" step="10" value="100" data-ng-model="lumiValue"
+                                data-ng-change="onLumi(lumiValue)" id="brightness"
+                                data-filter="brightness">
+                            <span class="icon icon-sun large-image"></span>
+                        </div>
+                    </div>
+                    <div class="Filter">
+                        <div class="FilterSetting">
+                            <span class="FilterName">{{"sna.sna_photo.ctrl_contraste_lbl"|trans({}, "sna", "fr")|raw}}</span> <span
+                                class="icon icon-contrast small-image"></span> <input
+                                type="range" min="0" max="200" step="10" value="100"
+                                data-ng-model="contrastValue" data-ng-change="onContrast(contrastValue)"
+                                id="contrast" data-filter="contrast">
+                            <span class="icon icon-contrast large-image"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- filters -->
+            </div>
+        </div>
+    </div>
+    <!-- form-content -->
+
+    <div class="form-group">
+            <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+            <button type="button"
+            data-ng-disabled="!isUserPhoto || acceptPhoto"
+            data-ng-hide="!isUserPhoto || !showOriginalPhoto"
+                class="btn btn-primary aide-photo-btn"
+                value="{{"sna.sna_photo.btn_valider_photo_info"|trans({}, "sna", "fr")|raw}}"
+                data-ng-click="onSelectImgModifed()">
+                <span>{{"sna.sna_photo.btn_valider_photo_lbl"|trans({}, "sna", "fr")|raw}}</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal Prendre Video : -->
+    <div class="modal fade" id="modalPrendrePhoto" tabindex="-1"
+         aria-labelledby="myModalLabel">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                        aria-label="{{"sna.sna_photo.aria_btn_fermer_popin_lbl"|trans({}, "sna", "fr")|raw}}">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">{{"sna.sna_photo.btn_webcam_lbl"|trans({}, "sna", "fr")|raw}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-xs-6 colVideo">
+                            <!-- Colonne video Canvas -->
+
+                            <video id="videoCanvas"></video>
+                        </div>
+
+                        <div class="col-xs-6 colPreviewCapture"
+                            data-ng-show="isVideoCaptureDone">
+                            <!-- Colonne capture image  -->
+                            <div id="canvasPreviewCapture">
+                                <img id="previewCapture" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <!-- Row Bouton -->
+                        <div class="col-xs-6">
+                            <button type="button" id="btCaptureImg"
+                                class="btn btn-default btn-modal bt_capture">{{"sna.sna_photo.btn_snapshot_lbl"|trans({}, "sna", "fr")|raw}}</button>
+                        </div>
+                        <div class="col-xs-6" data-ng-show="isVideoCaptureDone">
+
+                            <p data-ng-show="!isWebCamImageValid">{{"sna.sna_photo.btn_select_photo_info"|trans({}, "sna", "fr")|raw}}</p>
+                            <button data-ng-show="isWebCamImageValid" type="button"
+                                id="btSelectionImg" class="btn btn-default btn-modal bt_capture"
+                                data-ng-click="onSelectImg()">{{"sna.sna_photo.btn_select_photo_lbl"|trans({}, "sna", "fr")|raw}}</button>
+                        </div>
+                    </div>
+
+                    <div class="row rowHiddenCanvas">
+                        <div class="col-xs-6">
+                            <canvas id="hiddenCanvasCaptureImage"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{"sna.sna_photo.btn_fermer_popin_lbl"|trans({}, "sna", "fr")|raw}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,39 @@
+<!--  ********************************  -->
+<!--  MODAL POUR NORMALISATION ADRESSE  -->
+<!--  ********************************  -->
+{% verbatim %}
+<div class="modal fade" id="sModal" tabindex="-1"  aria-labelledby="fenetreDialogue">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="{% endverbatim %}{{ "cdc.cdc_coordonnees.aria_bt_fermer_popin_info" | trans({}, "cdc", "fr") | raw }}{% verbatim %}"
+                            value="{% endverbatim %}{{ "cdc.cdc_coordonnees.bt_fermer_popin_lbl" | trans({}, "cdc", "fr") | raw }}{% verbatim %}">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="fenetreDialogue">{% endverbatim %}{{ "cdc.cdc_coordonnees.lbl_verfication_adresse" | trans({}, "cdc", "fr") | raw }}{% verbatim %}</h4>
+            </div>
+            <div class="modal-body">
+                {{ errorMessage }}
+                <hr/>
+                <p>{% endverbatim %}{{"cdc.cdc_coordonnees.lbl_resutlat_verification"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</p>
+                <p>
+                    <strong>
+                        {{ normalizedAddress.line1 }}<br/>
+                        {{ normalizedAddress.line2 }}<br/>
+                        {{ normalizedAddress.line3 }}<br/>
+                        {{ normalizedAddress.line4 }}<br/>
+                        {{ normalizedAddress.zipCode }} {{ normalizedAddress.distributionOffice }}
+                    </strong>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"
+                        value="{% endverbatim %}{{"cdc.cdc_coordonnees.bt_modifier_popin_info"|trans({}, "cdc", "fr")|raw}}{% verbatim %}" data-ng-click="onClickAddressNormalizationPopinCancel()">{% endverbatim %}{{"cdc.cdc_coordonnees.bt_modifier"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</button>
+                <button type="button" class="btn btn-primary btn-modal" data-dismiss="modal" data-ng-click="onClickAddressNormalizationPopinValidate()"
+                        value="{% endverbatim %}{{"cdc.cdc_coordonnees.bt_confirmer"|trans({}, "cdc", "fr")|raw}}{% verbatim %}">{% endverbatim %}{{"cdc.cdc_coordonnees.bt_confirmer"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endverbatim %}

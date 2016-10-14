@@ -1,0 +1,10 @@
+{% extends "SelBundle::Mail/layoutSNA.html.twig" %}
+{% block title %}<h2 style="background: #ffffff;display: inline-block;font-size: inherit;margin: 0;padding: 0 0 5px;width: auto;">{{ 'mails.mails_relance_incomplete_subscription.subject'|trans({}, 'mails')|raw }}</h2>{% endblock title %}
+{% block body %}
+    {% block body_text %}
+        {% autoescape false %}
+            {{ 'mails.mails_relance_incomplete_subscription.message'|trans({'%username%': username, '%dateLimite%': date, '%link%': link }, 'mails')|raw }}
+        {% endautoescape %}
+    {% endblock %}
+    {% block body_html %}{% endblock %}
+{% endblock body %}

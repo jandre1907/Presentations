@@ -1,0 +1,91 @@
+ <div class="step_form" id="step_signature" data-ng-form name="step_form"><!-- 6.2 // Signature 2 -->
+
+
+    <h2 id="signature-souscription" class="margin-ultra-bottom" tabindex="-1">Signature de votre souscription</h2>
+    <p>
+        <strong>
+
+            {{"sna.sna_signature_porteur.bloc_signature"|trans({}, "sna", "fr")|raw}}
+        </strong>
+    </p>
+    <p>{{"sna.sna_signature_porteur.bloc_transmission_dossier"|trans({}, "sna", "fr")|raw}}</p>
+
+    <div class="form-content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+               <div class="pdf-desktop">
+                  <p>{{"sna.sna_signature_porteur.action_possible"|trans({}, "sna", "fr")|raw}}</p>
+                  <ul class="color_bullet">
+                      <li>{{"sna.sna_signature_porteur.visualiser"|trans({}, "sna", "fr")|raw}}</li>
+                      <li><a class="link" href="{% verbatim %}{{cart.documents.url_pdf}}{% endverbatim %}"  target="_blank" title="Télécharger le document [document name] (nouvelle fenêtre)">{{"sna.sna_signature_porteur.lien_telecharger_contrat"|trans({}, "sna", "fr")|raw}}</a></li>
+                  </ul>
+                  <br>
+                  <div class="pdf-preview"><img src="data:null" data-ng-src="{% verbatim %}{{cart.documents.url_png}}{% endverbatim %}" width="100%" height="100%" /></div>
+               </div>
+               <div class="pdf-mobile">
+                  <a class="btn btn-default" href="{% verbatim %}{{cart.documents.url_pdf}}{% endverbatim %}" title="Télécharger le document [document name]">
+                     <img src="{{ asset('bundles/sel/images/pdf.png') }}" class="picto" alt="Fichier PDF">
+                     {{"sna.sna_signature_porteur.bt_telecharger_contrat"|trans({}, "sna", "fr")|raw}}
+                  </a>
+               </div>
+            </div>
+        </div>
+
+        <p class="warning-light red" data-ng-show="error">
+            <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+            <strong>{% verbatim %}{{error}}{% endverbatim %}</strong>
+        </p>
+
+        <div class="checkbox"  >
+            <input type="checkbox" id="inlineRadio12" data-ng-model="cgvAccepted" >
+            <label for="inlineRadio12">
+                {{"sna.sna_signature_porteur.checkbox_certifie_exact"|trans({}, "sna", "fr")|raw}}
+            </label>
+        </div>
+        <br><br>
+        <p data-ng-show="!isNotPayer" class="title"><strong>{{"sna.sna_signature_porteur.label_bouton_otp"|trans({}, "sna", "fr")|raw}}{% verbatim %}{{phone}}{% endverbatim %}</strong></p>
+        <div class="box_spacer_button">
+            <div class="row minheight123" data-ng-show="!isNotPayer">
+                <div class="col-xs-12 col-sm-5 col-md-5">
+                    <button type="button" data-ng-disabled="!cgvAccepted || otpSended" class="btn btn-default pull-left sms" title="{{"sna.sna_signature_porteur.btn_otp_info"|trans({}, "sna", "fr")|raw}}" data-ng-click="getSmsOtp()"><strong>{{"sna.sna_signature_porteur.btn_otp_label"|trans({}, "sna", "fr")|raw}}</strong></button>
+                    <span class="text-center code">{{"sna.sna_signature_porteur.avertissement_validite_otp"|trans({}, "sna", "fr")|raw}}</span>
+                </div>
+                <div class="col-xs-12 col-sm-2 col-md-2"></div>
+                <div class="col-xs-12 col-sm-5 col-md-5" data-ng-show="otpSended && !otpSendedTwice" >
+                    <p class="code-text">
+                        <span>
+                            {{"sna.sna_erreur.SNA-SIG-EC01-MSS_006"|trans({}, "sna", "fr")|raw}}
+                        </span>
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-5 col-md-5" data-ng-show="otpSended && otpSendedTwice">
+                    <p class="code-text">
+                        <span>
+                            {{"sna.sna_erreur.SNA-SIG-EC01-MSS_007"|trans({}, "sna", "fr")|raw}}
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="row" data-ng-show="!isNotPayer" >
+                 <div class="col-xs-12 col-sm-5 col-md-5">
+                    <p class="text-left code"><strong>{{"sna.sna_signature_porteur.champs_saisie_otp"|trans({}, "sna", "fr")|raw}}</strong></p>
+                    <input type="text" class="form-control pull-left" placeholder="code" data-ng-model="otp" data-ng-disabled="!cgvAccepted">
+                </div>
+                <div class="col-xs-12 col-sm-2 col-md-2"></div>
+                <div class="col-xs-12 col-sm-5 col-md-5">
+                    <br>
+                    <button type="button" data-ng-disabled="!cgvAccepted || otpSendedTwice" data-ng-show="otpSended" class="btn btn-default pull-left sms" title="{{"sna.sna_signature_porteur.btn_otp_par_email_info"|trans({}, "sna", "fr")|raw}}" data-ng-click="getPayerEmailOtp()">
+                    <strong>{{"sna.sna_signature_porteur.btn_otp_par_email_label"|trans({}, "sna", "fr")|raw}}{% verbatim %} : <span class="clearfix">{{mail}}{% endverbatim %}</span></strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button type="button" class="btn btn-primary aide-photo-btn" title="{{"sna.sna_signature_porteur.btn_valider_info"|trans({}, "sna", "fr")|raw}}"
+            data-ng-disabled="!cgvAccepted || (( !otpSended || !otp ) && !isNotPayer) || (attemptNumber <= 0) "
+            data-ng-click="submitForm()"><span>{{"sna.sna_signature_porteur.btn_valider_label"|trans({}, "sna", "fr")|raw}}</span></button>
+        </div>
+    </div>
+</div>

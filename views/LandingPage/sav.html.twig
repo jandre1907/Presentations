@@ -1,0 +1,54 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block angularModule %}SAV{%  endblock angularModule %}
+
+{% block title %}Services Navigo{% endblock %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+{% endblock javascript_foot %}
+
+
+{% block contentTitle %}
+{% verbatim %}
+<div class="row" data-ng-controller="TitleCtrl as titleCtrl">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="heading">
+            <h1>{{titleCtrl.title}}</h1>
+        </div>
+    </div>
+</div>
+{% endverbatim %}
+{% endblock contentTitle %}
+
+{% block mainContent %}
+    {% block body %}
+    <div data-ng-controller="SavCtrl as savCtrl">
+
+        {% block content %}
+          <div><H1>coucou</H1>
+
+              {#--------------------#}
+              {# ProgressBar        #}
+              {#--------------------#}
+
+              {#--------------------#}
+              {# END ProgressBar    #}
+              {#--------------------#}
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div id="sel_form" class="form-horizontal">
+                            <!-- Step forms -->
+                            <div class="step-content">
+                                <div data-ng-view>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock content %}
+    </div>
+    {% endblock body%}
+{% endblock mainContent %}

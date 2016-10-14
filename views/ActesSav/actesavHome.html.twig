@@ -1,0 +1,96 @@
+ {% extends "SelBundle::layout.html.twig" %}
+ {% if acte is defined %}
+    {% set breadcrumb_l3 = ('sav.sav_choix_forfait.' ~ acte) | trans({}, "sav", "fr") %}
+    {% set breadcrumb_l3_title = ('sav.sav_choix_forfait.' ~ acte) | trans({}, "sav", "fr") %}
+{% endif %}
+
+ {% block title %}Services Navigo{% endblock %}
+
+
+{% block javascript_foot %}
+ {{ parent() }}
+{% endblock javascript_foot %}
+
+ {% block content_header '' %}
+ {% block flashMessage %}{% endblock flashMessage %}
+
+ {% block contentTitle %}
+     <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12">
+             <div class="heading">
+                 <h1>{{"sav.sav_choix_forfait.lbl_titre"|trans({}, "sav", "fr")|raw}}</h1>
+             </div>
+         </div>
+     </div>
+ {% endblock contentTitle %}
+
+ {% block breadcrumb %}
+    <div id="box_breadcrumb_id" class="row">
+       <div class="col-xs-12">
+          <ol class="breadcrumb">
+             <li><a href="http://www.navigo.fr" title="{{ 'sav.sav_choix_forfait.accueil_link_breadcrumb_title'|trans({}, 'sav') }}">{{ 'sav.sav_choix_forfait.accueil_link_breadcrumb'|trans({}, 'sav') }}</a></li>
+             <li><a href="{{ path('sel_homepage') }}" title="{{ 'sav.sav_choix_forfait.gere_maCarte_link_breadcrumb_title'|trans({}, 'att') }}">{{ 'sav.sav_choix_forfait.gere_maCarte_link_breadcrumb'|trans({}, 'sav') }}</a></li>
+             <li><a href="{{ path('sel_espace_client') }}" title="{{ 'sav.sav_choix_forfait.gere_maCarte_link_breadcrumb_title'|trans({}, 'att') }}">{{ 'sav.sav_choix_forfait.mon_espace_link_breadcrumb' |trans({}, 'sav') }}</a></li>
+             <li class="active">{{ breadcrumb_l3 }}</li>
+          </ol>
+       </div>
+    </div>
+ {% endblock breadcrumb %}
+
+ {% block content %}
+     <div>
+         <div class="row">
+             <div class="col-xs-12 col-sm-12 col-md-12">
+                 <div class="sav">
+                     {% for contrat  in contrats %}
+                     <div class="panel panel-default">
+                         <div class="panel-heading"><strong>{{  contrat.identitePorteur }}</strong></div>
+                         <div class="panel-body">
+                             <div class="row">
+                                 <div class="col-xs-12 col-sm-4 col-md-4">
+                                     <p class="recap-line clearfix">
+                                         <label>{{"sav.sav_choix_forfait.lbl_forf"|trans({}, "sav", "fr")|raw}}</label>
+                                         <strong>{{ contrat.nameProduit }}</strong>
+                                     </p>
+                                     <p class="recap-line clearfix">
+                                         <label>{{"sav.sav_choix_forfait.lbl_date_valid"|trans({}, "sav", "fr")|raw}}<sup>(1)</sup></label>
+                                         <strong>{{ contrat.dateDebut|date("d/m/Y") }} - {{ contrat.dateFin|date("d/m/Y") }}</strong>
+                                     </p>
+                                 </div>
+                                 <div class="col-xs-12 col-sm-4 col-md-4">
+                                     <p class="recap-line clearfix">
+                                         <label>{{"sav.sav_choix_forfait.lbl_zone"|trans({}, "sav", "fr")|raw}}</label>
+                                            <strong>{{ contrat.zones }}</strong>
+                                     </p>
+                                     <p class="recap-line clearfix">
+                                         <label>{{"sav.sav_choix_forfait.lbl_etat"|trans({}, "sav", "fr")|raw}}</label>
+                                         {% if contrat.codeProduit in [1, 2, 3, 4, 80, 90, 93] %}
+                                         <strong>{{ contrat.etat }}</strong>
+                                         {% endif %}
+                                     </p>
+                                 </div>
+                                 <div class="col-xs-12 col-sm-4 col-md-4">
+                                     <a href="{{ path('sel_actesav', {'action': acte, 'productCode': contrat.codeProduit, 'contractReference': contrat.reference}) }}">
+                                         <button class="btn btn-primary pull-right" type="button" title="{{"sav.sav_choix_forfait.btn_selection_title"|trans({}, "sav", "fr")|raw}}">
+                                             <span>{{"sav.sav_choix_forfait.btn_selection"|trans({}, "sav", "fr")|raw}}</span>
+                                         </button>
+                                     </a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+
+                     {% endfor %}
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-8">
+                            <p><sup>(1)</sup> {{ 'sav.sav_choix_forfait.label.legendValidite'|trans({'%cgu%':  asset('bundles/sel/pdf/CGU_SEL.pdf')}, 'sav')| raw }}</p>
+                        </div>
+                    </div>
+
+                 </div><!-- sav -->
+             </div>
+         </div>
+     </div>
+
+{% endblock content%}

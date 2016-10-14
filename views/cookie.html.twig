@@ -1,0 +1,11 @@
+<div id="bandeau_cookie" data-ng-controller="CookieCtrl" data-ng-hide="selAcceptCookie()">
+    <div class="container-fluid">
+        <div id="content_cookie">
+            <p class="text_cookie">
+                {{ 'transverse.transverse_cookie.main_message' | trans({}, 'transverse') }}
+                <a href="cookies.html" target="_blank" data-ng-click="closeCookie()" title="{{ 'transverse.transverse_cookie.more_infos_title' | trans({}, 'transverse') }}">{{ 'transverse.transverse_cookie.more_infos' | trans({}, 'transverse') }}</a>
+            </p>
+            <button class="btn" id="button_cookie" data-ng-click="closeCookie()">{{ 'transverse.transverse_cookie.accept' | trans({}, 'transverse') }}</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+<span id="confirmation-demande" class="general_Intext" tabindex="-1">{{"pv.pv_confirmation.title"|trans({}, "pv", "fr")|raw}}</span>
+{% verbatim %}
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+        <div class="confirmation">
+            <div data-ng-show="validatedDeclaration">
+				<div data-message-dv meskey="{{pageCtrl.meskey2}}"></div>
+                <div data-message-dv meskey="{{pageCtrl.meskey}}"></div>
+                <p data-message-dv meskey="{{pageCtrl.meskey3}}"></p>
+                <p data-message-dv meskey="{{pageCtrl.meskey4}}"></p>
+                <p data-message-dv meskey="{{pageCtrl.meskey5}}"></p>
+                <p data-message-dv meskey="{{pageCtrl.meskey6}}"></p>
+            </div>
+            <div data-ng-show="failedDeclaration">
+                <p data-message-dv meskey="{{pageCtrl.meskey7}}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12" data-message-dv meskey="{{pageCtrl.meskey}}"></div>
+    <div class="col-xs-12 col-sm-12 col-md-12" data-message-dv meskey="{{pageCtrl.meskey2}}"></div>
+    <div class="col-xs-12 col-sm-12 col-md-12" data-message-dv meskey="{{pageCtrl.meskey3}}"></div>
+    <div class="col-xs-12 col-sm-12 col-md-12" data-message-dv meskey="{{pageCtrl.meskey4}}"></div>
+    <div class="col-xs-12 col-sm-12 col-md-12" data-message-dv meskey="{{pageCtrl.meskey5}}"></div>
+    <div class="col-xs-12 col-sm-12 col-md-12" data-message-dv meskey="{{pageCtrl.meskey6}}"></div>
+</div>
+-->
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <button type="button" class="btn btn-default aide-photo-btn" title="{{pageCtrl.buttonMessageTitle}}" data-ng-click="pageCtrl.stepSubmit()"><span>{{pageCtrl.buttonMessage}}</span></button>
+    </div>
+</div>
+{% endverbatim %}
+
+{% block tag %}
+            {# set declaration to true to access subsection declaration in get_template in rtracking.yml #}
+            {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': {
+                    "confirmation": true
+                }})
+            %}
+{% endblock tag %}

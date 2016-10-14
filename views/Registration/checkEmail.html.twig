@@ -1,0 +1,49 @@
+
+<div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div class="confirmation">
+            {% verbatim %}{{ renewMessage }}{% endverbatim %}
+                <p>
+                    {{'cpt.cpt_envoi_activation.lbl_finalisation'|trans({}, 'cpt', 'fr')|raw}}
+                </p>
+                <p>
+                    {{'cpt.cpt_envoi_activation.lbl_info'|trans({}, 'cpt', 'fr')|raw}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button type="button" class="btn btn-default aide-photo-btn" value="Terminer et retourner à l'accueil" onclick="location.href='{{ path("sel_homepage") }}';">
+                <span>{{'cpt.cpt_envoi_activation.lbl_accueil'|trans({}, 'cpt', 'fr')|raw}}</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+
+<div aria-labelledby="fenetreDialogue"  tabindex="-1" id="infos_renew" class="modal fade">
+    <div  class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button value="Fermer la fenêtre de dialogue et continuer" aria-label="{{ 'cpt.cpt_envoi_activation.btn_close_modal'|trans({}, 'cpt') }}" data-dismiss="modal" class="close" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 id="fenetreDialogue" class="modal-title">{{ 'cpt.cpt_envoi_activation.titre_modal'|trans({}, 'cpt') }}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{ 'cpt.cpt_envoi_activation.content_modal'|trans({}, 'cpt') }}</p>
+            </div>
+            <div class="modal-footer">
+                <button value="{{ 'cpt.cpt_envoi_activation.btn_close_modal'|trans({}, 'cpt') }}" data-dismiss="modal" class="btn btn-default" type="button">{{ 'cpt.cpt_envoi_activation.btn_close_modal'|trans({}, 'cpt') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block tag %}
+    {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': {}}) %}
+{% endblock tag %}

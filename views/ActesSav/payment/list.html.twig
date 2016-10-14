@@ -1,0 +1,141 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+    <div id="box_breadcrumb_id" class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="http://www.navigo.fr" title="{{ 'pay.pay_list.accueil'|trans({}, 'pay') }}">{{ 'pay.pay_list.accueil'|trans({}, 'pay') }}</a></li>
+                <li><a href="{{ path('sel_homepage') }}" title="{{ 'pay.pay_list.service_navigo'|trans({}, 'pay') }}">{{ 'pay.pay_list.service_navigo'|trans({}, 'pay') }}</a></li>
+                <li><a href="{{ path('sel_espace_client') }}" title="{{ 'pay.pay_list.espace_client'|trans({}, 'pay') }}">{{ 'pay.pay_list.espace_client'|trans({}, 'pay') }}</a></li>
+                <li class="active">{{ 'pay.pay_list.moyen_de_paiement_menu'|trans({}, 'pay') }}</li>
+            </ol>
+        </div>
+    </div>
+{% endblock breadcrumb %}
+
+{% block title %}{{ 'pay.pay_list.my_moyen_de_paiement_title_onglet'|trans({}, 'pay') }}{% endblock %}
+
+{% block content_header '' %}
+{% block flashMessage %}{% endblock flashMessage %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{ 'pay.pay_list.my_moyen_de_paiement_title'|trans({}, 'pay') }}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block previousArrow %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="prev">
+                <a href="javascript:window.history.back()">
+                    <img src="{{ asset('bundles/sel/images/prev16.png') }}" class="picto" alt="{{ 'transverse.transverse_prev.previous_page_title' |trans({}, 'transverse') }}">
+                    {{ 'transverse.transverse_prev.previous_page' |trans({}, 'transverse') }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock previousArrow %}
+
+{% block content %}
+    <div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="sav paiement">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                            <span class="general_Intext">{{ 'pay.pay_list.moyen_paiement_carte_bancaire'|trans({}, 'pay') }}</span>
+                            <div class="row show-grid">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+
+                                    {% if cards|length == 0 %}
+                                        <span class="empty">{{ 'pay.pay_list.aucun_moyen_paiement_cb'|trans({}, 'pay') }}</span>
+                                    {% endif %}
+
+                                    {% for item in cards %}
+                                        {% if item.isDisabled == 0 %}
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <p class="recap-line clearfix">
+                                                        <label>{{ 'pay.pay_list.type_label'|trans({}, 'pay') }}</label><strong>{{ item.card.type }}</strong>
+                                                    </p><p class="recap-line clearfix">
+                                                        <label>{{ 'pay.pay_list.numero_carte'|trans({}, 'pay')|raw }}</label><strong>{{ item.card.number }}</strong>
+                                                    </p><p class="recap-line clearfix">
+                                                        <label>{{ 'pay.pay_list.expiration_carte'|trans({}, 'pay') }}</label><strong>{{ item.card.expirationDate|slice(0,2) }}/{{ item.card.expirationDate|slice(2,2) }}</strong>
+                                                    </p><p class="recap-line clearfix">
+                                                        <label>{{ 'pay.pay_list.nom_detenteur'|trans({}, 'pay') }}</label><strong>{{ item.firstName }} {{ item.lastName }}</strong>
+                                                    </p>
+                                                    <div class="action">
+                                                        <a href="{{ path('sel_payment_manage', { 'card': item.cardInd }) }}" class="pull-right modifier edit" title="{{ 'pay.pay_list.gerer_link_title'|trans({}, 'pay') }}">
+                                                            <img alt="{{ 'pay.pay_list.modifier_label_img'|trans({}, 'pay') }}" src="{{ asset('bundles/sel/images/crayon.png') }}">
+                                                            <span>{{ 'pay.pay_list.gerer_link'|trans({}, 'pay') }}</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                            <span class="general_Intext">{{ 'pay.pay_list.moyen_paiement_subtitle_2'|trans({}, 'pay') }}</span>
+                            <div class="row show-grid">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+
+                                    {% if ibans|length == 0 %}
+                                        <span class="empty">{{ 'pay.pay_list.aucun_moyen_paiement_bic_iban'|trans({}, 'pay') }}</span>
+                                    {% endif %}
+
+                                    {% for item in ibans %}
+                                        {% if item.codeStatut == 1 %}
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <p class="recap-line clearfix">
+                                                        <label>{{ 'pay.pay_list.type_label'|trans({}, 'pay') }}</label><strong>{{ 'pay.pay_list.prelevement_sepa'|trans({}, 'pay') }}</strong>
+                                                    </p><p class="recap-line clearfix">
+                                                        <label>{{ 'pay.pay_list.bic_label'|trans({}, 'pay') }}</label><strong>{{ item.codeBic }}</strong>
+                                                    </p><p class="recap-line clearfix">
+                                                        <label>{{ 'pay.pay_list.iban_label'|trans({}, 'pay') }}</label><strong>{{ item.iban  | hideIbanChars}}</strong>
+                                                    </p><p class="recap-line clearfix">
+                                                        <label>{{ 'pay.pay_list.nom_titulaire_label'|trans({}, 'pay') }}</label><strong>{{ item.titulaireDuCompte }}</strong>
+                                                    </p>
+                                                    <div class="action">
+                                                        <a href="{{ path('sel_iban_manage', { 'md5iban': item.md5iban }) }}" class="pull-right modifier edit" title="{{ 'pay.pay_list.gerer_label_btn_title'|trans({}, 'pay') }}">
+                                                            <img alt="{{ 'pay.pay_list.modifier_img_label'|trans({}, 'pay') }}" src="{{ asset('bundles/sel/images/crayon.png') }}"><span>{{ 'pay.pay_list.gerer_label_btn'|trans({}, 'pay') }}</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row show-grid">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <button type="button" class="btn btn-default aide-photo-btn percent" onclick="location.href = '{{ path('sel_payment_manage', { 'card': 0 }) }}';"  title="{{ 'pay.pay_list.ajouter_cb_title'|trans({}, 'pay') }}">
+                                <span>{{ 'pay.pay_list.ajouter_cb'|trans({}, 'pay') }}<sup>(1)</sup></span>
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <button type="button" class="btn btn-default aide-photo-btn percent"  onclick="location.href = '{{ path('sel_add_iban', {'returnUrl':'sel_payment_list'}) }}';"  title="{{ 'pay.pay_list.ajouter_bic_iban_title'|trans({}, 'pay') }}">
+                                <span>{{ 'pay.pay_list.ajouter_bic_iban'|trans({}, 'pay') }}</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-8">
+                            <p><sup>(1)</sup> {{ 'pay.pay_list.legendeAddCB'|trans({}, 'pay')| raw }}</p>
+                        </div>
+                    </div>
+                </div><!-- sav -->
+            </div>
+        </div>
+    </div>
+{% endblock content%}

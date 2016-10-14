@@ -1,0 +1,47 @@
+    <div class="globalWrapper">
+    <h1 class="title">S'inscrire 2</h1>
+
+        <form action="http://127.0.0.1:8080/comutitre/web/front/app_dev.php/api/users" method="POST" >
+
+        <div class="row">
+            <div class="columns column_mobile_100 input">
+
+                <label for="fos_user_registration_form_email" class=" control-label col-lg-3 control-label required">
+        Adresse e-mail :
+                                        </label>
+                <div class="col-lg-9"><input type="email" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" required="required" class=" form-control" /></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="columns column_50 column_mobile_100 input">
+
+                <label for="fos_user_registration_form_plainPassword_first" class=" control-label col-lg-3 control-label required">
+        Mot de passe :
+                                        </label>
+                <div class="col-lg-9"><input type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required="required" class=" form-control" /></div>
+            </div>
+            <div class="columns column_50 column_mobile_100 input">
+
+                <label for="fos_user_registration_form_plainPassword_second" class=" control-label col-lg-3 control-label required">
+        Vérification :
+                                        </label>
+                <div class="col-lg-9"><input type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" required="required" class=" form-control" /></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="columns column_mobile_100 input">
+
+                <label for="fos_user_registration_form_captcha" class=" control-label col-lg-3 control-label required">
+        Recopier les caracteres figurant sur l&#039;image :
+                                        </label>
+                <img id="captcha_55667f8d47344" src="/comutitre/web/front/app_dev.php/_gcb/generate-captcha/gcb_captcha?n=1432780685" alt="" title="captcha" width="200" height="50" /><script type="text/javascript">
+        function reload_captcha_55667f8d47344() {
+            var img = document.getElementById('captcha_55667f8d47344');
+            img.src = '/comutitre/web/front/app_dev.php/_gcb/generate-captcha/gcb_captcha?n=1432780685?n=' + (new Date()).getTime();
+        }
+    </script><a class="captcha_reload" href="javascript:reload_captcha_55667f8d47344();">Renouveler</a><div class="col-lg-9"><input type="text" id="fos_user_registration_form_captcha" name="fos_user_registration_form[captcha]" required="required" class=" form-control" /></div>
+            </div>
+        </div>
+
+    </form>
+    </div>

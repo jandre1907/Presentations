@@ -1,0 +1,186 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+
+    {% javascripts
+        '@SelBundle/Resources/public/js/faq.js'
+        output='js/faq.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% javascripts
+        '@SelBundle/Resources/public/js/Faq/Module/*.js'
+        '@SelBundle/Resources/public/js/Faq/Controller/*.js'
+        output='js/Faq.js' %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+{% endblock javascript_foot %}
+
+{% block title %}{{ 'home.home_homepage.faq_link_title_onglet'|trans({}, 'home') }}{% endblock %}
+
+{% block content_header '' %}
+
+{% block flashMessage %}{% endblock flashMessage %}
+
+{#  Contenu dynamique, pas de meta description renseigné #}
+
+{% block contentTitle %}
+    <div class="row">
+     <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="heading">
+           <h1>Aide en ligne</h1>
+        </div>
+     </div>
+  </div>
+{% endblock contentTitle %}
+
+{% block breadcrumb %}
+    {% set faq_article = attribute(faq, faq_id) %}
+    {% set faq_article_title = faq_article.title %}
+    <div id="box_breadcrumb_id" class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="http://www.navigo.fr" title="{{ 'faq.faq_index.home_link_breadcrumb'|trans({}, 'faq') }}">{{ 'faq.faq_index.home_link_breadcrumb'|trans({}, 'faq') }}</a></li>
+                <li><a href="{{ path('sel_homepage') }}" title="{{ 'faq.faq_index.home_services_navigo_link_breadcrumb'|trans({}, 'faq') }}">{{ 'faq.faq_index.home_services_navigo_link_breadcrumb'|trans({}, 'faq') }}</a></li>
+                {% if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('sel_espace_client') }}" title="{{ 'faq.faq_index.faq_mon_espace_breadcrumb'|trans({}, 'faq') }}">{{ 'faq.faq_index.faq_mon_espace_breadcrumb'|trans({}, 'faq') }}</a></li>
+                {% endif %}
+                <li><a href="{{ path('sel_faq') }}" title="{{ 'faq.faq_index.faq_lbl_breadcrumb'|trans({}, 'faq') }}">{{ 'faq.faq_index.faq_lbl_breadcrumb'|trans({}, 'faq') }}</a></li>
+                <li class="active">{{ faq_article_title }}</li>
+            </ol>
+        </div>
+    </div>
+{% endblock breadcrumb %}
+
+{% block previousArrow %}{% endblock previousArrow %}
+
+{% block throbber %}{% endblock throbber %}
+
+{% block content %}
+    {% set faq_article = attribute(faq, faq_id) %}
+    {% set faq_article_title = faq_article.title %}
+    <div>
+        <div class="row">
+            <div class="step_form clearfix">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="home">
+                        <div class="row show-grid">
+                            <div class="col-xs-12 col-sm-12 col-md-8">
+
+                                <h2>
+                                    {{ faq_article_title }}
+                                </h2>
+
+                                {#<div class="content-faq">#}
+								<article>
+                                    {{ description |raw}}
+								</article>
+                                {#</div>#}
+
+                                <div id="vote" class="sondage">
+                                    <ul>
+                                        <li>
+                                            <span class="general_Intext">{{ 'faq.faq_show.article_util_title'|trans({}, 'faq') }}</span>
+                                        </li>
+                                            <li>
+                                                <span {{ btnStat }} class="btn" id="poll_yes" title="oui" data-ng-click="sendPoll('yes')">
+                                                    <img src="{{ asset('bundles/sel/images/like.png') }}"  class="picto" alt="{{ 'faq.faq_show.yes_label'|trans({}, 'faq') }}">
+                                                </span>
+                                            </li>
+                                            <li >
+                                                <span id="poll_no" {{ btnStat }} class="btn" title="non"  data-ng-click="sendPoll('no')">
+                                                    <img src="{{ asset('bundles/sel/images/dislike.png') }}" class="picto" alt="{{ 'faq.faq_show.no_label'|trans({}, 'faq') }}">
+                                                </span>
+                                            </li>
+
+                                    </ul>
+                                    {% if (poll_choice is not null ) %}
+                                        <p class="alert alert-info">{{ 'faq.faq_show.thx_trust'|trans({}, 'faq') }}</p>
+                                    {% endif %}
+                                </div>
+
+                                <div id="article_god_for_you" class="step_form hide">
+                                    <div class="form-content_box">
+                                        <h2>{{ 'faq.faq_show.article_util_title'|trans({}, 'faq') }}</h2>
+                                        {% if (poll_choice is null ) %}
+                                            <div class="form-group">
+                                                <form id="faq_poll_form" action="#vote" method="post" {{ form_enctype(poll_form) }}>
+                                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                                        {{ form_row(poll_form.poll_choice) }}
+                                                        {{ form_rest(poll_form) }}
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        {% else %}
+                                            {{ 'faq.faq_show.thx_trust'|trans({}, 'faq') }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4">
+
+
+
+                            {% if related_faqs|length > 1 %}
+                                <div class="panel panel-default wrap-art-background">
+                                    <div class="panel-heading">
+                                        <h2>{{ 'faq.faq_show.on_the_same_theme_subtitle_2'|trans({}, 'faq') }}</h2>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <ul class="color_bullet">
+                                         {% for faq_id ,faq_title in related_faqs %}
+                                          {% if faq_title is iterable %}
+                                            {% for article in faq_title %}
+                                                {% if article.article != faq_article_title %}
+                                                    <li><a class="link" href="{{ article.articleId }}">{{ article.article }}</a></li>
+                                                {% endif %}
+                                            {% endfor %}
+                                          {% endif %}
+                                        {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+
+
+                                <div class="panel panel-default wrap-art-background">
+                                    <div class="panel-heading">
+                                        <h2>{{ 'faq.faq_show.ask_question'|trans({}, 'faq') }} </h2>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="margin-10">
+                                            {{ 'faq.faq_show.find_answer'|trans({}, 'faq') }}
+                                        </p>
+                                        <p>
+                                            <a href="{{ path('sel_faq_ask_description') }}"  class="btn btn-default" title="{{ 'faq.faq_show.ask_question_btn_title'|trans({}, 'faq') }}">
+                                                {{ 'faq.faq_show.ask_question_btn'|trans({}, 'faq') }}
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block tag %}
+    {% set article = attribute(faq, faq_id).title  %}
+    {% set category = related_faqs.category  %}
+        {#<p>{{ dump(article) }}</p>
+        <p>{{ dump(category) }}</p>
+        <p>{{ dump(faq_id) }}</p>
+        <p>{{ dump(faq) }}</p>#}
+
+    {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': {
+        "category": category,
+        "article": article
+    }}) %}
+{% endblock tag %}

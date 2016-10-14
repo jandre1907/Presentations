@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="fr">
+   <head>
+      <meta charset="utf-8">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
+      <meta name="robots" content="noindex,nofollow" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      {% block meta_desc %}
+         <meta name="description" content="{{ 'home.home_homepage.base_meta_desc'|trans({}, 'home') }}">
+      {% endblock %}
+
+      <title>{% block title %}{% endblock %}</title>
+
+      <link rel="shortcut icon"                    href="{{ asset('bundles/sel/images/favicon/favicon.png') }}"              type="image/png" />
+      <link rel="apple-touch-icon" sizes="57x57"   href="{{ asset('bundles/sel/images/favicon/apple-icon-57x57.png') }}"     type="image/png" />
+      <link rel="apple-touch-icon" sizes="60x60"   href="{{ asset('bundles/sel/images/favicon/apple-icon-60x60.png') }}"     type="image/png" />
+      <link rel="apple-touch-icon" sizes="72x72"   href="{{ asset('bundles/sel/images/favicon/apple-icon-72x72.png') }}"     type="image/png" />
+      <link rel="apple-touch-icon" sizes="76x76"   href="{{ asset('bundles/sel/images/favicon/apple-icon-76x76.png') }}"     type="image/png" />
+      <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('bundles/sel/images/favicon/apple-icon-114x114.png') }}"   type="image/png" />
+      <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('bundles/sel/images/favicon/apple-icon-120x120.png') }}"   type="image/png" />
+      <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('bundles/sel/images/favicon/apple-icon-152x152.png') }}"   type="image/png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('bundles/sel/images/favicon/apple-icon-180x180.png') }}"   type="image/png" />
+      <link rel="icon"             sizes="192x192" href="{{ asset('bundles/sel/images/favicon/android-icon-192x192.png') }}" type="image/png" />
+      <link rel="icon"             sizes="32x32"   href="{{ asset('bundles/sel/images/favicon/favicon-32x32.png') }}"        type="image/png" />
+      <link rel="icon"             sizes="96x96"   href="{{ asset('bundles/sel/images/favicon/favicon-96x96.png') }}"        type="image/png" />
+      <link rel="icon"             sizes="16x16"   href="{{ asset('bundles/sel/images/favicon/favicon-16x16.png') }}"        type="image/png" />
+
+      <meta name="msapplication-TileColor" content="#ffffff">
+      <meta name="msapplication-TileImage" content="{{ asset('bundles/sel/images/favicon/ms-icon-144x144.png') }}">
+      <meta name="theme-color" content="#ffffff">
+      <!--[if IE]>
+      <link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/sel/images/favicon/favicon.ico') }}" />
+      <![endif]-->
+
+      {% block head_responsive %}
+         <link href="{{ asset('bundles/sel/css/bootstrap.css') }}" rel="stylesheet" >
+            <link href="{{ asset('bundles/sel/css/navigo.css') }}" rel="stylesheet" >
+            <link href="{{ asset('bundles/sel/css/jquery.jscrollpane.css') }}" rel="stylesheet" media="all" />
+            {% block styles %}
+               {% if app.debug %}
+                  <link href="{{ asset('bundles/sel/less/main.less') }}" rel="stylesheet/less" >
+                  <link href="{{ asset('bundles/sel/css/styles-souscription-photo.css') }}" rel="stylesheet">
+                  <!--[if lt IE 10]>
+                     <link href="{{ asset('bundles/sel/less/ie.less') }}" rel="stylesheet/less" >
+                  <![endif]-->
+               {% else %}
+                  <link href="{{ asset('bundles/sel/lessc/main.css') }}" rel="stylesheet" >
+                  <link href="{{ asset('bundles/sel/css/styles-souscription-photo.css') }}" rel="stylesheet">
+                  <!--[if lt IE 10]>
+                     <link href="{{ asset('bundles/sel/lessc/ie.css') }}" rel="stylesheet" >
+                  <![endif]-->
+               {% endif %}
+            {% endblock styles %}
+      {% endblock head_responsive %}
+
+      {#<link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />#}
+      {#monitoring : {{ monitoring }}#}
+
+      {# TO DELETE ? #}
+      {#{% if monitoring and adrum_app_key is defined %}#}
+            {#<script>#}
+               {#window['adrum-start-time'] = new Date().getTime();#}
+               {#window["adrum-app-key"] = "{{ adrum_app_key }}";#}
+            {#</script>#}
+            {##}
+            {#{% javascripts#}
+               {#'@SelBundle/Resources/public/js/lib/appdynamics/adrums.js'#}
+               {#output='js/adrum.js' %}#}
+               {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
+            {#{% endjavascripts %}#}
+      {#{% endif %}#}
+
+      {% block javascript_head %}
+        <script type="text/javascript">
+        if (top.frames.length!=0) {
+            if (window.location.href.replace)
+                top.location.replace(self.location.href);
+            else
+                top.location.href=self.document.href;
+        }
+        </script>
+
+      {% endblock javascript_head %}
+
+      {% block javascript_libraries %}
+         {# Angular #}
+         {% javascripts '@SelBundle/Resources/public/js/lib/angular/angular.js' output='js/libAngular.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/lib/angular/angular-route.js' output='js/libAngular-Route.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/lib/angular/angular-ui-router.min.js' output='js/libAngular-UiRouter.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/lib/spin/angular-spinner.min.js' output='js/angular-spinner.min.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% block nonHTML5_javascript %}
+
+               <script>
+                  var useHtml5 = (function useHTML5() {
+                       var ua = window.navigator.userAgent;
+                       var msie = ua.indexOf('MSIE ');
+                       if (msie > 0) {
+                           return false;
+                       }
+
+                       // var trident = ua.indexOf('Trident/');
+                       // if (trident > 0) {
+                       //     return true;
+                       // }
+
+                       // var edge = ua.indexOf('Edge/');
+                       // if (edge > 0) {
+                       //     return true;
+                       // }
+
+                       return true;
+                   }());
+
+                   if (!useHtml5) {
+                      window.FileAPI = {
+                           jsPath: '{{ asset('bundles/sel/js/lib/FileAPI/') }}',
+                           staticPath: '{{ asset('bundles/sel/js/lib/FileAPI/') }}',
+                           html5: false
+                      };
+                   }
+                   // optional need to be loaded before angular-file-upload-shim(.min).js
+               </script>
+
+         {% endblock nonHTML5_javascript %}
+         {% javascripts
+            '@SelBundle/Resources/public/js/lib/ng-file-upload/ng-file-upload-shim.js'
+            '@SelBundle/Resources/public/js/lib/ng-file-upload/ng-file-upload.js'
+            output='js/libAngularFileUpload.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+
+
+         {% javascripts '@SelBundle/Resources/public/js/lib/easel/easeljs-0.8.1.min.js' output='js/easeljs-0.8.1.min.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/lib/gs/plugins/EaselPlugin.min.js' output='js/EaselPlugin.min.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+
+         {# Miscellaneous #}
+         {% javascripts '@SelBundle/Resources/public/js/lib/spin/spin.min.js' output='js/spin.min.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts
+            '@SelBundle/Resources/public/js/lib/jquery/jquery.js'
+            '@SelBundle/Resources/public/js/lib/jquery/jquery-cookie.js'
+            output='js/lib2jquery.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/lib/bootstrap/bootstrap.js' output='js/bootstrap.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/lib/gs/TweenLite.min.js' output='js/TweenLite.min.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/lib/moment/moment.min.js' output='js/moment.min.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/lib/underscore/underscore-min.js' output='js/underscore.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         <!-- IE8-HTML5: js/html5shiv.js -->
+         {% javascripts '@SelBundle/Resources/public/js/lib/html5shiv/*' output='js/libhtml5shiv.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+
+         {% if app.debug %}
+            {% javascripts '@SelBundle/Resources/public/js/less.min.js' output='js/less.min.js' %}
+               <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+         {% endif %}
+      {% endblock javascript_libraries %}
+
+
+        {% block documents %}
+           <!--  {{ asset('bundles/sel/pdf/CGU_SEL.pdf') }} -->
+           <!--  {{ asset('bundles/sel/pdf/CGV_SEL.pdf') }} -->
+           <!--  {{ asset('bundles/sel/pdf/CGU_NMS.pdf') }} -->
+           <!--  {{ asset('bundles/sel/pdf/contrat_NA.pdf') }} -->
+        {% endblock documents %}
+
+      {% block javascript_foot %}
+         <script type="text/javascript" >
+            window.PREFIX_FRONT = "{{ prefix_front }}";
+         </script>
+         <script type="text/javascript" >
+            window.SEL = window.SEL || {};
+            SEL.prefix = "{{ prefix }}";
+            SEL.prefix_pdf = "{{ prefix_pdf }}";
+            SEL.prefix_front = "{{ prefix_front }}";
+            SEL.userTry = 3;
+            SEL.test = "1";
+            SEL.userIsConnected = {% if is_granted('ROLE_USER') %}true{% else %}false{% endif %}
+         </script>
+         {% if contractId is defined and contractId %}
+            <script type="text/javascript">
+                SEL.contractId = "{{ contractId }}";
+            </script>
+         {% endif %}
+
+         {% javascripts
+            '@SelBundle/Resources/public/js/common/Module/*.js'
+            '@SelBundle/Resources/public/js/common/Constant/*.js'
+            '@SelBundle/Resources/public/js/common/Directive/*.js'
+            '@SelBundle/Resources/public/js/common/Controller/*.js'
+            '@SelBundle/Resources/public/js/common/Factory/*.js'
+            '@SelBundle/Resources/public/js/common/Filter/*.js'
+            output='js/common.js' combine=true %}
+            <script type="text/javascript" src="{{ asset_url }}" ></script>
+         {% endjavascripts %}
+
+         {% javascripts '@SelBundle/Resources/public/js/tools.js' output='js/tooltip.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/jquery.mousewheel.js' output='js/jquery.mousewheel.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/jquery.jscrollpane.min.js' output='js/jquery.jscrollpane.min.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/nav_step_open_close.js' output='js/nav_step_open_close.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/nav_header_open_close.js' output='js/nav_header_open_close.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/cmc/model_date.js' output='js/cmc_model_date.js' %}
+            <script type="text/javascript" src="{{ asset_url }}" ></script>
+         {% endjavascripts %}
+         {% javascripts '@SelBundle/Resources/public/js/uniqAccount/filter.js' output='js/cx.js' %}
+            <script type="text/javascript" src="{{ asset_url }}" ></script>
+         {% endjavascripts %}
+
+         <script type="text/javascript" src="{{ prefix_front }}api/template/Common/Wording-fr.js" ></script>
+      {% endblock javascript_foot %}
+
+      {% block head %}{% endblock %}
+   </head>
+
+   <body data-ng-app="{% block angularModule %}Common{% endblock angularModule %}" data-ng-init="prefix_front = '{{prefix_front}}'">
+      <div id="skip-links">
+         <ul class="skip-links unstyled">
+            <li class="inbl"><a href="#content">Aller au contenu</a></li>
+            <li class="inbl"><a href="#nav">Aller à la navigation</a></li>
+         </ul>
+      </div>
+
+      {% block cookie %}
+         {% include "SelBundle::cookie.html.twig" %}
+      {% endblock cookie %}
+
+      <div id="page" data-ng-controller="ResponsiveCtrl" class="ng-scope clearfix">
+         <div class="navigation clearfix">
+
+            {% block navigation %}
+               <div class="logo-nav-mobile">
+                  <a href="http://www.navigo.fr" title="{{ 'transverse.transverse_navigation.navigo_logo_title'|trans({}, 'transverse') }}">
+                     <img src="{{ asset('bundles/sel/images/new/logo-nav-mobile.png') }}" alt="{{ 'transverse.transverse_navigation.navigo_logo_title'|trans({}, 'transverse') }}">
+                  </a>
+               </div>
+                  <a class="logo" href="http://www.navigo.fr" title="{{ 'transverse.transverse_navigation.navigo_logo_title'|trans({}, 'transverse') }}">
+                     <img src="{{ asset('bundles/sel/images/new/logo-desktop.png') }}" alt="{{ 'transverse.transverse_navigation.navigo_logo_title'|trans({}, 'transverse') }}">
+                  </a>
+               <nav id="nav" class="panel-menu-wrap" >
+                  <ul class="nav-list">
+                      <li ><a href="http://www.navigo.fr/actualites/" title="{{ 'transverse.transverse_navigation.actuality_link_title'|trans({}, 'transverse')|raw }}"><i class="item-list ic-actu"></i><span>{{ 'transverse.transverse_navigation.actuality_link'|trans({}, 'transverse')|raw }}</span></a></li>
+                      <li><a href="javascript:void(0)" class="openMenu" title="{{ 'transverse.transverse_navigation.choice_forfait_link_title'|trans({}, 'transverse')|raw }}"><i class="item-list ic-forfait"></i><span>{{ 'transverse.transverse_navigation.choice_forfait_link'|trans({}, 'transverse')|raw }}</span><i class="item-list ic-arrow"></i></a>
+                          <div class="panel-sousmenu-wrap">
+                              <ul class="nav-sous-list">
+                                  <li class="title-category"><a title="{{ 'transverse.transverse_navigation.choice_forfait_link_title'|trans({}, 'transverse') }}">{{ 'transverse.transverse_navigation.choice_forfait_link_title'|trans({}, 'transverse')|raw }}<i class="btn-close"></i></a></li>
+                                  <li><a href="http://www.navigo.fr/je-choisis-mon-forfait/tous-les-titres-de-transport/" title="{{ 'transverse.transverse_navigation.titre_transport_link_title'|trans({}, 'transverse') }}"><span>{{ 'transverse.transverse_navigation.titre_transport_link'|trans({}, 'transverse') }}</span></a></li>
+                                  <li class="heightHigh-item"><a class="wrap-high-item" href="http://www.navigo.fr/je-choisis-mon-forfait/dezonage-et-complement-de-parcours/" title="{{ 'transverse.transverse_navigation.dezonage_link_title'|trans({}, 'transverse') }}"><span class="high-item">{{ 'transverse.transverse_navigation.dezonage_link'|trans({}, 'transverse') }}</span></a></li>
+                              </ul>
+                          </div>
+                      </li>
+                      <li><a href="http://www.navigo.fr/je-gere-ma-carte/" title="{{ 'transverse.transverse_navigation.control_card_link_title'|trans({}, 'transverse')|raw }}"><i class="item-list ic-carte"></i><span>{{ 'transverse.transverse_navigation.control_card_link'|trans({}, 'transverse')|raw }}</span></a></li>
+                      <li><a class="openMenu" href="javascript:void(0)" title="{{ 'transverse.transverse_navigation.organise_mouvement_link_title'|trans({}, 'transverse')|raw }}"><i class="item-list ic-deplacement"></i><span>{{ 'transverse.transverse_navigation.organise_mouvement_link'|trans({}, 'transverse')|raw }}</span><i class="item-list ic-arrow"></i></a>
+                          <div class="panel-sousmenu-wrap">
+                              <ul class="nav-sous-list">
+                                  <li class="title-category"><a href="#" title="{{ 'transverse.transverse_navigation.organise_mouvement_link_title'|trans({}, 'transverse') }}">{{ 'transverse.transverse_navigation.organise_mouvement_link_title'|trans({}, 'transverse') }}<i class="btn-close"></i></a></li>
+                                  <li><a href="http://www.navigo.fr/j-organise-mon-deplacement/parcs-relais/" title="{{ 'transverse.transverse_navigation.parcs_relais_link_title'|trans({}, 'transverse') }}"><span>{{ 'transverse.transverse_navigation.parcs_relais_link'|trans({}, 'transverse') }}</span></a></li>
+                                  <li><a href="http://www.navigo.fr/j-organise-mon-deplacement/veligo/" title="{{ 'transverse.transverse_navigation.veligo_link_title'|trans({}, 'transverse') }}"><span>{{ 'transverse.transverse_navigation.veligo_link'|trans({}, 'transverse') }}</span></a></li>
+                                  <li><a href="http://www.navigo.fr/j-organise-mon-deplacement/velos-en-libre-service/" title="{{ 'transverse.transverse_navigation.velos_service_link_title'|trans({}, 'transverse') }}"><span>{{ 'transverse.transverse_navigation.velos_service_link'|trans({}, 'transverse') }}</span></a></li>
+                                  <li><a href="http://www.navigo.fr/j-organise-mon-deplacement/fileo/" title="{{ 'transverse.transverse_navigation.fileo_link_title'|trans({}, 'transverse') }}"><span>{{ 'transverse.transverse_navigation.fileo_link'|trans({}, 'transverse') }}</span></a></li>
+                                  <li><a href="http://www.navigo.fr/j-organise-mon-deplacement/noctilien/" title="{{ 'transverse.transverse_navigation.noctilien_link_title'|trans({}, 'transverse') }}"><span>{{ 'transverse.transverse_navigation.noctilien_link'|trans({}, 'transverse') }}</span></a></li>
+                              </ul>
+                          </div>
+                      </li>
+                  </ul>
+                  <a class="logo-info" href="http://vianavigo.com" target="_blank" title="{{ 'transverse.transverse_navigation.vianavigo_logo_title'|trans({}, 'transverse') }}"><img src="{{ asset('bundles/sel/images/new/vianavigo.png') }}" alt="{{ 'transverse.transverse_navigation.vianavigo_logo_title'|trans({}, 'transverse') }}"></a>
+				              <a class="logo-infoText" href="http://vianavigo.com" target="_blank" title="{{ 'transverse.transverse_navigation.vianavigo_logo_title'|trans({}, 'transverse') }}"><span>{{ 'transverse.transverse_navigation.vianavigo_logo'|trans({}, 'transverse')|raw }}</span></a>
+							 </nav>
+            {% endblock navigation %}
+
+         </div>
+
+         <div id="container" class="container-fluid">
+
+            {% block throbber %}
+               <span data-ng-controller="SpinCtrl" data-us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1">
+                  <!-- <div id="spinner-shadow"></div> -->
+               </span>
+            {% endblock throbber %}
+
+            <header id="header_new"  class="clearfix">
+
+               {% block header %}
+                  <div id="box-nav">
+                      <div class="header-fix">
+                          <div class="container-fluid">
+                              <div class="mobile-open-nav">
+                                 <a href="#" class="menu-btn closed" title="{{ 'transverse.transverse_header.menu_mobile_title'|trans({}, 'transverse') }}">
+                                    <img src="{{ asset('bundles/sel/images/new/burger.png') }}" alt="{{ 'transverse.transverse_header.menu_mobile_title'|trans({}, 'transverse') }}" width="32" height="29">
+                                 </a>
+                                    <img src="{{ asset('bundles/sel/images/new/logo-mobile.jpg') }}" alt="{{ 'transverse.transverse_header.navigo_logo_title'|trans({}, 'transverse') }}">
+                                 <a href="#" class="open-nav-user-info" title="{{ 'transverse.transverse_header.entry_connection_title'|trans({}, 'transverse') }}">
+                                    <img src="{{ asset('bundles/sel/images/picto_connecte.png') }}" alt="{{ 'transverse.transverse_header.entry_connection_title'|trans({}, 'transverse') }}" class="picto_connection">
+                                 </a>
+
+
+                                 <div class="mobile-sous-menu">
+                                    <ul>
+                                    {% if is_granted('ROLE_USER') %}
+                                       <li>
+                                          <a href="{{ path('sel_espace_client') }}#/saisie_donnees_client"  title="{{ 'transverse.transverse_header.creer_espace_title'|trans({}, 'transverse') }}">
+                                             <span>
+                                               {% if user is defined %}
+                                                    {% if user.firstName is defined and user.firstName is not empty %}
+                                                        {{ 'transverse.transverse_header.hello'|trans({}, 'transverse') }} {{user.fullName}}
+                                                    {% else %}
+                                                        {{ 'transverse.transverse_header.hello'|trans({}, 'transverse') }}
+                                                        {# {{user.emailPorteur}} #}
+                                                    {% endif %}
+                                                {% else %}
+                                                    {{ 'transverse.transverse_header.creer_espace'|trans({}, 'transverse') }}
+                                                {% endif %}
+                                             </span>
+                                          </a>
+                                       </li>
+                                       <li>
+                                          <a href="{{ path('sel_front_logout') }}" title="{{ 'transverse.transverse_header.deconnexion_title' | trans({}, 'transverse') }}">
+                                             <span>{{ 'transverse.transverse_header.deconnexion' | trans({}, 'transverse') }}</span>
+                                          </a>
+                                       </li>
+                                       {% else %}
+                                       <li>
+                                          <a href="{{ path('sel_register') }}#/saisie_donnees_client" title="{{ 'transverse.transverse_header.creer_espace_title'|trans({}, 'transverse') }}">
+                                             <span>{{ 'transverse.transverse_header.creer_espace'|trans({}, 'transverse') }}</span>
+                                          </a>
+                                       </li>
+                                       <li>
+                                          <a href="{{ path('sel_connexion') }}" title="{{ 'transverse.transverse_header.connection_title'|trans({}, 'transverse') }}">
+                                             <span>{{ 'transverse.transverse_header.connection'|trans({}, 'transverse') }}</span>
+                                          </a>
+                                       </li>
+                                    {% endif %}
+                                    </ul>
+                                 </div>
+
+
+                              </div>
+                              <nav>
+                                 <ul class="clearfix">
+                                    <li class="box-title">
+                                       <p>{{ 'transverse.transverse_header.main_title'|trans({}, 'transverse') }}</p>
+                                       <span>{{ 'transverse.transverse_header.main_title_desc'|trans({}, 'transverse') }}</span>
+                                    </li>
+                                    <li class="box_area_connected">
+                                       <div class="box_area_connected_content">
+                                          <ul class="clearfix">
+                                            {% if is_granted('ROLE_USER') %}
+                                             <li class="logged">
+                                                <a href="{{path('sel_espace_client')}}" title="{{ 'transverse.transverse_header.acces_espace_title'|trans({}, 'transverse') }}">
+                                                  <span class="user-name show">
+                                                     {% if app.user is defined and app.user.firstName is defined and app.user.firstName is not empty %}
+                                                         {{ 'transverse.transverse_header.hello'|trans({}, 'transverse') }}  {{ app.user.fullName }}
+                                                     {% else %}
+                                                         {{ 'transverse.transverse_header.hello'|trans({}, 'transverse') }}
+                                                         {# {{user.emailPorteur}} #}
+                                                     {% endif %}
+                                                   </span>
+                                                </a>
+                                             </li>
+                                             <li class="deconnexion">
+                                                <a href="{{ path('sel_front_logout') }}" title="{{ 'transverse.transverse_header.deconnexion_title' | trans({}, 'transverse') }}">
+                                                   <img src="{{ asset('bundles/sel/images/connexion.png') }}" alt="transverse.transverse_header.deconnexion_title">
+                                                </a>
+                                             </li>
+                                             {% else %}
+                                             <li class="logged">
+                                                <a href="{{ path('sel_register') }}#/saisie_donnees_client" title="{{ 'transverse.transverse_header.creer_espace_title'|trans({}, 'transverse') }}">
+                                                   <span>{{ 'transverse.transverse_header.creer_espace'|trans({}, 'transverse') }}</span>
+                                                </a>
+                                             </li>
+                                             <li class="deconnexion">
+                                                <a href="{{ path('sel_connexion') }}" title="{{ 'transverse.transverse_header.connection_title'|trans({}, 'transverse') }}">
+                                                   <span>{{ 'transverse.transverse_header.connection'|trans({}, 'transverse') }}</span>
+                                                </a>
+                                             </li>
+                                             {% endif %}
+                                          </ul>
+                                       </div>
+                                    </li>
+                                    <li class="service-stif">
+                                       <a href="http://www.stif.info" title="{{ 'transverse.transverse_header.stif_sites_alt'|trans({}, 'transverse') }}">
+                                       {{ 'transverse.transverse_header.stif_sites'|trans({}, 'transverse') }}
+                                       <img src="{{ asset('bundles/sel/images/new/stif.png') }}" alt="{{ 'transverse.transverse_header.stif_sites_alt'|trans({}, 'transverse') }}"></a>
+                                    </li>
+                                 </ul>
+                              </nav>
+                          </div>
+                      </div>
+                  </div>
+               {% endblock header %}
+
+            </header>
+
+            <main id="content" class="content">
+
+               {% block contentTitle %}
+                  <div class="row">
+                     <div class="col-xs-12">
+                        <div class="heading">
+                           <h1>{{ 'transverse.transverse_base.main_title' |trans({}, 'transverse') }}</h1>
+                        </div>
+                     </div>
+                  </div>
+               {% endblock contentTitle %}
+
+               {% block breadcrumb %}
+                  <div id="box_breadcrumb_id" class="row">
+                     <div class="col-xs-12">
+                        <ol class="breadcrumb">
+                           <li><a href="http://www.navigo.fr" title="{{ 'home.home_homepage.home_link_breadcrumb_title'|trans({}, 'home') }}">{{ 'home.home_homepage.home_link_breadcrumb'|trans({}, 'home') }}</a></li>
+                           <li class="active">{{ 'home.home_homepage.services_home_link_breadcrumb'|trans({}, 'home') }}</li>
+                           <li class="active">{{ 'home.home_homepage.services_link_breadcrumb' |trans({}, 'home') }}</li>
+                           {% if breadcrumb_l3 is defined and breadcrumb_l3_title is defined and breadcrumb_l3 and breadcrumb_l3_title %}
+                           <li class="active">{{ breadcrumb_l3 }}</li>
+                           {% endif %}
+                        </ol>
+                     </div>
+                  </div>
+               {% endblock breadcrumb %}
+
+               {% block mainContent %}
+                  <div id="mainContent">
+                     {% block body %}{% endblock %}
+                  </div>
+               {% endblock mainContent %}
+
+               {% block MentionCNIL %}
+                  <div id="box_cnil_id">
+            			<div class="row">
+            				<div class="col-xs-12 col-sm-12 col-md-12">
+            					<p class="cnil">
+            					   {{ 'transverse.transverse_cnil.footer_cnil'|trans({}, 'transverse') | raw }}
+            					</p>
+            				</div>
+            			</div>
+            		</div>
+               {% endblock MentionCNIL %}
+
+               {% block tag %}
+                  {#Navigo annuel#}
+                  {% set navigo_annuel = app.request.attributes.get('courseType') is defined and app.request.attributes.get('courseType') != 'commande_de_carte'%}
+
+                  {# recapitulatif #}
+                  {% set navigo_annuel_incomplet = (user is defined and user.contract is defined and user.contract.photoValid is defined and user.contract.photoValid == 0) or (user.contract.ribValid is defined and user.contract.ribValid == 0) %}
+                  {# SIGNATURE #}
+                  {% set tmp_port_pay = contract is defined and contract.porteurIsPayeur is defined and contract.porteurIsPayeur or type is defined and type == 'porteur' %}
+                  {% set port_pay = navigo_annuel and tmp_port_pay %}
+                  {% set port     = navigo_annuel and not tmp_port_pay %}
+
+                  {# SIGNATURE CONFIRMATION #}
+                  {% set pay = navigo_annuel and type is defined and type == 'payeur' %} {# confirmation payeur seul #}
+                  {% set porteurPayeur =       porteurIsPayeur is defined and porteurIsPayeur and not port %}
+                  {% set port_pay_rib =        navigo_annuel and porteurPayeur and type is defined and type == 'invalidRIB' %}
+                  {% set port_pay_photo =      navigo_annuel and porteurPayeur and type is defined and type == 'invalidPhoto' %}
+                  {% set port_pay_rib_photo =  navigo_annuel and porteurPayeur and type is defined and type == 'invalidPhotoRIB' %}
+                  {% set port_pay =            port_pay and not port_pay_rib and not port_pay_photo and not port_pay_rib_photo %}
+
+                  {% set port_rib =        navigo_annuel and not porteurPayeur and type is defined and type == 'invalidRIB' %}
+                  {% set port_photo =      navigo_annuel and not porteurPayeur and type is defined and type == 'invalidPhoto' %}
+                  {% set port_rib_photo =  navigo_annuel and not porteurPayeur and type is defined and type == 'invalidPhotoRIB' %}
+
+                  {% set port = port and not port_rib and not port_photo and not port_rib_photo %}
+
+                  {# Confirmation de la modification de l'email du compte SEL #}
+                  {% set confirm_email_edit =  user is defined and error is not defined %}
+                  {% set na_detail =  navigo_annuel and detail is defined and detail %}
+                  {% set cdc_detail = detail is defined and detail and not navigo_annuel %}
+
+
+                  {% set mapperParameters = {
+                        'connected': is_granted('ROLE_USER'),
+                        'navigo_annuel': navigo_annuel and not na_detail,
+                        'navigo_annuel_incomplet': navigo_annuel_incomplet,
+                        'confirm_email_edit': confirm_email_edit,
+                        'port_pay': port_pay,
+                        'port':     port,
+                        'port_pay_rib':       port_pay_rib,
+                        'port_pay_photo':     port_pay_photo,
+                        'port_pay_rib_photo': port_pay_rib_photo,
+                        'pay': pay,
+                        'port_rib':       port_rib,
+                        'port_photo':     port_photo,
+                        'port_rib_photo': port_rib_photo,
+                        'error_deja_forfait': error_deja_forfait is defined and error_deja_forfait,
+                        'error_trop_jeune': error_trop_jeune is defined and error_trop_jeune,
+                        'error_trop_vieux': error_trop_vieux is defined and error_trop_vieux,
+                        'identification_error': identification_error is defined and identification_error,
+                        'na_detail': na_detail,
+                        'cdc_detail': cdc_detail
+                      }
+                  %}
+
+                  {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': mapperParameters}) %}
+               {% endblock tag %}
+
+		   </main>
+
+            <footer id="footer"  class="clearfix">
+
+               {% block footer %}
+                  <ul class="bottom-bar left">
+                     <li><a href="http://www.navigo.fr/mentions-legales" title="{{ 'transverse.transverse_footer.legal_mentions_link_title'|trans({}, 'transverse') }}"><span>{{ 'transverse.transverse_footer.legal_mentions_link'|trans({}, 'transverse') }}</span></a></li>
+                     <li><a href="http://www.navigo.fr/les-sites-du-stif" title="{{ 'transverse.transverse_footer.stif_sites_link_title'|trans({}, 'transverse') }}">{{ 'transverse.transverse_footer.stif_sites_link'|trans({}, 'transverse') }}</a></li>
+                     <li><a href="http://www.navigo.fr/plan-du-site" title="{{ 'transverse.transverse_footer.sitemap_link_title'|trans({}, 'transverse') }}">{{ 'transverse.transverse_footer.sitemap_link'|trans({}, 'transverse') }}</a></li>
+                  </ul>
+                  <div class="hr"></div>
+                  <ul class="bottom-bar">
+                     <li class="service-stif">
+                        {{ 'transverse.transverse_footer.stif_sites_img'|trans({}, 'transverse') }}
+                        <img src="{{ asset('bundles/sel/images/new/stif.png') }}" alt="{{ 'transverse.transverse_footer.stif_sites_alt'|trans({}, 'transverse') }}">
+                     </li>
+                  </ul>
+                  <ul class="bottom-bar">
+                     <li><a href="http://www.optile.com/"><img title="{{ 'transverse.transverse_footer.logo_optile_title'|trans({}, 'transverse') }}" src="{{ asset('bundles/sel/images/new/logo_optile.jpg') }}" alt="{{ 'transverse.transverse_footer.logo_optile_alt'|trans({}, 'transverse') }}"/></a></li>
+                     <li><a href="http://www.ratp.fr/"><img title="{{ 'transverse.transverse_footer.logo_ratp_title'|trans({}, 'transverse') }}" src="{{ asset('bundles/sel/images/new/logo_ratp.jpg') }}" alt="{{ 'transverse.transverse_footer.logo_ratp_alt'|trans({}, 'transverse') }}"/></a></li>
+                     <li><a href="http://www.sncf.com/"><img title="{{ 'transverse.transverse_footer.logo_sncf_title'|trans({}, 'transverse') }}" src="{{ asset('bundles/sel/images/new/logo_sncf.png') }}" alt="{{ 'transverse.transverse_footer.logo_sncf_alt'|trans({}, 'transverse') }}"/></a></li>
+                  </ul>
+               {% endblock footer %}
+
+            </footer>
+         </div>
+	 </div>
+
+      <script type="text/javascript">localStorage.clear();</script>
+   </body>
+</html>

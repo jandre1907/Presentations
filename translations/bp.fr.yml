@@ -1,0 +1,35 @@
+bp.bp_requet.accueil: Accueil
+bp.bp_requet.service_navigo_link_label: 'Je gère ma carte Navigo'
+bp.bp_requet.espace_client_link_label: 'Mon espace personnel'
+bp.bp_requet.bon_plan_renew_link_label: 'Demande de nouvelle carte Bons Plans Navigo imagine R'
+bp.bp_requet.service_navigo: 'Je gère ma carte Navigo'
+bp.bp_requet.carte_bon_plan_title: 'Demande de nouvelle carte Bons Plans Navigo imagine R'
+bp.bp_requet.verification_coordonnees_sub_title2: 'Vérification de vos coordonnées postales'
+bp.bp_requet.verification_coordonnees_postale_sub_title3: 'Avant de confirmer votre demande veuillez vérifier l’adresse postale et la mettre à jour si nécessaire.'
+bp.bp_requet.nom_label: Nom
+bp.bp_requet.prenom_label: Prénom
+bp.bp_requet.adresse_complement: '<abbr title="Numéro">N°</abbr> et nom de la rue'
+bp.bp_requet.code_postal_label: 'Code postal'
+bp.bp_requet.ville_label: Ville
+bp.bp_requet.pays_label: Pays
+bp.bp_requet.modifier_coordonnees_label_btn: Modifier
+bp.bp_requet.modifier_btn: Modifier
+bp.bp_requet.continuer_btn: Continuer
+bp.bp_confirm.accueil: Accueil
+bp.bp_confirm.service_navigo: 'Je gère ma carte Navigo'
+bp.bp_confirm.espcace_client: 'Mon espace personnel'
+bp.bp_confirm.renew_carte_bon_plan_label_link: 'Demande de nouvelle carte Bons Plans'
+bp.bp_confirm.service_navigo_title: 'Je gère ma carte Navigo'
+bp.bp_confirm.renew_carte_bon_plan_title: 'Demande de nouvelle carte Bons Plans'
+bp.bp_confirm.confirmation_img_label: Confirmation
+bp.bp_confirm.demande_enregistree_subtitle_2: 'Votre demande a bien été prise en compte.'
+bp.bp_confirm.email_confirmation_envoye_check_adresse: 'Vous allez recevoir un e-mail de confirmation à l’adresse'
+bp.bp_confirm.delai_reception_carte_bon_plan_label: 'Vous recevrez prochainement votre nouvelle carte Bons Plans Navigo imagine R.'
+bp.bp_confirm.suivre_avancement_renouvellement: 'Vous pouvez suivre l''avancement du renouvellement de votre carte depuis votre espace Services Navigo.'
+bp.bp_confirm.vous_ne_pouvez_commander_carte: 'Vous ne pouvez plus bénéficier d’une carte Bons Plans Navigo imagine R.'
+bp.bp_confirm.merci_de_vous_rendre: '<p>Merci de vous rendre en<br><a href="#" class="link underline" title="Fichier PDF XX Ko">point de vente (PDF)</a>.</p>'
+bp.bp_confirm.terminer_back_to_myspace: 'terminer et retourner à mon espace'
+bp.bp_confirm.back_to_myspace_btn: 'Retour à mon espace personnel'
+bp.bp_requet.adresse_complement1: 'Complément adresse 1'
+bp.bp_requet.adresse_complement2: 'Complément adresse 2'
+bp.bp_requet.adresse_complement3: 'Complément adresse 3'

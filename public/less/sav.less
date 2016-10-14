@@ -1,0 +1,164 @@
+.sav {
+    margin: 45px 0;
+    .recap-line label {
+        color: @grey;
+        font-weight: normal;
+        width: 50%;
+    }
+    &.paiement {
+      .panel-body {
+        padding: 25px 0;
+        border-bottom: 2px solid @ghost-white;
+        h3 {
+          margin: 15px 0;
+        }
+        button {
+           padding: 12px;
+           img {
+             margin-right: 5px;
+          }
+          a {
+            color: @white;
+            vertical-align: middle;
+            &:hover,
+            &:focus {
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+    &.paiement .recap-line
+    {
+        label
+        {
+            color: @midnight;
+            font-weight: normal;
+            width: 50%;
+        }
+         strong
+        {
+            font-family: 'ralewaysemibold', verdana, arial, sans-serif;
+            width:50%;
+        }
+    }
+    .panel{
+        border-radius: 0;
+    }
+    .panel-body {
+        padding: 15px;
+    }
+    .panel-heading{
+        font-size: @font-mid;
+        padding: 10px 15px;
+        color: @midnight;
+        border: none;
+        .border-radius(4px 4px 0 0);
+        & strong {
+            font-family: 'ralewaysemibold', verdana, arial, sans-serif;
+        }
+    }
+    &.paiement.detail .panel-heading + .panel-body{
+        border: 0;
+        margin: 0px;
+    }
+    &.paiement.detail .action {
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 25px;
+        text-align: right;
+    }
+    &.change .action{
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 35px;
+    }
+} //SAV
+
+.pdf-line{
+    h3{
+        color: @dark-grey;
+        display: inline;
+        line-height: 2.4;
+        margin: 0;
+        font-size: @font-small-mid;
+    }
+}
+
+#step_paiement .panel-body{
+        .border-block();
+    }
+.action .delete span{
+   font-family: 'ralewaybold', verdana, arial, sans-serif;
+    text-decoration: underline;
+    margin-left: 5px;
+}
+
+.action-bt > span{
+    //font-weight: bold;
+    font-family: @bold;
+    text-align: center;
+    color: @mauve;
+    font-size: @font-mid;
+    display: inline-block;
+    width: 100%;
+    padding-top: 15px;
+    border-top: 1px solid @light-grey;
+    margin-top: 5px;
+}
+
+.pdf-line {
+    margin: 0;
+    line-height: 2;
+    span {
+        float: right;
+        color: @mauve;
+        a {
+            margin-left: 10px;
+            font-size: @font-mid;
+            color: @mauve;
+        }
+    }
+}
+.nom-forfait {
+    border: 1px solid @light-grey;
+    padding: 15px;
+    text-align: left;
+    margin-bottom: 25px;
+    .border-radius(4px);
+}
+.paiement-actif
+{
+    border: 1px solid @light-grey;
+    display: inline-block;
+    margin: 0;
+    padding: 20px 20px 20px 40px;
+    position: relative;
+    vertical-align: middle;
+    width: 100%;
+    .border-radius(4px);
+
+    span{
+        width: 100%;
+        padding: 5px 0;
+        display: inline-block;
+        margin-left: 10px;
+    }
+}
+a.ajouter-iban{
+    margin-top: 20px;
+    color: @white;
+    padding: 15px;
+    border: 1px solid @light-grey;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    font-size: @font-mid;
+    .border-radius(4px);
+
+    &:hover{
+        text-decoration: none;
+        background: #7271a6;
+        color: @white;
+    }
+}

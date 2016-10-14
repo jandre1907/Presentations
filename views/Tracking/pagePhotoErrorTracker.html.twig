@@ -1,0 +1,39 @@
+ <script type="text/javascript">
+ try  {
+      window.xtsd =    "{{ params.xtsd | raw}}";
+      window.xtsite =  "{{ params.xtsite | raw}}";
+      window.xtn2 =    "{{ params.xtn2 | raw}}";
+      window.pages = {{ params.pages | raw}};
+      window.xt_multc ="{{ params.xt_multc | raw}}";
+      window.xt_ac =   "{{ params.xt_ac | raw}}";
+      window.xt_an =   "{{ params.xt_an | raw}}";
+      window.xt_page = "{{params.xtpage | raw}}";
+      window.xt_form = {{ params.xt_form | raw}};
+      window.sessionId = "{{ params.sessionId | raw}}";
+      window.referer = "{{ params.referer | striptags}}";
+   } catch (e) {
+      // TODO something
+   }
+
+</script>
+{% if not error %}
+   <div data-ng-controller="TagPhotoErrorCtrl" data-ng-init=
+         '
+            ctrlActivated =1;
+            xtsd =    "{{ params.xtsd | raw}}";
+            xtsite =  "{{ params.xtsite | raw}}";
+            xtn2 =    "{{ params.xtn2 | raw}}";
+            xt_multc ="{{ params.xt_multc | raw}}";
+            xt_ac =   "{{ params.xt_ac | raw}}";
+            xt_an =   "{{ params.xt_an | raw}}";
+            xtpage = "{{ params.xtpage | raw}}";;
+            xt_form = {{ params.xt_form | raw}};
+            sessionId = "{{ params.sessionId | raw}}";
+            referer = "{{ params.referer | raw}}";
+         '
+      >
+   {% verbatim %}
+      <img data-ng-if="url != '#'" width="1" height="1" src="data:null" data-ng-src="{{url}}" />
+   {% endverbatim %}
+   <div>
+{% endif %}

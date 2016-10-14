@@ -1,0 +1,203 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block angularModule %}CX{% endblock angularModule %}
+
+{% block title %}Services Navigo{% endblock %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+    {% javascripts
+    '@SelBundle/Resources/public/js/uniqAccount/model.js'
+    '@SelBundle/Resources/public/js/uniqAccount/model_io.js'
+    '@SelBundle/Resources/public/js/uniqAccount/step_load.js'
+    '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/confirmation.js'
+    '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/connexionHelp.js'
+    '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/coordonnees.js'
+    '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/detail.js'
+    '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/formulaire.js'
+    '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/verification.js'
+    '@SelBundle/Resources/public/js/uniqAccount/directives.js'
+    '@SelBundle/Resources/public/js/uniqAccount/main.js'
+
+    output='js/uniqAccount.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        CX.secretCaptcha = "{{ public_key_captcha }}";
+        CX.defaultRoute = "/Verification";
+        CX.isSig = "{{user.referenceSig}}";
+        CX.userMail = "{{user.email}}";
+        CX.dateOfBirth = "{{user.dateOfBirth|date('Y-m-d') | escape('js')}}";
+
+
+    </script>
+{% endblock javascript_foot %}
+
+{% block breadcrumb %}
+<div id="box_breadcrumb_id" class="row" data-ng-controller="TitleCtrl">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="http://www.navigo.fr" title="Accueil">Accueil</a></li>
+            <li><a href="{{ path('sel_homepage') }}" title="{{ 'cpt.cpt_inscription.services_link_breadcrumb' |trans({}, 'cpt') }}">{{ 'cpt.cpt_inscription.services_link_breadcrumb' |trans({}, 'cpt') }}</a></li>
+            <li class="active" data-ng-show="!breadcrumb">{% verbatim %}{{title}}{% endverbatim %}</li>
+            <li class="active" data-ng-show="breadcrumb"><a href="{{ path('sel_espace_client') }}" title="cpt.cpt_inscription.mon_espace_link_breadcrumb_title">{{ 'cpt.cpt_inscription.mon_espace_link_breadcrumb' |trans({}, 'cpt') }}</a></li>
+            <li class="active" data-ng-show="breadcrumb">{% verbatim %}{{breadcrumb}}{% endverbatim %}</li>
+        </ol>
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+{% block contentTitle %}
+{% verbatim %}
+<div class="row" data-ng-controller="TitleCtrl">
+    <div class="col-xs-12">
+        <div class="heading">
+            <h1>{{title}}</h1>
+        </div>
+    </div>
+</div>
+{% endverbatim %}
+{% endblock contentTitle %}
+
+{% block mainContent %}
+    {% block body %}
+        {% block content %}
+        <div>
+            <p data-ng-show="hideForm">{{'cpt.cpt_confirm_rattachement.lbl_verif_coor'|trans({}, 'cpt', 'fr')|raw}}</p>
+
+            <div class="row"
+                data-ng-controller="VerificationCtrl"
+                data-ng-hide="hideForm"
+                data-ng-init='
+                    hideForm = false;
+                    street1    = "{{ user.client.adresse.ligne3 | raw }}";
+                    street2    = "{{ user.client.adresse.ligne2 | raw }}";
+                    ligne1     = "{{ user.client.adresse.ligne1 | raw }}";
+                    ligne4     = "{{ user.client.adresse.ligne4 | raw }}";
+                    postalCode = "{{ user.client.adresse.codePostal | escape('js') }}";
+                    country    = "{{ user.client.adresse.pays | escape('js') }}" || country;
+                    npai       = "{{ user.client.adresse.nPAI | escape('js') }}";
+                    birthDate  = "{{ user.client.dateNaissance | date('Y-m-d') | escape('js') }}";
+                    mobil      = "{{ user.client.telephoneMobile | escape('js') }}";
+                    phone      = "{{ user.client.adresse.telephone | escape('js') }}";
+                    firstName  = "{{ user.client.prenom }}";
+                    lastName   = "{{ user.client.nom }}";
+                    title      = "{{ user.client.civilite }}";
+                    codeInseeCommune   = userSig.adresse.codeInseeCommune;
+                    infoBirthDate = {
+                        "day":   "{{ user.client.dateNaissance | date('d') | escape('js')}}",
+                        "month": "{{ user.client.dateNaissance | date('m') | escape('js')}}",
+                        "year":  "{{ user.client.dateNaissance | date('Y') | escape('js')}}",
+                    };
+                    city = {{ user.client.adresse | json_encode() | raw }};
+                    city.libelle = city.bureauDistributeur;
+                    city.label = city.libelle;
+                    cities = [];
+                    cities[0] = city;
+                    adresseInitiale = city;
+                '
+                CX.isSig = "{{user.referenceSig}}";
+        CX.userMail = "{{user.email}}";
+        CX.dateOfBirth = "{{user.dateOfBirth|date('Y-m-d') | escape('js')}}";    >
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-horizontal">
+                        <div class="step_form creation-compte">
+                            <h2>{{'cpt.cpt_confirm_rattachement.lbl_verif_coor'|trans({}, 'cpt', 'fr')|raw}}</h2>
+
+
+                            {% verbatim %}
+                                <p>{{firstName}} {{lastName}} né le {{infoBirthDate.day}}-{{infoBirthDate.month}}-{{infoBirthDate.year}}
+                            {% endverbatim %}
+                                <a class="link help" href="#" aria-label="{{'cpt.cpt_confirm_rattachement.aria_link_info_coor'|trans({}, 'cpt', 'fr')|raw}}" data-target="#infos" data-toggle="modal">
+                                    <img src="{{ asset('bundles/sel/images/question.png') }}" class="picto" alt="Aide" width="20" height="20">
+                                </a>
+                            </p>
+                            {% verbatim %}
+                                <p><span class="alert-warning" aria-live="assertive"  data-ng-show="npai">{{errorMessages['CU-INS-EC03-MSS_001']}}</span></p>
+                            {% endverbatim %}
+
+
+                            {{ include('SubscriptionBundle:Subscription:npaiPopin.html.twig', { 'client': user.client, 'initNpaiPopinVisible': false }) }}
+
+
+                            <p class="warning-light red" data-ng-show="error">
+                                <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alerte">
+                                {% verbatim %}{{ error }}{% endverbatim %}
+                            </p>
+
+                            {% include "SelBundle::Registration/coordinates.html.twig" %}
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <button type="button" class="btn btn-primary aide-photo-btn" title="{{'cpt.cpt_confirm_rattachement.btn_valider_title'|trans({}, 'cpt', 'fr')|raw}}" data-ng-click="show=true;gotoStep()" data-ng-disabled="verificationForm.$invalid"><span>{{'cpt.cpt_confirm_rattachement.btn_valider'|trans({}, 'cpt', 'fr')|raw}}</span></button>
+                                </div>
+                            </div>
+                            <span class="obligatoire">
+                                <span class="star"></span>
+                                {{'cpt.cpt_confirm_rattachement.lbl_champ_obli'|trans({}, 'cpt', 'fr')|raw}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {% include 'SelBundle:Rest:addressPopin.html.twig' %}
+            </div>
+        </div>
+    </div>
+</div>
+        {% block tag %}
+            {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': {
+                    "mail_expired": mail_expired is defined and mail_expired
+                }})
+            %}
+        {% endblock tag %}
+<!-- Modal -->
+<div aria-labelledby="fenetreInfo"  tabindex="-1" id="infos" class="modal fade">
+    <div  class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button value="Fermer la fenêtre de dialogue et continuer" aria-label="{{'coor.coor_show.aria_close'|trans({}, 'coor', 'fr')|raw}}" data-dismiss="modal" class="close" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 id="fenetreDialogue" class="modal-title">{{'coor.coor_show.modal_title'|trans({}, 'coor', 'fr')|raw}}</h4>
+            </div>
+            <div class="modal-body">
+                {{'coor.coor_show.bloc_infos_non_modifiables'|trans({}, 'coor', 'fr')|raw}}
+            </div>
+            <div class="modal-footer">
+                <button value="Fermer la fenêtre de dialogue" data-dismiss="modal" class="btn btn-default" type="button">{{'coor.coor_show.modal_btn_close'|trans({}, 'coor', 'fr')|raw}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+
+<div aria-labelledby="fenetreDialogue"  tabindex="-1" id="infos_coordonnees" class="modal fade">
+    <div  class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="{{'cpt.cpt_confirm_rattachement.aria_close_modal'|trans({}, 'cpt', 'fr')|raw}}" data-dismiss="modal" class="close" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                {{'cpt.cpt_confirm_rattachement.content_modal'|trans({}, 'cpt', 'fr')|raw}}
+
+                {# <p>Les informations suivantes ne sont pas modifiables :</p>
+                    <ul class="color_bullet">
+                        <li>Civilité</li>
+                        <li>Nom</li>
+                        <li>Prénom</li>
+                        <li>Date de naissance</li>
+                    </ul>
+                    <p>Si vous souhaitez modifier ces informations, nous vous invitons à vous rendre en <a href="#" title="[Nom du Fichier PDF + XX Ko]" class="link underline">point de vente (PDF - XX Ko)</a>.</p> #}
+            </div>
+            <div class="modal-footer">
+                <button aria-label="{{'cpt.cpt_confirm_rattachement.aria_close_modal'|trans({}, 'cpt', 'fr')|raw}}" data-dismiss="modal" class="btn btn-default" type="button">{{'cpt.cpt_confirm_rattachement.btn_close_modal'|trans({}, 'cpt', 'fr')|raw}}</button>
+            </div>
+
+        {% endblock content %}
+
+    {% endblock body %}
+
+{% endblock mainContent %}

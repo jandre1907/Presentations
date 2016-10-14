@@ -1,0 +1,104 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12">
+			<h2 class="customer-number">Où trouver le numéro client ?</h2>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+    <div id="step_identification_help" class="container-fluid" ng-form name="step_form">
+       <div class="row">
+           <div class="col-xs-12 col-sm-12 col-md-12">
+               <div class="panel-group coordonnees" role="tablist" aria-multiselectable="true">
+                 <div class="panel panel-default">
+                   <div class="panel-heading slide open" role="tab" id="headingOne" ng-class="{'open':blocks[1]}">
+                       <a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapseOne" ng-click="toggle(1)">
+                           <h2 class="panel-title">Je détiens une carte Navigo Annuel, Imagine R ou Navigo Mois ou Semaine</h2>
+                           <span class="plus">+</span>
+                           <span class="moins">-</span>
+                       </a>
+                   </div>
+                   <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" ng-class="{'in':blocks[1] }">
+                     <div class="panel-body">
+                       <p><span class="inline-block">Vous trouverez votre numéro client sur le recto de votre carte navigo.</span></p>
+                       <div class="row">
+                           <div class="col-xs-12 col-sm-6 col-md-6">
+                               <h3 class="under"><span>Nouveau modèle de carte Navigo</span></h3>
+                               <p>Votre numéro client se situe à gauche de votre photo</p>
+                               <img class="" ng-src="{{ element.image || '../bundles/sel/images/nouvelle-carte-navigo.jpg' }}" alt="Nouveau modèle de carte Navigo">
+                           </div>
+                           <div class="col-xs-12 col-sm-6 col-md-6">
+                               <h3 class="under"><span>Ancien modèle de carte Navigo</span></h3>
+                               <p>Votre numéro client se situe au dessus de votre photo</p>
+                               <img class="" ng-src="{{ element.image || '../bundles/sel/images/ancienne-carte-navigo.jpg' }}" alt="Ancien modèle de carte Navigo">
+                           </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="panel panel-default">
+                   <div class="panel-heading slide" role="tab" id="headingTwo" ng-class="{'open':blocks[2]}">
+                       <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="collapseTwo" ng-click="toggle(2)" >
+                           <h2 class="panel-title">Je détiens une carte Navigo Découverte</h2>
+                           <span class="plus">+</span>
+                           <span class="moins">-</span>
+                       </a>
+                   </div>
+                   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" ng-class="{'in':blocks[2] }" >
+                     <div class="panel-body">
+                       <div class="media">
+                           <div class="media-left">
+                               <img ng-src="{{ element.image || '../bundles/sel/images/alert.png' }}" class="picto" alt="Alerte">
+                           </div>
+                           <div class="media-body">
+                               <p class="no-margin">La carte Navigo Découverte n'est associé à aucun numéro client.
+                               <b>Vous devez cocher la case "Je ne connais pas le numéro client ou j'ai une carte Navigo découverte"</b>
+                               situé sous la zone de saisie du numéro client.</p>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="col-xs-12 col-sm-6 col-md-6">
+                               <h3 class="under"><span>Nouveau modèle de carte Navigo Découverte</span></h3>
+                               <img class="" ng-src="{{ element.image || '../bundles/sel/images/nouvelle-carte-navigo-decouverte.jpg' }}" alt="Nouveau modèle de carte Navigo Découverte" >
+                           </div>
+                           <div class="col-xs-12 col-sm-6 col-md-6">
+                               <h3 class="under"><span>Ancien modèle de carte Navigo Découverte</span></h3>
+                               <img class="" ng-src="{{ element.image || '../bundles/sel/images/ancienne-carte-navigo-decouverte.jpg' }}" alt="Ancien modèle de carte Navigo Découverte" >
+                           </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="panel panel-default">
+                   <div class="panel-heading slide" role="tab" id="headingThree" ng-class="{'open':blocks[3]}">
+                       <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="collapseThree" ng-click="toggle(3)" >
+                           <h2 class="panel-title">Je ne détiens pas de carte Navigo et je finance le contrat d'un de mes proche</h2>
+                           <span class="plus">+</span>
+                           <span class="moins">-</span>
+                       </a>
+                   </div>
+                   <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" ng-class="{'in':blocks[3] }" >
+                     <div class="panel-body">
+                       <div class="media">
+                           <div class="media-left">
+                               <img ng-src="{{ element.image || '../bundles/sel/images/info-red.png' }}" class="picto" alt="Information">
+                           </div>
+                           <div class="media-body">
+                               <p>Vous trouverez votre numéro client <b>sur le courrier de confirmation de votre souscription.</b></p>
+                               <p class="no-margin">Vous pouvez également utiliser les identifiants de la personne dont vous financer le forfait</p>
+                           </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+               <!-- END COLLAPSE -->
+           </div>
+       </div>
+       <div class="form-group">
+           <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+               <button type="button" class="btn btn-default aide-photo-btn" value="fermer la page d'aide et retourner à la page précédente" ng-click="windowClose()"><span>fermer la page d'aide et retourner à la page précédente</span></button>
+           </div>
+       </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+{% verbatim %}<div class="step_form" id="step_profil" data-ng-form name="step_form"><!-- 0 -->
+
+    <div class="infos">
+        <div class="info">
+            <p class="info-picto">
+                <img class="" src="data:null" data-ng-src="{{ prefix_front }}bundles/sel/images/info.png" class="picto" alt="Information">
+                <span>{% endverbatim %}{{"cdc.cdc_profil.lbl_titre"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span>
+            </p>
+            {% endverbatim %}
+            {{"cdc.cdc_profil.lbl_condition_debut"|trans({}, "cdc", "fr")|raw}}
+            {% verbatim %}
+        </div>
+        {% endverbatim %}
+            {{"cdc.cdc_profil.lbl_condition_fin"|trans({}, "cdc", "fr")|raw}}
+        {% verbatim %}
+    </div>
+    <h2 id="questions-carte" tabindex="-1" data-ng-hide="userIsSig && hideIsUserQuestion">{% endverbatim %}{{"cdc.cdc_profil.lbl_action_utilisateur"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</h2>
+    <div class="form-content" data-ng-hide="userIsSig && hideIsUserQuestion">
+        <div class="form-group" data-ng-hide="userIsSig">
+            <span class="radio_label"><strong>{% endverbatim %}{{"cdc.cdc_profil.lbl_client_sig"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</strong><span class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></span>
+            <div class="radio">
+                <input data-ng-change="onRadioChange('sigSelected')" type="radio" name="hasCard" id="inlineRadio1"   data-ng-model="userInfo.hasCard" value="1" required>
+                <label class="radio-inline" for="inlineRadio1">
+                    {% endverbatim %}{{"cdc.cdc_profil.btn_rad_oui"|trans({}, "cdc", "fr")|raw}}{% verbatim %}
+                  </label>
+                  <input data-ng-change="onRadioChange('sigSelected')" type="radio" name="hasCard" id="inlineRadio2" data-ng-model="userInfo.hasCard" value="0" required>
+                  <label class="radio-inline" for="inlineRadio2">
+                    {% endverbatim %}{{"cdc.cdc_profil.btn_rad_non"|trans({}, "cdc", "fr")|raw}}{% verbatim %}
+                </label>
+            </div>
+            <span class="mess-error" data-ng-show="step_form.$submitted && step_form.hasCard.$invalid">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+            <span class="mess-error" data-ng-show="error">{{error}}</span>
+            {% endverbatim %}{# <i class="fa fa-times fa-lg" data-ng-show="step_form.$submitted && step_form.hasCard.$invalid"></i> #}{% verbatim %}
+        </div>
+        <div class="form-group" data-ng-hide="hideIsUserQuestion">
+            <span class="radio_label"><strong>{% endverbatim %}{{"cdc.cdc_profil.lbl_cpt_navigo"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</strong><span class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></span>
+            <div class="radio">
+                <input data-ng-change="onRadioChange('selSelected')" type="radio" name="isUserSel" id="inlineRadio3" data-ng-model="userInfo.isUserSel" value="1" required>
+                <label class="radio-inline" for="inlineRadio3">
+                    {% endverbatim %}{{"cdc.cdc_profil.btn_rad_oui"|trans({}, "cdc", "fr")|raw}}{% verbatim %}
+                </label>
+                <input data-ng-change="onRadioChange('selSelected')" type="radio" name="isUserSel" id="inlineRadio4" data-ng-model="userInfo.isUserSel" value="0" required>
+                <label class="radio-inline" for="inlineRadio4">
+                   {% endverbatim %}{{"cdc.cdc_profil.btn_rad_non"|trans({}, "cdc", "fr")|raw}}{% verbatim %}
+                </label>
+            </div>
+            <span class="mess-error" data-ng-show="step_form.$submitted && step_form.isUserSel.$invalid">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+            {% endverbatim %}{# <i class="fa fa-times fa-lg" data-ng-show="step_form.$submitted && step_form.isUserSel.$invalid"></i> #}{% verbatim %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button type="button" data-ng-disabled="!activeBoutonContinuer" class="btn btn-primary aide-photo-btn" data-ng-click="submitForm()" title="{% endverbatim %}{{"cdc.cdc_profil.btn_etape_suiv_info"|trans({}, "cdc", "fr")|raw}}{% verbatim %}" ><span>{% endverbatim %}{{"cdc.cdc_profil.btn_etape_suiv"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span></button>
+        </div>
+    </div>
+    <span data-ng-show="step_form.$submitted" class="obligatoire">
+        <span class="star">{% endverbatim %}{{"cdc.cdc_transverse.asterisque"|trans({}, "cdc", "fr")|raw}}{% verbatim %}</span>
+        {% endverbatim %}{{"transverse.transverse_obli.lbl_obli"|trans({}, "transverse", "fr")|raw}}{% verbatim %}
+    </span>
+</div>{% endverbatim %}

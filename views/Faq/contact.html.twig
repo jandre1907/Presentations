@@ -1,0 +1,124 @@
+ {% extends "SelBundle::layout.html.twig" %}
+
+{% block meta_desc %}
+	<meta name="description" content="{{ 'faq.faq_contacts.meta_desc'|trans({}, 'faq') }}">
+{% endblock %}
+
+ {% block title %}{{ 'faq.faq_contacts.service_en_ligne_label'|trans({}, 'faq') }}{% endblock %}
+
+ {% block content_header '' %}
+ {% block flashMessage %}{% endblock flashMessage %}
+
+{% block breadcrumb %}
+	<div id="box_breadcrumb_id" class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12">
+			<ol class="breadcrumb">
+				<li><a href="http://www.navigo.fr" title="{{ 'faq.faq_contacts.accueil'|trans({}, 'faq') }}">{{ 'faq.faq_contacts.accueil'|trans({}, 'faq') }}</a></li>
+				<li><a href="{{ path('sel_homepage') }}" title="{{ 'faq.faq_contacts.service_navigo'|trans({}, 'faq') }}">{{ 'faq.faq_contacts.service_navigo'|trans({}, 'faq') }}</a></li>
+				<li class="active">{{ 'faq.faq_contacts.contact'|trans({}, 'faq') }}</li>
+			  </ol>
+		</div>
+	</div>
+{% endblock breadcrumb %}
+
+{% block contentTitle %}
+     <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12">
+             <div class="heading">
+                 <h1>{{ 'faq.faq_contacts.contact_title'|trans({}, 'faq') }}</h1>
+             </div>
+         </div>
+     </div>
+{% endblock contentTitle %}
+
+{% block previousArrow %}{% endblock previousArrow %}
+
+{% block content %}
+<div class="margin-top-bottom">
+    <div class="media box_spacer_xs12">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <span class="general_Intext">
+                {{ 'faq.faq_contacts.ask_question_message'|trans({}, 'faq', 'fr')| raw }}
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="home contact">
+                <div class="row show-grid">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2>{{ 'faq.faq_contacts.heading_bloc_1'|trans({}, 'faq', 'fr')| raw }}</h2>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+										{{ 'faq.faq_contacts.content_bloc_1'|trans({}, 'faq', 'fr')| raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2>{{ 'faq.faq_contacts.heading_bloc_2'|trans({}, 'faq', 'fr')| raw }} </h2>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+										{{ 'faq.faq_contacts.content_bloc_2'|trans({}, 'faq', 'fr')| raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="home contact">
+                <div class="row show-grid">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2> {{ 'faq.faq_contacts.heading_bloc_3'|trans({}, 'faq', 'fr')| raw }} </h2>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+										{{ 'faq.faq_contacts.content_bloc_3'|trans({}, 'faq', 'fr')| raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2>{{ 'faq.faq_contacts.heading_bloc_4'|trans({}, 'faq', 'fr')| raw }}</h2>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+										{{ 'faq.faq_contacts.content_bloc_4'|trans({}, 'faq', 'fr')| raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button type="button" class="btn btn-default aide-photo-btn" value="Retourner sur mon espace data-personnel"><span>{{ 'faq.faq_contacts.back_to_myspace'|trans({}, 'faq') }}</span></button>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}

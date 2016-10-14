@@ -1,0 +1,112 @@
+{# form customisation #}
+
+  {% block textarea_widget %}
+    {% spaceless %}
+        <div class="col-xs-11 col-sm-6 col-md-4">
+            <textarea {{ block('widget_attributes') }} class="form-control">{{ value }}</textarea>
+        </div>
+    {% endspaceless %}
+  {% endblock %}
+
+  {% block text_widget %}
+    {% spaceless %}
+            <div class="box_search">
+                <input class="form-control" type="text"{{ block('widget_attributes') }} value="{{ value }}" placeholder="{{ 'faq.faq_index.search_name_label'|trans({}, 'faq') }}" aria-described="search">
+                <button class="box_search_action" type="submit">
+                    <img src="{{ asset('bundles/sel/images/icon_magnifying_glass.jpg') }}" alt="lancer la recherche">
+                </button>
+            </div>
+    {% endspaceless %}
+  {% endblock %}
+
+{%- block choice_widget_collapsed -%}
+    {%- if required and placeholder is none and not placeholder_in_choices and not multiple -%}
+        {% set required = false %}
+    {%- endif -%}
+    <div class="col-xs-11 col-sm-6 col-md-4">
+        <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %} class="form-control">
+            {%- if placeholder is not none -%}
+                <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? placeholder|trans({}, translation_domain) }}</option>
+            {%- endif -%}
+            {%- if preferred_choices|length > 0 -%}
+                {% set options = preferred_choices %}
+                {{- block('choice_widget_options') -}}
+                {%- if choices|length > 0 and separator is not none -%}
+                    <option disabled="disabled">{{ separator }}</option>
+                {%- endif -%}
+            {%- endif -%}
+            {%- set options = choices -%}
+            {{- block('choice_widget_options') -}}
+        </select>
+    </div>
+{%- endblock choice_widget_collapsed -%}
+        
+{% block file_widget %}
+    {% spaceless %}
+        <div class="col-xs-11 col-sm-6 col-md-4">
+        <div class="fileUpload btn btn-default">
+            <span>{{ 'faq.faq_index.parcourir_btn'|trans({}, 'faq') }}</span>
+             {% set type = type|default('file') %}
+            <input id="joindre_un_fichier" class="upload" type="{{ type }}" {{ block('widget_attributes') }} />
+        </div>
+    </div>
+    {# <div class="col-xs-12 col-sm-12 col-md-4">
+        <div class="box_action_show_error">
+            <a href="javascript:" class="action_show_error" data-target="#infos_upload" data-toggle="modal" data-target="#myModal">
+                <img  src="{{ asset('bundles/sel/images/picto_information.png')}}" alt="Information sur le téléchargement d'un fichier" />
+            </a>
+        </div>
+    </div> #}
+    {% endspaceless %}
+{% endblock file_widget %}
+
+
+{%- block submit_widget -%}
+    {%- set type = type|default('submit') -%}
+    {{ block('button_widget') }}
+{%- endblock submit_widget -%}
+
+
+{%- block form_label -%}
+    {% if label is not same as(false) -%}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {%- endif %}
+        {% if required -%}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {%- endif %}
+        {% if label is empty -%}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace({
+                    '%name%': name,
+                    '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {%- endif -%}
+         
+        {#% if label_attr.class is not defined %} {% set label_attr.class = '' %} {% endif %#}
+        {% set class_defined = 0 %}
+        {% for attrname, attrvalue in label_attr %}
+            {% if attrname == 'class' %}
+                {% set class_defined  = 1 %}
+            {% endif %}
+        {% endfor %}
+        {% if class_defined is defined and class_defined != 1 %}
+            {% set label_attr = label_attr|merge({'class': ''}) %}
+        {% endif %}
+
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }} {% if attrname == 'class' %}hide{% endif %}"{% endfor %} >{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</label>
+    {%- endif -%}
+{%- endblock form_label -%}
+
+{% block field_row %}
+<div class="">
+    {{ form_label(form) }}
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+</div>
+{% endblock field_row %}
+
+{# endform customisation #}

@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div id="sel_form" class="form-horizontal">
+            <div class="step-content">
+                <!-- Step forms -->
+
+
+                <div class="step_form" id="step_coordonnees">
+                    <!-- 1 -->
+                    <h2 class="margin-ultra-bottom">Avant de confirmer votre déclaration veuillez vérifier vos coordonnées postales et les mettre à jour si nécessaire.</h2>
+
+                    <div class="form-content">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-5 col-md-5">
+                                <p class="recap-line">
+                                    <label>Nom</label><strong>{{ pageCtrl.userSig.nom }}</strong>
+                                </p>
+                                <p class="recap-line">
+                                    <label>Prénom</label><strong>{{ pageCtrl.userSig.prenom}}</strong>
+                                </p>
+                                <p class="recap-line">
+                                    <label>N° et nom de rue</label><strong>{{ pageCtrl.userSig.adresse.ligne3 }}</strong>
+                                </p>
+                                <p class="recap-line">
+                                    <label>Code postal</label><strong>{{ pageCtrl.userSig.adresse.codePostal }}</strong>
+                                </p>
+                                <p class="recap-line">
+                                    <label>Ville</label><strong>{{ pageCtrl.userSig.adresse.bureauDistributeur }}</strong>
+                                </p>
+                                <p class="recap-line">
+                                    <label>Pays</label><strong>{{ pageCtrl.userSig.adresse.pays }}</strong>
+                                </p>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6"></div>
+                        </div>
+                    </div>
+                    <div class="row box_button">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <button ng-click="pageCtrl.modifyUrl()" type="button" class="btn btn-default pull-right" title="Modifier les coordonnées">
+                                <span>Modifier</span>
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <button ng-click="pageCtrl.stepSubmit()"  type="button" class="btn btn-primary pull-right" title="Continuer sans modifier les coordonnées">
+                                <span>Continuer</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

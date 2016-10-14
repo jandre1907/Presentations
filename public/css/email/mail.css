@@ -1,0 +1,129 @@
+.header,
+.title,
+.subtitle,
+.footer-text {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.header {
+    background: #adb0d8;
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 12px 0 5px;
+}
+
+.footer-text {
+  background: #444;
+  padding: 24px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+}
+.footer-text a {
+  color: #aaaaaa;
+}
+.footer-text >img{
+  float: right;
+}
+.container {
+  width: 650px;
+  max-width: 650px;
+}
+
+.container-padding {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.content {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #ffffff;
+}
+
+code {
+  background-color: #eee;
+  padding: 0 4px;
+  font-family: Menlo, Courier, monospace;
+  font-size: 12px;
+}
+hr {
+  border: 0;
+  border-bottom: 1px solid #cccccc;
+}
+.hr {
+  height: 1px;
+  border-bottom: 1px solid #cccccc;
+}
+.title {
+    border-bottom: 1px solid;
+    color: #374550;
+    font-size: 18px;
+    font-weight: 600;
+}
+.title h2 {
+    background: #fff none repeat scroll 0 0;
+    display: inline-block;
+    font-size: inherit;
+    margin: 0;
+    padding: 0 0 5px;
+    width: auto;
+}
+.subtitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2469A0;
+}
+.subtitle span {
+  font-weight: 400;
+  color: #999999;
+}
+
+.body-text {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+  color: #333333;
+}
+.smallfontsize{
+  font-size: 12px;
+}
+.bt {
+  text-align: center;
+}
+.bt > a {
+  background: #908fc6;
+  border-radius: 4px;
+  color: #fff;
+  display: inline-block;
+  font-weight: bold;
+  margin: 35px 0;
+  padding: 10px 25px;
+  text-decoration: none;
+  width: auto;
+}
+.bt > a:hover{
+  background: #7271A6;
+  color: #fff;
+}
+a, a:hover{
+  color: #7271A6;
+}
+.body-text.avantages {
+    display: inline-block;
+}
+.avantages > *{
+    float: left;
+    font-size: 12px;
+    margin: 0;
+    max-width: 60%;
+}
+.avantages > p{
+  padding-left: 15px;
+}
+.avantages > p a, .avantages > p + a{
+    display: inline-block;
+    width: 100%;
+}

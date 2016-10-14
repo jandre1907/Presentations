@@ -1,0 +1,259 @@
+{% include 'SelBundle:Rest:addressPopin.html.twig' %}
+<div class="step_form" id="step_coordonnees"  data-ng-form name="step_form" ><!-- 2 -->
+
+         <p class="warning-light red"  data-ng-show="error && (formSubmitted || userInfo.isSig)">
+            <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+            <strong>{% verbatim %}{{error}}{% endverbatim %}</strong>
+        </p>
+
+         <h2 id="saisie-coordonnees" class="margin-ultra-bottom" tabindex="-1">{{"sna.sna_coordonnees_porteur.lbl_titre"|trans({}, "sna", "fr")|raw}}</h2>
+         <h3 class="margin-ultra-bottom">{{"sna.sna_coordonnees_porteur.lbl_action_utilisateur"|trans({}, "sna", "fr")|raw}}</h3>
+         <div class="form-content">
+             <div class="form-group">
+                     <div class="col-xs-12 col-sm-4 col-md-4">
+                         <span class="radio_label"><strong>{{"sna.sna_coordonnees_porteur.lbl_civilite"|trans({}, "sna", "fr")|raw}} </strong><span class="star">*</span></span>
+                     </div>
+                     <div class="col-xs-11 col-sm-6 col-md-5">
+                         <div class="radio">
+                             <input type="radio" name="inlineRadioOption1" id="inlineRadio1" value="02" data-ng-model="userSig.prefix" required aria-required="true">
+                             <label class="radio-inline" for="inlineRadio1">
+                                 {{"sna.sna_coordonnees_porteur.lbl_madame"|trans({}, "sna", "fr")|raw}}
+                             </label>
+                             <input type="radio" name="inlineRadioOption1" id="inlineRadio2" value="01" data-ng-model="userSig.prefix" required aria-required="true">
+                              <label class="radio-inline" for="inlineRadio2">
+                                 {{"sna.sna_coordonnees_porteur.lbl_monsieur"|trans({}, "sna", "fr")|raw}}
+                             </label>
+                         </div>
+                         <span aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.inlineRadioOption1.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                         <!-- <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="Ok" data-ng-hide="true" data-ng-show="!(step_form.inlineRadioOption1.$invalid)"> -->
+                         {# <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.inlineRadioOption1.$invalid)"> #}
+                     </div>
+
+             </div>
+             <div class="form-group" data-border-valid-mobile>
+                 <label for="nom" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_coordonnees_porteur.lbl_nom"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <input id="nom" type="text" class="form-control" data-ng-disabled="disableLastname" data-ng-model="userSig.lastname" required name="nom" maxlength="20" aria-required="true">
+                      <span aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.nom.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="!(step_form.nom.$invalid)">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.nom.$invalid)">
+                 </div>
+
+             </div>
+
+             <div class="form-group" data-border-valid-mobile>
+                 <label for="prenom" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_coordonnees_porteur.lbl_prenom"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <input id="prenom" type="text" class="form-control" data-ng-disabled="disableFirstname" data-ng-model="userSig.firstname" required name="prenom" maxlength="20" class="form-control" aria-required="true">
+                      <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.prenom.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="!(step_form.prenom.$invalid)">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.prenom.$invalid)">
+                 </div>
+
+             </div>
+
+            <div class="form-group birthdate" data-border-valid-mobile>
+                  <label class="col-xs-12 col-sm-4 col-md-4 control-label" for="birthdate">{{"sna.sna_coordonnees_porteur.lbl_date_naissance"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                  <div class="col-xs-11 col-sm-6 col-md-4">
+                      <div class="col_3">
+                          <div>
+                               <input id="birthdate" type="text" placeholder="JJ" class="form-control" name="birthday" data-ng-model="userSig.birthDate.day" maxlength="2" required aria-required="true" aria-label="{{"sna.sna_coordonnees_porteur.aria_alt_champs_jour_naissance"|trans({}, "sna", "fr")|raw}}">
+                          </div><div>
+                               <input type="text" placeholder="MM" class="form-control" name="birthmonth" data-ng-model="userSig.birthDate.month" maxlength="2" required aria-required="true" aria-label="{{"sna.sna_coordonnees_porteur.aria_alt_champs_mois_naissance"|trans({}, "sna", "fr")|raw}}">
+                          </div><div>
+                               <input type="text" placeholder="AAAA" class="form-control" name="birthyear" data-ng-model="userSig.birthDate.year"  maxlength="4" required aria-required="true" aria-label="{{"sna.sna_coordonnees_porteur.aria_alt_champs_annee_naissance"|trans({}, "sna", "fr")|raw}}">
+                          </div>
+                      </div>
+                      <span aria-live="assertive"   class="mess-error" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.birthday.$invalid || step_form.birthmonth.$invalid || step_form.birthyear.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                      <span aria-live="assertive"   class="mess-error" data-ng-hide="true" data-ng-show="step_form.birthday.$error.date ">{{"sna.sna_coordonnees_porteur.erreur_date_naissance"|trans({}, "sna", "fr")|raw}}</span>
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="!step_form.birthday.$error.date && !step_form.birthday.$invalid && !step_form.birthmonth.$invalid && !step_form.birthyear.$invalid">
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="step_form.birthday.$error.date || (formSubmitted && (step_form.birthday.$invalid || step_form.birthmonth.$invalid || step_form.birthyear.$invalid))">
+                  </div>
+            </div>
+
+             <div class="form-group" data-border-valid-mobile>
+                 <label for="numero-rue" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_coordonnees_porteur.lbl_addresse"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <input id="numero-rue" type="text" class="form-control" data-ng-model="userSig.street3" name="ligne3" required maxlength="38" aria-required="true">
+                      <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.ligne3.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="!(step_form.ligne3.$invalid)">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.ligne3.$invalid)">
+                 </div>
+
+             </div>
+             <div class="form-group" data-border-valid-mobile>
+                 <label for="adresse-2" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_coordonnees_porteur.lbl_complement_addresse"|trans({}, "sna", "fr")|raw}}</label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <textarea id="adresse-2" class="form-control" placeholder="{{"sna.sna_coordonnees_porteur.info_complement_addresse"|trans({}, "sna", "fr")|raw}}" name="ligne2" data-ng-model="userSig.street2" maxlength="38"></textarea>
+                      <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.ligne2.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="!(step_form.ligne2.$invalid)">
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.ligne2.$invalid)">
+                 </div>
+
+             </div>
+            <div class="form-group" data-border-valid-mobile>
+                 <label for="code-postal" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_coordonnees_porteur.lbl_code_postal"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <input id="code-postal" type="text" class="form-control" data-ng-model="userSig.postalCode" name="postalCode" data-ng-change="getCities()" required maxlength="5" class="form-control" aria-required="true">
+                     <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.postalCode.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="!(step_form.postalCode.$invalid)">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.postalCode.$invalid)">
+                 </div>
+
+             </div>
+             <div class="form-group" data-border-valid-mobile>
+                 <label for="ville" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_coordonnees_porteur.lbl_ville"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                    <select  id="ville" class="form-control " aria-required="true" name="city" data-ng-options="city.label for city in cities" data-ng-model="userSig.city" >
+                     </select>
+                     <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.city.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="!(step_form.city.$invalid)">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}"  data-ng-hide="true" data-ng-show="formSubmitted && (step_form.city.$invalid)">
+                 </div>
+
+             </div>
+             <div class="form-group">
+                 <label for="pays"class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_coordonnees_porteur.lbl_pays"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <input id="pays" type="text" class="form-control" disabled value="France" data-ng-model="userSig.country" aria-required="true" >
+                 </div>
+
+             </div>
+
+
+             <div class="form-group" data-border-valid-mobile>
+                 <label class="col-xs-4 control-label">{{"sna.sna_coordonnees_porteur.lbl_telephone_portable"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <input type="text" class="form-control" data-ng-model="rawMobile" name="mobile" maxlength="15"/ required>
+                      <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.mobile.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="!(step_form.mobile.$invalid)">
+                      <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}"  data-ng-hide="true" data-ng-show="formSubmitted && (step_form.mobile.$invalid)">
+                 </div>
+
+                 <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="box_action_show_error">
+                        <a href="#" class="action_show_error">
+                            <img  src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/picto_information.png" alt="{{"sna.sna_coordonnees_porteur.img_info_alt"|trans({}, "sna", "fr")|raw}}" />
+                        </a>
+                        <div id="phone-info" class="tooltip right tel" > <!-- class tel provisoire -->
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner">
+                                {{"sna.sna_coordonnees_porteur.indication_telephone_portable"|trans({}, "sna", "fr")|raw}}
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+             </div>
+             <div class="form-group" data-border-valid-mobile>
+                 <label for="tel" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_coordonnees_porteur.lbl_telephone_fixe"|trans({}, "sna", "fr")|raw}}</label>
+                 <div class="col-xs-11 col-sm-6 col-md-4">
+                     <input id="tel" type="text" class="form-control" data-ng-model="rawFixe" name="telephoneFixe" maxlength="15" aria-described="phone-info">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="!(step_form.telephoneFixe.$invalid)">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}"  data-ng-hide="true" data-ng-show="formSubmitted && (step_form.telephoneFixe.$invalid)">
+                 </div>
+
+             </div>
+                 <!-- Création compte SEL-->
+
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-4 col-md-4 control-label create-sel">{{"sna.sna_coordonnees_porteur.lbl_action_utilisateur_mdp"|trans({}, "sna", "fr")|raw}}</label>
+                <div class="col-xs-11 col-sm-6 col-md-4">
+                    <p class="create-sel">
+                        {{"sna.sna_coordonnees_porteur.info_email"|trans({}, "sna", "fr")|raw}}
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="form-group" data-border-valid-mobile>
+                <label for="email" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_coordonnees_porteur.lbl_email"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                <div class="col-xs-11 col-sm-6 col-md-4">
+                    <input id="email" type="email" data-gie-mail class="form-control" aria-required="true" name="email" data-ng-model="userSel.email" data-ng-required="emailRequired" maxlength="100" data-ng-disabled="disableEmail" />
+                     <span aria-live="assertive"  class="mess-error" data-ng-show="formSubmitted && (step_form.email.$error.required)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                     <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.email.$invalid && !step_form.email.$error.required && !step_form.email.$error.emailEqual)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_004']}}{% endverbatim %}</span>
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-show="step_form.email.$valid">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-show="formSubmitted && (step_form.email.$invalid)">
+                </div>
+
+            </div>
+
+
+            <div class="form-group" data-ng-hide="disableEmail" data-border-valid-mobile>
+                <label for="confirmer-email" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_coordonnees_porteur.lbl_email_confirmation"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                <div class="col-xs-11 col-sm-6 col-md-4">
+                    <input id="confirmer-email" type="text" class="form-control" aria-required="true" data-ng-model="userSel.emailTwin" name="emailtwo" maxlength="100" onpaste="return false;" data-ng-required="emailRequired" />
+                     <span aria-live="assertive"  class="mess-error" data-ng-show="formSubmitted && (step_form.emailtwo.$error.required)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                     <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="(step_form.emailtwo.$error.emailEqual) ">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_006']}}{% endverbatim %}</span>
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="(!step_form.emailtwo.$invalid)">
+                     <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.emailtwo.$invalid)">
+                </div>
+
+            </div>
+
+            <div class="form-group" data-ng-hide="hidePassword" data-border-valid-mobile>
+                <label for="password" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_coordonnees_porteur.lbl_mdp"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                <div class="col-xs-11 col-sm-6 col-md-4">
+                    <input id="password" type="password" autocomplete="off" name="password" class="form-control" data-ng-model="userSel.password" minlength="8" maxlength="20" data-sel-password data-ng-required="passwordRequired" aria-described="password-info" aria-required="true">
+                    <span aria-live="assertive"  class="mess-error" data-ng-show="formSubmitted && (step_form.password.$error.required)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                    <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.password.$error.passwordFormat)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_003']}}{% endverbatim %}</span>
+                    <span  aria-live="assertive"  data-ng-hide="true" data-ng-show="step_form.password.$error.minlength || step_form.password.$error.maxlength">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_007-DOCA']}}{% endverbatim %}</span>
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="!(step_form.password.$invalid)">
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.password.$invalid)">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="box_action_show_error">
+                        <a href="#" class="action_show_error">
+                            <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/picto_information.png" alt="Information" />
+                        </a>
+                         <div id="password-info" class="tooltip right password" > <!-- class password provisoire -->
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner">
+                                {{"sna.sna_coordonnees_porteur.info_mdp"|trans({}, "sna", "fr")|raw}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" data-ng-hide="hidePassword" data-border-valid-mobile>
+                <label for="confirmer-password" class="col-xs-12 col-sm-4 col-md-4 control-label">{{"sna.sna_coordonnees_porteur.lbl_mdp_confirmation"|trans({}, "sna", "fr")|raw}}<span class="star">*</span></label>
+                <div class="col-xs-11 col-sm-6 col-md-4">
+                    <input id="confirmer-password" type="password" autocomplete="off" class="form-control" data-ng-model="userSel.passwordTwin" name="password2" minlength="8" maxlength="20" onpaste="return false;" data-sel-password data-ng-required="passwordRequired" aria-required="true">
+                    <span aria-live="assertive"  class="mess-error" data-ng-show="formSubmitted && (step_form.password2.$error.required)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                    <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="userSel.password != userSel.passwordTwin">{{"sna.sna_coordonnees_porteur.err_concordance_mdp"|trans({}, "sna", "fr")|raw}}</span>
+                    <span  aria-live="assertive"  class="mess-error" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.password2.$error.passwordFormat)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_003']}}{% endverbatim %}</span>
+                    <span  aria-live="assertive"  data-ng-hide="true" data-ng-show="step_form.password2.$error.minlength || step_form.password2.$error.maxlength">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_007-DOCA']}}{% endverbatim %}</span>
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="!(step_form.password2.$invalid)">
+                    <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.password2.$invalid)">
+                </div>
+
+            </div>
+            <div class="checkbox margin-top-bottom" data-ng-hide="hideAcceptContract">
+                <input type="checkbox" id="inlineRadio9-1" data-ng-model="userSig.acceptContract" name="donneesCommunicables" data-ng-true-value="1" data-ng-false-value="0" data-ng-required="!hideAcceptContract" data-ng-init="hideAcceptContract">
+                <label for="inlineRadio9-1">{{"sna.sna_coordonnees_porteur.ckbok_cgv_debut"|trans({}, "sna", "fr")|raw}}<a href="#" class="link underline" title="{{"sna.sna_coordonnees_porteur.ckbok_cgv_link_title"|trans({}, "sna", "fr")|raw}}">{{"sna.sna_coordonnees_porteur.ckbox_cgv_link"|trans({}, "sna", "fr")|raw}}</a><span class="star">*</span></label>
+                <span  aria-live="assertive"  class="mess-error" data-ng-show="formSubmitted && (step_form.donneesCommunicables.$invalid)">{% verbatim %}{{errorMessages['IHM-TRANS-ERR_001']}}{% endverbatim %}</span>
+                <!-- <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/check.png" class="picto valid" alt="Ok" data-ng-hide="true" data-ng-show="!(step_form.donneesCommunicables.$invalid)"> -->
+                <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/error.png" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-hide="true" data-ng-show="formSubmitted && (step_form.donneesCommunicables.$invalid)">
+            </div>
+
+
+
+
+            <div class="checkbox">
+                <input type="checkbox" data-ng-model="userSig.acceptCom" name="optin" id="inlineRadio9-2" data-ng-true-value="1" data-ng-false-value="0">
+                <label for="inlineRadio9-2">
+                    {{"sna.sna_coordonnees_porteur.ckbox_offre_commerciale"|trans({}, "sna", "fr")|raw}}
+                </label>
+            </div>
+         </div><!-- form-content -->
+         <div class="form-group">
+            <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+                <button type="button" class="btn btn-primary aide-photo-btn" data-ng-disabled="disableSubmit || step_form.donneesCommunicables.$invalid" data-ng-click="submitForm()" title="{{"sna.sna_coordonnees_porteur.bt_ok_info"|trans({}, "sna", "fr")|raw}}"><span>{{"sna.sna_coordonnees_porteur.bt_ok"|trans({}, "sna", "fr")|raw}}</span></button>
+             </div>
+         </div>
+        <span class="obligatoire">
+            <span class="star" aria-label="{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}">*</span>
+            {{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}
+        </span>
+     </div>

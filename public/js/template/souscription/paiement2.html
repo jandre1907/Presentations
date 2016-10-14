@@ -1,0 +1,266 @@
+
+<div class="step_form" id="step_rib" ng-form name="step_form">
+	<!-- 4 -->
+    <h2 id="signature-souscription" class="margin-ultra-bottom" tabindex="-1">Signature de votre souscription</h2>
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12">
+			<div class="jumbotron">
+				<p>
+					<strong>{{ userSig.title }} {{ userSig.firstname }} {{ userSig.lastname }} a demandé à souscrire un forfait
+						Navigo Annuel pour lequel vous êtes déclaré comme payeur.</strong>
+				</p>
+				<p>
+					<strong>Les caractéristiques du forfait sont : </strong>
+				</p>
+				<dl class="dl-horizontal">
+					<dt>Date de début du forfait</dt>
+					<dd>{{ deliveryDate }}</dd>
+					<dt>Zones du forfait</dt>
+					<dd>{{ cart.zoneForfaitDetail.title }}</dd>
+					<dt>Montant</dt>
+					<dd>{{ cart.zoneForfaitDetail.price | euro : 2 : "," : " €" }}/mois + 7,60 € de frais de dossier prélevés une seule fois</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+
+         <div class="modal fade" id="sModal" tabindex="-1" role="dialog" aria-labelledby="fenetreDialogue">
+           <div class="modal-dialog" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Fermer la fenêtre de dialogue et continuer" value="Fermer la fenêtre de dialogue et continuer">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+                 <h4 class="modal-title" id="fenetreDialogue">Vérification de l'adresse</h4>
+               </div>
+               <div class="modal-body">
+                 {{ tabMsg.msg }}
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal" value="Fermer la fenêtre de dialogue">Annuler</button>
+                 <button type="button" class="btn btn-default btn-modal" ng-click="submitForm()" data-dismiss="modal" value="Confirmer la suppréssion de ce moyen de paiement et continuer">Confirmer</button>
+               </div>
+             </div>
+           </div>
+         </div>
+
+	<span class="obligatoire">
+        <span class="star" aria-label="Les informations à saisir marquées par une * sont obligatoires">*</span>
+        Champs obligatoires
+    </span>
+    <p class="warning-light red" ng-show="formSubmitted && error">
+        <img ng-src="{{ prefix_front }}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+        <strong>{{error}}</strong>
+    </p>
+	<div class="form-content">
+        <div class="form-group">
+            <label for="bic" class="col-xs-12 col-sm-4 col-md-4 control-label label-rib">BIC<span class="star">*</span>
+                <span class="sub-label">Bank Identifier Code</span>
+            </label>
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="bic" type="text" class="form-control" aria-required="true" aria-label="saisissez votre code BIC" ng-model="payerSig.bic" maxlength="12" name="bicpayer">
+                <span class="mess-error" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.bicpayer.$invalid))">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.bicpayer.$invalid))" >
+            </div>
+            
+        </div>
+
+		<div class="form-group" ng-show="userSig.isNotPayer">
+            <label for="iban" class="col-xs-12 col-sm-4 col-md-4 control-label label-rib">IBAN<span class="star">*</span>
+                <span class="sub-label">International Bank Account Number</span>
+            </label>
+			<div class="col-xs-11 col-sm-8 col-md-8">
+				<div class="iban-group">
+					<input id="iban" type="text" class="form-control pull-left" ng-model="payerSig.ibanTab[0]" name="ibanholder[]" maxlength="4" ng-required="userSig.isNotPayer" aria-required="true" aria-label="Quatre premiers caractères de votre numéro IBAN">
+                    <input type="text" class="form-control pull-left" ng-model="payerSig.ibanTab[1]" name="ibanholder[]" maxlength="4" ng-required="userSig.isNotPayer" aria-required="true" aria-label="caractères cinq à huit de votre numéro IBAN">
+                    <input type="text" class="form-control pull-left" ng-model="payerSig.ibanTab[2]" name="ibanholder[]" maxlength="4" ng-required="userSig.isNotPayer" aria-required="true" aria-label="caractères neuf à douze de votre numéro IBAN">
+                    <input type="text" class="form-control pull-left" ng-model="payerSig.ibanTab[3]" name="ibanholder[]" maxlength="4" ng-required="userSig.isNotPayer" aria-required="true" aria-label="caractères treize à seize de votre numéro IBAN">
+                    <input type="text" class="form-control pull-left" ng-model="payerSig.ibanTab[4]"name="ibanholder[]" maxlength="4" ng-required="userSig.isNotPayer" aria-required="true" aria-label="caractères dix-sept à vingt de votre numéro IBAN">
+                    <input type="text" class="form-control pull-left" ng-model="payerSig.ibanTab[5]" name="ibanholder[]" maxlength="4" ng-required="userSig.isNotPayer" aria-required="true" aria-label="caractères vingt et un à vingt-quatre de votre numéro IBAN">
+                    <input type="text" class="form-control pull-left" ng-model="payerSig.ibanTab[6]" name="ibanholder[]" maxlength="3" ng-required="userSig.isNotpayer" aria-required="true" aria-label="caractères vingt-cinq à vingt-sept de votre numéro IBAN">
+				</div>
+				<span class="mess-error" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.ibantabpayer.$invalid))">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.ibantabpayer.$invalid))">
+			</div>
+		</div>
+	</div>
+
+	<div class="form-content add" ng-show="userSig.isNotPayer">
+
+		<div class="form-group">
+			<div class="col-xs-12 col-sm-4 col-md-4">
+                <span class="radio_label"><strong>Civilité </strong><span class="star">*</span></span>
+            </div>
+			<div class="col-xs-11 col-sm-6 col-md-4">
+				<div class="radio">
+					<input type="radio" name="inlineRadioOption1" id="inlineRadio1" value="02" ng-model="payerSig.prefix" ng-required="userSig.isNotPayer" aria-required="true">
+                    <label class="radio-inline" for="inlineRadio1"> Madame </label>
+                    <input type="radio" name="inlineRadioOption1" id="inlineRadio2" value="01" ng-model="payerSig.prefix" ng-required="userSig.isNotPayer" aria-required="true">
+                    <label class="radio-inline" for="inlineRadio2"> Monsieur </label>
+				</div>
+				<span class="mess-error" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.inlineRadioOption1.$invalid))">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur"  ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.inlineRadioOption1.$invalid))">
+			</div>
+			
+		</div>
+
+
+		<div class="form-group">
+			<label for="nom" class="col-xs-12 col-sm-4 col-md-4 control-label">Nom<span class="star">*</span></label>
+			<div class="col-xs-11 col-sm-6 col-md-4">
+				<input id="nom" type="text" class="form-control" ng-model="payerSig.lastname" ng-required="userSig.isNotPayer" name="nom" maxlength="20" ng-required="userSig.isNotPayer" aria-required="true">
+                <span class="mess-error" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.nom.$invalid))">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.nom.$invalid))">
+			</div>
+			
+		</div>
+
+
+		<div class="form-group">
+			<label for="prenom" class="col-xs-12 col-sm-4 col-md-4 control-label">Prénom<span class="star">*</span></label>
+			<div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="prenom" type="text" class="form-control" ng-model="payerSig.firstname" ng-required="userSig.isNotPayer" name="prenom" maxlength="20" ng-required="userSig.isNotPayer" aria-required="true">
+				<span class="mess-error" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.prenom.$invalid))">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.prenom.$invalid))">
+			</div>
+			
+		</div>
+
+
+		<div class="form-group birthdate">
+			<label for="birthdate" class="col-xs-12 col-sm-4 col-md-4 control-label">Date de naissance<span class="star">*</span></label>
+			<div class="col-xs-11 col-sm-6 col-md-4">
+				<input id="birthdate" type="text" placeholder="JJ" class="form-control pull-left" ng-model="payerSig.birthDate.day" maxlength="2" ng-required="userSig.isNotPayer" aria-required="true" aria-label="jour de votre naissance">
+                <input type="text" placeholder="MM" class="form-control pull-left" ng-model="payerSig.birthDate.month" maxlength="2" ng-required="userSig.isNotPayer" aria-required="true" aria-label="mois de votre naissance">
+                <input type="text" placeholder="AAAA" class="form-control pull-left" ng-model="payerSig.birthDate.year" maxlength="4" ng-required="userSig.isNotPayer" aria-required="true" aria-label="année de votre naissance">
+                <span class="mess-error" ng-show="formSubmitted && ( step_form.day.$invalid || step_form.month.$invalid  || step_form.year.$invalid )">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="formSubmitted && ( step_form.day.$invalid || step_form.month.$invalid  || step_form.year.$invalid )">
+			</div>
+			
+		</div>
+
+
+		<div class="form-group">
+			<label for="rue" class="col-xs-12 col-sm-4 col-md-4 control-label"><abbr title="Numéro">N°</abbr> et nom de rue<span class="star">*</span></label>
+			<div class="col-xs-11 col-sm-6 col-md-4">
+				<input id="rue" type="text" class="form-control" ng-model="payerSig.street3" name="street3" ng-required="userSig.isNotPayer" maxlength="38" ng-required="userSig.isNotPayer" aria-required="true">
+                <span class="mess-error" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.street3.$invalid))">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.street3.$invalid))">
+			</div>
+			
+		</div>
+
+
+
+		<div class="form-group">
+			<label for="adresse-2" class="col-xs-12 col-sm-4 col-md-4 control-label">Complément d'adresse</label>
+			<div class="col-xs-11 col-sm-6 col-md-4">
+				<textarea id="adresse-2" class="form-control" placePayer="Bâtiment, étage, lieu-dit,  indication au livreur, etc." name="street2" ng-model="payerSig.street2" maxlength="38"></textarea>
+				<span class="mess-error" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.street2.$invalid))">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.street2.$invalid))">
+			</div>
+			
+		</div>
+
+
+		<div class="form-group">
+			<label for="code-postal" class="col-xs-12 col-sm-4 col-md-4 control-label">Code postal<span class="star">*</span></label>
+			<div class="col-xs-11 col-sm-6 col-md-4">
+				<input id="code-postal" type="text" class="form-control" ng-model="payerSig.postalCode" name="codePostal" ng-change="getCities()" ng-required="userSig.isNotPayer" maxlength="5" aria-required="true">
+                <span class="mess-error" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.codePostal.$invalid))">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="userSig.isNotPayer == true && (formSubmitted && (step_form.codePostal.$invalid))">
+			</div>
+			
+		</div>
+
+
+		<div class="form-group">
+			<label for="ville" class="col-xs-12 col-sm-4 col-md-4 control-label">Ville<span class="star">*</span></label>
+			<div class="col-xs-11 col-sm-6 col-md-4">
+				<select id="ville" class="form-control" name="city" ng-options="city.label for city in cities" ng-model="payerSig.city" ng-required="userSig.isNotPayer" aria-required="true">
+				</select>
+                <span class="mess-error" ng-show="formSubmitted && (step_form.city.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="formSubmitted && (step_form.city.$invalid)">
+			</div>
+			
+		</div>
+
+
+		<div class="form-group">
+			<label for="pays" class="col-xs-12 col-sm-4 col-md-4 control-label">Pays<span class="star">*</span></label>
+			<div class="col-xs-11 col-sm-6 col-md-4">
+				<input id="pays" type="text" class="form-control" disabled value="France" ng-model="payerSig.country" ng-required="userSig.isNotPayer" aria-required="true">
+			</div>
+			
+		</div>
+
+
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Téléphone portable<span class="star">*</span></label>
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input type="text" class="form-control" ng-model="rawMobile" name="mobile" maxlength="15"/ required>
+                 <span  aria-live="assertive" role="alert" class="mess-error" ng-hide="true" ng-show="formSubmitted && (step_form.mobile.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                 <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" ng-hide="true" ng-show="!(step_form.mobile.$invalid)">
+                 <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur"  ng-hide="true" ng-show="formSubmitted && (step_form.mobile.$invalid)">
+             </div>
+             
+         </div>
+         <div class="form-group">
+             <label for="tel" class="col-xs-12 col-sm-4 col-md-4 control-label">Téléphone fixe</label>
+             <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="tel" type="text" class="form-control" ng-model="rawFixe" name="telephoneFixe" maxlength="15" aria-described="phone-info">
+                <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" ng-hide="true" ng-show="!(step_form.telephoneFixe.$invalid)">
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur"  ng-hide="true" ng-show="formSubmitted && (step_form.telephoneFixe.$invalid)">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <div class="box_action_show_error">
+                    <a href="#" class="action_show_error">
+                        <img  ng-src="{{ prefix_front }}bundles/sel/images/picto_information.png" alt="Information" />
+                    </a>
+                    <div id="phone-info" class="tooltip right tel" role="tooltip"> <!-- class tel provisoire -->
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">
+                            Votre téléphone portable nous servira à finaliser votre souscription et à améliorer la gestion de votre forfait. Il ne sera en aucun cas utilisé à des fins commerciales sans votre autorisation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+
+
+		<div class="form-group">
+			<label for="email-payeur" class="col-xs-12 col-sm-4 col-md-4 control-label">E-mail payeur<span class="star">*</span></label>
+			<div class="col-xs-11 col-sm-6 col-md-4">
+				<input id="email-payeur" type="email" name="email" class="form-control" ng-model="payerSig.email" ng-required="userSig.isNotPayer" aria-required="true">
+				<span class="mess-error" ng-show="formSubmitted && ( payerSig.emailTwin != payerSig.email || step_form.email.$invalid )">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="formSubmitted && ( payerSig.emailTwin != payerSig.email || step_form.email.$invalid )">
+			</div>
+			
+		</div>
+
+		<div class="form-group">
+			<label for="email-payeur-confirmation" class="col-xs-12 col-sm-4 col-md-4 control-label">Confirmer l'e-mail payeur<span class="star">*</span></label>
+			<div id="email-payeur-confirmation" class="col-xs-11 col-sm-6 col-md-4">
+				<input type="email" class="form-control" name="mailconfirm" ng-model="payerSig.emailTwin" onpaste="return false;" ng-required="userSig.isNotPayer" aria-required="true">
+                <span class="mess-error" ng-show="formSubmitted && ( payerSig.emailTwin != payerSig.email || step_form.mailconfirm.$invalid )">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-show="formSubmitted && ( payerSig.emailTwin != payerSig.email || step_form.mailconfirm.$invalid )">
+			</div>
+			
+		</div>
+
+
+
+	</div>
+
+	<!-- END COORDONNEES PAYEUR -->
+	<div class="form-group">
+        <div class="col-xs-11 col-sm-12 col-md-12 text-center">
+			<button type="button" class="btn btn-primary aide-photo-btn" ng-click="submitForm()" title="Valider le formulaire et poursuivre">
+				<span>Continuer</span>
+			</button>
+		</div>
+	</div>
+
+</div>
+

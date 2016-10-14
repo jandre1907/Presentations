@@ -1,0 +1,177 @@
+// Variables
+
+  //Colors
+@black :      #000;
+@dark-grey :  #333;
+@mid-grey :   #555;
+@grey :       #999;
+@light-grey : #d9d9d9;
+@white-grey : #f1f1f1;
+@white :      #fff;
+@light-mauve :#BAB9DE;
+@mauve :      #908FC6;
+@mauve-new:  #6e6db2;
+@dark-mauve : #7271a6;
+@orange :     #e86301;
+@dark-red :   #dc3332;
+@cream :      #f6f7f8;
+@purple :     #BAB9DE;
+@purple-hard : #8f8dc1;
+@pink :       #fff2f2;
+@yellow :     #fefbee;
+@midnight :   #25303B;
+@rhino :      #404952;
+@bluebelle :  #9b9bca;
+@shuttlegrey : #54606c;
+@kingfisher : #643c87;
+@whisper :    #eeeeee;
+@ghost-white : #f5f5f6;
+@balihai :     #899499;
+@iron :        #c7ccce;
+@scampi:       #7474a3;
+@charcoal:     #3f3f4a;
+@speech_red:   #d40000;
+@islamic_green: #01af0d;
+@arsenic:       #334150;
+@swirl:         #c6ccd2;
+@chetwobeblue:  #7271ab;
+
+
+  //Font-size
+@font-small :         0.8571em; // 12px;
+@font-small-mid :     1.0000em; // 14px; // BASE
+@font-mid :         1.1429em; // 16px;
+@font-mid-lg :         1.2857em; // 18px;
+@font-lg :             1.4286em; // 20px;
+@font-mid-hd :      1.8571em;   // 26px;
+@font-hd :          2em;      // 28px;
+@font-hd-lg :       2.5714em; // 36px;
+
+  //Font-weight
+@bold : 'ralewaybold', verdana, arial, sans-serif;
+
+// Mixins
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+.box-shadow (@string) {
+    -webkit-box-shadow: @string;
+    -moz-box-shadow:    @string;
+    box-shadow:         @string;
+}
+.transform(@deg){
+    -moz-transform: @deg;
+    -webkit-transform: @deg;
+    -o-transform: @deg;
+    -ms-transform: @deg;
+    transform: @deg;
+}
+.border-block(){
+  padding: 15px;
+  border: 1px solid @light-grey;
+  margin: 15px 0;
+}
+.transition-width(@s){
+   -webkit-transition: width @s;
+    -o-transition: width @s;
+    transition: width @s;
+}
+.animation-width(@s){
+  -webkit-animation: width @s;
+  -o-animation: width @s;
+  animation: width @s;
+}
+
+*{
+  font-family: 'ralewayregular', verdana, arial, sans-serif;
+  font-weight: normal!important;
+  }
+
+strong, h1, h2, .general_Intext { font-family: @bold; }
+h2, .general_Intext {
+   font-size: @font-lg;
+   color: @kingfisher;
+}
+h3 {
+    display: inline-block;
+    color: @kingfisher;
+    font-size: @font-mid-lg;
+    margin: 0 0 10px;
+}
+h4{
+      font-size: @font-small-mid;
+      color: @kingfisher;
+    }
+a {
+  outline: none;
+}
+a:focus {
+  outline: thin dotted!important;
+  outline: 5px auto -webkit-focus-ring-color!important;
+  outline-offset: -2px!important;
+}
+// Tools
+.flex{ display: flex; }
+.color{ color: @mauve; }
+.bgcolor{
+    background: @mauve;
+    color: @white !important;
+}
+a.bgcolor:hover{ color: @white !important; }
+.no-padding{ padding: 0px !important; }
+.show-grid { margin-bottom: 15px; }
+.show-grid-top{ margin: 30px -15px 15px -15px; }
+.margin-10{ margin-bottom: 10px; }
+.margin-ultratop{ margin-top: 45px; }
+.margin-ultra-bottom{ margin-bottom: 35px; }
+.style-none{ list-style: none; }
+.no-border{ border: 0; }
+.no-margin{ margin: 0; }
+.margin-top-bottom{
+    margin-top: 30px !important;
+    margin-bottom: 10px !important;
+}
+.margin-top{ margin-top: 20px !important; }
+.margin-bottom{ margin-bottom: 15px !important; }
+.margin-medium { margin: 25px 0!important; }
+.border-top{ border-top:1px solid @light-grey; }
+.border-bottom{
+  border-top:1px solid @light-grey;
+  padding-bottom: 15px;
+  }
+.black{ color: @black; }
+.red{
+    color: @dark-red;
+    font-size: 14px;
+    font-family: @bold;
+}
+.minheight123{ min-height: 123px; }
+.fixed-height{ height:  220px; }
+.normal{
+    font-family: raleway, verdana, arial, sans-serif;
+    font-weight: normal;
+}
+.indent{
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-indent: -99999px;
+}
+.bg-danger {
+    background-color: @pink;
+}
+.bg-warning {
+    /*background-color: @yellow;*/
+}
+.percent
+{
+  width: 100%!important;
+}
+.underline{
+      text-decoration: underline;
+}
+.empty{
+  color: @mid-grey;
+}

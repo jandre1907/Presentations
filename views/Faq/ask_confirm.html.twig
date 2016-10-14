@@ -1,0 +1,68 @@
+ {% extends "SelBundle::layout.html.twig" %}
+
+ {% block title %}Service en ligne{% endblock %}
+
+ {% block contentTitle %}
+     <div class="row">
+     <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="heading">
+           <h1>{{ 'faq.faq_ask_confirm.title.question'|trans({}, 'faq') }}</h1>
+        </div>
+     </div>
+  </div>
+{% endblock contentTitle %}
+
+{% block breadcrumb %}
+<div>
+	<div id="box_breadcrumb_id" class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12">
+			<ol class="breadcrumb">
+				<li><a href="http://www.navigo.fr" title="{{ 'faq.faq_ask_confirm.accueil'|trans({}, 'faq') }}">{{ 'faq.faq_ask_confirm.accueil'|trans({}, 'faq') }}</a></li>
+				<li><a href="{{ path('sel_homepage') }}" title="{{ 'faq.faq_index.home_gere_macarte_link_breadcrumb'|trans({}, 'faq') }}">{{ 'faq.faq_index.home_gere_macarte_link_breadcrumb'|trans({}, 'faq') }}</a></li>
+                {% if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('sel_espace_client') }}" title="{{ 'faq.faq_index.faq_mon_espace_breadcrumb'|trans({}, 'faq') }}">{{ 'faq.faq_index.faq_mon_espace_breadcrumb'|trans({}, 'faq') }}</a></li>
+                {% endif %}
+				<li class="active">{{ 'faq.faq_ask_confirm.lbl.question'|trans({}, 'faq') }}</li>
+			  </ol>
+		</div>
+	</div>
+</div>
+{% endblock breadcrumb %}
+
+ {% block content_header '' %}
+ {% block flashMessage %}{% endblock flashMessage %}
+
+{% block content %}
+ <div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12">
+			<div id="confirmation" class="step_form">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+						<div class="confirmation">
+							<div class="margin-bottom">
+								<span class="general_Intext">
+									<img src="{{ asset('bundles/sel/images/new/check-vert.png')}}" class="picto valid" alt="Confirmation">
+									<strong>
+										{{ 'faq.faq_ask_confirm.messsage.pris_en_compte'|trans({}, 'faq') }}
+									</strong>
+								</span>
+							</div>
+							<br>
+							<p>{{ 'faq.faq_ask_confirm.messsage.mail_sent'|trans({}, 'faq') }}<strong>{{ user_email }}</strong>.</p>
+							<p>{{ 'faq.faq_ask_confirm.messsage.anwswer_advicer'|trans({}, 'faq') }}</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<a href="{{ path('sel_espace_client') }}" class="btn btn-default aide-photo-btn" title="{{ 'faq.faq_ask_confirm.messsage.back_to_myspace_title'|trans({}, 'faq') }}">
+							<span>{{ 'faq.faq_ask_confirm.messsage.back_to_myspace'|trans({}, 'faq') }}</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

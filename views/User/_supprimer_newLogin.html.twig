@@ -1,0 +1,57 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block title "Sel - Login" %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <div class="globalWrapper">
+        <div class="columns column_60 column_mobile_100 hide-mobile">
+            <h2>Connexion</h2>
+            
+            {%  if (form is defined) %}
+            <form action="{{ url('post_login') }}" method="POST" {{ form_enctype(form) }}>
+
+                <div class="row border">
+                    <div class="columns column_mobile_100 input">
+                    {{ form_row(form.email) }}
+                    </div>
+                </div>
+                <div class="row border">
+                    <div class="columns column_mobile_100 input">
+                    {{ form_row(form.current_password) }}
+                    </div>
+                </div>
+                <div  class="row border">
+                    <div class="columns column_90">
+                        <a href="#" data-popup="{{ path('fos_user_resetting_request') }}">{% trans %}Mot de passe oublié?{% endtrans %}</a>
+                    </div>
+                </div>
+                <input type="hidden" id="remember_me" name="_remember_me" value="true" />
+                
+                <input type="submit" value="{% trans %}Me connecter{% endtrans %}">
+            </form>
+        </div>
+        <div class="columns column_40 column_mobile_100 hide-mobile">
+            <h2>Creer un espace client</h2>
+            <div class="row">
+                <div class="column_90 column_mobile_100 border">
+                    <p>Enregistrer vous avant de poursuivre</p>
+                    <a href="{{ path('new_user') }}" class="submitButton">Creer mon espace Client</a>
+                </div>
+            </div>
+        </div>
+            
+            {% endif %}
+</div>
+
+{% endblock %}
+
+
+{% block javascript_foot %}
+    {{ parent() }}
+    <script type="text/javascript" >
+        jQuery("#tokenSignatureXml").hide();
+        jQuery("#tokenSignatureXml").val('<?xml version="1.0" encoding="UTF-8"?><login_info><time>Wed, 24 Mar 2010 17:54:20 +0100</time><login_id>a193590</login_id><language>FR</language><first_name>Mamadou</first_name><last_name>DEMBELE</last_name><e_mail>appli.demo1@renault.com</e_mail> <signature>g2B1ZTWKIIMwliGY8YY6ubgwsay7qqlYHzLUQWGMDerNqgNmZLWqaF984TDoqiJKTLSrtOK0PxM0HOtT0TA82DoGCEAsabfKbqrUbs4Ak2881Wj7R0lilS3Fex307WTfW3vzPS3btilAo9pQaCX5qr37IzM29qiRNkckL5Tcgf/xBpLdQoB9qckGngFQG+pNu3sLD2efZ06kkBBcPlwLm1hbWqrqCfDUusCCzHiXt1sjrzauDCsfzZzULH8QYqZhK+ssbb8/1LO0uSs/v3p+yEERxwHTIZXVzh3jiiHXhkUSr7l36dk9gXDjGdU10IYiXHj8n7xXPNSXGkQk/MaxDg==</signature></login_info>');
+    </script>
+{% endblock javascript_foot %}

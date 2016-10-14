@@ -1,0 +1,181 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block meta_desc %}
+    <meta name="description" content="{{'conn.conn_connexion.meta_desc'|trans({}, 'conn', 'fr')|raw}}">
+{% endblock %}
+
+{% block breadcrumb %}
+    <div id="box_breadcrumb_id" class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="http://www.navigo.fr" title="Accueil">Accueil</a></li>
+                {% if faq_redirect %}
+                    <li><a href="{{ path('sel_homepage') }}" title="{{ 'faq.faq_index.home_gere_macarte_link_breadcrumb'|trans({}, 'faq') }}">{{ 'faq.faq_index.home_gere_macarte_link_breadcrumb'|trans({}, 'faq') }}</a></li>
+                    <li><a href="{{ path('sel_faq') }}" title="{{ 'faq.faq_search_results.help_online'|trans({}, 'faq') }}">{{ 'faq.faq_search_results.help_online'|trans({}, 'faq') }}</a></li>
+                    <li class="active">{{ 'faq.faq_index.faq_posez_question_breadcrumb'|trans({}, 'faq') }}</li>
+                {% else %}
+                    <li><a href="{{ path('sel_homepage') }}" title="{{'conn.conn_connexion.gere_maCarte_link_breadcrumb'|trans({}, 'conn')}}">{{ 'conn.conn_connexion.gere_maCarte_link_breadcrumb'|trans({}, 'conn') }}</a></li>
+                    <li class="active">{{ 'conn.conn_connexion.connexion_link_breadcrumb'|trans({}, 'conn') }}</li>
+                {% endif %}
+              </ol>
+        </div>
+    </div>
+{% endblock breadcrumb %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+    {% javascripts
+        '@SelBundle/Resources/public/js/Connexion/Module/*.js'
+        '@SelBundle/Resources/public/js/Connexion/Controller/*.js'
+        '@SelBundle/Resources/public/js/Connexion/Directive/*.js'
+        output='js/connexion.js' %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+{% endblock javascript_foot %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                {% if faq_redirect %}
+                    <h1>{{'faq.faq_connexion.title-page'|trans({}, 'faq')|raw}}</h1>
+                {% else %}
+                <h1>{{'conn.conn_connexion.lbl_titre'|trans({}, 'conn', 'fr')|raw}}</h1>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+{% block title %}{{ 'conn.conn_connexion.lbl_titre_onglet'|trans({}, 'conn') }}{% endblock %}
+
+{% block previousArrow %}{% endblock previousArrow %}
+{% block angularModule %}connexion{% endblock %}
+{% block mainContent %}
+    {% block body %}
+        {% block content %}
+            <p class="warning-light red"  data-ng-show="error && (formSubmitted || userInfo.isSig)">
+                <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+                <strong>{% verbatim %}{{ error }}{% endverbatim %}</strong>
+            </p>
+                <div class="row"  >
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-horizontal connexion-form">
+                            <!--<h4>Connexion</h4>-->
+                            {% if faq_redirect %}
+                                {% set check_login_path = "fos_user_security_check_faq" %}
+                            {% else %}
+                                {% set check_login_path = "sel_front_login_check" %}
+                            {% endif %}
+
+                            <form id="loginform" action="{{ path(check_login_path) }}" name="form1" method="POST" class="">
+                                {% if error %}
+                                    <p class="warning-light red">
+                                        <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alerte">
+                                        <strong>{{ error|trans }}<br/>{{tentatives}}</strong>
+                                    </p>
+                                {% endif %}
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-sm-4 col-md-4 control-label text-right" for="username">{{'conn.conn_connexion.lbl_email'|trans({}, 'conn', 'fr')|raw}}<span class="star"></span></label>
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <input type="email" data-gie-mail-or-ref data-ng-model="mail" id="username" name="_username" required="required" class="form-control" placeholder="email@nomdedomaine.com"  aria-required="true" aria-describedby="mess-error">
+                                        <span aria-live="assertive"  class="mess-error" data-ng-show="form1._username.$dirty && form1._username.$error.required">{{"sna.sna_erreur.IHM-TRANS-ERR_002"|trans({}, "sna", "fr")|raw}}</span>
+                                        <span aria-live="assertive"  class="mess-error" data-ng-show="form1._username.$dirty && form1._username.$error.email">{{"sna.sna_erreur.IHM-TRANS-ERR_004"|trans({}, "sna", "fr")|raw}}</span>
+                                        <img src="data:null" data-ng-src="{{ asset('bundles/sel/images/check.png') }}" class="picto valid" alt="{{"sna.sna_transverse.alt_picto_ok"|trans({}, "sna", "fr")|raw}}"  data-ng-show="form1._username.$dirty && form1._username.$valid">
+                                        <img src="data:null" data-ng-src="{{ asset('bundles/sel/images/error.png') }}" class="picto error" alt="{{"sna.sna_transverse.alt_picto_err"|trans({}, "sna", "fr")|raw}}" data-ng-show="form1._username.$dirty && form1._username.$invalid">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-sm-4 col-md-4 control-label text-right" for="password">{{'conn.conn_connexion.lbl_mdp'|trans({}, 'conn', 'fr')|raw}}<span class="star"></span></label>
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <input type="password" autocomplete="off" data-ng-password-connect id="password" data-ng-init="passVisibility='hidden'" data-ng-model="passField" name="_password" required="required" class="form-control" aria-required="true">
+                                        <a href="{{ path('sel_front_resetting_request') }}" class="link underline" title="{{'conn.conn_connexion.act_mdp_oubli_title'|trans({}, 'conn', 'fr')|raw}}">{{'conn.conn_connexion.act_mdp_oubli'|trans({}, 'conn', 'fr')|raw}}</a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-md-offset-4 col-sm-offset-4">
+                                        <div class="checkbox">
+                                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                            <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                                                <label for="remember_me" class="rested_connected">
+                                                    {{'conn.conn_connexion.cac_rest_connec'|trans({}, 'conn', 'fr')|raw}}
+                                                    <a href="{{ path('sel_rest_connect') }}" class="link underline rested_connected help" target="_blank" title="Page rester connecté (nouvelle fenêtre)" aria-label="description de la fonctionnalité 'rester connecté' ">
+                                                        <img src="{{ asset('bundles/sel/images/question.png') }}" class="picto" alt="Aide" width="20" height="20">
+                                                    </a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if target_path is not empty %}
+                                    <input type="hidden" name="_target_path" value="{{ target_path }}" />
+                                {% endif %}
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            {% if faq_redirect %}
+                                                <button data-ng-disabled="!((form1._username.$valid || formatNum) && form1._password.$valid)" type="submit" class="btn btn-primary aide-photo-btn" value="{% trans %}Connexion{% endtrans %}"><span>{{'faq.faq_connexion.btn_connexion'|trans({}, 'faq')|raw}}</span></button>
+                                            {% else %}
+                                            <button data-ng-disabled="!((form1._username.$valid || formatNum) && form1._password.$valid)" type="submit" class="btn btn-primary aide-photo-btn" value="{% trans %}Connexion{% endtrans %}"><span>{{'conn.conn_connexion.btn_connexion'|trans({}, 'conn', 'fr')|raw}}</span></button>
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                </form>
+                            {% if faq_redirect %}
+                                <div class="row">
+                                    <div class="col-xs-4 col-xs-offset-4">
+                                        {% if faq_redirect %}
+                                        <a href="{{ path('sel_faq_contact') }}" class="link addto" title="{{'conn.conn_connexion.lbl_contact_title'|trans({}, 'conn', 'fr')|raw}}">
+                                                <span>{{'faq.faq_connexion.lbl-contact'|trans({}, 'faq')|raw}}</span>
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('sel_faq_contact') }}" class="link addto" title="{{'conn.conn_connexion.lbl_contact_title'|trans({}, 'conn', 'fr')|raw}}">
+                                            <span>{{'conn.conn_connexion.lbl_contact'|trans({}, 'conn', 'fr')|raw}}</span>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+    {% endblock content %}
+{% endblock body %}
+
+{% endblock mainContent %}
+
+{#<div class="form">
+    <form id="loginform" action="{{ path('sel_front_login_check') }}" method="POST" class="">
+        <div class="form_title">
+            Connexion
+        </div>
+        {% if error %}
+        <p class="error">{{ error.message|trans }}</p>
+        {% endif %}
+
+        <table>
+            <tr>
+                <td>
+                    <div class="form_item">
+                        <div class="form_label"><label for="username">{% trans %}Email{% endtrans %} :</label></div>
+                        <div class="form_widget"><input type="email" data-gie-mail id="username" name="_username" value="{{ last_username }}" required="required"/></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form_item">
+                        <div class="form_label"><label for="password">{% trans %}Mot de passe{% endtrans %} :</label></div>
+                        <div class="form_widget"><input type="password" autocomplete="off" id="password" name="_password" required="required"/></div>
+                    </div>
+                </td>
+            </tr>
+
+
+        </table>
+        <input type="hidden" id="remember_me" name="_remember_me" value="true" />
+        <div class="form_button">
+            <input type="submit" class="obj-btn" value="{% trans %}Me connecter{% endtrans %}"/>
+        </div>
+        <p class="register"><a href="{{ path('sel_front_registration') }}">{% trans %}Créer mon compte{% endtrans %}</a></p>
+        <p class="forgot"><a href="">{% trans %}Mot de passe oublié?{% endtrans %}</a></p>
+    </form>
+</div>#}

@@ -1,0 +1,36 @@
+ {% extends "SelBundle::layout.html.twig" %}
+
+{% block meta_desc %}
+	<meta name="description" content="{{'static.static_aide_photo.meta_desc'|trans({}, 'static', 'fr')|raw}}">
+{% endblock %}
+
+ {% block content_header '' %}
+ {% block flashMessage %}{% endblock flashMessage %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{'static.static_aide_photo.title'|trans({}, 'static', 'fr') }}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block content %}
+
+	{{'static.static_aide_photo.text'|trans({}, 'static', 'fr')|raw}}
+{% endblock %}
+
+ {% block tag %}
+  {#Navigo annuel#}
+  {% set navigo_annuel = app.request.attributes.get('courseType') is defined and app.request.attributes.get('courseType') != 'commande_de_carte'%}
+
+  {% set mapperParameters = {
+            'connected': is_granted('ROLE_USER'),
+            'navigo_annuel': navigo_annuel
+        }
+  %}
+
+  {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': mapperParameters}) %}
+{% endblock tag %}

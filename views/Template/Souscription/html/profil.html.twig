@@ -1,0 +1,71 @@
+<div class="step_form" id="step_profil"><!-- 0 -->
+    <div class="infos">
+        <div class="info">
+            <p class="info-picto">
+                <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/info.png" class="picto" alt="Information">
+                <span>{{"sna.sna_profil.lbl_titre"|trans({}, "sna", "fr")|raw}}</span>
+            </p>
+            {{"sna.sna_profil.lbl_condition_debut"|trans({}, "sna", "fr")|raw}}
+        </div>
+        <div class="info">
+            <p class="info-picto">
+                <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/info.png" class="picto" alt="Information">
+                <span>{{"sna.sna_profil.lbl_condition_fin_imperatif"|trans({}, "sna", "fr")|raw}}</span>
+            </p>
+            {{"sna.sna_profil.lbl_condition_fin"|trans({}, "sna", "fr")|raw}}
+        </div>
+    </div>
+
+    <p class="warning-light red"   data-ng-show="error">
+        <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+        <strong>{% verbatim %}{{error}}{% endverbatim %}</strong>
+    </p>
+
+    <div data-ng-hide="userInfo.isConnected && userInfo.isSig">
+        <h2>{{"sna.sna_profil.lbl_action_utilisateur"|trans({}, "sna", "fr")|raw}}</h2>
+        <div class="form-content">
+    	    <div class="form-group">
+                <div class="col-xs-12 col-md-12">
+                    <span class="radio_label">
+                        <strong>{{"sna.sna_profil.lbl_client_sig"|trans({}, "sna", "fr")|raw}}</strong>
+                        <span data-ng-show="formSubmitted" class="star">*</span>
+                    </span>
+                </div>
+    	        <div class="col-xs-12 col-md-12">
+                    <div class="radio">
+                        <input type="radio" name="hasCard" id="inlineRadio1"   data-ng-model="userInfo.hasCard" value="1">
+                        <label class="radio-inline" for="inlineRadio1"> {{"sna.sna_profil.btn_rad_oui"|trans({}, "sna", "fr")|raw}}</label>
+                        <input type="radio" name="hasCard" id="inlineRadio2" data-ng-model="userInfo.hasCard" value="0">
+                        <label class="radio-inline" for="inlineRadio2"> {{"sna.sna_profil.btn_rad_non"|trans({}, "sna", "fr")|raw}}</label>
+                    </div>
+    	        </div>
+    	    </div>
+    	    <div class="form-group" data-ng-hide="userInfo.isConnected">
+    	        <div class="col-xs-12 col-md-12" >
+                    <span class="radio_label">
+                        <strong>{{"sna.sna_profil.lbl_cpt_navigo"|trans({}, "sna", "fr")|raw}}</strong>
+                        <span data-ng-show="formSubmitted" class="star">*</span>
+                    </span>
+                </div>
+                <div class="col-xs-12 col-md-12">
+                    <div class="radio">
+                        <input type="radio" name="isUser" id="inlineRadio3" data-ng-model="userInfo.isUser" value="1">
+                        <label class="radio-inline" for="inlineRadio3">{{"sna.sna_profil.btn_rad_oui"|trans({}, "sna", "fr")|raw}}</label>
+                        <input type="radio" name="isUser" id="inlineRadio4" data-ng-model="userInfo.isUser" value="0">
+                        <label class="radio-inline" for="inlineRadio4">{{"sna.sna_profil.btn_rad_non"|trans({}, "sna", "fr")|raw}}</label>
+                    </div>
+                </div>
+    	    </div>
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="button" data-ng-disabled="disableSubmit" class="btn btn-primary aide-photo-btn" data-ng-click="gotoStep()" title="{{"sna.sna_profil.btn_etape_suiv_info"|trans({}, "sna", "fr")|raw}}"><span>{{"sna.sna_profil.btn_etape_suiv"|trans({}, "sna", "fr")|raw}}</span></button>
+            </div>
+        </div>
+		<span data-ng-show="formSubmitted" class="obligatoire">
+			<span class="star">*</span>
+			{{"transverse.transverse_obli.lbl_obli"|trans({}, "transverse", "fr")|raw}}
+		</span>
+</div>

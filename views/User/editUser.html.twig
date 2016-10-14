@@ -1,0 +1,164 @@
+{% extends "SelBundle::layout.html.twig" %}
+
+{% block javascript_foot %}
+    {{ parent() }}
+    {% javascripts
+        '@SelBundle/Resources/public/js/uniqAccount/model.js'
+        '@SelBundle/Resources/public/js/uniqAccount/model_io.js'
+        '@SelBundle/Resources/public/js/uniqAccount/step_load.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/confirmation.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/connexionHelp.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/coordonnees.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/detail.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/formulaire.js'
+        '@SelBundle/Resources/public/js/uniqAccount/Ctrl_Js/verification.js'
+        '@SelBundle/Resources/public/js/uniqAccount/directives.js'
+        '@SelBundle/Resources/public/js/uniqAccount/main.js'
+        output='js/cx_uniqAccount.js' %}
+        <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        CX.secretCaptcha = "{{ public_key_captcha }}";
+        CX.defaultRoute = "/Coordonnees";
+        CX.isSig = {% if user.referenceSig is defined %}"{{user.referenceSig}}"{% else %}{{referenceSig}}{% endif %};
+        CX.userMail = {% if user.referenceSig is defined %}"{{user.email}}"{% else %}null{% endif %};
+    </script>
+{% endblock javascript_foot %}
+
+{% block angularModule %}CX{%  endblock angularModule %}
+
+{% block title %}{{ 'home.home_espace_client.title_onglet'|trans({}, 'home') }}{% endblock %}
+
+{% block breadcrumb %}
+    <div id="box_breadcrumb_id" class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="http://www.navigo.fr" title="{{'coor.coor_edit.accueil'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_edit.accueil'|trans({}, 'coor', 'fr')|raw}}</a></li>
+                <li><a href="{{ path('sel_homepage') }}" title="{{'coor.coor_edit.service_navigo'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_edit.service_navigo'|trans({}, 'coor', 'fr')|raw}}</a></li>
+                <li><a href="{{ path('sel_espace_client') }}" title="{{'coor.coor_edit.espace_client'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_edit.espace_client'|trans({}, 'coor', 'fr')|raw}}</a></li>
+                <li><a href="{{ path('sel_coordonnees') }}" title="{{'coor.coor_edit.vos_coordonnees'|trans({}, 'coor', 'fr')|raw}}">{{'coor.coor_edit.vos_coordonnees'|trans({}, 'coor', 'fr')|raw}}</a></li>
+                <li class="active">{{'coor.coor_edit.lbl_ariane_modifier'|trans({}, 'coor', 'fr')|raw}}</li>
+              </ol>
+        </div>
+    </div>
+{% endblock breadcrumb %}
+
+{% block contentTitle %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="heading">
+                <h1>{{'coor.coor_edit.lbl_titre'|trans({}, 'coor', 'fr')|raw}}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock contentTitle %}
+
+{% block previousArrow %}
+    <div class="row" data-ng-controller="PreviousArrowCtrl as arrowCtrl">
+        <div class="col-xs-12 col-sm-12 col-md-12" data-ng-hide="arrowCtrl.hide">
+            <div class="prev" >
+                <a href="" data-ng-click="arrowCtrl.previousPage()">
+                    <img src="{{ asset('bundles/sel/images/prev16.png') }}" class="picto" alt="{{ 'transverse.transverse_prev.previous_page_title' |trans({}, 'transverse') }}">
+                        {{ 'transverse.transverse_prev.previous_page' |trans({}, 'transverse') }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock previousArrow %}
+
+{% block throbber %}{% endblock %}
+
+{% block mainContent %}
+    {% block body%}
+        {% block content %}
+
+        <div>
+            <div class="row"
+                data-ng-controller="VerificationCtrl"
+                data-ng-init='
+                    hideForm = false;
+                    street1    = "{{ user.client.adresse.ligne3 | raw }}";
+                    street2    = "{{ user.client.adresse.ligne2 | raw }}";
+                    ligne1     = "{{ user.client.adresse.ligne1 | raw }}";
+                    ligne4     = "{{ user.client.adresse.ligne4 | raw }}";
+                    postalCode = "{{ user.client.adresse.codePostal | escape('js') }}";
+                    country    = "{{ user.client.adresse.pays | escape('js') }}" || country;
+                    npai       = "{{ user.client.adresse.nPAI | escape('js') }}";
+                    birthDate  = "{{ user.client.dateNaissance | date('Y-m-d') | escape('js') }}";
+                    mobil      = "{{ user.client.telephoneMobile | escape('js') }}";
+                    phone      = "{{ user.client.adresse.telephone | escape('js') }}";
+                    firstName  = "{{ user.client.prenom }}";
+                    lastName   = "{{ user.client.nom }}";
+                    title      = "{{ user.getReadableCivilite(user.client.civilite) }}";
+                    codeInseeCommune   = userSig.adresse.codeInseeCommune;
+                    infoBirthDate = {
+                        "day":   "{{ user.client.dateNaissance | date('d') | escape('js')}}",
+                        "month": "{{ user.client.dateNaissance | date('m') | escape('js')}}",
+                        "year":  "{{ user.client.dateNaissance | date('Y') | escape('js')}}",
+                    };
+                    city = {{ user.client.adresse | json_encode() | raw }};
+                    city.libelle = city.bureauDistributeur;
+                    city.label = city.libelle;
+                    cities = [];
+                    cities[0] = city;
+                    adresseInitiale = city;
+                '
+            >
+                <div class="col-xs-12">
+                    <div class="form-horizontal">
+                        <div class="step_form creation-compte">
+                        {% if error != false %}
+                            {#<span class="mess-error">{{error}}</span>#}
+                            <div class="row">
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <div class="warning">
+                                        <p>{{error}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <p class="warning-light red" data-ng-show="error">
+                                <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alerte">
+                                {% verbatim %}{{ error }}{% endverbatim %}
+                            </p>
+                        {% endif %}
+
+                            {% verbatim %}
+                            <span class="general_Intext margin-10">{{ title }} {{firstName}} {{lastName}} né(e) le {{infoBirthDate.day}}-{{infoBirthDate.month}}-{{infoBirthDate.year}}</span>
+
+                            {% endverbatim %}
+
+                            {% include "SelBundle::Registration/coordinates.html.twig" %}
+                            {% if error != false %}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                       <a href="{{ path('sel_coordonnees') }}" class="btn btn-default aide-photo-btn" title="{{'coor.coor_confirmation.btn_retour_coor'|trans({}, 'coor', 'fr')|raw}}">
+                                            <span>{{'coor.coor_confirmation.btn_retour_coor'|trans({}, 'coor', 'fr')|raw}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                        <button type="button" class="btn btn-primary aide-photo-btn" title="{{'coor.coor_edit.btn_valider_title'|trans({}, 'coor', 'fr')|raw}}" data-ng-click="gotoStep(null, {'url':'{{ returnUrl }}'})" data-ng-disabled="verificationForm.$invalid" >
+                                            <span>{{'coor.coor_edit.btn_valider'|trans({}, 'coor', 'fr')|raw}}</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <span class="obligatoire">
+                                <span class="star" aria-label="{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}"></span>
+                                {{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+                {% include 'SelBundle:Rest:addressPopin.html.twig' %}
+            </div>
+        </div>
+        {% endblock content %}
+    {% endblock body %}
+{% endblock mainContent %}

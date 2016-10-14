@@ -1,0 +1,132 @@
+    {#<div id="page">
+        <div> #}
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-horizontal">
+                        <div class="step_form creation-compte">
+                            <p class="warning-light red" data-ng-show="formSubmitted && error">
+                                <img src="{{ asset('bundles/sel/images/alert.png')}}" class="picto" alt="Alerte">
+                                {% verbatim %}
+                                    <strong data-template-content="{{error}}"></strong>
+                                {% endverbatim %}
+                            </p>
+
+
+                            <div class="form-content" data-ng-form="detailForm">
+                                <span class="general_Intext margin-10">{{'cpt.cpt_rattachement_details.lbl_compl_info'|trans({}, 'cpt', 'fr')|raw}}</span>
+
+                                <div class="form-group" data-border-valid-mobile>
+                                    <label for="email" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'cpt.cpt_rattachement_details.lbl_email'|trans({}, 'cpt', 'fr')|raw}}
+                                    </label>
+                                    <div class="col-xs-11 col-sm-6 col-md-6">
+                                        <input id="email" type="email" data-gie-mail class="form-control"  name="emailSel" data-ng-model="mail" required>
+
+                                        <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="!detailForm.emailSel.$pristine && (detailForm.emailSel.$invalid)">
+                                        <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Ok" data-ng-show="!detailForm.emailSel.$pristine && (detailForm.emailSel.$valid)">
+                                        {% verbatim %}
+                                        <span class="mess-error" aria-live="assertive"  data-ng-show="formSubmitted && (detailForm.emailSel.$error.pattern)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                                        {% endverbatim %}
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Hide si (checkbox "je ne connais pas le numéro client" == checked) -->
+                                <div class="form-group" data-ng-show="!!reference || !detailForm.reference.$pristine" data-border-valid-mobile>
+                                    <label for="numero-client" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'cpt.cpt_rattachement_details.lbl_num_cli'|trans({}, 'cpt', 'fr')|raw}}</label>
+                                    <div class="col-xs-11 col-sm-6 col-md-6">
+                                        <input id="numero-client" type="text" class="form-control" placeholder="Inscrit à coté de la photo" data-ng-model="reference" data-ng-pattern="/^[0-9]{0,10}$/" name="reference"/>
+
+                                        <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="!detailForm.reference.$pristine && (detailForm.reference.$invalid)">
+                                        <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Ok" data-ng-show="!detailForm.reference.$pristine && (detailForm.reference.$valid)">
+                                    </div>
+                                </div>
+                                <!-- -->
+
+                                <div class="form-group" data-border-valid-mobile>
+                                        <label for="nom" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'cpt.cpt_rattachement_details.lbl_nom'|trans({}, 'cpt', 'fr')|raw}}</label>
+                                        <div class="col-xs-11 col-sm-6 col-md-6">
+                                            <input id="nom" type="text" class="form-control" data-ng-model="lastName" name="lastName" data-ng-pattern="/^[a-zA-ZáàâäçéèêëíìîïôöúùûüÿæœÁÀÂÄÇÉÈÊËÍÌÎÏÓÒÔÖÚÙÛÜŸÆŒ\- \']{2,20}$/">
+
+                                            <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="!detailForm.lastName.$pristine && (detailForm.lastName.$invalid)">
+                                            <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Ok" data-ng-show="!detailForm.lastName.$pristine && (detailForm.lastName.$valid)">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" data-border-valid-mobile>
+                                        <label for="prenom" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'cpt.cpt_rattachement_details.lbl_prenom'|trans({}, 'cpt', 'fr')|raw}}</label>
+                                        <div class="col-xs-11 col-sm-6 col-md-6">
+                                            <input id="prenom" type="text" class="form-control" data-ng-model="firstName" name="firstName" data-ng-pattern="/^[a-zA-ZáàâäçéèêëíìîïôöúùûüÿæœÁÀÂÄÇÉÈÊËÍÌÎÏÓÒÔÖÚÙÛÜŸÆŒ\- \']{2,20}$/">
+
+                                            <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="!detailForm.firstName.$pristine && (detailForm.firstName.$invalid)">
+                                            <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Ok" data-ng-show="!detailForm.firstName.$pristine && (detailForm.firstName.$valid)">
+
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group" data-border-valid-mobile>
+                                        <label for="code-postal" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'cpt.cpt_rattachement_details.lbl_cp'|trans({}, 'cpt', 'fr')|raw}}</label>
+                                        <div class="col-xs-11 col-sm-6 col-md-6">
+                                            <input id="code-postal" type="text" class="form-control" data-ng-model="postalCode" name="postalCode" data-ng-pattern="/^[0-9]{5}$/">
+
+                                            <img src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur" data-ng-show="!detailForm.postalCode.$pristine && (detailForm.postalCode.$invalid)">
+                                            <img src="{{ asset('bundles/sel/images/check.png')}}" class="picto error" alt="Ok" data-ng-show="!detailForm.postalCode.$pristine && (detailForm.postalCode.$valid)">
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group" data-border-valid-mobile>
+                                        <label for="mobile" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'cpt.cpt_rattachement_details.lbl_tel_port'|trans({}, 'cpt', 'fr')|raw}}</label>
+                                        <div class="col-xs-11 col-sm-6 col-md-6">
+                                            <input id="mobile" type="tel" class="form-control" data-ng-model="rawMobile" name="mobile" maxlength="15" >
+
+                                            <img src="data:null" data-ng-src="{{ asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Ok" data-ng-hide="true" data-ng-show="!(detailForm.mobile.$invalid)">
+                                            <img src="data:null" data-ng-src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur"  data-ng-hide="true" data-ng-show="detailForm.mobile.$invalid">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group birthdate" data-border-valid-mobile>
+                                        <label for="birthdate" class="col-xs-12 col-sm-3 col-md-3 control-label">{{'cpt.cpt_rattachement_details.lbl_date_naiss'|trans({}, 'cpt', 'fr')|raw}}</label>
+                                        <div class="col-xs-11 col-sm-8 col-md-6">
+                                            <div class="col_3 clearfix">
+												<fieldset>
+	                                                <div>
+	                                                    <input id="birthdate" class="form-control" type="text" placeholder="JJ"  aria-label="{{'cpt.cpt_rattachement_details.aria_jour_date_naiss'|trans({}, 'cpt', 'fr')|raw}}" data-ng-model="birthDay" data-ng-change="setBirthDate()" maxlength="2" data-ng-patter="/^[0-9]{2}$/" name="birthDay">
+	                                                </div><div>
+	                                                    <input class="form-control" type="text" placeholder="MM"  aria-label="{{'cpt.cpt_rattachement_details.aria_mois_date_naiss'|trans({}, 'cpt', 'fr')|raw}}" data-ng-model="birthMonth" data-ng-change="setBirthDate()" maxlength="2" data-ng-patter="/^[0-9]{2}$/" name="birthMonth">
+	                                                </div><div>
+	                                                    <input class="form-control" type="text" placeholder="AAAA"  aria-label="{{'cpt.cpt_rattachement_details.aria_annee_date_naiss'|trans({}, 'cpt', 'fr')|raw}}" data-ng-model="birthYear" data-ng-change="setBirthDate()" maxlength="4" data-ng-patter="/^[0-9]{4}$/" name="birthYear">
+	                                                </div>
+												<fieldset>
+                                            </div>
+
+                                            <img src="data:null" data-ng-src="{{ asset('bundles/sel/images/check.png')}}" class="picto valid" alt="Ok" data-ng-hide="true" data-ng-show="dateIsValid()">
+                                            <img src="data:null" data-ng-src="{{ asset('bundles/sel/images/error.png')}}" class="picto error" alt="Erreur"  data-ng-hide="true" data-ng-show="dateIsInvalid()"
+                                        </div>
+                                    </div>
+                                </div><!-- form-content -->
+
+                                <div class="row">
+                                    <div class="col-xs-12 text-center">
+                                        <button type="button" class="btn btn-primary aide-photo-btn" value="Valider le formulaire et continuer" data-ng-click="gotoStep()" data-ng-disabled="detailForm.$invalid"><span>{{'cpt.cpt_rattachement_details.btn_continuer'|trans({}, 'cpt', 'fr')|raw}}</span></button>
+                                    </div>
+                                </div>
+                                <span class="obligatoire">
+                                    <span class="star" aria-label="{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}"></span>
+                                    {{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+{% block tag %}
+    {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': {}}) %}
+    {% render controller("SelBundle:Tracking:identificationErrorTracker", {'request': app.request, 'mapperParameters': {
+        'identification_error': true
+    }}) %}
+{% endblock tag %}

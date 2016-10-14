@@ -1,0 +1,83 @@
+{% verbatim %}
+
+<!--    MESSAGE : cas -2- le PDF s'ouvre dans un nouvel onglet-
+   on informe l'utilisateur de cet action ! -->
+<div data-ng-show="pageCtrl.pdfOnNewTab">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-10">
+           <div class="sav paiement">
+                <h2><!-- {% endverbatim %}{{"att.att_list.lbl_choix_forf"|trans({}, "att", "fr")|raw}}{% verbatim %}--></h2>
+                <div class="panel panel-default" >
+                    <div class="panel-body">
+                        <div class="row">
+                           <div class="col-xs-12 col-sm-12 col-md-7">
+                              {% endverbatim %}{{"att.att_list.liste_elt"|trans({}, "att", "fr")|raw}}{% verbatim %}
+                           </div>
+                           <div class="col-xs-12 col-sm-12 col-md-5">
+                            {% endverbatim %}{{"att.att_list.liste_elt_link_begin"|trans({}, "att", "fr")|raw}}{% verbatim %}
+                              <button type="submit" class="btn btn-default" download  ng-click="xt_click(''3'',''telecharger_attestation_pdf'',''T'')"><img src="{% endverbatim %}{{prefix_front}}{% verbatim %}bundles/sel/images/pdf-white.png" class="picto" alt="Fichier PDF" >
+                                {% endverbatim %}{{"att.att_list.liste_elt_link_content"|trans({}, "att", "fr")|raw}}{% verbatim %}
+                              </button>
+                            {% endverbatim %}{{"att.att_list.liste_elt_link_end"|trans({}, "att", "fr")|raw}}{% verbatim %}
+
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--    MESSAGE : PAS DE FORFAIT DISPONIBLE   -->
+<div data-ng-hide="pageCtrl.isForfaits">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-8">
+            <div class="sav paiement text-center">
+                <div data-message-dv meskey="SAV-ATT-EC01-RG_006"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--    MESSAGE : Erreur Serveur/Probleme technique   -->
+<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1" data-ng-show="pageCtrl.isError">
+    <div class="warning">
+        <img src="data:null" data-ng-src="{{prefix_front}}bundles/sel/images/warning.png" class="picto" alt="Attention">
+        <br>
+        <div class="col-xs-10 col-xs-offset-1" data-message-dv meskey="SERVER_ERROR"></div>
+        <br>
+    </div>
+</div>
+
+
+<div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+
+            <button data-ng-click="pageCtrl.onRetourEspace()" type="button" class="btn btn-default aide-photo-btn" title="{% endverbatim %}{{"att.att_list.Bt_return_title"|trans({}, "att", "fr")|raw}}{% verbatim %}">
+                <span>{% endverbatim %}{{"att.att_list.Bt_return_msg"|trans({}, "att", "fr")|raw}}{% verbatim %}</span>
+           </button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endverbatim %}
+
+{% block tag %}
+    {# set declaration to true to access subsection declaration in get_template in rtracking.yml #}
+    {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': {
+            "telechargement_attestation": true
+        }})
+    %}
+{% endblock tag %}

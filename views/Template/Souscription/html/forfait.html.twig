@@ -1,0 +1,15 @@
+    <div class="step_form" id="step_forfait" data-ng-form name="step_form"><!-- 1 -->
+
+         <p class="warning-light red" data-ng-show="error">
+            <img src="data:null" data-ng-src="{% verbatim %}{{ prefix_front }}{% endverbatim %}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+            <strong>{% verbatim %}{{error}}{% endverbatim %}</strong>
+        </p>
+
+         <h3 class="clearfix margin-ultra-bottom">{{"sna.sna_forfait.lbl_delai"|trans({}, "sna", "fr")|raw}}</h3>
+         <div id="form_step_forfait"></div>
+
+          <span class="obligatoire">
+               <span class="star" aria-label="{{ 'transverse.transverse_obli.aria_lbl_obli'|trans({}, 'transverse') }}">*</span>
+                {{ 'transverse.transverse_obli.lbl_obli'|trans({}, 'transverse') }}
+          </span>
+    </div>

@@ -1,0 +1,415 @@
+<style>
+    .image-editor {
+        margin-left: 150px;
+    }
+
+    .cropit-image-preview {
+        background-color: #f8f8f8;
+        background-size: cover;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-top: 7px;
+        width: 104px;
+        height: 123px;
+        cursor: move;
+    }
+
+    .cropit-image-background {
+        opacity: .2;
+        cursor: auto;
+    }
+
+    .image-size-label {
+        margin-top: 0.6rem;
+    }
+
+    input {
+        /* Use relative position to prevent from being covered by image background */
+        position: relative;
+        z-index: 10;
+    }
+</style>
+<!--  DEBUT - VERION INTEGRATION _____________________________________________________________________________________________________________________________________________ -->
+
+
+<div class="step_form" id="step_photo">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+            <h2 id="chargement-photo" class="margin-ultra-bottom" tabindex="-1">Chargement de votre photo</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+            <p class="title"><strong>Votre photo doit être <span class="fw-normal">(<a href="#" class="link underline">en savoir plus</a>)</span>:</strong></p>
+            <div class="infos no-border no-margin">
+                <div class="info">
+                    <ul class="color_bullet">
+                        <li>de face, tête nue, sur fond clair, type photo d’identité </li>
+                        <li>en couleur</li>
+                        <li>aux formats : JPEG, GIF, BMP, TIFF, GIF, PNG ou PDF</li>
+                        <li>d’un poids maximum de 5 Mo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/////////////////// -->
+    <!--    BLOCK DEFAULT   -->
+    <!--/////////////////// -->
+    <div class="form-content box_btn_action_pictures"
+         ng-hide="is_imgFileUploaded">
+
+        <!--    ALERT-RED - No visage / Fichier non valide      -->
+        <!--    origin : ng-show="!files[0] && rejFiles.length != 0 && rejFiles != empty"   -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+                <p class="warning-light red" ng-show="is_photoInvalid">
+                    <img src="{{ prefix_front }}bundles/sel/images/alert.png" class="picto" alt="Alerte">
+                    <strong>
+                        Nous n'avons pas détecté de visage sur votre photo.
+                    </strong>
+                </p>
+            </div>
+        </div>
+        <!--    BOUTON - parcourir -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+                <div ngf-select="" class="fileUpload btn btn-default"
+                     ng-model="files" ngf-multiple="false"
+                     ngf-accept="'*.pdf,*.jpg,*.png'" ng-model-rejected="rejFiles"
+                     tabindex="0">
+                    <span>Parcourir</span>
+                    <input type="file" class="upload" value=""/>
+                </div>
+            </div>
+
+            <!--    BOUTON - prendre photo -->
+            <!-- origin class="btn btn-default"-->
+            <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+                <button type="button"
+                        ng-class="{'btn btPrendrePhotoDisabled' : !isUserMedia, 'btn btn-default' : isUserMedia}"
+                        ng-click="onTakePic()" ng-disabled="!isUserMedia"
+                        value="Retoucher cette photo">
+                    <span>Prendre une photo</span><br>
+                    <span ng-hide="isUserMedia" id="msgNavigateurIncompatible">{{isUserMediaWording}}</span>
+                </button>
+            </div>
+        </div>
+
+        <!--    ! (lv)  !                                       -->
+        <!--    LE PARCOURS PHOTO OUBLIGE LA PRISE DE PHOTO :   -->
+        <!--    donc impossible de passer cette étape           -->
+
+        <!--
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+                 <a href="#" class="link addto">
+                    <span>Ajouter une photo plus tard et continuer</span>
+                 </a>
+            </div>
+        </div>
+        -->
+
+    </div>
+
+
+    <!--///////////////////////// -->
+    <!--    BLOCK PHOTO FILE-UPLODED   -->
+    <!--///////////////////////// -->
+    <div class="form-content center-block"
+         ng-show="is_imgFileUploaded">
+
+        <div class="row">
+
+            <!--///////////////////////// -->
+            <!--    BLOCK - Message     -->
+            <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+
+                <!--    ALERT  - Avertissement   -->
+                <p class="warning-light">
+                    <strong>
+                        ATTENTION<br>
+                        Si votre photo n'est pas conforme, votre dossier ne sera pas validé dans les délais habituellement annoncés.
+                    </strong>
+                </p>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="media photo col-xs-12 col-md-6 col-md-offset-3">
+                <p><span>{{photo_labelImage}}</span></p>
+                <!--    *********************   -->
+                <!--    IMAGE  - file-uploded   -->
+                <!--    *********************   -->
+                <div class="media-left">
+                    <span class="photo-identite">
+                        <img class="media-object" src="{{ photoCroped }}"
+                             ng-show="is_imgFileUploaded"
+                             alt="photo identité"  width="104">
+                    </span>
+                </div>
+
+                <div class="media-body">
+                    <a href="#/Photo" class="delete" ng-click="delete_imgFileUpoaded()">
+                        <!-- orirign <img src="/sel/web/front/bundles/sel/images/delete.png" class="picto" alt="Supprimer">-->
+                        <img ng-src="{{ prefix_front }}bundles/sel/images/delete.png" class="picto" alt="Supprimer">
+                        <span>Supprimer</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <!--    ! (lv)  !                                 -->
+        <!--    MISE DE COTÉ DE CETTE FONCTIONNALITÉ TEMPORAIREMENT-->
+
+        <!--<div class="row show-grid">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3">
+                <p><strong>Souhaitez-vous forcer l'utilisation de cette photo ?</strong></p>
+                <div class="checkbox margin-bottom">
+                    <input id="checkbox96" type="checkbox">
+                    <label for="checkbox96">Je déclare cette photo valide et souhaite l'utiliser pour ma souscription</label>
+                </div>
+            </div>
+        </div>-->
+
+    </div>
+
+    <!--    BOUTON  - valider et continuer -->
+    <div class="row" ng-show="is_imgFileUploaded">
+        <div class="col-xs-12 text-center">
+            <button type="button"
+                    ng-click="gotoStep('/Recapitulatif')"
+                    class="btn btn-primary aide-photo-btn"
+                    value="Valider cette photo et continuer">
+                <span>Valider cette photo et continuer</span>
+            </button>
+        </div>
+    </div>
+
+
+    <!--    BOUTON  - Retoucher la photo -->
+    <div class="row" ng-show="is_imgFileUploaded">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3">
+            <a href="#/Photo" class="link text-center return"
+               ng-click="is_imgTransform = true">
+                <span class="icon icon-equalizer small-image"></span>
+                <span>Retoucher cette photo</span>
+            </a>
+        </div>
+    </div>
+    <!--///////////////////////// -->
+    <!--        - END -           -->
+    <!--BLOCK PHOTO FILE-UPLODED  -->
+    <!--///////////////////////// -->
+
+
+
+    <!--///////////////////////// -->
+    <!--BLOCK PHOTO WEBCAM CAPTURE-->
+    <!--///////////////////////// -->
+    <div class="form-content center-block"
+         ng-show="is_imgTransform">
+
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3">
+                <p class="warning-light">
+                    <strong>
+                        ATTENTION<br>
+                        Si votre photo n'est pas conforme, votre dossier ne sera pas validé dans les délais habituellement annoncés.
+                    </strong>
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <!--    BLOCK  - Canvas     -->
+            <div class="media photo col-xs-12 col-md-6 col-md-offset-3">
+                <p><span>Votre photo originale</span></p>
+
+                <div class="media-left">
+                    <span class="photo-identite-canvas">
+                        <!--    *********************   -->
+                        <!--    IMAGE  WEBCAM - HTML5 CANVAS -->
+                        <!--    *********************   -->
+                        <canvas class="media-object" id="canvasImg"></canvas>
+
+                    </span>
+                </div>
+
+                <div class="media-body">
+                    <a href="#/Photo" class="delete" ng-click="delete_imgTransform()">
+                        <img ng-src="{{ prefix_front }}bundles/sel/images/delete.png" class="picto" alt="Supprimer">
+                        <span>Supprimer</span>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3">
+                <p class="retoucher"><strong>Vous pouvez modifier l'apparence de votre photo avant de l'envoyer :</strong></p>
+                <div id="Filters">
+
+                    <div class="Filter">
+                        <div class="FilterSetting">
+                            <span class="FilterName">Orientation</span>
+                            <div class="rotate-control">
+                                <div class="redo rotate">
+                                    <span class="icon icon-undo small-image"></span>
+
+                                    <!--************************-->
+                                    <!--    CONTROLE DE LA ROTATIONS-->
+                                    <!--************************-->
+                                    <input type="button" class="undo" value="" data-filter=""
+                                           title="Pivoter à gauche"
+                                           ng-click="onRotateImg('undo')">
+                                </div>
+                                <div class="redo rotate">
+                                    <span class="icon icon-redo small-image"></span>
+                                    <input type="button" class="redo" value="" data-filter=""
+                                           title="Pivoter à droite"
+                                           ng-click="onRotateImg('redo')" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--************************-->
+                    <!--  CONTROLE ZOOM -->
+                    <!--************************-->
+                    <div class="slider">
+                        <div class="slider-wrapper">
+                            <span class="FilterName">Recadrer</span>
+                            <span class="icon icon-image small-image"></span>
+                            <input type="range" class="cropit-image-zoom-input custom"
+                                   value="100" min="0" max="200" step="1"
+                                   ng-model="zoomValue"
+                                   ng-change="onZoom(zoomValue)">
+                            <span class="icon icon-image large-image"></span>
+                        </div>
+                    </div>
+                    <!--************************-->
+                    <!--  CONTROLE LUMINOSITÉ -->
+                    <!--************************-->
+                    <div class="Filter">
+                        <div class="FilterSetting">
+                            <span class="FilterName">Luminosité</span>
+                            <span class="icon icon-sun small-image"></span>
+                            <input
+                                    type="range"
+                                    value="100" min="0" max="200" step="10"
+                                    ng-model="lumiValue"
+                                    ng-change="onLumi(lumiValue)"
+                                    id="brightness">
+                            <span class="icon icon-sun large-image"></span>
+                        </div>
+                    </div>
+
+                    <!--************************-->
+                    <!--  CONTROLE CONTRASTE -->
+                    <!--************************-->
+                    <div class="Filter">
+                        <div class="FilterSetting">
+                            <span class="FilterName">Contraste</span>
+                            <span class="icon icon-contrast small-image"></span>
+                            <input  type="range"
+                                    value="100" min="0" max="200" step="10"
+                                    ng-model="contrastValue"
+                                    ng-change="onContrast(contrastValue)"
+                                    id="contrast">
+                            <span class="icon icon-contrast large-image"></span>
+                        </div>
+                    </div>
+                </div><!-- filters -->
+            </div>
+        </div>
+
+
+        <!--    BOUTON  - valider et continuer -->
+        <!--    DEPUIS Photo retouchée -->
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <button type="button" class="btn btn-primary aide-photo-btn"
+                        value="Retoucher cette photo" ng-click="onSelectImgModified()">
+                    <span>Valider cette photo et continuer</span>
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+    <!--///////////////////////// -->
+    <!--        - END -           -->
+    <!--BLOCK PHOTO WEBCAM CAPTURE-->
+    <!--///////////////////////// -->
+
+
+    <!--///////////////////////// -->
+    <!-- MODAL - WEBCAM CAPTURE   -->
+    <!--///////////////////////// -->
+    <div class="modal fade" id="modalPrendrePhoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Prendre une photo avec votre webcam :</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-xs-6 colVideo">                                             <!-- Colonne video Canvas -->
+
+                            <video id="videoCanvas"></video>
+                        </div>
+
+                        <div class="col-xs-6 colPreviewCapture" ng-show="isVideoCaptureDone">       <!-- Colonne capture image  -->
+                            <div id="canvasPreviewCapture">
+                                <img id="previewCapture"/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">                                                               <!-- Row Bouton -->
+                        <div class="col-xs-6">
+                            <button type="button" id="btCaptureImg" class="btn btn-default btn-modal bt_capture">Prendre
+                                une image
+                            </button>
+                        </div>
+                        <div class="col-xs-6" ng-show="isVideoCaptureDone">
+
+                            <p ng-show="!isWebCamImageValid">Votre photo est invalide</p>
+
+
+                            <button ng-show ="isWebCamImageValid" type="button" id="btSelectionImg"
+                                    class="btn btn-default btn-modal bt_capture"
+                                    ng-click="onSelectImg()"
+                                    >Garder cette image
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <div class="row rowHiddenCanvas">
+                        <div class="col-xs-6">
+                            <canvas id="hiddenCanvasCaptureImage"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,399 @@
+<div class="step_form" id="step_coordonnees" ng-form name="step_form"><!-- 2 -->
+         <span class="obligatoire">
+             <span class="star">*</span>
+             Champs obligatoire
+         </span>
+
+    <p class="text-error" ng-show="error">{{error}}</p>
+
+    <h2 id="saisie-coordonnees" class="margin-ultra-bottom" tabindex="-1">Saisie de vos coordonnées</h2>
+
+    <h3 class="margin-ultra-bottom">Veuillez vérifier vos coordonées personnelles et les compléter ou les modifier si
+        necéssaire.</h3>
+
+
+    <!--    *****************************   -->
+    <!--    MODAL POUR UNIFICATION ADRESSE   -->
+    <!--    *****************************   -->
+    <div class="modal fade" id="sModal" tabindex="-1" role="dialog" aria-labelledby="fenetreDialogue">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Fermer la fenêtre de dialogue et continuer"
+                            value="Fermer la fenêtre de dialogue et continuer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="fenetreDialogue">Vérification de l'adresse</h4>
+                </div>
+                <div class="modal-body">
+                    {{ tabMsg.msg }}
+                    <hr/>
+                    <p>N° et nom de rue aprés vérification : </p>
+                    <p><strong>{{ userSig.street3 }}</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                            value="Fermer la fenêtre de dialogue" ng-click="onClickBtPopin('annuler')">Modifier
+                    </button>
+                    <button type="button" class="btn btn-default btn-modal" data-dismiss="modal" ng-click="onClickBtPopin('valider')"
+                            value="Confirmer la suppréssion de ce moyen de paiement et continuer">Confirmer
+                    </button>
+                    <!--origin bt continuer  : submitForm()-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    END - modal pour unification adresse   -->
+
+
+
+    <div class="form-content">
+        <div class="form-group">
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <span class="radio_label"><strong>Civilité </strong><span class="star">*</span></span>
+            </div>
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <div class="radio">
+                    <input type="radio" name="inlineRadioOption1" id="inlineRadio1" value="02" ng-model="userSig.prefix"
+                           ng-disabled="userSig.prefix && userInfo.isSig" required>
+                    <label class="radio-inline" for="inlineRadio1">
+                        Madame
+                    </label>
+                    <input type="radio" name="inlineRadioOption1" id="inlineRadio2" value="01" ng-model="userSig.prefix"
+                           ng-disabled="userSig.prefix && userInfo.isSig" required>
+                    <label class="radio-inline" for="inlineRadio2">
+                        Monsieur
+                    </label>
+                </div>
+                <span aria-live="assertive" role="alert" class="mess-error"
+                      ng-show="formSubmitted && (step_form.inlineRadioOption1.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img alt="Erreur" class="picto error" ng-show="formSubmitted && (step_form.inlineRadioOption1.$invalid)"
+                     ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label for="nom" class="col-xs-12 col-sm-4 col-md-4 control-label">Nom<span class="star">*</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="nom" type="text" class="form-control" ng-disabled="userSig.lastname && userInfo.IsSIG"
+                       ng-model="userSig.lastname" ng-required="isFirstLastNameMandatory" name="nom" maxlength="20" 
+                       aria-required="true">
+                <span aria-live="assertive" role="alert" class="mess-error"
+                      ng-show="formSubmitted && (step_form.nom.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" ng-hide="true"
+                     ng-show="!(step_form.nom.$invalid)">
+                <img alt="Erreur" class="picto error" ng-show="formSubmitted && (step_form.nom.$invalid)"
+                     ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label for="prenom" class="col-xs-12 col-sm-4 col-md-4 control-label">Prénom<span
+                    class="star">*</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="prenom" type="text" class="form-control" ng-disabled="userSig.firstname && userInfo.IsSIG"
+                       ng-model="userSig.firstname" ng-required="isFirstLastNameMandatory" name="prenom" maxlength="20"
+                       aria-required="true">
+                <span aria-live="assertive" role="alert" class="mess-error"
+                      ng-show="formSubmitted && (step_form.prenom.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" ng-hide="true"
+                     ng-show="!(step_form.prenom.$invalid)">
+                <img alt="Erreur" class="picto error" ng-show="formSubmitted && (step_form.prenom.$invalid)"
+                     ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+            
+        </div>
+        <div class="form-group birthdate">
+            <label for="birthdate" class="col-xs-12 col-sm-4 col-md-4 control-label">Date de naissance<span
+                    class="star">*</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input type="text" placeholder="JJ" class="form-control pull-left" id="birthdate"
+                       ng-model="userSig.birthDate.day" name="birthday" ng-change="setBirthDate()"
+                       ng-disabled="userSig.birthDate.day && userInfo.isSig" maxlength="2" minlength="2" required aria-required="true"
+                       aria-label="jour de votre naissance">
+                <input type="text" placeholder="MM" class="form-control pull-left" ng-model="userSig.birthDate.month"
+                       ng-change="setBirthDate()" name="birthmonth" maxlength="2" minlength="2"
+                       ng-disabled="userSig.birthDate.month && userInfo.isSig" required aria-required="true"
+                       aria-label="mois de votre naissance">
+                <input type="text" placeholder="AAAA" class="form-control pull-left" ng-model="userSig.birthDate.year"
+                       ng-change="setBirthDate()" name="birthyear" maxlength="4"
+                       ng-disabled="userSig.birthDate.year && userInfo.isSig" required aria-required="true"
+                       aria-label="année de votre naissance">
+
+                <div class="clearfix">
+                    <span aria-live="assertive" role="alert" class="mess-error"
+                          ng-show="formSubmitted && (step_form.birthday.$invalid || step_form.birthmonth.$invalid || step_form.birthyear.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                    <span class="mess-error" ng-hide="isDateValide">Cette date n'est pas valide</span>
+                    <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok"
+                         ng-show="isDateValide && step_form.birthyear.$dirty">
+                    <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto valid" alt="Ok"
+                         ng-show="!isDateValide && step_form.birthyear.$dirty">
+                </div>
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label for="numero-rue" class="col-xs-12 col-sm-4 col-md-4 control-label"><abbr title="Numéro">N°</abbr> et
+                nom de rue<span class="star">*</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="numero-rue" type="text" class="form-control" ng-model="userSig.street3" name="ligne3"
+                       required maxlength="38" aria-required="true">
+                <span aria-live="assertive" role="alert" class="mess-error"
+                      ng-show="formSubmitted && (step_form.ligne3.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" ng-hide="true"
+                     ng-show="!(step_form.ligne3.$invalid)">
+                <img alt="Erreur" ng-show="formSubmitted && (step_form.ligne3.$invalid)" class="picto error"
+                     ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label for="adresse-2" class="col-xs-12 col-sm-4 col-md-4 control-label">Complément d'adresse</label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <textarea id="adresse-2" class="form-control"
+                          placeholder="Bâtiment, étage, lieu-dit,  indication au livreur, etc." name="ligne2"
+                          ng-model="userSig.street2" maxlength="38"></textarea>
+                <span aria-live="assertive" role="alert" class="mess-error"
+                      ng-show="formSubmitted && (step_form.ligne2.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img alt="Erreur" ng-show="formSubmitted && (step_form.ligne2.$invalid)" class="picto error"
+                     ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+            
+        </div>
+
+        <div class="form-group">
+            <label for="code-postal" class="col-xs-12 col-sm-4 col-md-4 control-label">Code postal<span
+                    class="star">*</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="code-postal" type="text" class="form-control" ng-model="userSig.postalCode" name="postalCode"
+                       ng-change="getCities(userSig.postalCode)" required maxlength="5" minlength="5" aria-required="true">
+                <span aria-live="assertive" role="alert" class="mess-error"
+                      ng-show="formSubmitted && (step_form.postalCode.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok"
+                     ng-hide="true" ng-show="!(step_form.postalCode.$invalid)">
+                <img alt="Erreur" ng-show="formSubmitted && (step_form.postalCode.$invalid)" class="picto error"
+                     ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label for="ville" class="col-xs-12 col-sm-4 col-md-4 control-label">Ville<span
+                    class="star">*</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <select id="ville" class="form-control " name="city" ng-options="city.label for city in cities"
+                        ng-model="userSig.city" aria-required="true">
+
+                </select>
+                <span aria-live="assertive" role="alert" class="mess-error"
+                      ng-show="formSubmitted && (step_form.city.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img alt="Erreur" ng-show="formSubmitted && (step_form.city.$invalid)" class="picto error"
+                     ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label for="pays" class="col-xs-12 col-sm-4 col-md-4 control-label">Pays<span class="star">*</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="pays" type="text" class="form-control" disabled  value="France" ng-model="userSig.country"
+                       aria-required="true">
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label class="col-xs-4 control-label">Téléphone portable<span class="star">*</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input type="text" class="form-control" ng-model="rawMobile" name="mobile" maxlength="15" required>
+                <span aria-live="assertive" role="alert" class="mess-error" ng-hide="true"
+                      ng-show="formSubmitted && (step_form.mobile.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" ng-hide="true"
+                     ng-show="!(step_form.mobile.$invalid)">
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-hide="true"
+                     ng-show="formSubmitted && (step_form.mobile.$invalid)">
+            </div>
+            
+        </div>
+        <div class="form-group">
+            <label for="tel" class="col-xs-12 col-sm-4 col-md-4 control-label">Téléphone fixe</label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="tel" type="text" class="form-control" ng-model="rawFixe" name="telephoneFixe" maxlength="15"
+                       aria-described="phone-info">
+                <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok" ng-hide="true"
+                     ng-show="!(step_form.telephoneFixe.$invalid)">
+                <img ng-src="{{ prefix_front }}bundles/sel/images/error.png" class="picto error" alt="Erreur" ng-hide="true"
+                     ng-show="formSubmitted && (step_form.telephoneFixe.$invalid)">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <div class="box_action_show_error">
+                    <a href="#" class="action_show_error">
+                        <img ng-src="{{ '../bundles/sel/images/picto_information.png' }}" alt="Information"/>
+                    </a>
+
+                    <div id="phone-info" class="tooltip right tel" role="tooltip"> <!-- class tel provisoire -->
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">
+                            Votre téléphone portable nous servira à finaliser votre souscription et à améliorer la
+                            gestion de votre forfait. Il ne sera en aucun cas utilisé à des fins commerciales sans votre
+                            autorisation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Création compte SEL-->
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-4 col-md-4 control-label create-sel">Définissez vos codes d'accès à l'espace
+                Services Navigo</label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <p class="create-sel">
+                    Votre email et votre mot de passe seront vos identifiants pour accéder à votre espace.
+                </p>
+            </div>
+            
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="col-xs-12 col-sm-4 col-md-4 control-label">E-mail<span
+                    class="star">*</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="email" type="email" name="email" class="form-control" ng-model="userSel.email"
+                       ng-required="emailRequired" maxlength="100" ng-disabled="disableEmail" aria-required="true">
+                <span aria-live="assertive" role="alert" class="mess-error"
+                      ng-show="formSubmitted && (step_form.email.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok"
+                     ng-hide="true" ng-show="(!step_form.email.$invalid)">
+                <img alt="Erreur" ng-show="formSubmitted && (step_form.email.$invalid)" class="picto error"
+                     ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+
+            
+        </div>
+
+        <div class="form-group" ng-hide="disableEmail">
+            <label for="confirmer-email" class="col-xs-12 col-sm-4 col-md-4 control-label">Confirmer votre e-mail<span
+                    class="star">*</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+
+                <input id="confirmer-email" type="email" name="emailtwo" class="form-control" ng-model="userSel.emailTwin" maxlength="100" onpaste="return false;" ng-required="emailRequired"
+                       aria-required="true">
+                <!--sel-password-->
+                <span aria-live="assertive" role="alert" class="mess-error" ng-show="(step_form.emailtwo.$error.emailEqual)">{{errorMessages['IHM-TRANS-ERR_006']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok"
+                     ng-hide="true" ng-show="(!step_form.emailtwo.$invalid)">
+                <img alt="Erreur" ng-show="formSubmitted && (step_form.emailtwo.$invalid)" class="picto error"
+                     ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+
+            
+        </div>
+
+
+        <div class="form-group" ng-hide="hidePassword">
+            <label for="password" class="col-xs-12 col-sm-4 col-md-4 control-label">Mot de passe<span
+                    class="star">*</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="password" type="password" name="password" class="form-control" ng-model="userSel.password"
+                       minlength="8" maxlength="20" sel-password ng-required="passwordRequired" aria-required="true"
+                       aria-described="password-info" aria-required="true" sel-password>
+                <span aria-live="assertive" role="alert" class="mess-error"
+                      ng-show="formSubmitted && (step_form.password.$error.passwordFormat)">{{errorMessages['IHM-TRANS-ERR_003']}}</span>
+                <span aria-live="assertive" role="alert"
+                      ng-show="step_form.password.$error.minlength || step_form.password.$error.maxlength">{{errorMessages['IHM-TRANS-ERR_007-DOCA']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok"
+                     ng-hide="true" ng-show="step_form.password.$valid">
+                <img alt="Erreur" ng-show="formSubmitted && (step_form.password.$invalid)" class="picto error"
+                     ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <div class="box_action_show_error">
+                    <a href="#" class="action_show_error">
+                        <img ng-src="{{ prefix_front }}bundles/sel/images/picto_information.png"
+                             alt="Information"/>
+                    </a>
+
+                    <div id="password-info" class="tooltip right password" role="tooltip">
+                        <!-- class password provisoire -->
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">
+                            <p>Votre mot de passe doit respecter<br/>le format suivant :</p>
+                            <ul>
+                                <li>une majuscule</li>
+                                <li>une minuscule</li>
+                                <li>un chiffre</li>
+                                <li>minimum 8 caractères</li>
+                                <li>maximum 20 caractères</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-hide="hidePassword">
+            <label for="confirmer-password" class="col-xs-12 col-sm-4 col-md-4 control-label">Confirmer votre mot de
+                passe<span class="star">*</span></label>
+
+            <div class="col-xs-11 col-sm-6 col-md-4">
+                <input id="confirmer-password" type="password" class="form-control" ng-model="userSel.passwordTwin"
+                       name="password2" minlength="8" maxlength="20" sel-password ng-required="passwordRequired"
+                       aria-required="true">
+                <span aria-live="assertive" role="alert" class="mess-error"
+                      ng-show="userSel.password != userSel.passwordTwin">Les deux mots de passe ne concordent pas. Veuillez les saisir à nouveau.</span>
+                <span aria-live="assertive" role="alert" class="mess-error"
+                      ng-show="formSubmitted && (step_form.password.$error.passwordFormat)">{{errorMessages['IHM-TRANS-ERR_003']}}</span>
+                <span aria-live="assertive" role="alert"
+                      ng-show="step_form.password.$error.minlength || step_form.password.$error.maxlength">{{errorMessages['IHM-TRANS-ERR_007-DOCA']}}</span>
+                <img ng-src="{{ prefix_front }}bundles/sel/images/check.png" class="picto valid" alt="Ok"
+                     ng-hide="true" ng-show="step_form.password2.$valid">
+                <img alt="Erreur" ng-show="formSubmitted && (step_form.password.$invalid)" class="picto error"
+                     ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+                <img alt="Erreur" ng-show="formSubmitted && (step_form.passwordTwin.$invalid)" class="picto error"
+                     ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+            </div>
+            
+        </div>
+
+        <div class="checkbox margin-top-bottom">
+            <input type="checkbox" id="inlineRadio9-1" ng-model="userSig.acceptContract" name="donneesCommunicables"
+                   ng-true-value="1" ng-false-value="0" required>
+            <label for="inlineRadio9-1">Je déclare accépter les <a href="#" class="link underline" target="_blank"
+                                                                   title="Lire les conditions Générales de Vente (nouvelle fenêtre)">conditions
+                générales d'utilisation (CGU)</a>
+            </label>
+            <span aria-live="assertive" role="alert" class="mess-error"
+                  ng-show="formSubmitted && (step_form.donneesCommunicables.$invalid)">{{errorMessages['IHM-TRANS-ERR_001']}}</span>
+            <img alt="Erreur" ng-show="formSubmitted && (step_form.donneesCommunicables.$invalid)" class="picto error"
+                 ng-src="{{ prefix_front }}bundles/sel/images/error.png">
+        </div>
+
+        <div class="checkbox margin-top-bottom">
+            <input type="checkbox" ng-model="userSig.acceptCom" name="optin" id="inlineRadio9-2" ng-true-value="1"
+                   ng-false-value="0">
+            <label for="inlineRadio9-2">
+                J’accepte de recevoir les avantages et les offres commerciales de la RATP, d'OPTILE et de SNCF
+                Transilien par communications éléctroniques
+            </label>
+        </div>
+    </div>
+    <!-- form-content -->
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button type="button" class="btn btn-primary aide-photo-btn"
+                    ng-disabled="disableSubmit || step_form.donneesCommunicables.$invalid" ng-click="submitForm()"
+                    title="Valider le formulaire et poursuivre"><span>Continuer</span></button>
+        </div>
+    </div>
+</div>

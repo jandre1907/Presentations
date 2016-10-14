@@ -1,0 +1,21 @@
+{# block title %}{{ 'home.home_espace_client.link.change_email_title' |trans({}, 'home') }}{% endblock title #}
+<div class="step_form" id="echec" data-ng-init="prefix_front=SEL.prefix_front;documentTitle = '{{ 'home.home_espace_client.link.change_email_title_onglet' |trans({}, 'home') }}';"><!-- Echec -->
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+            {% verbatim %}
+            <div class="warning-light red" data-template-content={{pageCtrl.error}}>
+            </div>
+            {% endverbatim %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+            <a href="{{ path('sel_homepage') }}"><button type="button" class="btn btn-default pull-right" title="{{'cpt.cpt_echec_rattachement.btn_terminer_title'|trans({}, 'cpt', 'fr')|raw}}"><span>{{'cpt.cpt_echec_rattachement.btn_terminer'|trans({}, 'cpt', 'fr')|raw}}</span></button></a>
+        </div>
+    </div>
+</div>
+
+
+{% block tag %}
+    {% render controller("SelBundle:Tracking:pageTracker", {'request': app.request, 'mapperParameters': {}}) %}
+{% endblock tag %}
