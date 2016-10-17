@@ -55,29 +55,91 @@
 <a id="w3" href="http://validator.w3.org/check?uri=referer"><img
     src="http://www.w3.org/Icons/valid-xhtml10"
     alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+    <div class="note">
+    	Bonjour à tous et merci pour votre présence,
+    	Je me présente Je m'appelle Julien
+    	Je suis dévelopeur WEB chez trepia depuis 2011
+    	Pôle PHP symfony, j'ai travaillé pas mal sur différentes techno JS au cours de différentes missions.
+
+    	Je vais tenter de vous faire faire un tour dans angularJs 1.
+    	C'est une techno avec laquelle j'ai travaillé pendant 6 ou 7 mois sur ma mission actuelle que j'ai commencé en mai 2015.
+    </div>
 </div>
 
 <div class="slide">
 	<h1>Sommaire</h1>
-	<ul >
+	<ul>
 		<li>Petite histoire</li>
-		<li>SPA</li>
-		<li>Pour commencer</li>
+		<li>AngularJs</li>
+		<li>SPA, single page application</li>
+		<li>Des liens pour commencer</li>
 		<li>Les grandes lignes</li>
-		<li>Angular 2</li>
+		<li>Angular 2, fin de vie et migration</li>
 	</ul>
 </div>
 
 <div class="slide">
 	<h1>Petite histoire</h1>
 	<ul>
-		<li>Première version by Google</li>
+		<li><a href="http://blog.backand.com/angularjs-history/">Première version des fondateur</a></li>
+		<div class="note">
+			angular a fait ses début en 2009 dans le but de dépasser les limites de GWT par
+			Miško Hevery et Adam Abronsw et Igor Minar
+    	</div>
 		<li>La communeauté s'y met</li>
+		<div class="note">
+			le framework est rendu open source
+    	</div>
+    	<li><a href="https://www.madewithangular.com/#/"> Google s'y met</a></li>
+		<div class="note">
+			Le framework est adopté par google, ça fait le buzz, tout le monde s'y met
+    	</div>
+	</ul>
+</div>
+
+<div class="slide">
+	<h1>AngularJs</h1>
+	<ul>
+		<li>Cadriciel</li>
+		<div class="note">
+    		AngularJs est un framework js, et non une lib.
+    		On peut le comparer à emberJs ou backbone ou d'autre mais pas à jquery.
+    		Par Framework on entend un cadre d'élaboration d'une application séparant les composant de cette application en des endroits spécifiques.
+    		Angular est dit MVW pour le fun, mais il est en fait très MVVM
+    	</div>
+    	<ul>
+			<li>MVVM<img class="under" src="imgs/schema.jpg"></li>
+			<div class="note">
+	    		MVVM, model view view model est un patron de conception selon lequel les modifcation de modele métier, entités.. dataObject impact la vue
+	    		et les modification de vue impact le modele
+	    		ces repercussions de modifications se font par un lien qui est la vue de modèle
+	    	</div>
+			<li><a href="https://threejs.org/editor/">Exemple MVVM 3D</a></li>
+			<div class="note">
+	    		Il y a d'autres MVVM par exemple un éditeur de modele 3D, vous en avez tous vue ou utilisez.
+	    		On a une tasse en 3D fil de fer, si les coordonnées des points change ou la texture, et bien ça change dans l'editeur.
+	    		Inversement si on modifie via l'editeur les cordonnées des points de la tasse, alors on change le modèle.
+	    	</div>
+			<li><a href="http://jsfiddle.net/jhadesdev/U2QkK/13/">Exemple MVVM avec AngularJS</a></li>
+		</ul>
 		<li>Angular 2</li>
+		<div class="note">
+	    	Angular 2 est un autre framework, Ce n'est pas angularJS 2 mais angular 2 car on y parle le typescript
+	    	Il y a de grande chance qu'AngularJs soit en fin de vie et que tout l'investissement, tant financier qu'émotionnele soit en quasi pure perte à moyen terme
+	    	Toutefois il est probable aussi qu'un certain nombre de application web écrite en angularJS continuent à être maintenue ou migrer vers un autre framework client.
+
+    	</div>
 		<li><a href="http://angularjs.blogspot.fr/2015/08/angular-1-and-angular-2-coexistence.html">Coexistence d'AngularJs et Angular 2</a></li>
+		<div class="note">
+			Il est donc necessaire pour proceder au maintiens et à la migration des web app angularJS de connaitre un minimum ce framework.
+			google propose un certain nombre de méthodologie et de librairie facilitant la migration vers angular 2
+			Voici les documents qui peuvent être illisible pour certains d'entre vous
+    	</div>
 
 	</ul>
 </div>
+
+
 
 <div class="slide">
 	<h1>SPA, Pageload</h1>
